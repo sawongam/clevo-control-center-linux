@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>3.98.0.0</AssemblyVersion>
+    <FileVersion>3.98.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>FnKey</AssemblyName>
+    <RootNamespace>FnKey</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <!-- FnKey.Properties.Resources.resx images, extracted by tools/extract_resx.py (same names as the resx keys) -->
+    <AvaloniaResource Include="Assets/**" />
+    <Content Include="Data/**" CopyToOutputDirectory="PreserveNewest" LinkBase="" />
+  </ItemGroup>
+</Project>
