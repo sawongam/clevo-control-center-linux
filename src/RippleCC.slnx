@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="BatteryUtility/BatteryUtility.csproj" />
+  <Project Path="ControlCenter30/ControlCenter30.csproj" />
+  <Project Path="CPUOC/CPUOC.csproj" />
+  <Project Path="EnergySave/EnergySave.csproj" />
+  <Project Path="FanSpeedSetting/FanSpeedSetting.csproj" />
+  <Project Path="Flexikey/Flexikey.csproj" />
+  <Project Path="FnKey/FnKey.csproj" />
+  <Project Path="GPUOverclocking/GPUOverclocking.csproj" />
+  <Project Path="LedKeyboardSetting/LedKeyboardSetting.csproj" />
+  <Project Path="RippleCC.Platform/RippleCC.Platform.csproj" />
+</Solution>
