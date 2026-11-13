@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 ripple-cc contributors
+# build output
+bin/
+obj/
+dist/
+*.user
+.vs/
+.idea/
+__pycache__/
+*.pyc
+
+# kernel build artefacts
+*.o
+*.ko
+*.mod
+*.mod.c
+*.mod.o
+*.cmd
+.*.cmd
+.module-common.o
+Module.symvers
+modules.order
+.tmp_versions/
+
+# original Windows suite, decompiled sources and other reference material (not redistributable)
+reference/
