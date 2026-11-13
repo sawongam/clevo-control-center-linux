@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>CPUOC</AssemblyName>
+    <RootNamespace>CPUOC30</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <AvaloniaResource Include="Assets/**" />
+    <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

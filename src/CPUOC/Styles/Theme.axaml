@@ -1,0 +1,414 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Brushes copied 1:1 from index.xaml resources (only those that are used) -->
+  <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5" />
+  <SolidColorBrush x:Key="SliderThumb.Disabled.Background" Color="#FFF0F0F0" />
+  <SolidColorBrush x:Key="SliderThumb.Disabled.Border" Color="#FFD9D9D9" />
+  <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
+  <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
+  <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF" />
+  <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070" />
+  <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+  <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+  <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+  <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+  <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+  <SolidColorBrush x:Key="ScrollBar.Static.Glyph" Color="#606060" />
+
+  <!-- RepeatButtonTransparent -->
+  <ControlTheme x:Key="RepeatButtonTransparent" TargetType="RepeatButton">
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" />
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- RepeatButtonStyle_L : the "filled" part of the slider (decrease side) -->
+  <ControlTheme x:Key="RepeatButtonStyle_L" TargetType="RepeatButton">
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch" ClipToBounds="True">
+          <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="355" Margin="6.025,16.033,-183.408,0">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Assets/slider_range_2.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- SliderThumbHorizontalDefault -->
+  <ControlTheme x:Key="SliderThumbHorizontalDefault" TargetType="Thumb">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+          <Rectangle Name="rectangle" HorizontalAlignment="Stretch" Height="60" Margin="-20.487,-9.966,-19.514,-10.035" StrokeThickness="2" VerticalAlignment="Stretch" Width="48" Fill="{TemplateBinding BorderBrush}" RenderTransformOrigin="50%,50%" UseLayoutRounding="False" IsVisible="False">
+            <Rectangle.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform AngleX="32" />
+                <RotateTransform />
+                <TranslateTransform />
+              </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Assets/slider_handle_layer1.png" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Path Name="grip" Data="M0,0 C0,0 11,0 11,0 C11,0 11,18 11,18 C11,18 0,18 0,18 C0,18 0,0 0,0" Stretch="Fill" StrokeThickness="2" UseLayoutRounding="True" VerticalAlignment="Center">
+            <Path.Fill>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Color="#FF606060" Offset="0.046" />
+                <GradientStop Color="White" Offset="0.503" />
+                <GradientStop Color="#FF606060" Offset="0.943" />
+              </LinearGradientBrush>
+            </Path.Fill>
+          </Path>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:disabled /template/ Path#grip">
+      <Setter Property="Fill" Value="{StaticResource SliderThumb.Disabled.Background}" />
+      <Setter Property="Stroke" Value="{StaticResource SliderThumb.Disabled.Border}" />
+    </Style>
+  </ControlTheme>
+
+  <!-- SliderStyle_INC + SliderHorizontal -->
+  <ControlTheme x:Key="SliderStyle_INC" TargetType="Slider">
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="BorderBrush" Value="#00FFFFFF" />
+    <Setter Property="Foreground" Value="{StaticResource SliderThumb.Static.Foreground}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Grid RowDefinitions="Auto,Auto,Auto">
+            <Border Name="TrackBackground" BorderThickness="1" Height="4" Margin="0" Grid.Row="1" VerticalAlignment="Center">
+              <Canvas Margin="-6,-1" />
+            </Border>
+            <Track Name="PART_Track" Grid.Row="1" Grid.RowSpan="2" Margin="0" Height="60"
+                   Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton" Theme="{StaticResource RepeatButtonStyle_L}" BorderBrush="{TemplateBinding BorderBrush}" />
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton" Theme="{StaticResource RepeatButtonTransparent}" Background="#00FFFFFF" />
+              </Track.IncreaseButton>
+              <Thumb Name="thumb" Focusable="False" Height="40" Width="8" VerticalAlignment="Center" Theme="{StaticResource SliderThumbHorizontalDefault}" BorderBrush="{TemplateBinding BorderBrush}" />
+            </Track>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ToolButton (close / minimize): Content is an ImageBrush used as opacity mask of a white rectangle -->
+  <ControlTheme x:Key="ToolButton" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Width="80" Height="50" Background="#00FFFFFF">
+          <Rectangle Name="rect" OpacityMask="{TemplateBinding Content}" Fill="#FFFFFFFF" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- btnWindow -->
+  <ControlTheme x:Key="BTN_WINDOW" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}">
+          <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ButtonStyle1_OK (dialog buttons) -->
+  <ControlTheme x:Key="ButtonStyle1_OK" TargetType="Button">
+    <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+    <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+    <Setter Property="Foreground" Value="#FF000000" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+              <GradientStop Color="#00000000" Offset="0" />
+              <GradientStop Color="#FF4B4B4B" Offset="1" />
+            </LinearGradientBrush>
+          </Border.Background>
+          <ContentPresenter Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" RecognizesAccessKey="True" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#border">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="0" />
+          <GradientStop Color="#FF959595" Offset="1" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:pressed /template/ Border#border">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="1" />
+          <GradientStop Color="#FF4B4B4B" Offset="0" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:disabled /template/ Border#border">
+      <Setter Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+    </Style>
+    <Style Selector="^:disabled /template/ ContentPresenter#contentPresenter">
+      <Setter Property="Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+    </Style>
+  </ControlTheme>
+
+  <!-- CheckBoxStyle_auto -->
+  <ControlTheme x:Key="CheckBoxStyle_auto" TargetType="CheckBox">
+    <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+    <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+    <Setter Property="Foreground" Value="#FF000000" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF" ColumnDefinitions="Auto,*">
+          <Grid Name="rectangle" Height="46" Margin="0,0,0,-7" VerticalAlignment="Center" Width="46">
+            <Grid.Background>
+              <ImageBrush Source="/Assets/btn_enable_w.png" />
+            </Grid.Background>
+          </Grid>
+          <TextBlock Name="textBlock" Grid.Column="1" Margin="0,10.926,0,3.926" TextWrapping="NoWrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFB4B4B4" FontSize="21.333" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:checked /template/ Grid#rectangle">
+      <Setter Property="Background">
+        <ImageBrush Source="/Assets/btn_disable_w.png" />
+      </Setter>
+    </Style>
+    <Style Selector="^:checked /template/ TextBlock#textBlock">
+      <Setter Property="Foreground" Value="#FFFFFFFF" />
+    </Style>
+  </ControlTheme>
+
+  <!-- RadioButtonStyle1_FAN -->
+  <ControlTheme x:Key="RadioButtonStyle1_FAN" TargetType="RadioButton">
+    <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+    <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+    <Setter Property="Foreground" Value="#FF000000" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF" ColumnDefinitions="Auto,*">
+          <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+            <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/Assets/btn_enable.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+          <TextBlock Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFB4B4B4" FontSize="21.333" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:checked /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <ImageBrush Source="/Assets/btn_disable.png" />
+      </Setter>
+    </Style>
+    <Style Selector="^:checked /template/ TextBlock#textBlock">
+      <Setter Property="Foreground" Value="#FFFFFFFF" />
+    </Style>
+  </ControlTheme>
+
+  <!-- TextBox: WPF look as used here (no chrome; text 2px inset) -->
+  <ControlTheme x:Key="{x:Type TextBox}" TargetType="TextBox">
+    <Setter Property="Foreground" Value="#FF000000" />
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="BorderBrush" Value="#FFABADB3" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <DockPanel Margin="{TemplateBinding Padding}">
+            <TextPresenter Name="PART_TextPresenter" Margin="2,0,2,0"
+                           Text="{Binding Text, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                           CaretIndex="{TemplateBinding CaretIndex}"
+                           SelectionStart="{TemplateBinding SelectionStart}"
+                           SelectionEnd="{TemplateBinding SelectionEnd}"
+                           TextAlignment="{TemplateBinding TextAlignment}"
+                           TextWrapping="{TemplateBinding TextWrapping}"
+                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ScrollBar (ScrollBarStyle1_cpuset / ScrollBarStyle1) -->
+  <ControlTheme x:Key="ScrollBarButton" TargetType="RepeatButton">
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border" Background="#66000000">
+          <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#border"><Setter Property="Background" Value="#CC000000" /></Style>
+    <Style Selector="^:pressed /template/ Border#border"><Setter Property="Background" Value="#606060" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="ScrollBarThumbVertical" TargetType="Thumb">
+    <Setter Property="Template">
+      <ControlTemplate><Rectangle Name="rectangle" Fill="#FF000000" /></ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Rectangle#rectangle"><Setter Property="Fill" Value="#606060" /></Style>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle"><Setter Property="Fill" Value="#606060" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="ScrollBarStyle1_cpuset" TargetType="ScrollBar">
+    <Setter Property="Background" Value="#33000000" />
+    <Setter Property="Width" Value="17" />
+    <Setter Property="MinWidth" Value="17" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="Bg" RowDefinitions="17,*,17">
+          <Border Grid.Row="1" Background="{TemplateBinding Background}" />
+          <RepeatButton Name="PART_LineUpButton" Theme="{StaticResource ScrollBarButton}" Grid.Row="0">
+            <Path Data="M0,4 C0,4 0,6 0,6 C0,6 3.5,2.5 3.5,2.5 C3.5,2.5 7,6 7,6 C7,6 7,4 7,4 C7,4 3.5,0.5 3.5,0.5 C3.5,0.5 0,4 0,4" Margin="3,4,3,3" Stretch="Uniform" Fill="{StaticResource ScrollBar.Static.Glyph}" />
+          </RepeatButton>
+          <Track Name="PART_Track" Grid.Row="1" IsDirectionReversed="True"
+                 Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportSize}" Orientation="{TemplateBinding Orientation}">
+            <Track.DecreaseButton><RepeatButton Name="PART_PageUpButton" Theme="{StaticResource RepeatButtonTransparent}" /></Track.DecreaseButton>
+            <Track.IncreaseButton><RepeatButton Name="PART_PageDownButton" Theme="{StaticResource RepeatButtonTransparent}" /></Track.IncreaseButton>
+            <Thumb Theme="{StaticResource ScrollBarThumbVertical}" Margin="2,0" />
+          </Track>
+          <RepeatButton Name="PART_LineDownButton" Theme="{StaticResource ScrollBarButton}" Grid.Row="2">
+            <Path Data="M0,2.5 C0,2.5 0,0.5 0,0.5 C0,0.5 3.5,4 3.5,4 C3.5,4 7,0.5 7,0.5 C7,0.5 7,2.5 7,2.5 C7,2.5 3.5,6 3.5,6 C3.5,6 0,2.5 0,2.5" Margin="3,4,3,3" Stretch="Uniform" Fill="{StaticResource ScrollBar.Static.Glyph}" />
+          </RepeatButton>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <!-- dropdown scrollbar: 10px wide, white thumb, no buttons -->
+  <ControlTheme x:Key="ScrollBarThumbVertical2" TargetType="Thumb">
+    <Setter Property="Template">
+      <ControlTemplate><Rectangle Name="rectangle" Fill="#FFFFFFFF" /></ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Rectangle#rectangle"><Setter Property="Fill" Value="#606060" /></Style>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle"><Setter Property="Fill" Value="#606060" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="ScrollBarStyle1" TargetType="ScrollBar">
+    <Setter Property="Width" Value="17" />
+    <Setter Property="MinWidth" Value="17" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="Bg" Width="10" HorizontalAlignment="Right">
+          <Track Name="PART_Track" IsDirectionReversed="True"
+                 Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{Binding Value, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportSize}" Orientation="{TemplateBinding Orientation}">
+            <Track.DecreaseButton><RepeatButton Name="PART_PageUpButton" Theme="{StaticResource RepeatButtonTransparent}" /></Track.DecreaseButton>
+            <Track.IncreaseButton><RepeatButton Name="PART_PageDownButton" Theme="{StaticResource RepeatButtonTransparent}" /></Track.IncreaseButton>
+            <Thumb Theme="{StaticResource ScrollBarThumbVertical2}" />
+          </Track>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ScrollViewer templates -->
+  <ControlTheme x:Key="ScrollViewerControlTemplate1_cpuset" TargetType="ScrollViewer">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto" Background="{TemplateBinding Background}">
+          <ScrollContentPresenter Name="PART_ContentPresenter" Grid.Column="0" Grid.Row="0" Padding="{TemplateBinding Padding}"
+                                  Content="{TemplateBinding Content}" Extent="{Binding Extent, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Offset="{Binding Offset, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Viewport="{Binding Viewport, Mode=OneWayToSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                  CanHorizontallyScroll="False" CanVerticallyScroll="True" />
+          <ScrollBar Name="PART_VerticalScrollBar" Theme="{StaticResource ScrollBarStyle1_cpuset}" Orientation="Vertical" Grid.Column="1" Background="#33000000" Cursor="Arrow" Visibility="{TemplateBinding VerticalScrollBarVisibility}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="ScrollViewerControlTemplate1" TargetType="ScrollViewer">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="*,Auto" Background="{TemplateBinding Background}">
+          <ScrollContentPresenter Name="PART_ContentPresenter" Grid.Column="0" Padding="{TemplateBinding Padding}"
+                                  Content="{TemplateBinding Content}" Extent="{Binding Extent, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Offset="{Binding Offset, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Viewport="{Binding Viewport, Mode=OneWayToSource, RelativeSource={RelativeSource TemplatedParent}}"
+                                  CanHorizontallyScroll="False" CanVerticallyScroll="True" />
+          <ScrollBar Name="PART_VerticalScrollBar" Theme="{StaticResource ScrollBarStyle1}" Orientation="Vertical" Grid.Column="1" Cursor="Arrow" Visibility="{TemplateBinding VerticalScrollBarVisibility}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ComboBox (ComboBoxStyle_dropdown + ComboBoxTemplate2 + ToggleButtonStyle_dropdown1) -->
+  <ControlTheme x:Key="ComboBoxItem_dd" TargetType="ComboBoxItem">
+    <Setter Property="Padding" Value="5,2" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="#1F26A0DA" /></Style>
+    <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="#3D26A0DA" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="ComboBoxStyle_dropdown" TargetType="ComboBox">
+    <Setter Property="Background" Value="#FF2B2B2B" />
+    <Setter Property="Foreground" Value="#FFFFFFFF" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="6,3,5,3" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="MaxDropDownHeight" Value="150" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot">
+          <Border Name="templateRootBorder" BorderThickness="1" Margin="0.267,0,10.566,0" HorizontalAlignment="Stretch" RenderTransformOrigin="50%,50%">
+            <Border.RenderTransform>
+              <TransformGroup><ScaleTransform /><SkewTransform AngleX="-32" /><RotateTransform /><TranslateTransform /></TransformGroup>
+            </Border.RenderTransform>
+            <Border Name="splitBorder" Margin="0" HorizontalAlignment="Stretch" Background="#FF242424" Cursor="Hand" />
+          </Border>
+          <ContentPresenter Name="contentPresenter" Content="{TemplateBinding SelectionBoxItem}" IsHitTestVisible="False" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="Center" />
+          <Popup Name="PART_Popup" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PlacementTarget="{TemplateBinding}" IsLightDismissEnabled="True" WindowManagerAddShadowHint="False">
+            <Border Name="dropDownBorder" BorderThickness="0" Margin="0" Background="#FF272727" HorizontalAlignment="Left" Width="126" Height="150">
+              <ScrollViewer Name="DropDownScrollViewer" Theme="{StaticResource ScrollViewerControlTemplate1}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </ScrollViewer>
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#templateRootBorder">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%"><GradientStop Color="#FFECF4FC" Offset="0" /><GradientStop Color="#FFDCECFC" Offset="1" /></LinearGradientBrush>
+      </Setter>
+      <Setter Property="BorderBrush" Value="#FF7EB4EA" />
+    </Style>
+    <Style Selector="^ /template/ ItemsPresenter ComboBoxItem"><Setter Property="Theme" Value="{StaticResource ComboBoxItem_dd}" /></Style>
+  </ControlTheme>
+</ResourceDictionary>

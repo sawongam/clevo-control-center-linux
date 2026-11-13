@@ -1,0 +1,888 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:CPUOC30.ViewModel"
+        x:Class="CPUOC30.View.index" Name="mainWindow" Title="CPU OverClocking" Width="1920" Height="1080"
+        WindowDecorations="None" Topmost="True" CanResize="True" WindowState="Maximized" Background="#FF181818" FontSize="12">
+  <Grid Margin="0">
+    <Viewbox Name="mainViewbox" Margin="0" Width="1920" Height="1080" Stretch="Fill">
+      <Grid Name="mainGrid" Height="1080" Width="1920" Background="{x:Null}">
+        <Canvas Name="Apps_main" Width="1920" Height="1080" PointerPressed="Apps_2_MouseLeftButtonDown" PointerMoved="Apps_main_MouseMove">
+          <Canvas.Background>
+            <ImageBrush Source="/Assets/bg_cpu_layer2.png" />
+          </Canvas.Background>
+          <Image Source="/Assets/bg_cpu_layer3.png" Width="1920" Height="1080" />
+          <Image Source="/Assets/bg_cpu_layer4.png" Width="1920" Height="1080" />
+          <Image Name="title" Source="/Assets/bg_cpu_title.png" Width="908" Height="81" Canvas.Left="506" />
+          <Image Source="/Assets/title_cpu.png" Width="670" Height="66" Canvas.Left="625" Canvas.Top="7" />
+          <Image Name="RamClock_0_Bar_IMAGE" Source="/Assets/clock_mem_0.png" Canvas.Left="722" Canvas.Top="128" />
+          <Image Name="RamClock_405_Bar_IMAGE" Source="/Assets/clock_mem_405.png" Canvas.Left="722" Canvas.Top="128" />
+          <Image Name="RamClock_810_Bar_IMAGE" Source="/Assets/clock_mem_810.png" Canvas.Left="722" Canvas.Top="128" />
+          <Image Name="RamClock_2999_Bar_IMAGE" Source="/Assets/clock_mem_2999.png" Canvas.Left="722" Canvas.Top="128" />
+          <Image Name="RamClock_4006_Bar_IMAGE" Source="/Assets/clock_mem_4006.png" Canvas.Left="722" Canvas.Top="128" />
+          <Image Name="RamClock_Full_Bar_IMAGE" Source="/Assets/clock_mem_full.png" Canvas.Left="722" Canvas.Top="128" />
+          <Image Source="/Assets/bg_clock_layer1.png" Width="1920" Height="1080" />
+          <Image Source="/Assets/bg_clock_layer2.png" Width="1920" Height="1080" />
+          <Image Source="/Assets/bg_clock_layer3.png" Width="1920" Height="1080" />
+          <Image Source="/Assets/bg_clock_layer4.png" Width="1920" Height="1080" />
+          <Image Source="/Assets/bg_clock_layer5.png" Width="1920" Height="1080" />
+          <Image Source="/Assets/bg_clock_top.png" Canvas.Left="722" Canvas.Top="112" Opacity="0.3" />
+          <Image Name="cpu_clock_IMAGE" Source="/Assets/clock_full.png" Canvas.Left="576" Canvas.Top="249" />
+          <Image Name="cpu_unilization_bar_IMAGE" Source="/Assets/utilization_100.png" Canvas.Left="548" Canvas.Top="416" />
+          <TextBox TextWrapping="Wrap" Text="100" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" Canvas.Left="1515" Canvas.Top="441" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox TextWrapping="Wrap" Text="80" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" Height="31" Canvas.Left="1458" Canvas.Top="549" Width="46" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox TextWrapping="Wrap" Text="60" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" Height="31" Canvas.Left="1480" Canvas.Top="680" Width="46" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox TextWrapping="Wrap" Text="40" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" RenderTransformOrigin="213%,254.8%" Height="31" Canvas.Left="1568" Canvas.Top="771" Width="46" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox TextWrapping="Wrap" Text="20" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" RenderTransformOrigin="213%,254.8%" Height="31" Canvas.Left="1695" Canvas.Top="793" Width="46" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox TextWrapping="Wrap" Text="0" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" RenderTransformOrigin="213%,254.8%" Height="31" Canvas.Left="1817" Canvas.Top="730" Width="46" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <Image Source="/Assets/gauge_cpu_layer1.png" Canvas.Left="1435" Canvas.Top="346" />
+          <Image Source="/Assets/gauge_cpu_layer2.png" Canvas.Left="1435" Canvas.Top="346" />
+          <Image Source="/Assets/gauge_cpu_layer3.png" Canvas.Left="1435" Canvas.Top="346" />
+          <Image Source="/Assets/bg_cpu_gauge.png" Canvas.Left="1412" Canvas.Top="328" />
+          <Image Name="cpu_needle_layer1_IMAGE" Source="/Assets/gauge_cpu_needle_layer1.png" Canvas.Left="1435" Canvas.Top="346" RenderTransformOrigin="50%,50%">
+            <Image.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform Angle="-224.516" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Image.RenderTransform>
+          </Image>
+          <Image Name="cpu_needle_layer2_IMAGE" Source="/Assets/gauge_cpu_needle_layer2.png" Canvas.Left="1435" Canvas.Top="346" RenderTransformOrigin="50%,50%">
+            <Image.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform Angle="-224.516" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Image.RenderTransform>
+          </Image>
+          <Image Source="/Assets/bg_cpu_info.png" Canvas.Left="26" Canvas.Top="150" />
+          <Image Source="/Assets/ic_cpu_processor.png" Canvas.Left="53" Canvas.Top="175" />
+          <Image Source="/Assets/ic_cpu_voltage.png" Canvas.Left="53" Canvas.Top="279" />
+          <Image Source="/Assets/bg_cpu_setting.png" Canvas.Left="26" Canvas.Top="470" />
+          <Image Source="/Assets/ic_cpu_setting.png" Canvas.Left="53" Canvas.Top="486" />
+          <Image Name="CPU_ratio_IMAGE" Source="/Assets/btn_cpu_ratio_override_selected.png" Canvas.Left="136" Canvas.Top="584" Cursor="Hand" />
+          <Image Name="CPU_Voltage_IMAGE" Source="/Assets/btn_cpu_voltage_normal.png" Canvas.Left="136" Canvas.Top="784" Cursor="Hand" />
+          <Image Name="CPU_VR_IMAGE" Source="/Assets/btn_cpu_vr_limit_normal.png" Canvas.Left="136" Canvas.Top="716" Cursor="Hand" />
+          <Image Name="power_limit_IMAGE" Source="/Assets/btn_power_limit_normal.png" Canvas.Left="136" Canvas.Top="650" Cursor="Hand" />
+          <Image Name="cache_ratio_IMAGE" Source="/Assets/btn_cache_ratio_override_normal.png" Canvas.Left="136" Canvas.Top="890" Cursor="Hand" IsVisible="False" />
+          <Button Name="btnClose" Width="80" Height="50" Theme="{StaticResource ToolButton}" Canvas.Left="1830" Canvas.Top="10" Cursor="Hand" Click="Button_Click_Close">
+            <ImageBrush Source="/Assets/ic_close.png" />
+          </Button>
+          <Button Name="btnWindow" Theme="{StaticResource BTN_WINDOW}" Width="80" Height="50" Canvas.Left="1750" Canvas.Top="10" Cursor="Hand" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Button_Click_Window">
+            <Button.Background>
+              <ImageBrush Source="/Assets/ic_fullscreen.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="btnMinimize" Width="80" Height="50" Theme="{StaticResource ToolButton}" Canvas.Left="1670" Canvas.Top="10" Cursor="Hand" Click="Button_Click_Minimize">
+            <ImageBrush Source="/Assets/ic_minimize.png" />
+          </Button>
+          <Image Name="default_IMAGE" Source="/Assets/btn_default_normal.png" Canvas.Left="1376" Canvas.Top="920" Cursor="Hand" PointerPressed="default_MouseLeftButtonDown" />
+          <Image Name="save_IMAGE" Source="/Assets/btn_save_pressed.png" Canvas.Left="1590" Canvas.Top="920" Cursor="Hand" IsEnabled="False" PointerPressed="save_MouseLeftButtonDown" />
+          <TextBox Name="TextBox_Memory_Clock" Height="23" Canvas.Left="868" TextWrapping="Wrap" Text="MEMORY CLOCK" Canvas.Top="249" Width="190" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="RAMClock_TEXTBOX" Height="94" Canvas.Left="868" TextWrapping="Wrap" Canvas.Top="164" Width="185" FontSize="72" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Text="{Binding Memory_Frequency_Per_Second}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="23" Canvas.Left="1041" TextWrapping="Wrap" Text="MHz" Canvas.Top="221" Width="59" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="66" Canvas.Left="538" TextWrapping="Wrap" Text="0" Canvas.Top="171" Width="66" FontSize="48" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="23" Canvas.Left="590" TextWrapping="Wrap" Text="MHz" Canvas.Top="204" Width="47" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="TextBox_Utilization" Height="23" Canvas.Left="339" TextWrapping="Wrap" Text="Utilization" Canvas.Top="396" Width="97" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="CPU_util_TEXTBOX" Height="66" Canvas.Left="422" TextWrapping="Wrap" Canvas.Top="364" Width="94" FontSize="48" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Text="{Binding CPU_Usage_Per_Second}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="23" Canvas.Left="508" TextWrapping="Wrap" Text="%" Canvas.Top="396" Width="30" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="TextBox_TurboMax" Height="22" Canvas.Left="1277" TextWrapping="Wrap" Text="Turbo Max" Canvas.Top="204" Width="103" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="CPU_TurboMax_TEXTBOX" Height="66" Canvas.Left="1362" TextWrapping="Wrap" Text="N/A" Canvas.Top="171" Width="150" FontSize="48" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="23" Canvas.Left="1495" TextWrapping="Wrap" Text="MHz" Canvas.Top="203" Width="57" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="TextBox_CoreBase" Height="22" Canvas.Left="1376" TextWrapping="Wrap" Text="Turbo Min" Canvas.Top="324" Width="98" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="CPU_TurboMin_TEXTBOX" Height="66" Canvas.Left="1456" TextWrapping="Wrap" Text="0" Canvas.Top="292" Width="150" FontSize="48" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="24" Canvas.Left="1588" TextWrapping="Wrap" Text="MHz" Canvas.Top="324" Width="56" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="CPU_Core_TEXTBOX" Height="107" Canvas.Left="841" TextWrapping="Wrap" Canvas.Top="379" Width="257" FontSize="98" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Text="{Binding CPU_Frequency_Per_Second}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="23" Canvas.Left="1082" TextWrapping="Wrap" Text="MHz" Canvas.Top="463" Width="45" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <Label Name="default_LABEL" Height="52" Canvas.Left="1432" Content="DEFAULT" Canvas.Top="924" Width="120" FontSize="24" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsHitTestVisible="True" VerticalContentAlignment="Center" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="default_MouseLeftButtonDown" Padding="5" />
+          <Label Name="save_LABEL" Height="56" Canvas.Left="1646" Content="SAVE" Canvas.Top="920" Width="82" FontSize="24" Foreground="#FF666666" HorizontalContentAlignment="Center" BorderThickness="0" IsHitTestVisible="True" VerticalContentAlignment="Center" Cursor="Hand" IsEnabled="False" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="save_MouseLeftButtonDown" Padding="5" />
+          <TextBox Name="CPU_NAME_TEXTBOX" Height="46" Canvas.Left="112" TextWrapping="Wrap" Canvas.Top="175" Width="346" FontSize="18" Foreground="#FFFFFFFF" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Text="{Binding Model_Name}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="TextBox_CPU_Voltage" Height="35" Canvas.Left="110" TextWrapping="Wrap" Text="CPU Voltage" Canvas.Top="279" Width="115" FontSize="18" Foreground="#FFFFFFFF" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="CPU_voltage_TEXTBOX" Height="52" Canvas.Left="105" TextWrapping="Wrap" Canvas.Top="308" Width="133" FontSize="36" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Text="{Binding Voltage_Per_Second}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Height="22" Canvas.Left="228" TextWrapping="Wrap" Text="v" Canvas.Top="326" Width="30" FontSize="18" Foreground="#FFFFFFFF" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="TextBox_CPUSetting" Height="28" Canvas.Left="108" TextWrapping="Wrap" Text="CPU SETTING:" Canvas.Top="498" Width="148" FontSize="20" Foreground="#FFFFFFFF" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <Label Name="CPU_ratio_LABEL" Height="46" Canvas.Left="182" Content="  CPU Ratio Override" Canvas.Top="584" Width="212" FontSize="20" Foreground="#FFFFFFFF" BorderThickness="0" IsHitTestVisible="True" VerticalContentAlignment="Center" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="CPU_ratio_MouseLeftButtonDown" Padding="5" />
+          <Label Name="CPU_Voltage_LABEL" Height="46" Canvas.Left="182" Content="  CPU Voltage" Canvas.Top="784" Width="212" FontSize="20" Foreground="#FF666666" BorderThickness="0" IsHitTestVisible="True" VerticalContentAlignment="Center" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="CPU_Voltage_MouseLeftButtonDown" Padding="5" />
+          <Label Name="CPU_VR_LABEL" Height="46" Canvas.Left="182" Content="  CPU VR Limit" Canvas.Top="716" Width="212" FontSize="20" Foreground="#FF666666" BorderThickness="0" IsHitTestVisible="True" VerticalContentAlignment="Center" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="CPU_VR_MouseLeftButtonDown" Padding="5" />
+          <Label Name="power_limit_LABEL" Height="42" Canvas.Left="182" Content="  Power Limit" Canvas.Top="650" Width="212" FontSize="20" Foreground="#FF666666" BorderThickness="0" IsHitTestVisible="True" VerticalContentAlignment="Center" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="power_limit_MouseLeftButtonDown" Padding="5" />
+          <Label Name="cache_ratio_LABEL" Height="46" Canvas.Left="182" Content="  Cache Ratio Override" Canvas.Top="894" Width="232" FontSize="20" Foreground="#FF666666" BorderThickness="0" VerticalContentAlignment="Center" IsHitTestVisible="True" Cursor="Hand" IsVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" PointerPressed="cache_ratio_MouseLeftButtonDown" Padding="5" />
+          <TextBox Name="cpu_temperature_TEXTBOX" Height="67" Canvas.Left="1625" TextWrapping="Wrap" Canvas.Top="476" Width="110" FontSize="56" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" IsHitTestVisible="False" Text="{Binding Temperature_Per_Second}" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox TextWrapping="Wrap" Text="°C" FontSize="36" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" Canvas.Left="1735" Canvas.Top="491" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="TextBox_Temperature" TextWrapping="Wrap" Text="TEMPERATURE" FontSize="18" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" IsReadOnly="True" BorderThickness="0" Height="24" Canvas.Left="1625" Canvas.Top="660" Width="136" IsHitTestVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" />
+          <TextBox Name="CPU_Core_Reflection_TEXTBOX" Height="108" Canvas.Left="841" TextWrapping="Wrap" Canvas.Top="482" Width="257" FontSize="98" HorizontalContentAlignment="Center" BorderThickness="0" IsReadOnly="True" IsHitTestVisible="False" RenderTransformOrigin="50%,50%" Text="{Binding CPU_Frequency_Per_Second}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" Background="{x:Null}">
+            <TextBox.Foreground>
+              <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Offset="0.448" />
+                <GradientStop Offset="1" Color="#7FE8C5C5" />
+              </LinearGradientBrush>
+            </TextBox.Foreground>
+            <TextBox.RenderTransform>
+              <ScaleTransform ScaleY="-1" />
+            </TextBox.RenderTransform>
+          </TextBox>
+        </Canvas>
+        <Canvas Name="Apps_CPU_VR_Limit" Margin="500,700,550,100" IsVisible="False">
+          <StackPanel Name="SP_VRset" VerticalAlignment="Top" HorizontalAlignment="Left" Width="850" Canvas.Top="10">
+            <StackPanel Name="SP_VRlimit_onoff" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="800" Orientation="Horizontal" Margin="0,0,0,0">
+              <CheckBox Name="check_VRAuto" Content="Auto" Margin="0" Height="39" Theme="{StaticResource CheckBoxStyle_auto}" HorizontalAlignment="Left" Cursor="Hand" Focusable="False" Click="check_VRAuto_Click" />
+            </StackPanel>
+            <StackPanel Name="SP_VR" HorizontalAlignment="Left" Height="100" Margin="0,0,0,0">
+              <Grid Name="grid_CPUVRlimit" HorizontalAlignment="Left" Width="800" Height="105.8">
+                <Rectangle Name="R_sliderCPU_VRINC_Copy" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FF474747" Margin="68.934,43.652,0,0">
+                  <Rectangle.OpacityMask>
+                    <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                  </Rectangle.OpacityMask>
+                </Rectangle>
+                <Grid Name="grid_VRlimit" HorizontalAlignment="Left" Width="800">
+                  <Rectangle Name="R_sliderCPU_VRINC" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Rectangle.OpacityMask>
+                      <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                    </Rectangle.OpacityMask>
+                  </Rectangle>
+                  <TextBlock Name="T_CVRMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                  <TextBlock Name="T_CVRMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                  <LayoutTransformControl Margin="229,0,0,24" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                    <LayoutTransformControl.LayoutTransform>
+                        <TransformGroup>
+                          <ScaleTransform />
+                          <SkewTransform AngleX="-32" />
+                          <RotateTransform />
+                          <TranslateTransform />
+                        </TransformGroup>
+                    </LayoutTransformControl.LayoutTransform>
+                    <Slider Name="SL_VR" Theme="{StaticResource SliderStyle_INC}" Width="363" SmallChange="1" TickFrequency="1" Height="54" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC5}" ValueChanged="SL_VR_ValueChanged" />
+                  </LayoutTransformControl>
+                  <Grid Name="G_T_CPU_VRINC" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                    <TextBlock Name="T_CPU_VRINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="VR Limit" Width="170" HorizontalAlignment="Left" />
+                  </Grid>
+                  <ComboBox Name="comboBox_CPUVRMinc" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUVRMinc_SelectionChanged" />
+                  <TextBlock Name="T_unit_x2" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="A" />
+                </Grid>
+              </Grid>
+            </StackPanel>
+          </StackPanel>
+        </Canvas>
+        <Canvas Name="Apps_CPU_Voltage" Margin="500,700,550,100" IsVisible="False">
+          <ScrollViewer Name="SV_CPU_Voltage" Margin="0,0,0,0" Theme="{StaticResource ScrollViewerControlTemplate1_cpuset}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="290">
+            <StackPanel Name="SP_CPU_VoltageList" Margin="0" VerticalAlignment="Top" Width="855" HorizontalAlignment="Left" Height="380">
+              <StackPanel Name="SP_CPUVoltageSet" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,15,0,0" Width="850">
+                <StackPanel Name="SP_CPUVoltage_adaptive" HorizontalAlignment="Right" Width="850" Margin="0,10,0,0">
+                  <RadioButton Name="BTN_CPUAdaptive" Content="Adaptive" HorizontalAlignment="Left" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Height="46" IsChecked="True" GroupName="CPUvoltage" Focusable="False" />
+                  <StackPanel Name="SP_CPUAdaptive_override" HorizontalAlignment="Right" Height="100" Margin="0" Width="820" Focusable="True" IsEnabled="{Binding IsChecked, ElementName=BTN_CPUAdaptive}">
+                    <Grid Name="grid_CPUAdaptive_override" HorizontalAlignment="Left" Width="800" Height="105.8">
+                      <Rectangle Name="R_sliderCPUAdaptive_override" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68.934,43.652,0,0" Fill="#FF474747">
+                        <Rectangle.OpacityMask>
+                          <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                        </Rectangle.OpacityMask>
+                      </Rectangle>
+                      <Grid Name="CPUAdaptive_override_value" HorizontalAlignment="Left" Width="800">
+                        <Rectangle Name="R_sliderCPUAdaptive_override_value" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                          <Rectangle.OpacityMask>
+                            <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                          </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Name="T_CPUAdaptive_overrideMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                        <TextBlock Name="T_CPUAdaptive_overrideMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                        <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                          <LayoutTransformControl.LayoutTransform>
+                              <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform AngleX="-32" />
+                                <RotateTransform />
+                                <TranslateTransform />
+                              </TransformGroup>
+                          </LayoutTransformControl.LayoutTransform>
+                          <Slider Name="SL_CPUAdaptive_override" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC5}" ValueChanged="SL_CPUoverride_override_ValueChanged" />
+                        </LayoutTransformControl>
+                        <Grid Name="G_T_CPUAdaptive_overrideINC" HorizontalAlignment="Left" Margin="35,-17,0,42.44" Width="200">
+                          <TextBlock Name="T_CPUAdaptive_overrideINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="CPU Core &amp; Cache Voltage" Width="200" HorizontalAlignment="Left" />
+                        </Grid>
+                        <ComboBox Name="comboBox_CPUAdaptive_override" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUoverride_override_SelectionChanged" />
+                        <TextBlock Name="T_unit_CPUAdaptive_override" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="V" />
+                      </Grid>
+                    </Grid>
+                    <Rectangle Name="R_sliderCPU_RatioINC11_Copy" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                  </StackPanel>
+                  <StackPanel Name="SP_CPUAdaptive_offset" HorizontalAlignment="Right" Height="100" Margin="0" Width="820" IsEnabled="{Binding IsChecked, ElementName=BTN_CPUAdaptive}">
+                    <Grid Name="grid_CPUAdaptive_offset" HorizontalAlignment="Left" Width="800" Height="105.8">
+                      <Rectangle Name="R_sliderCPUAdaptive_offset" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68.934,43.652,0,0" Fill="#FF474747">
+                        <Rectangle.OpacityMask>
+                          <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                        </Rectangle.OpacityMask>
+                      </Rectangle>
+                      <Grid Name="CPUAdaptive_offset_value" HorizontalAlignment="Left" Width="800">
+                        <Rectangle Name="R_sliderCPUAdaptive_offset_value" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                          <Rectangle.OpacityMask>
+                            <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                          </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Name="T_CPUAdaptive_offsetMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                        <TextBlock Name="T_CPUAdaptive_offsetMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                        <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                          <LayoutTransformControl.LayoutTransform>
+                              <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform AngleX="-32" />
+                                <RotateTransform />
+                                <TranslateTransform />
+                              </TransformGroup>
+                          </LayoutTransformControl.LayoutTransform>
+                          <Slider Name="SL_CPUAdaptive_offset" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC5}" ValueChanged="SL_CPUAdaptive_CPUcache_ValueChanged" />
+                        </LayoutTransformControl>
+                        <Grid Name="G_T_CPUAdaptive_OffsetINC" HorizontalAlignment="Left" Margin="45,-17,0,42.44" Width="190">
+                          <TextBlock Name="T_CPUAdaptive_OffsetINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="CPU Core &amp; Cache Offset" Width="190" HorizontalAlignment="Left" />
+                        </Grid>
+                        <ComboBox Name="comboBox_CPUAdaptive_Offset" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUAdaptive_CPUcache_SelectionChanged" />
+                        <TextBlock Name="T_unit_CPUAdaptive_Offset" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="mV" />
+                      </Grid>
+                    </Grid>
+                  </StackPanel>
+                  <StackPanel Name="SP_CPUAdaptive_Graphics" HorizontalAlignment="Right" Height="100" Margin="0" Width="820" IsEnabled="{Binding IsChecked, ElementName=BTN_CPUAdaptive}">
+                    <Grid Name="grid_CPUAdaptive_Graphics" HorizontalAlignment="Left" Width="800" Height="105.8">
+                      <Rectangle Name="R_sliderCPUAdaptive_Graphics" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="68.934,43.652,0,0" Fill="#FF474747">
+                        <Rectangle.OpacityMask>
+                          <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                        </Rectangle.OpacityMask>
+                      </Rectangle>
+                      <Grid Name="CPUAdaptive_Graphics_value" HorizontalAlignment="Left" Width="800">
+                        <Rectangle Name="R_sliderCPUAdaptive_Graphics_value" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                          <Rectangle.OpacityMask>
+                            <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                          </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Name="T_CPUAdaptive_GraphicsMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                        <TextBlock Name="T_CPUAdaptive_GraphicsMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                        <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                          <LayoutTransformControl.LayoutTransform>
+                              <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform AngleX="-32" />
+                                <RotateTransform />
+                                <TranslateTransform />
+                              </TransformGroup>
+                          </LayoutTransformControl.LayoutTransform>
+                          <Slider Name="SL_CPUAdaptive_Graphics" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC5}" ValueChanged="SL_CPUAdaptive_Graphics_ValueChanged" />
+                        </LayoutTransformControl>
+                        <Grid Name="G_T_CPUAdaptive_GraphicsINC" HorizontalAlignment="Left" Margin="45,-17,0,42.44" Width="190">
+                          <TextBlock Name="T_CPUAdaptive_GraphicsINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Graphics &amp; Media Offset" Width="190" HorizontalAlignment="Left" />
+                        </Grid>
+                        <ComboBox Name="comboBox_CPUAdaptive_Graphics" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUAdaptive_Graphics_SelectionChanged" />
+                        <TextBlock Name="T_unit_CPUAdaptive_Graphics" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="mV" />
+                      </Grid>
+                    </Grid>
+                  </StackPanel>
+                </StackPanel>
+              </StackPanel>
+            </StackPanel>
+          </ScrollViewer>
+        </Canvas>
+        <Canvas Name="Apps_CPU_Ratio_Override" Margin="500,700,550,100">
+          <ScrollViewer Name="SV_CPU_Ratio_Override" Margin="0,0,0,0" Theme="{StaticResource ScrollViewerControlTemplate1_cpuset}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Height="290">
+            <StackPanel Name="SP_CPU_Ratio_OverrideList" Margin="0" VerticalAlignment="Top" Width="855" HorizontalAlignment="Left" Height="380">
+              <StackPanel Name="SP_ratioOverride" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Width="855">
+                <StackPanel Name="SP_ratioTitle_P" Margin="0,0,0,0" HorizontalAlignment="Left" Height="50">
+                  <Grid Name="grid_CPU_ratioTitle_P" HorizontalAlignment="Left" Width="800" Height="65.8">
+                    <TextBlock Name="T_unit_xTitle_P" Margin="56,0,14.926,18.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Center" Text="-------------------------------------------- Performance Core Ratio Multiplier --------------------------------------------" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio1" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio1" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC1" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="#FF474747">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin1" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax1" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio1_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="1 Performance Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc1" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc1_SelectionChanged" />
+                    <TextBlock Name="T_unit_x" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio2" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio2" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC2" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin2" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax2" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio2" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio2_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC2" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC2" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="2 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc2" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" Width="154.267" HorizontalAlignment="Right" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc2_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio3" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio3" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC3" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin3" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax3" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio3" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio3_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC3" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC3" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="3 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc3" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" Width="154.267" HorizontalAlignment="Right" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc3_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy1" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio4" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio4" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC4" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin4" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax4" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio4" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio4_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC4" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC4" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="4 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc4" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc4_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy2" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio5" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio5" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC12" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin5" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax5" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio5" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio5_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC5" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC5" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="5 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc5" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc5_SelectionChanged" />
+                    <TextBlock Name="T_unit_x7" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio6" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio6" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC13" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin6" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax6" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio6" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio6_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC6" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC6" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="6 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc6" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" Width="154.267" HorizontalAlignment="Right" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc6_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy3" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio7" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio7" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC14" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin7" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax7" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio7" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio7_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC7" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC7" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="7 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc7" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" Width="154.267" HorizontalAlignment="Right" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc7_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy4" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio8" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio8" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC15" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin8" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax8" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio8" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio8_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC8" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC8" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="8 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc8" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc8_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy5" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio9" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio9" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC16" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin9" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax9" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio9" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio9_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC9" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC9" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="9 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc9" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc9_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy6" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratio10" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratio10" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINC17" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMin10" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMax10" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratio10" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratio10_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINC10" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINC10" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="10 Performace Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMinc10" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMinc10_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_Copy7" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioTitle_E" Margin="0,0,0,0" HorizontalAlignment="Left" Height="50">
+                  <Grid Name="grid_CPU_ratioTitle_E" HorizontalAlignment="Left" Width="800" Height="65.8">
+                    <TextBlock Name="T_unit_xTitle_E" Margin="56,0,14.926,18.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Center" Text="----------------------------------------------- Efficient Core Ratio Multiplier -----------------------------------------------" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE1" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE1" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE1" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE1" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE1" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE1_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="1 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE1" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE1_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE1" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE2" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE2" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE2" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE2" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE2" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE2" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE2_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE2" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE2" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="2 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE2" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE2_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE2" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE3" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE3" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE3" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE3" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE3" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE3" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE3_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE3" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE3" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="3 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE3" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE3_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE3" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE4" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE4" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE4" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE4" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE4" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE4" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE4_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE4" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE4" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="4 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE4" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE4_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE4" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE5" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE5" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE5" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE5" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE5" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE5" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE5_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE5" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE5" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="5 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE5" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE5_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE5" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE6" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE6" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE6" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE6" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE6" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE6" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE6_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE6" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE6" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="6 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE6" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE6_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE6" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE7" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE7" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE7" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE7" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE7" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE7" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE7_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE7" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE7" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="7 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE7" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE7_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE7" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+                <StackPanel Name="SP_ratioE8" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+                  <Grid Name="grid_CPU_ratioE8" HorizontalAlignment="Left" Width="800" Height="105.8">
+                    <Rectangle Name="R_sliderCPU_RatioINCE8" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                      <Rectangle.OpacityMask>
+                        <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                      </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <TextBlock Name="T_ratioIncMinE8" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                    <TextBlock Name="T_ratioIncMaxE8" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                    <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                      <LayoutTransformControl.LayoutTransform>
+                          <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform AngleX="-32" />
+                            <RotateTransform />
+                            <TranslateTransform />
+                          </TransformGroup>
+                      </LayoutTransformControl.LayoutTransform>
+                      <Slider Name="SL_ratioE8" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC1}" ValueChanged="SL_ratioE8_ValueChanged" />
+                    </LayoutTransformControl>
+                    <Grid Name="G_T_CPU_RatioINCE8" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                      <TextBlock Name="T_CPU_RatioINCE8" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="8 Efficient Core" Width="170" HorizontalAlignment="Left" />
+                    </Grid>
+                    <ComboBox Name="comboBox_CPURatioMincE8" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" Margin="0,44.319,33.408,34.481" HorizontalAlignment="Right" Width="154.267" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPURatioMincE8_SelectionChanged" />
+                    <TextBlock Name="T_unit_x_CopyE8" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="X" />
+                  </Grid>
+                </StackPanel>
+              </StackPanel>
+            </StackPanel>
+          </ScrollViewer>
+        </Canvas>
+        <Canvas Name="Apps_Power_Limit" Margin="500,700,550,100" IsVisible="False">
+          <StackPanel Name="SP_powerlimitset" VerticalAlignment="Top" HorizontalAlignment="Left" Width="855">
+            <StackPanel Name="SP_powerlimit_1" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+              <Grid Name="grid_CPU_PL1" HorizontalAlignment="Left" Width="800" Height="105.8">
+                <Rectangle Name="R_sliderCPU_RatioINC6" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                  <Rectangle.OpacityMask>
+                    <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                  </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock Name="T_PL1Min" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                <TextBlock Name="T_PL1Max" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                  <LayoutTransformControl.LayoutTransform>
+                      <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform AngleX="-32" />
+                        <RotateTransform />
+                        <TranslateTransform />
+                      </TransformGroup>
+                  </LayoutTransformControl.LayoutTransform>
+                  <Slider Name="SL_powerlimit1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC6}" ValueChanged="SL_powerlimit1_ValueChanged" />
+                </LayoutTransformControl>
+                <Grid Name="G_T_CPU_PL1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                  <TextBlock Name="T_CPU_PL1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Power Limit 1" Width="170" HorizontalAlignment="Left" />
+                </Grid>
+                <ComboBox Name="comboBox_CPUPL1Minc" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUPL1Minc_SelectionChanged" />
+                <TextBlock Name="T_unit_W" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="W" />
+              </Grid>
+            </StackPanel>
+            <StackPanel Name="SP_powerlimit_time" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100">
+              <Grid Name="grid_CPU_PLTime" HorizontalAlignment="Left" Width="800" Height="105.8">
+                <Rectangle Name="R_sliderCPU_RatioINC7" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                  <Rectangle.OpacityMask>
+                    <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                  </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock Name="T_PLTMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                <TextBlock Name="T_PLTMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                  <LayoutTransformControl.LayoutTransform>
+                      <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform AngleX="-32" />
+                        <RotateTransform />
+                        <TranslateTransform />
+                      </TransformGroup>
+                  </LayoutTransformControl.LayoutTransform>
+                  <Slider Name="SL_powerlimitTime" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC7}" ValueChanged="SL_powerlimitTime_ValueChanged" />
+                </LayoutTransformControl>
+                <Grid Name="G_T_CPU_PLT" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                  <TextBlock Name="T_CPU_PLT" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Power Limit Time" Width="170" HorizontalAlignment="Left" />
+                </Grid>
+                <ComboBox Name="comboBox_CPUPLTMinc" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUPLTMinc_SelectionChanged" />
+                <TextBlock Name="T_unit_W1" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="S" />
+              </Grid>
+            </StackPanel>
+            <StackPanel Name="SP_powerlimit_2" Margin="0,0,0,0" HorizontalAlignment="Left" Height="100" Width="800">
+              <Grid Name="grid_CPU_PL2" HorizontalAlignment="Left" Width="800" Height="105.8">
+                <Rectangle Name="R_sliderCPU_RatioINC8" Fill="#FF474747" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top">
+                  <Rectangle.OpacityMask>
+                    <ImageBrush Source="/Assets/slider_gpu_setting_1.png" />
+                  </Rectangle.OpacityMask>
+                </Rectangle>
+                <TextBlock Name="T_PL2Min" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                <TextBlock Name="T_PL2Max" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="Hand">
+                  <LayoutTransformControl.LayoutTransform>
+                      <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform AngleX="-32" />
+                        <RotateTransform />
+                        <TranslateTransform />
+                      </TransformGroup>
+                  </LayoutTransformControl.LayoutTransform>
+                  <Slider Name="SL_powerlimit2" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" TickFrequency="1" Height="60" IsSnapToTickEnabled="True" BorderBrush="{Binding Fill, ElementName=R_sliderCPU_RatioINC8}" ValueChanged="SL_powerlimit2_ValueChanged" />
+                </LayoutTransformControl>
+                <Grid Name="G_T_CPU_PL2" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                  <TextBlock Name="T_CPU_PL2" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Power Limit 2" Width="170" HorizontalAlignment="Left" />
+                </Grid>
+                <ComboBox Name="comboBox_CPUPL2Minc" HorizontalAlignment="Right" Margin="0,44.319,33.408,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" Background="#FF2B2B2B" BorderBrush="{x:Null}" SelectionChanged="comboBox_CPUPL2Minc_SelectionChanged" />
+                <TextBlock Name="T_unit_W2" Margin="0,0,14.926,36.466" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="W" />
+              </Grid>
+            </StackPanel>
+          </StackPanel>
+        </Canvas>
+        <Canvas Name="Apps_PowerMode_Description" Margin="500,700,550,100" IsVisible="False">
+          <Label Name="current_power_mode_LABEL" Content="POWER SAVING" FontSize="36" Foreground="#FFFFFFFF" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="870" Canvas.Top="96" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+          <Label Name="switch_power_mode_description_LABEL" Height="46" Content="Press Fn + 3 key to swtich power mode." FontSize="20" Foreground="#FF666666" BorderThickness="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="870" Canvas.Top="157" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        </Canvas>
+        <Canvas Name="Apps_DialogBox" Margin="0,0,0,0" Background="#00FFFFFF" Width="1920" Height="1080" IsVisible="False">
+          <Image Name="Image_dialog_bg_dialog_png" Source="/Assets/bg_dialog.png" Stretch="Fill" Width="950" HorizontalAlignment="Center" Height="460" VerticalAlignment="Center" Canvas.Left="480" Canvas.Top="270" />
+          <Image Name="Image_dialog_warning" HorizontalAlignment="Left" Source="/Assets/ic_dialog_warning.png" Stretch="Fill" Width="140" Canvas.Left="548" Canvas.Top="420" />
+          <Button Name="BTN_Cancel" Content="Cancel" HorizontalAlignment="Right" Height="70" VerticalAlignment="Bottom" Width="450" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" Canvas.Left="954" Canvas.Top="614" BorderBrush="{x:Null}" Click="BTN_Cancel_Click" />
+          <TextBlock Name="T_Dialog_info" TextWrapping="Wrap" Text="Activating CPU Overclock may reduce system stability, useful life of the system and affect system data integrity." Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Center" VerticalAlignment="Center" Width="660" Canvas.Left="710" Canvas.Top="420" />
+          <Button Name="BTN_OK" Content="OK" HorizontalAlignment="Left" Height="70" VerticalAlignment="Bottom" Width="448" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" Canvas.Left="506" Canvas.Top="614" BorderBrush="{x:Null}" Click="BTN_OK_Click" />
+        </Canvas>
+      </Grid>
+    </Viewbox>
+  </Grid>
+</Window>

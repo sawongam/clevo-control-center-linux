@@ -1,0 +1,13 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CPUOC30.View.Window1" Name="warnningWindow" Title="Window1" Width="760" Height="368"
+        WindowDecorations="None" Topmost="True" CanResize="False" FontSize="12" TransparencyLevelHint="Transparent" Background="Transparent"
+        WindowStartupLocation="CenterScreen">
+  <Grid Background="#00FFFFFF">
+    <Canvas Name="Apps_DialogBox" Margin="0,0,0,0" Background="#00FFFFFF" Width="760" Height="368" PointerPressed="Apps_DialogBox_PointerPressed">
+      <Image Name="Image_dialog_bg_dialog_png" Source="/Assets/bg_dialog.png" Stretch="Fill" HorizontalAlignment="Center" Width="760" Height="368" VerticalAlignment="Center" Canvas.Left="0" Canvas.Top="0" />
+      <Image Name="Image_dialog_warning" HorizontalAlignment="Left" Source="/Assets/ic_dialog_warning.png" Stretch="Fill" Width="100" Canvas.Left="47" Canvas.Top="100" Height="101" />
+      <TextBlock Name="T_Dialog_info" TextWrapping="Wrap" Text="Activating CPU Overclock may reduce system stability, useful life of the system and affect system data integrity." Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Width="510" Canvas.Left="200" Canvas.Top="80" />
+      <Button Name="BTN_OK" Content="OK" HorizontalAlignment="Left" Height="56" VerticalAlignment="Bottom" Width="359" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" Canvas.Left="21" Canvas.Top="278" Click="BTN_OK_Click" />
+    </Canvas>
+  </Grid>
+</Window>
