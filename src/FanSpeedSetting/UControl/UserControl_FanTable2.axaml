@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="FanSpeedSetting.UControl.UserControl_FanTable2" Name="userControl" Width="600" Height="400" BorderBrush="#FF00FF6F" Tag="0">
+  <Grid Margin="0">
+    <Grid Margin="0">
+      <TextBlock Name="textBlock" HorizontalAlignment="Left" Margin="62.6,42.2,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="100" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy" HorizontalAlignment="Left" Margin="71.5,70.8,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="90" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="71.5,99.6,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="80" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="71.5,131.6,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="70" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="71.5,160.71,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="60" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="71.5,191.71,0,190.18" TextWrapping="Wrap" Text="50" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="71.5,0,0,161.18" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="40" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="71.5,0,0,130.07" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="30" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="71.5,0,0,101.07" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="20" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy8" HorizontalAlignment="Left" Margin="71.5,0,0,69.96" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="10" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy9" HorizontalAlignment="Left" Margin="80.4,0,0,42.79" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="0" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy10" HorizontalAlignment="Left" Margin="120.7,0,0,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="40" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy11" HorizontalAlignment="Right" Margin="0,0,37.1,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="100" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy12" HorizontalAlignment="Left" Margin="191.7,0,0,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="50" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy13" HorizontalAlignment="Left" Margin="260.3,0,0,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="60" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy14" HorizontalAlignment="Right" Margin="0,0,249.9,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="70" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy15" HorizontalAlignment="Right" Margin="0,0,181.5,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="80" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy16" HorizontalAlignment="Right" Margin="0,0,110.5,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="90" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy17" HorizontalAlignment="Left" Margin="93.3,0,0,31.4" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="35" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy18" Margin="-560,182,550,0" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Fan " Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy19" Margin="0,0,0,9" VerticalAlignment="Bottom" TextAlignment="Center" TextWrapping="Wrap" Text="Temp (°C)" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy20" HorizontalAlignment="Left" Margin="24.575,0,0,171.6" VerticalAlignment="Bottom" TextWrapping="Wrap" Text="(%)" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+      <TextBlock Name="textBlock_Copy21" HorizontalAlignment="Left" Margin="21.882,187.18,0,194.71" IsVisible="False" TextWrapping="Wrap" Text="Duty" Foreground="#FFC2C2C2" FontFamily="Microsoft Sans Serif" FontSize="16" />
+    </Grid>
+    <Grid Margin="0,50,50,0" RenderTransformOrigin="50%,50%" Width="455" Height="300" HorizontalAlignment="Right" VerticalAlignment="Top">
+      <Grid.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform ScaleY="-1" ScaleX="1" />
+        </TransformGroup>
+      </Grid.RenderTransform>
+      <StackPanel Margin="0" Width="455" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Rectangle Height="30" Margin="0,0,0,30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="455" StrokeThickness="1" Stroke="#FF666666" />
+        <Rectangle Height="30" Margin="0,0,0,30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="455" StrokeThickness="1" Stroke="#FF666666" />
+        <Rectangle Height="30" Margin="0,0,0,30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="455" StrokeThickness="1" Stroke="#FF666666" />
+        <Rectangle Height="30" Margin="0,0,0,30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="455" StrokeThickness="1" Stroke="#FF666666" />
+        <Rectangle Height="30" Margin="0,0,0,30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="455" StrokeThickness="1" Stroke="#FF666666" />
+      </StackPanel>
+      <StackPanel Margin="0" Width="455" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+        <Rectangle Height="300" Margin="0,0,70,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" StrokeThickness="1" Stroke="#FF8C8C8C" />
+        <Rectangle Height="300" Margin="0,0,70,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" StrokeThickness="1" Stroke="#FF8C8C8C" />
+        <Rectangle Height="300" Margin="0,0,70,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" StrokeThickness="1" Stroke="#FF8C8C8C" />
+        <Rectangle Height="300" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" StrokeThickness="1" Stroke="#FF8C8C8C" />
+      </StackPanel>
+      <Path Name="R12" Data="M0,0 L1,1" Stretch="Fill" StrokeThickness="6" HorizontalAlignment="Left" VerticalAlignment="Top" Height="138.333" Width="133.467" MinHeight="6" Stroke="{Binding #T1.Fill}" Margin="{Binding #T1_point.Margin}" />
+      <Path Name="R23" Data="M0,0 L1,1" Stretch="Fill" StrokeThickness="6" HorizontalAlignment="Left" VerticalAlignment="Top" Height="43.8" Width="144" MinHeight="6" Stroke="{Binding #T1.Fill}" Margin="{Binding #T2_point.Margin}" />
+      <Path Name="R34" Data="M0,0 L1,1" Stretch="Fill" StrokeThickness="6" HorizontalAlignment="Left" VerticalAlignment="Top" Height="119.2" Width="180.6" MinHeight="6" Stroke="{Binding #T1.Fill}" Margin="{Binding #T3_point.Margin}" />
+      <Rectangle Name="R_layer" Margin="0" Width="455" Height="300" StrokeThickness="1" Stroke="#FF525252" ClipToBounds="True" Fill="#FF000000" Opacity="0.01" IsVisible="False" />
+      <Grid Name="T1_point" HorizontalAlignment="Left" Height="20" Margin="455,300,0,0" VerticalAlignment="Top" Width="20">
+        <Ellipse Name="T1" Height="16" Margin="-10,-10,0,0" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="0" Stroke="#FFA0A0A0" Fill="{Binding #userControl.BorderBrush}"  />
+      </Grid>
+      <Grid Name="T4_point" HorizontalAlignment="Left" Height="20" Margin="455,300,0,0" VerticalAlignment="Top" Width="20">
+        <Ellipse Name="T4" Height="16" Margin="-10,-10,0,0" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="0" Stroke="#FFA0A0A0" Fill="{Binding #userControl.BorderBrush}"  />
+      </Grid>
+      <Grid Name="T2_point" HorizontalAlignment="Left" Height="20" Margin="455,300,0,0" VerticalAlignment="Top" Width="20">
+        <Ellipse Name="T2" Height="20" Margin="-10,-10,0,0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="2" Stroke="#FFA0A0A0" Fill="{Binding #userControl.BorderBrush}" Cursor="Hand" />
+      </Grid>
+      <Grid Name="T3_point" HorizontalAlignment="Left" Height="20" Margin="455,300,0,0" VerticalAlignment="Top" Width="20">
+        <Ellipse Name="T3" Height="20" Margin="-10,-10,0,0" Width="20" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeThickness="2" Stroke="#FFA0A0A0" Fill="{Binding #userControl.BorderBrush}" Cursor="Hand" />
+      </Grid>
+    </Grid>
+    <StackPanel Name="SP_Text" Height="24.8" Margin="0,2,0,0" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+      <TextBlock Name="T_fan_Copy" HorizontalAlignment="Left" Height="25" TextWrapping="Wrap" Text="Fan :" Foreground="#FF9A9A9A" FontSize="16" VerticalAlignment="Top" Margin="8,0,0,0" />
+      <TextBlock Name="T_fan" HorizontalAlignment="Left" Height="25" Margin="10,0" TextWrapping="Wrap" Width="50" Foreground="#FFFFFFFF" FontSize="18.667" VerticalAlignment="Top" TextAlignment="Center" Background="#FF2E2E2E" />
+      <TextBlock Name="T_fan_Copy1" HorizontalAlignment="Left" Height="25" Margin="0" TextWrapping="Wrap" Text="%" Width="18" Foreground="#FF9A9A9A" FontSize="16" VerticalAlignment="Top" />
+      <TextBlock Name="T_temp_Copy1" Height="25" Margin="20,0,0,0" TextWrapping="Wrap" Text="Temp :" Foreground="#FF9A9A9A" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+      <TextBlock Name="T_temp" Height="25" Margin="10,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontSize="18.667" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" TextAlignment="Center" Background="#FF2E2E2E" />
+      <TextBlock Name="T_temp_Copy2" HorizontalAlignment="Left" Height="25" Margin="0,0,10,0" TextWrapping="Wrap" Text="°C" Width="20" Foreground="#FF9A9A9A" FontSize="16" VerticalAlignment="Top" />
+    </StackPanel>
+  </Grid>
+</UserControl>

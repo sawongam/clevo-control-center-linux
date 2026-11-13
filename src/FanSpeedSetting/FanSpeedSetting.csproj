@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>3.93.0.0</AssemblyVersion>
+    <FileVersion>3.93.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>FanSpeedSetting</AssemblyName>
+    <RootNamespace>FanSpeedSetting</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <AvaloniaResource Include="image/**" />
+    <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="oem.ini" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

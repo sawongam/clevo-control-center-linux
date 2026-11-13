@@ -1,0 +1,1230 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:FanSpeedSetting" xmlns:UControl="clr-namespace:FanSpeedSetting.UControl" x:Class="FanSpeedSetting.Page_system_monitor" Name="userControl" Width="1920" Height="1080" BorderBrush="#FFFF0000">
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+    <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070" />
+    <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
+    <ControlTheme x:Key="RBTN_GPU_selected" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Name="rectangle" Fill="{TemplateBinding Foreground}" StrokeThickness="0" Width="50" Stroke="{x:Null}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/btn_gpu1_normal.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/btn_gpu1_hover.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/btn_gpu1_selected.png" />
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RBTN_GPUSelected2" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Name="rectangle" Grid.ColumnSpan="2" Fill="{TemplateBinding Foreground}" Margin="0" StrokeThickness="0" Width="50" Height="50" Stroke="{x:Null}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/btn_gpu2_normal.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/btn_gpu2_hover.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/btn_gpu2_selected.png" />
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="ButtonStyle1_reset1" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border">
+            <WrapPanel Margin="0">
+              <Image Name="Image_Page_SystemMonitor_btn_save_normal_png" Margin="0" Stretch="Fill" Width="56" Height="56" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" />
+              <TextBlock Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" />
+            </WrapPanel>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_SystemMonitor_btn_save_normal_png">
+        <Setter Property="Source" Value="/image/page_systemmonitor/btn_default_normal.png" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_SystemMonitor_btn_save_normal_png">
+        <Setter Property="Source" Value="/image/page_systemmonitor/btn_default_hover.png" />
+      </Style>
+      <Style Selector="^:pressed /template/ Image#Image_Page_SystemMonitor_btn_save_normal_png">
+        <Setter Property="Source" Value="/image/page_systemmonitor/btn_save_pressed.png" />
+      </Style>
+      <Style Selector="^:pressed /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FF808080" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="ButtonStyle1_SAVE" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border">
+            <WrapPanel Margin="0">
+              <Image Name="Image_Page_SystemMonitor_btn_save_normal_png" Margin="0" Stretch="Fill" Width="56" Height="56" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" />
+              <TextBlock Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" />
+            </WrapPanel>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_SystemMonitor_btn_save_normal_png">
+        <Setter Property="Source" Value="/image/page_systemmonitor/btn_save_normal.png" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_SystemMonitor_btn_save_normal_png">
+        <Setter Property="Source" Value="/image/page_systemmonitor/btn_save_hover.png" />
+      </Style>
+      <Style Selector="^:pressed /template/ Image#Image_Page_SystemMonitor_btn_save_normal_png">
+        <Setter Property="Source" Value="/image/page_systemmonitor/btn_save_pressed.png" />
+      </Style>
+      <Style Selector="^:pressed /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FF808080" />
+      </Style>
+      <Style Selector="^:disabled">
+        <Setter Property="Opacity" Value="0.2" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_FAN" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle1" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="#FF444444" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/page_systemmonitor/fan/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+            <Grid Name="grid" Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}" />
+            </Grid>
+            <Border Name="radioButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" />
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_enable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="21.333" />
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:disabled /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FF353535" />
+      </Style>
+      <Style Selector="^:disabled /template/ Grid#grid">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_disable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_customFan" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0,0,5,0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Stroke="{x:Null}" OpacityMask="{x:Null}" />
+            </Grid>
+            <Border Name="radioButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,22,0,12.4" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" />
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{TemplateBinding Foreground}" FontSize="21.333" IsVisible="True" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_cpu_normal.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="OpacityMask" Value="#7F000000" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_cpu_hover.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_cpu_selected.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="OpacityMask" Value="#FF000000" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle_customFanGPU" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0,0,5,0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Stroke="{x:Null}" OpacityMask="{x:Null}" />
+            </Grid>
+            <Border Name="radioButtonBorder_Copy" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,26.8,0,-3.6" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" />
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{TemplateBinding Foreground}" FontSize="21.333" IsVisible="True" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_gpu1_normal.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="OpacityMask" Value="#7F000000" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_gpu1_hover.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_gpu1_selected.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="OpacityMask" Value="#FF000000" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_custonFanGPU2" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0,0,5,0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Stroke="{x:Null}" OpacityMask="{x:Null}" />
+            </Grid>
+            <Border Name="radioButtonBorder_Copy" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,26.8,0,-3.6" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" />
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="5,0,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="{TemplateBinding Foreground}" FontSize="21.333" IsVisible="True" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_gpu2_normal.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="OpacityMask" Value="#7F000000" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_fan_gpu2_hover.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/page_systemmonitor/fansetting/btn_gpu2_selected.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="OpacityMask" Value="#FF000000" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="CheckBoxStyle1" TargetType="CheckBox">
+      <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF" Margin="0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Name="rectangle" Grid.ColumnSpan="2" Margin="0" StrokeThickness="0" RenderTransformOrigin="50%,50%" Fill="#FF242424" Stroke="{x:Null}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform />
+                  <SkewTransform AngleX="-30" />
+                  <RotateTransform />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle Name="rectangle_Copy" Grid.ColumnSpan="2" Margin="0" StrokeThickness="0" RenderTransformOrigin="50%,50%" Fill="{TemplateBinding Background}" IsVisible="False" Stroke="{x:Null}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform />
+                  <SkewTransform AngleX="-30" />
+                  <RotateTransform />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+            </Rectangle>
+            <Border Name="radioButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" />
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="20,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="21.333" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:disabled /template/ Grid#templateRoot">
+        <Setter Property="Opacity" Value="0.1" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle_Copy">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:not(:checked) /template/ Rectangle#rectangle_Copy">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="CheckBoxStyle2" TargetType="CheckBox">
+      <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}" />
+            </Grid>
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="24" FontFamily="Microsoft Sans Serif" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_enable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_disable.png" />
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="ButtonStyle_Setting" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch">
+            <Rectangle Margin="0" VerticalAlignment="Stretch" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="96.9%,50.6%" StartPoint="0.6%,48.5%">
+                  <GradientStop Color="#7F000000" Offset="0.759" />
+                  <GradientStop />
+                  <GradientStop Color="#B2333333" Offset="0.428" />
+                  <GradientStop Color="#00000000" Offset="1" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <WrapPanel Name="wrapPanel" HorizontalAlignment="Left" Margin="37,0,0,-0.4" VerticalAlignment="Center" Width="357">
+              <TextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" Width="310" TextAlignment="Center" />
+            </WrapPanel>
+            <Path Data="M10,67.5 L305,67" HorizontalAlignment="Right" Height="3" Margin="0" Stretch="Fill" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="3" UseLayoutRounding="False" VerticalAlignment="Bottom" Fill="{x:Null}">
+              <Path.OpacityMask>
+                <LinearGradientBrush EndPoint="99.2%,11.4%" StartPoint="-0.4%,34.1%">
+                  <GradientStop Color="#00000000" Offset="0" />
+                  <GradientStop Color="White" Offset="0.504" />
+                  <GradientStop Offset="1" />
+                </LinearGradientBrush>
+              </Path.OpacityMask>
+            </Path>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="ButtonStyle1_antiDust" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+            <TextBlock Name="textBlock" HorizontalAlignment="Stretch" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" TextAlignment="Center" Width="700" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="0.1%,49.8%" StartPoint="99.3%,47.8%">
+            <GradientStop Color="#00000000" Offset="0" />
+            <GradientStop Color="#00000000" Offset="0.984" />
+            <GradientStop Color="#FF3F3E3E" Offset="0.475" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:disabled /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FF919191" />
+      </Style>
+      <Style Selector="^:pressed /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="-1%,49.8%" StartPoint="99.3%,48.8%">
+            <GradientStop Color="#001F1F1F" Offset="0" />
+            <GradientStop Color="#006F6F6F" Offset="0.984" />
+            <GradientStop Color="#CC060606" Offset="0.495" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:disabled /template/ Border#border">
+        <Setter Property="Background" Value="{x:Null}" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="TextBlockStyle2_TIME" TargetType="TextBlock">
+      <Style Selector="^:disabled">
+        <Setter Property="Foreground" Value="#FF5C5C5C" />
+      </Style>
+      <Setter Property="TextWrapping" Value="NoWrap" />
+      <Setter Property="TextTrimming" Value="None" />
+      <Setter Property="Foreground" Value="#FFFFFFFF" />
+    </ControlTheme>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+    <ControlTheme x:Key="ComboBoxStyle_dropdown" TargetType="ComboBox">
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="6,3,5,3" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot">
+            <Border Name="templateBg" Background="{TemplateBinding Background}" RenderTransformOrigin="50%,50%" Cursor="Hand">
+              <Border.RenderTransform>
+                <SkewTransform AngleX="-32" />
+              </Border.RenderTransform>
+            </Border>
+            <ContentControl Name="contentPresenter" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding ItemTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" IsHitTestVisible="False" />
+            <Path Name="arrow" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" Data="M0,0 L2.667,2.66665 L5.3334,0 L5.3334,-1.78168 L2.6667,0.88501 L0,-1.78168 L0,0" Fill="#FF606060" IsHitTestVisible="False" />
+            <Popup Name="PART_Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" MinWidth="126" PlacementTarget="{Binding #templateRoot}" IsLightDismissEnabled="True">
+              <Border Background="#FF272727" MaxHeight="150" MinWidth="126">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                  <ItemsPresenter Name="PART_ItemsPresenter" />
+                </ScrollViewer>
+              </Border>
+            </Popup>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+  </UserControl.Resources>
+  <Grid Name="page_system_monitor" Width="1920" Height="1080">
+    <Rectangle Name="r_layer2" Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080" IsVisible="False" Fill="{Binding #userControl.BorderBrush}">
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/image/main/bg_cpu_layer2.png" />
+      </Rectangle.OpacityMask>
+    </Rectangle>
+    <Rectangle Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080" IsVisible="False">
+      <Rectangle.Fill>
+        <ImageBrush Source="/image/fanspeedsetting/bg_fan_less_layer3.png" />
+      </Rectangle.Fill>
+    </Rectangle>
+    <Rectangle Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080" IsVisible="False">
+      <Rectangle.Fill>
+        <ImageBrush Source="/image/fanspeedsetting/bg_fan_more_layer3.png" />
+      </Rectangle.Fill>
+    </Rectangle>
+    <Grid Name="info_FAN_CPU" HorizontalAlignment="Left" Margin="300,140,0,0" Width="568" Height="568" VerticalAlignment="Top" IsVisible="False">
+      <Rectangle Name="system_temperature_layer6_turbofan" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+        <Rectangle.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="1" />
+            <SkewTransform AngleY="0" AngleX="0" />
+            <RotateTransform Angle="107.311" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Rectangle.RenderTransform>
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer2_2.png" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Name="system_temperature_layer5" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%" Fill="{Binding #userControl.BorderBrush}">
+        <Rectangle.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="1" />
+            <SkewTransform AngleY="0" AngleX="0" />
+            <RotateTransform Angle="90" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Rectangle.RenderTransform>
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer1_1.png" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Name="system_temperature_layer6" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+        <Rectangle.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="1" />
+            <SkewTransform AngleY="0" AngleX="0" />
+            <RotateTransform Angle="89.5" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Rectangle.RenderTransform>
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer2_2.png" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Image Name="Image_Page_SystemMonitor_system_gpu_temperature_layer3_png2" Margin="0" Source="/image/fanspeedsetting/system_fan_layer3_1.png" Stretch="Fill" Height="88" Width="88" HorizontalAlignment="Center" VerticalAlignment="Center" />
+      <TextBlock Name="T_7" HorizontalAlignment="Left" Height="20" Margin="423,106,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="39" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+      <TextBlock Name="T_8" HorizontalAlignment="Left" Height="20" Margin="304,46,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+      <TextBlock Name="T_9" HorizontalAlignment="Left" Height="20" Margin="160,0,0,479" TextWrapping="Wrap" Text="60" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+      <TextBlock Name="T_10" HorizontalAlignment="Left" Height="20" Margin="66,0,0,380" TextWrapping="Wrap" Text="40" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+      <TextBlock Name="T_11" HorizontalAlignment="Left" Height="20" Margin="48,0,0,240" TextWrapping="Wrap" Text="20" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+      <TextBlock Name="T_12" HorizontalAlignment="Left" Height="20" Margin="108,0,0,111" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+      <TextBlock Name="T_FanSpeed" Margin="165,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="247" TextAlignment="Center" Text="{Binding #F_speed.Text}" />
+      <Rectangle Name="CPUFAN_needle_layer3" Margin="0" RenderTransformOrigin="50%,50%" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding #system_temperature_layer5.Fill}">
+        <Rectangle.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform />
+            <SkewTransform />
+            <RotateTransform Angle="225" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Rectangle.RenderTransform>
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_needle_layer1_2.png" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Name="CPUFAN_needle_layer4" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Rectangle.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="1" />
+            <SkewTransform AngleY="0" AngleX="0" />
+            <RotateTransform Angle="225" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Rectangle.RenderTransform>
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_needle_layer2_2.png" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <TextBlock Name="T_unit2" Height="25" Margin="342,193,0,0" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="29" />
+      <TextBlock Name="CPUFan_value1" Margin="214,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="48" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="135" TextAlignment="Center" Height="55" Text="100" />
+      <TextBlock Name="F_RPM_Copy" Margin="0,0,195.6,63.8" TextWrapping="Wrap" Text="RPM" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Right" Width="53" Height="20" VerticalAlignment="Bottom" />
+      <TextBlock Name="T_GPUFan_RPM_value_Copy" Margin="0,470.2,259.6,57.8" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontSize="36" FontFamily="Microsoft Sans Serif" TextAlignment="Right" HorizontalAlignment="Right" Width="94" Text="{Binding #T_CPUFan_RPM_value.Text}" />
+      <Image Name="Image_turbofan" Margin="467.444,155.889,60.556,372.111" Source="/image/page_systemmonitor/fan/btn_memory_xmp2_hover.png" Stretch="Fill" Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Grid>
+    <Viewbox Name="VB_temp" HorizontalAlignment="Center" Height="568" Margin="0,140,0,0" VerticalAlignment="Top" Width="1920">
+      <Grid Height="568" Width="1920" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Viewbox Name="VB_GPU_Temp" HorizontalAlignment="Right" Height="568" Margin="0,0,1057,0" VerticalAlignment="Top" Width="568">
+          <Grid Name="info_temp_fan_gpu" HorizontalAlignment="Left" Width="568" Height="568" VerticalAlignment="Top">
+            <Rectangle Name="system_temperature_layer1" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%" Fill="{Binding #info_GPU.Foreground}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="90" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer1_1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="system_temperature_layer2" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="89.5" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer2_2.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Image Name="Image_Page_SystemMonitor_system_gpu_temperature_layer3_png" Margin="0" Source="/image/page_systemmonitor/temp/system_gpu_temperature_layer3_1.png" Stretch="Fill" Height="88" Width="88" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBlock Name="T_100" HorizontalAlignment="Left" Height="20" Margin="423,106,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="39" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+            <TextBlock Name="T_80" HorizontalAlignment="Left" Height="20" Margin="304,46,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+            <TextBlock Name="T_60" HorizontalAlignment="Left" Height="20" Margin="160,0,0,479" TextWrapping="Wrap" Text="60" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+            <TextBlock Name="T_40" HorizontalAlignment="Left" Height="20" Margin="66,0,0,380" TextWrapping="Wrap" Text="40" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+            <TextBlock Name="T_20" HorizontalAlignment="Left" Height="20" Margin="48,0,0,240" TextWrapping="Wrap" Text="20" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+            <TextBlock Name="T_0" HorizontalAlignment="Left" Height="20" Margin="108,0,0,111" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+            <TextBlock Name="T_temp" Height="34" Margin="165,344,0,0" TextWrapping="Wrap" Text="Temperature" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="246" TextAlignment="Center" />
+            <Rectangle Name="GPUTemp_needle_layer1" Margin="0" RenderTransformOrigin="50%,50%" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding #info_GPU.Foreground}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform />
+                  <SkewTransform />
+                  <RotateTransform Angle="225" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_needle_layer1_2.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="GPUTemp_needle_layer2" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="225" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_needle_layer2_2.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <TextBlock Name="T_unit" Height="25" Margin="342,193,0,0" TextWrapping="Wrap" Text="°C" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="29" />
+            <TextBlock Name="GPUTemp_value" Margin="225,171,0,0" TextWrapping="Wrap" Text="OFF" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="48" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="115" TextAlignment="Center" Height="55" />
+            <TextBlock Name="info_GPU" Margin="-142.6,0,617.6,489.6" TextWrapping="Wrap" Text="GPU" Foreground="#FF00A8FF" FontSize="40" FontFamily="Microsoft Sans Serif" TextAlignment="Right" Height="46" VerticalAlignment="Bottom" />
+            <RadioButton Name="RBTN_GPU1" Content="RadioButton" Height="50" Margin="-146.2,0,664.2,443" VerticalAlignment="Bottom" Theme="{StaticResource RBTN_GPU_selected}" GroupName="GPU_Selected" Width="50" Cursor="Hand" IsChecked="True" Foreground="{Binding #info_GPU.Foreground}">
+              <RadioButton.Effect>
+                <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="5" Color="Black" />
+              </RadioButton.Effect>
+            </RadioButton>
+            <RadioButton Name="RBTN_GPU2" Content="RadioButton" Height="50" Margin="-88.6,0,606.6,443" VerticalAlignment="Bottom" Theme="{StaticResource RBTN_GPUSelected2}" GroupName="GPU_Selected" Width="50" HorizontalAlignment="Right" Cursor="Hand" Foreground="{Binding #info_GPU.Foreground}">
+              <RadioButton.Effect>
+                <DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="5" Color="Black" />
+              </RadioButton.Effect>
+            </RadioButton>
+          </Grid>
+        </Viewbox>
+        <Viewbox Name="VB_CPU_Temp" HorizontalAlignment="Left" Height="568" Margin="1057,0,0,0" VerticalAlignment="Top" Width="568">
+          <Grid Name="info_temp_fan_cpu" HorizontalAlignment="Right" Width="568" RenderTransformOrigin="50%,50%" Height="568" VerticalAlignment="Top">
+            <Grid.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Grid.RenderTransform>
+            <Rectangle Name="system_temperature_layer3" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding #userControl.BorderBrush}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform />
+                  <SkewTransform />
+                  <RotateTransform Angle="90" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer1_1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="system_temperature_layer4" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform />
+                  <SkewTransform />
+                  <RotateTransform Angle="90" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_layer2_2.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Image Name="Image_Page_SystemMonitor_system_gpu_temperature_layer3_png1" Margin="0" Source="/image/page_systemmonitor/temp/system_cpu_temperature_layer3_1.png" Stretch="Fill" Height="88" Width="88" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Image.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Image.RenderTransform>
+            </Image>
+            <TextBlock Name="T_1" HorizontalAlignment="Left" Height="25" Margin="433,111,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="39" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_2" HorizontalAlignment="Left" Height="25" Margin="302,46,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_3" HorizontalAlignment="Left" Height="25" Margin="159,0,0,478" TextWrapping="Wrap" Text="60" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_4" HorizontalAlignment="Left" Height="25" Margin="68,0,0,381" TextWrapping="Wrap" Text="40" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_5" HorizontalAlignment="Left" Height="25" Margin="45,0,0,231" TextWrapping="Wrap" Text="20" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_6" HorizontalAlignment="Left" Height="25" Margin="75,0,0,128" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_cpu_temp_value" Height="58" Margin="227,178,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="48" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="112" TextAlignment="Center" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_unit1" Height="25" Margin="184,205,0,0" TextWrapping="Wrap" Text="°C" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="50%,50%">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Name="T_temp1" Height="40" Margin="149,346,0,0" TextWrapping="Wrap" Text="Temperature" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="255" RenderTransformOrigin="50%,50%" TextAlignment="Center">
+              <TextBlock.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </TextBlock.RenderTransform>
+            </TextBlock>
+            <Rectangle Name="CPUTemp_needle_layer1" Margin="0" RenderTransformOrigin="50%,50%" Width="568" HorizontalAlignment="Center" VerticalAlignment="Center" Height="568" Fill="{Binding #system_temperature_layer3.Fill}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="225" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_needle_layer1_2.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="CPUTemp_needle_layer2" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="225" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/temp/system_temperature_needle_layer2_2.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </Viewbox>
+      </Grid>
+    </Viewbox>
+    <Grid Name="Setting" Margin="0,528,0,-1" Height="553">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <Grid Name="grid_fan_AntiDust" Margin="0,0,1,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Rectangle Name="rectangle" HorizontalAlignment="Center" Height="200" Margin="384.4,216,384.6,0" VerticalAlignment="Top" Width="1150" RenderTransformOrigin="50%,50%" Opacity="0.7" Fill="{Binding #userControl.BorderBrush}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="-1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/main/bg_title_bar_3.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="238.832" Margin="428.4,275.368,0,0" VerticalAlignment="Top" Width="1049.1" Fill="{Binding #rectangle.Fill}">
+          <Rectangle.OpacityMask>
+            <LinearGradientBrush EndPoint="0.2%,53.5%" StartPoint="100.1%,49.9%">
+              <GradientStop Color="#00000000" Offset="0.085" />
+              <GradientStop Offset="0.987" />
+              <GradientStop Color="#66797979" Offset="0.477" />
+              <GradientStop Color="#66898989" Offset="0.502" />
+            </LinearGradientBrush>
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Grid Height="258" Margin="473,0,402,65" VerticalAlignment="Bottom">
+          <TextBlock Name="T_AntiDustScheduler" Margin="10,9.267,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="26.667" Foreground="#FFFFFFFF" Height="28.533" HorizontalAlignment="Left" Text="Anti-Dust Fan Scheduler" Width="383.547" />
+          <CheckBox Name="CB_Resume" Content="Execute after each system power on or resume." HorizontalAlignment="Left" Height="46" Margin="10,51.167,0,0" VerticalAlignment="Top" Theme="{StaticResource CheckBoxStyle2}" IsChecked="True" Cursor="Hand" Background="{Binding #userControl.BorderBrush}" />
+          <CheckBox Name="CB_Week" Content="Week Specified :" HorizontalAlignment="Left" Height="46" Margin="10,102.167,0,0" VerticalAlignment="Top" Theme="{StaticResource CheckBoxStyle2}" IsChecked="True" Cursor="Hand" Background="{Binding #userControl.BorderBrush}" />
+          <Grid Height="104.633" Margin="0" VerticalAlignment="Bottom" IsEnabled="{Binding #CB_Week.IsChecked}">
+            <WrapPanel Margin="100,0,0,0" IsEnabled="{Binding #RB_FAN_custom_Copy7.IsChecked}">
+              <CheckBox Name="CB_0" Content="Sun" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Cursor="Hand" Margin="10,0,0,0" Background="{Binding #RB_FAN_auto.Background}" />
+              <CheckBox Name="CB_1" Content="Mon" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Margin="10,0,0,0" Cursor="Hand" Background="{Binding #RB_FAN_auto.Background}" />
+              <CheckBox Name="CB_2" Content="Tue" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Margin="10,0,0,0" Cursor="Hand" Background="{Binding #RB_FAN_auto.Background}" />
+              <CheckBox Name="CB_3" Content="Wed" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Margin="10,0,0,0" Cursor="Hand" Background="{Binding #RB_FAN_auto.Background}" />
+              <CheckBox Name="CB_4" Content="Thu" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Margin="10,0,0,0" Cursor="Hand" Background="{Binding #RB_FAN_auto.Background}" />
+              <CheckBox Name="CB_5" Content="Fri" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Margin="10,0,0,0" Cursor="Hand" Background="{Binding #RB_FAN_auto.Background}" />
+              <CheckBox Name="CB_6" Content="Sat" Height="33" Foreground="#FFFFFFFF" FontSize="24" Theme="{StaticResource CheckBoxStyle1}" IsChecked="True" OpacityMask="#FF7F2525" Margin="10,0,0,0" Cursor="Hand" Background="{Binding #RB_FAN_auto.Background}" />
+            </WrapPanel>
+            <WrapPanel HorizontalAlignment="Left" Height="45.168" Margin="100,59.465,0,0" VerticalAlignment="Top" Width="889.6">
+              <TextBlock Name="T_time" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Microsoft Sans Serif" Height="28.533" HorizontalAlignment="Left" Text="Time : " FontSize="22" Margin="0,0,20,0" Theme="{StaticResource TextBlockStyle2_TIME}" />
+              <ComboBox Name="CB_AM" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="21.333" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" BorderBrush="#00FFFFFF" HorizontalAlignment="Left" Width="200" SelectedIndex="0" Height="45" VerticalAlignment="Bottom" Margin="0,0,20,0" Background="{Binding #CB_0.Background}">
+                <Button Content="AM" IsCancel="True" Foreground="#FFFFFFFF" Background="{x:Null}" BorderBrush="{x:Null}" />
+                <Button Content="PM" Foreground="#FFFFFFFF" Background="{x:Null}" BorderBrush="{x:Null}" />
+              </ComboBox>
+              <ComboBox Name="CB_H" Theme="{StaticResource ComboBoxStyle_dropdown}" FontFamily="Microsoft Sans Serif" FontSize="21.333" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" HorizontalAlignment="Left" Width="200" SelectedIndex="0" Height="45" VerticalAlignment="Bottom" Background="{Binding #CB_0.Background}" BorderBrush="{x:Null}">
+                <Button Content="12" IsCancel="True" Foreground="#FFFFFFFF" Background="{x:Null}" BorderBrush="{x:Null}" />
+                <Button Content="1" Foreground="#FFFFFFFF" Background="{x:Null}" BorderBrush="{x:Null}" />
+                <Button Content="2" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="3" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="4" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="5" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="6" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="7" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="8" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="9" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="10" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+                <Button Content="11" Foreground="#FFFFFFFF" BorderBrush="{x:Null}" Background="{x:Null}" />
+              </ComboBox>
+            </WrapPanel>
+          </Grid>
+        </Grid>
+        <Path Data="M430.8,37.8 L1476.7,37.8" HorizontalAlignment="Center" Height="3" Margin="1172.6,40.968,441.4,0" Stretch="Fill" StrokeThickness="3" VerticalAlignment="Top" Width="305" StrokeDashArray="1" IsVisible="False" Stroke="{Binding #rectangle.Fill}" />
+        <Path Data="M430.8,37.8 L1476.7,37.8" HorizontalAlignment="Left" Height="3" Margin="195,609.055,0,-59.055" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="3" VerticalAlignment="Top" Width="1048.9" StrokeDashArray="1,2,1,2" />
+        <Path Data="M430.8,37.8 L1476.7,37.8" HorizontalAlignment="Center" Height="3" Margin="444.3,40.968,1181.5,0" Stretch="Fill" StrokeThickness="3" VerticalAlignment="Top" Width="293.2" StrokeDashArray="1" IsVisible="False" Stroke="{Binding #rectangle.Fill}" />
+        <Button Name="BTN_AntiDustNow" Margin="579.5,48.968,591.5,0" FontSize="26.667" Foreground="#FFFFFFFF" BorderThickness="0,4,0,5" Height="145.8" VerticalAlignment="Top" HorizontalAlignment="Center" Width="748" Padding="0,1" Cursor="Hand" RenderTransformOrigin="50%,50%" Content="Anti-Dust Fan Manual" Theme="{StaticResource ButtonStyle1_antiDust}" BorderBrush="{x:Null}">
+          <Button.Background>
+            <LinearGradientBrush EndPoint="0.1%,49.8%" StartPoint="99.3%,47.8%">
+              <GradientStop Color="#00000000" Offset="0" />
+              <GradientStop Offset="0.984" Color="#00000000" />
+              <GradientStop Color="#FF3F3E3E" Offset="0.475" />
+            </LinearGradientBrush>
+          </Button.Background>
+          <Button.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Button.RenderTransform>
+        </Button>
+      </Grid>
+      <Grid Name="grid_btn_AntiDustSetting" HorizontalAlignment="Center" Height="141" VerticalAlignment="Top" Width="407.2" Margin="761.3,-117,751.5,0">
+        <Button Name="BTN_AntiDustSetting" Margin="0" VerticalAlignment="Bottom" FontSize="26.667" Foreground="#FFFFFFFF" BorderThickness="0,3,5,5" HorizontalAlignment="Center" Padding="1" UseLayoutRounding="True" Theme="{StaticResource ButtonStyle_Setting}" Content="Anti-Dust  Fan Setting" Cursor="Hand" Background="#FF272727" Width="404" BorderBrush="{Binding #r_layer2.Fill}" />
+      </Grid>
+      <Grid Name="Setting_FAN" Margin="0" Width="1748" Height="553" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid Name="Grid_save_reset_fan" HorizontalAlignment="Left" Height="104" Margin="1264.4,0,0,13.2" VerticalAlignment="Bottom">
+          <WrapPanel Name="WP_save_reset_fan" Height="59.667" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Button Name="BTN_Reset_Fan" Content="Default" Height="56" Theme="{StaticResource ButtonStyle1_reset1}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Focusable="False" />
+            <Path Data="M166,483.73333 L171.33333,528.4" Fill="#FFF4F4F5" Height="53" Stretch="Fill" StrokeThickness="3" Width="3.333" Stroke="#FFFFFFFF" StrokeDashArray="1,2,1,2" StrokeDashOffset="2" Margin="15,0" />
+            <Button Name="BTN_SAVE_Fan" Content="Save" Height="56" Theme="{StaticResource ButtonStyle1_SAVE}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" IsEnabled="False" Focusable="False" />
+          </WrapPanel>
+        </Grid>
+        <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_ic_gpu_setting_png_Copy" HorizontalAlignment="Left" Margin="781,95,0,0" Source="/image/page_systemmonitor/fan/ic_fan_setting.png" Stretch="Fill" Width="46" Height="46" VerticalAlignment="Top" IsVisible="False" />
+        <TextBlock Name="T_FANSET" HorizontalAlignment="Left" Margin="836,0,0,416" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="21.333" Foreground="#FFFFFFFF" Width="286" Height="32" Text="Fan Speed Setting" IsVisible="False" />
+        <Grid Name="grid_fan_auto" Margin="0,0,362,0" Height="494" Width="1180" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+          <Rectangle Name="R_slider_fan_auto_offset" Margin="400.934,247.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/image/page_systemmonitor/cpugpusetting/slider_gpu_setting_1.png" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <TextBlock Name="T_FanAuto_" Margin="0,0,46.876,219.422" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="21.333" Foreground="#FFFFFFFF" Height="24" TextAlignment="Center" Text="%" HorizontalAlignment="Right" Width="36.97" />
+          <TextBlock Name="T_FanAutoOffset" Margin="0,0,613,219" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="24" Foreground="#FFFFFFFF" Height="34" TextAlignment="Center" HorizontalAlignment="Right" Text="Offset" Width="188" />
+          <TextBlock Name="T_FanAutoMin" Margin="562.154,0,0,191.422" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+          <TextBlock Name="T_FanAutoMax" Margin="0,0,241.5,191.422" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+          <Slider Name="slider_FAN_AutoOffset" Margin="554.446,0,0,202.223" Theme="{StaticResource SliderStyle_INC}" HorizontalAlignment="Left" Width="362.399" SmallChange="1" Height="60" VerticalAlignment="Bottom" Cursor="Hand" IsSnapToTickEnabled="True" Maximum="50" BorderBrush="{Binding #R_slider_fan_auto_offset.Fill}">
+            <Slider.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform AngleX="-32" />
+                <RotateTransform />
+                <TranslateTransform />
+              </TransformGroup>
+            </Slider.RenderTransform>
+          </Slider>
+          <ComboBox Name="comboBox_FanAutoOffset" Theme="{StaticResource ComboBoxStyle_dropdown}" HorizontalAlignment="Right" Margin="0,0,81.467,218.347" Width="154.267" Background="#FF00A5FF" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" VerticalAlignment="Bottom" BorderBrush="{x:Null}" />
+        </Grid>
+        <Grid Name="grid_fan_custom" Margin="0,0,158,-7" Height="494" Width="1330" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+          <Path Data="M-1020.4574,851.87628 L2374.925,850.80426 L3547.2928,909.76544 L16019.584,911.62804" Height="68.2" Stretch="Fill" StrokeThickness="3" StrokeDashArray="1,2,1,2" StrokeDashOffset="2" Margin="73.1,0,11.7,16.4" VerticalAlignment="Bottom" Stroke="#FFFFFFFF" />
+          <Rectangle Margin="0,124,426,0" StrokeThickness="1" Stroke="#FF8C8C8C" HorizontalAlignment="Right" Width="455" Height="300" VerticalAlignment="Top">
+            <Rectangle.Fill>
+              <LinearGradientBrush EndPoint="-1.3%,50%" StartPoint="99.3%,50.7%">
+                <GradientStop Color="#4C003CFF" Offset="1" />
+                <GradientStop Color="#4CFF0000" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+          <StackPanel Name="SP_customFan3" Margin="354,74,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="{Binding #SP_customFan1.Height}" Width="{Binding #SP_customFan1.Width}">
+            <StackPanel Name="SP_FanTable_GPU2" Height="400" Margin="0" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top">
+              <UControl:UserControl_FanTable2 Name="UC_FanTable_GPU2" PointerMoved="UC_FanTable_MouseMove" Height="400" Margin="0" Width="600" RenderTransformOrigin="50%,50%" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <UControl:UserControl_FanTable2.RenderTransform>
+                  <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1" />
+                    <SkewTransform AngleY="0" AngleX="0" />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                  </TransformGroup>
+                </UControl:UserControl_FanTable2.RenderTransform>
+              </UControl:UserControl_FanTable2>
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Name="SP_customFan2" Margin="354,74,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{Binding #SP_customFan1.Width}" Height="{Binding #SP_customFan1.Height}">
+            <StackPanel Name="SP_FanTable_GPU1" Height="400" Margin="0" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top">
+              <UControl:UserControl_FanTable2 Name="UC_FanTable_GPU1" PointerMoved="UC_FanTable_MouseMove" Height="400" Margin="0" Width="600" RenderTransformOrigin="50%,50%" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{Binding #info_GPU.Foreground}">
+                <UControl:UserControl_FanTable2.RenderTransform>
+                  <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1" />
+                    <SkewTransform AngleY="0" AngleX="0" />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                  </TransformGroup>
+                </UControl:UserControl_FanTable2.RenderTransform>
+              </UControl:UserControl_FanTable2>
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Name="SP_customFan1" Margin="354,74,0,0" Width="600" Height="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Name="SP_FanTable_CPU" Height="400" Margin="0" Width="600" HorizontalAlignment="Left" VerticalAlignment="Top">
+              <UControl:UserControl_FanTable2 Name="UC_FanTable_CPU" PointerMoved="UC_FanTable_MouseMove" Height="400" Width="600" RenderTransformOrigin="50%,50%" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="{Binding #RB_customFanCPU.Foreground}">
+                <UControl:UserControl_FanTable2.RenderTransform>
+                  <TransformGroup>
+                    <ScaleTransform ScaleY="1" ScaleX="1" />
+                    <SkewTransform AngleY="0" AngleX="0" />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                  </TransformGroup>
+                </UControl:UserControl_FanTable2.RenderTransform>
+              </UControl:UserControl_FanTable2>
+            </StackPanel>
+          </StackPanel>
+          <RadioButton Name="RB_customFanCPU" Content="CPU Fan" HorizontalAlignment="Left" Height="46" Margin="85,191,0,0" VerticalAlignment="Top" Width="194" GroupName="CustomFan" IsChecked="True" Theme="{StaticResource RadioButtonStyle1_customFan}" VerticalContentAlignment="Center" FontSize="21.333" FontFamily="Microsoft Sans Serif" Cursor="Hand" Foreground="{Binding #system_temperature_layer3.Fill}" />
+          <RadioButton Name="RB_customFanGPU1" Content="GPU1 Fan" HorizontalAlignment="Left" Margin="85,269,0,179" Width="194" GroupName="CustomFan" Theme="{StaticResource RadioButtonStyle_customFanGPU}" Cursor="Hand" Foreground="{Binding #info_GPU.Foreground}" />
+          <RadioButton Name="RB_customFanGPU2" Content="GPU2 Fan" HorizontalAlignment="Left" Margin="85,0,0,98" Width="194" GroupName="CustomFan" Height="46" VerticalAlignment="Bottom" Theme="{StaticResource RadioButtonStyle1_custonFanGPU2}" Cursor="Hand" Foreground="#FF00FF6F" />
+        </Grid>
+      </Grid>
+    </Grid>
+    <Viewbox Name="VB_GPUFan" HorizontalAlignment="Left" Height="306" Margin="25,500,0,0" VerticalAlignment="Top" Width="334">
+      <Grid Name="grid_GPUfan" HorizontalAlignment="Left" Width="318" Height="306">
+        <UControl:UserControl_FAN Name="UC_FAN_GPU" Margin="0" RenderTransformOrigin="50%,50%" Width="226" Height="226" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="1" BorderBrush="{Binding #info_GPU.Foreground}">
+          <UControl:UserControl_FAN.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </UControl:UserControl_FAN.RenderTransform>
+        </UControl:UserControl_FAN>
+        <TextBlock Name="F_speed" Margin="0" TextWrapping="Wrap" Text="Fan Speed" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" TextAlignment="Center" HorizontalAlignment="Center" />
+        <TextBlock Name="F_RPM" Margin="0,0,100,277" TextWrapping="Wrap" Text="RPM" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Right" Width="53" Height="20" VerticalAlignment="Bottom" />
+        <TextBlock Name="F_unit" Margin="0,248,227,0" TextWrapping="Wrap" Text="%" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Right" Width="18" Height="20" VerticalAlignment="Top" />
+        <TextBlock Name="T_GPUFan_percent_value" Margin="-17,228,251,0" TextWrapping="Wrap" Text="100" Foreground="#FFFFFFFF" FontSize="30" FontFamily="Microsoft Sans Serif" TextAlignment="Right" Height="32" VerticalAlignment="Top" />
+        <TextBlock Name="T_GPUFan_RPM_value" Margin="0,-5,164,271" TextWrapping="Wrap" Text="2000" Foreground="#FFFFFFFF" FontSize="36" FontFamily="Microsoft Sans Serif" TextAlignment="Right" HorizontalAlignment="Right" Width="94" />
+        <Rectangle Name="UI_TurboFan_GPU1" HorizontalAlignment="Left" Height="187.802" Margin="41.01,35.499,0,0" VerticalAlignment="Top" Width="235.78" RenderTransformOrigin="50%,50%" Opacity="0">
+          <Rectangle.Fill>
+            <ImageBrush Source="/image/page_systemmonitor/fan/rim_in.png" />
+          </Rectangle.Fill>
+        </Rectangle>
+        <Ellipse HorizontalAlignment="Left" Height="45" Margin="139.8,134,0,0" StrokeThickness="2" VerticalAlignment="Top" Width="45" Stroke="#FFFDFDFD">
+          <Ellipse.Fill>
+            <RadialGradientBrush>
+              <GradientStop Color="#FF303030" Offset="1" />
+              <GradientStop Color="#FF545454" />
+            </RadialGradientBrush>
+          </Ellipse.Fill>
+        </Ellipse>
+        <Rectangle Name="UI_TurboFan_GPU2" Fill="#FFC0FF00" HorizontalAlignment="Left" Height="44.7" Margin="142.624,136.577,0,0" Stroke="#FF000000" VerticalAlignment="Top" Width="43.2" StrokeThickness="0">
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/page_systemmonitor/fan/btn_memory_xmp2_hover.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="UI_TurboFan_GPU1_Copy" HorizontalAlignment="Left" Height="187.802" Margin="41.01,83.099,0,0" VerticalAlignment="Top" Width="235.78" RenderTransformOrigin="50%,50%" Opacity="0">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="-1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.Fill>
+            <ImageBrush Source="/image/page_systemmonitor/fan/rim_in.png" />
+          </Rectangle.Fill>
+        </Rectangle>
+      </Grid>
+    </Viewbox>
+    <Viewbox Name="VB_CPUFan" HorizontalAlignment="Right" Height="306" Margin="0,500,25,0" VerticalAlignment="Top" Width="334">
+      <Grid Name="grid_CPUfan" HorizontalAlignment="Right" Width="334" RenderTransformOrigin="50%,50%" Height="306">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="275*" />
+          <RowDefinition Height="31*" />
+        </Grid.RowDefinitions>
+        <Grid.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="1" />
+            <SkewTransform AngleY="0" AngleX="0" />
+            <RotateTransform Angle="0" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Grid.RenderTransform>
+        <UControl:UserControl_FAN Name="UC_FAN_CPU" Margin="54,40,54,8.9" RenderTransformOrigin="50%,50%" Width="226" Height="226" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="1" BorderBrush="{Binding #CPUTemp_needle_layer1.Fill}">
+          <UControl:UserControl_FAN.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </UControl:UserControl_FAN.RenderTransform>
+        </UControl:UserControl_FAN>
+        <TextBlock Name="F_speed2" Margin="0" TextWrapping="Wrap" Text="Fan Speed" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" TextAlignment="Center" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" Grid.Row="1">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="F_RPM2" Height="20" Margin="0,0,54,240.2" TextWrapping="Wrap" Text="RPM" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%" HorizontalAlignment="Right" Width="50">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="F_unit2" Margin="311,254,-1,0" TextWrapping="Wrap" Text="%" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="24" Height="24" VerticalAlignment="Top" RenderTransformOrigin="50%,50%" Grid.RowSpan="2">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_CPUFan_percent_value" Margin="206.8,243,28,0" TextWrapping="Wrap" Text="100" Foreground="#FFFFFFFF" FontSize="32" FontFamily="Microsoft Sans Serif" Height="32" VerticalAlignment="Top" RenderTransformOrigin="50%,50%" TextAlignment="Right">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_CPUFan_RPM_value" Margin="0,1,127,0" TextWrapping="Wrap" Text="2000" Foreground="#FFFFFFFF" FontSize="32" FontFamily="Microsoft Sans Serif" TextAlignment="Right" RenderTransformOrigin="50%,50%" HorizontalAlignment="Right" Width="75" Height="32" VerticalAlignment="Top">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <Rectangle Name="UI_TurboFan_CPU2" HorizontalAlignment="Left" Height="187.802" Margin="48.21,34.899,0,0" VerticalAlignment="Top" Width="235.78" RenderTransformOrigin="50%,50%" Opacity="0">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.Fill>
+            <ImageBrush Source="/image/page_systemmonitor/fan/rim_in.png" />
+          </Rectangle.Fill>
+        </Rectangle>
+        <Ellipse HorizontalAlignment="Left" Height="45" Margin="139.8,134,0,0" StrokeThickness="2" VerticalAlignment="Top" Width="45" Stroke="#FFFDFDFD">
+          <Ellipse.Fill>
+            <RadialGradientBrush>
+              <GradientStop Color="#FF303030" Offset="1" />
+              <GradientStop Color="#FF545454" />
+            </RadialGradientBrush>
+          </Ellipse.Fill>
+        </Ellipse>
+        <Rectangle Name="UI_TurboFan_CPU1" Fill="#FFFFFF00" HorizontalAlignment="Left" Height="44.7" Margin="141.957,137.127,0,0" StrokeThickness="1" Stroke="#FF000000" VerticalAlignment="Top" Width="43.2" RenderTransformOrigin="50%,50%">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/page_systemmonitor/fan/btn_memory_xmp2_hover.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+      </Grid>
+    </Viewbox>
+    <StackPanel Name="SP_FANBTN" Height="302" Margin="835,190,796,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="289">
+      <StackPanel Name="SP_Auto" Height="46" Margin="0,0,0,10">
+        <RadioButton Name="RB_FAN_auto" Content="Automatic" Margin="0" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" Height="46" Focusable="False" IsChecked="True" GroupName="FanMode" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{Binding #userControl.BorderBrush}" />
+      </StackPanel>
+      <StackPanel Name="SP_Max" Height="46" Margin="0,0,0,10">
+        <RadioButton Name="RB_FAN_max" Content="Maximum" Margin="0" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" Height="46" VerticalAlignment="Top" Focusable="False" GroupName="FanMode" HorizontalAlignment="Left" Background="{Binding #RB_FAN_auto.Background}" />
+      </StackPanel>
+      <StackPanel Name="SP_MaxQ" Height="46" Margin="0,0,0,10">
+        <RadioButton Name="RB_FAN_Maxq" Content="MAX-Q" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" Height="45.9" VerticalAlignment="Top" Focusable="False" GroupName="FanMode" HorizontalAlignment="Left" Background="{Binding #RB_FAN_auto.Background}" />
+      </StackPanel>
+      <StackPanel Name="SP_Silent" Height="46" Margin="0,0,0,10">
+        <RadioButton Name="RB_FAN_Silent" Content="Silent" HorizontalAlignment="Left" Margin="0" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" Height="46" VerticalAlignment="Top" Focusable="False" GroupName="FanMode" Background="{Binding #RB_FAN_auto.Background}" />
+      </StackPanel>
+      <StackPanel Name="SP_Custom" Height="46" Margin="0,0,0,10">
+        <RadioButton Name="RB_FAN_custom" Content="Custom" Margin="0" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" Height="46" Focusable="False" GroupName="FanMode" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{Binding #RB_FAN_auto.Background}" />
+      </StackPanel>
+    </StackPanel>
+    <UControl:UserControl_DialogBox Name="UC_DialogBox" Margin="0" IsVisible="False" />
+  </Grid>
+</UserControl>
+

@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="FanSpeedSetting.UControl.UserControl_FAN" Name="userControl" Width="168" Height="168" BorderBrush="#FF00A8FF">
+  <Grid Name="rotGrid" RenderTransformOrigin="50%,50%">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="83*" />
+      <ColumnDefinition Width="85*" />
+    </Grid.ColumnDefinitions>
+    <Rectangle Name="R_FanLayer2" Margin="0" RenderTransformOrigin="50%,50%" Grid.ColumnSpan="2" Fill="{Binding #userControl.BorderBrush}">
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/image/page_systemmonitor/fan/system_fan_layer2_1.png" />
+      </Rectangle.OpacityMask>
+    </Rectangle>
+    <Rectangle Name="R_FanLayer3" Fill="#FFFFFFFF" Margin="0" RenderTransformOrigin="50%,50%" Grid.ColumnSpan="2">
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/image/page_systemmonitor/fan/system_fan_layer3_1.png" />
+      </Rectangle.OpacityMask>
+    </Rectangle>
+    <Rectangle Name="R_FanLayer2_AntiDustMode2" Margin="0" RenderTransformOrigin="50%,50%" Grid.ColumnSpan="2" Fill="#FFFFFFFF">
+      <Rectangle.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform ScaleY="1" ScaleX="-1" />
+          <RotateTransform Angle="90" />
+        </TransformGroup>
+      </Rectangle.RenderTransform>
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/image/fanspeedsetting/fan_speed_layer1_2.png" />
+      </Rectangle.OpacityMask>
+    </Rectangle>
+  </Grid>
+</UserControl>

@@ -1,0 +1,74 @@
+<Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="FanSpeedSetting.App" RequestedThemeVariant="Light">
+  <Application.Styles>
+    <FluentTheme />
+  </Application.Styles>
+  <Application.Resources>
+    <SolidColorBrush x:Key="SliderThumb.Disabled.Background" Color="#FFF0F0F0" />
+    <SolidColorBrush x:Key="SliderThumb.Disabled.Border" Color="#FFD9D9D9" />
+    <ControlTheme x:Key="SliderThumbHorizontalDefault" TargetType="Thumb">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True">
+            <Rectangle Name="rectangle" HorizontalAlignment="Stretch" Height="60" Margin="-20.487,-9.966,-19.514,-10.035" StrokeThickness="2" VerticalAlignment="Stretch" Width="48" Fill="{TemplateBinding BorderBrush}" RenderTransformOrigin="50%,50%" UseLayoutRounding="False" IsVisible="False">
+              <Rectangle.RenderTransform>
+                <SkewTransform AngleX="32" />
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_systemmonitor/cpugpusetting/slider_handle_layer1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Path Name="grip" Data="M0,0 C0,0 11,0 11,0 C11,0 11,18 11,18 C11,18 0,18 0,18 C0,18 0,0 0,0" Stretch="Fill" StrokeThickness="2" UseLayoutRounding="True" VerticalAlignment="Center" Stroke="#FF606060">
+              <Path.Fill>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                  <GradientStop Color="#FF606060" Offset="0.046" />
+                  <GradientStop Color="White" Offset="0.503" />
+                  <GradientStop Color="#FF606060" Offset="0.943" />
+                </LinearGradientBrush>
+              </Path.Fill>
+            </Path>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:disabled /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Disabled.Background}" />
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Disabled.Border}" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RepeatButtonStyle_L" TargetType="RepeatButton">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="Transparent" />
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderStyle_INC" TargetType="Slider">
+      <Setter Property="Background" Value="#00FFFFFF" />
+      <Setter Property="BorderBrush" Value="#00FFFFFF" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid>
+              <Border Name="TrackBackground" BorderThickness="1" Height="4" Margin="0" VerticalAlignment="Center" />
+              <Track Name="PART_Track" Height="60" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}">
+                <Track.DecreaseButton>
+                  <RepeatButton Name="PART_DecreaseButton" Theme="{StaticResource RepeatButtonStyle_L}" />
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Name="PART_IncreaseButton" Theme="{StaticResource RepeatButtonStyle_L}" />
+                </Track.IncreaseButton>
+                <Thumb Name="thumb" Focusable="False" Height="40" Width="8" Theme="{StaticResource SliderThumbHorizontalDefault}" VerticalAlignment="Center" BorderBrush="{TemplateBinding BorderBrush}" />
+              </Track>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+  </Application.Resources>
+</Application>
