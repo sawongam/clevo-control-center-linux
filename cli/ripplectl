@@ -1,0 +1,274 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 ripple-cc contributors
+"""ripplectl - Linux port of the Clevo/Ripple Control Center 3.0 hardware controls.
+
+Talks to the firmware's \\_SB.DCHU._DSM through /dev/ripple_dchu (kernel/ripple_dchu.ko),
+using the exact command encoding reverse-engineered from the Windows apps
+(see docs/protocol.md). Keyboard backlight uses the existing tuxedo_keyboard sysfs LED.
+"""
+
+import argparse
+import fcntl
+import os
+import struct
+import sys
+import time
+
+DEV = "/dev/ripple_dchu"
+KBD_LED = "/sys/class/leds/rgb:kbd_backlight"
+
+# struct ripple_dchu_call (kernel/ripple_dchu.h)
+CALL_FMT = "<IIII256sIIQ256s"
+CALL_SIZE = struct.calcsize(CALL_FMT)  # 544
+IN_INT, IN_BUF = 0, 1
+OUT_NONE, OUT_INT, OUT_BUF = 0, 1, 2
+
+
+def _iowr(type_chr, nr, size):
+    return (3 << 30) | (size << 16) | (ord(type_chr) << 8) | nr
+
+
+IOC_CALL = _iowr("R", 0x01, CALL_SIZE)
+
+# DCHU commands (from DCHUService / CC30 / FanSpeedSetting decompilation + DSDT)
+CMD_PKG_FAN_STATUS = 0x0C   # PK0C: fan RPM/duty/temps (buffer out)
+CMD_PKG_FAN_TABLE = 0x0D    # PK0D: fan table + caps (buffer out)
+CMD_PKG_FAN_WRITE = 0x0E    # PK0E: write custom fan curve (buffer in)
+CMD_OPT = 0x79              # SetWMI(121, sub, data): data | sub << 24
+SUB_FAN_MODE = 0x01
+SUB_PERF_MODE = 0x19
+
+PERF_MODES = {"quiet": 0, "powersave": 1, "performance": 2, "entertainment": 3}
+# Values the Windows app sends (SetWMI 121,1,x). This BIOS (DSDT SCMD 0x79/1) only acts on
+# 0,1,2,5,6 and translates them to an EC 0xD7 bit flag; 3 (silent) and 4 are no-ops here,
+# and there is no fan mode 7 (turbo fan is perf-mode flag 0x40).
+FAN_MODES = {"auto": 0, "max": 1, "maxq": 5, "custom": 6}
+# EC 0xD7 readback (PK0D byte 14) -> mode name
+# Observed 2026-11-12: in auto, this byte also tracks perf mode (0x80 after perf quiet,
+# 0x08 after perf performance, 0x02 at boot default).
+EC_FAN_MODE = {0x02: "auto", 0x80: "auto(quiet)", 0x08: "auto(perf)", 0x10: "max", 0x01: "maxq",
+               0x04: "custom"}
+FAN_NAMES = ("cpu", "gpu1", "gpu2")
+
+
+class Dchu:
+    """Handle on /dev/ripple_dchu; exits with a message if it cannot be opened."""
+
+    def __init__(self, path=DEV):
+        try:
+            self.fd = os.open(path, os.O_RDWR)
+        except FileNotFoundError:
+            sys.exit(f"{path} missing - load the module: sudo insmod kernel/ripple_dchu.ko")
+        except PermissionError:
+            sys.exit(f"{path}: permission denied - run with sudo")
+
+    def call(self, func, arg=0, buf=None):
+        if buf is None:
+            req = struct.pack(CALL_FMT, func, IN_INT, arg & 0xFFFFFFFF, 0, b"", 0, 0, 0, b"")
+        else:
+            buf = bytes(buf)
+            req = struct.pack(CALL_FMT, func, IN_BUF, 0, len(buf), buf, 0, 0, 0, b"")
+        res = bytearray(req)
+        fcntl.ioctl(self.fd, IOC_CALL, res, True)
+        f = struct.unpack(CALL_FMT, res)
+        out_type, out_len, out_int, out_buf = f[5], f[6], f[7], f[8]
+        if out_type == OUT_INT:
+            return out_int
+        if out_type == OUT_BUF:
+            return bytes(out_buf[:out_len])
+        return None
+
+    def opt(self, sub, data):
+        """Send command 0x79 with sub-command `sub` in the top byte."""
+        return self.call(CMD_OPT, (sub << 24) | (data & 0xFFFFFF))
+
+
+def raw_to_rpm(raw):
+    """Convert the EC tachometer period to RPM (0 means stopped)."""
+    return round(2156250 / raw) if raw else 0
+
+
+def read_status(d):
+    """Return per-fan dicts (name, rpm, duty 0-255, temp C) from the status package."""
+    b = d.call(CMD_PKG_FAN_STATUS)
+    if not isinstance(b, bytes) or len(b) < 25:
+        sys.exit(f"unexpected fan status reply: {b!r}")
+    fans = []
+    for i, (rpm_off, duty_off, temp_off) in enumerate(((2, 16, 18), (4, 19, 21), (6, 22, 24))):
+        raw = (b[rpm_off] << 8) | b[rpm_off + 1]   # Windows: array[3] + (array[2] << 8)
+        fans.append({"name": FAN_NAMES[i], "rpm": raw_to_rpm(raw), "duty": b[duty_off],
+                     "temp": b[temp_off]})
+    return fans
+
+
+def read_table(d):
+    """Parse the firmware fan table package (mode, fan count, 4-point curves)."""
+    b = d.call(CMD_PKG_FAN_TABLE)
+    if not isinstance(b, bytes) or len(b) < 44:
+        sys.exit(f"unexpected fan table reply: {b!r}")
+    curves = []
+    for base in (0x10, 0x18, 0x20):
+        curves.append([(b[base + 2 * i], b[base + 2 * i + 1]) for i in range(4)])
+    return {
+        "fan_count": b[12],
+        "fan_mode": b[14],
+        "custom_supported": b[12] > 1 and not ((b[43] >> 1) & 1),
+        "curves": curves,  # [(temp C, duty 0-255)] x4 per fan
+        "raw": b,
+    }
+
+
+def pct(v255):
+    """Scale a 0-255 duty value to percent."""
+    return round(v255 / 255 * 100)
+
+
+def cmd_status(d, a):
+    if a.watch:
+        try:
+            while True:
+                t = read_table(d)
+                fans = read_status(d)[: max(t["fan_count"], 1)]
+                print(time.strftime("%H:%M:%S"), EC_FAN_MODE.get(t["fan_mode"], hex(t["fan_mode"])), "  ".join(
+                    f"{f['name']} {f['rpm']:>5}rpm {pct(f['duty']):>3}% {f['temp']:>3}°C" for f in fans), flush=True)
+                time.sleep(a.watch)
+        except KeyboardInterrupt:
+            return
+    t = read_table(d)
+    mode = EC_FAN_MODE.get(t["fan_mode"], f"unknown (0x{t['fan_mode']:02x})")
+    print(f"fan mode: {mode}   fans: {t['fan_count']}")
+    for f in read_status(d)[: max(t["fan_count"], 1)]:
+        print(f"  {f['name']:<5} {f['rpm']:>5} rpm  duty {pct(f['duty']):>3}%  temp {f['temp']:>3}°C")
+
+
+def cmd_table(d, a):
+    t = read_table(d)
+    print(f"fans={t['fan_count']} mode={EC_FAN_MODE.get(t['fan_mode'], hex(t['fan_mode']))} "
+          f"custom_supported={t['custom_supported']}")
+    for name, pts in zip(FAN_NAMES, t["curves"][: max(t["fan_count"], 1)]):
+        print(f"  {name:<5} " + "  ".join(f"{tc}°C→{pct(dv)}%" for tc, dv in pts))
+    if a.raw:
+        print(t["raw"][:64].hex(" "))
+
+
+def cmd_perf(d, a):
+    mode = PERF_MODES[a.mode]
+    if a.mode == "performance":
+        mode |= (0x40 if a.turbo_fan else 0) | (0x80 if a.dtt else 0)
+    elif a.turbo_fan or a.dtt:
+        sys.exit("--turbo-fan/--dtt only apply to performance mode")
+    r = d.opt(SUB_PERF_MODE, mode)
+    print(f"performance mode -> {a.mode} (arg 0x{mode:02x}, fw returned {r!r})")
+
+
+def cmd_fan(d, a):
+    r = d.opt(SUB_FAN_MODE, FAN_MODES[a.mode])
+    print(f"fan mode -> {a.mode} (fw returned {r!r})")
+
+
+def parse_points(s):
+    """argparse type: \"T2:D2,T3:D3\" -> [(T2, D2), (T3, D3)]."""
+    pts = []
+    for p in s.split(","):
+        t, du = p.split(":")
+        pts.append((int(t), int(du)))
+    if len(pts) != 2:
+        raise argparse.ArgumentTypeError("give exactly two points: T2:D2,T3:D3 (°C:%)")
+    return pts
+
+
+def cmd_curve(d, a):
+    t = read_table(d)
+    if not t["custom_supported"] and not a.force:
+        sys.exit("firmware reports custom fan curve unsupported (use --force to try anyway)")
+    new = {"cpu": a.cpu, "gpu1": a.gpu1, "gpu2": a.gpu2}
+    buf = bytearray(256)
+    for i, name in enumerate(FAN_NAMES):
+        (t1, d1_255) = t["curves"][i][0]
+        d1 = pct(d1_255)
+        pts = new[name] or [(t["curves"][i][1][0], pct(t["curves"][i][1][1])),
+                            (t["curves"][i][2][0], pct(t["curves"][i][2][1]))]
+        (t2, d2), (t3, d3) = pts
+        t4, d4 = 100, 100
+        if not (t1 < t2 < t3 < t4) or not (d1 <= d2 <= d3 <= d4) or d2 > 100 or d3 > 100:
+            sys.exit(f"{name}: need {t1}°C < T2 < T3 < 100°C and {d1}% <= D2 <= D3 <= 100%")
+        rates = [round((db - da) / (tb - ta) * 2.55 * 16)
+                 for (ta, da), (tb, db) in (((t1, d1), (t2, d2)), ((t2, d2), (t3, d3)), ((t3, d3), (t4, d4)))]
+        buf[2 + 4 * i: 6 + 4 * i] = bytes([t2, round(d2 / 100 * 255), t3, round(d3 / 100 * 255)])
+        for j, r in enumerate(rates):  # R12/R23/R34, big-endian words (Write_WMI14)
+            off = 14 + 6 * i + 2 * j
+            buf[off], buf[off + 1] = (r >> 8) & 0xFF, r & 0xFF
+        print(f"  {name:<5} {t1}°C:{d1}%  {t2}°C:{d2}%  {t3}°C:{d3}%  100°C:100%")
+    d.call(CMD_PKG_FAN_WRITE, buf=buf)
+    d.opt(SUB_FAN_MODE, FAN_MODES["custom"])
+    print("custom fan curve written, fan mode -> custom")
+
+
+def _read(path):
+    with open(path) as f:
+        return f.read().strip()
+
+
+def _write(path, text):
+    with open(path, "w") as f:
+        f.write(text)
+
+
+def cmd_kbd(d, a):
+    if not os.path.isdir(KBD_LED):
+        sys.exit(f"{KBD_LED} not found (tuxedo_keyboard not loaded?)")
+    if a.color:
+        c = a.color.lstrip("#")
+        r, g, b = int(c[0:2], 16), int(c[2:4], 16), int(c[4:6], 16)
+        _write(f"{KBD_LED}/multi_intensity", f"{r} {g} {b}")
+    if a.brightness is not None:
+        mx = int(_read(f"{KBD_LED}/max_brightness"))
+        _write(f"{KBD_LED}/brightness", str(round(a.brightness / 100 * mx)))
+    print("color:", _read(f"{KBD_LED}/multi_intensity"),
+          " brightness:", _read(f"{KBD_LED}/brightness"))
+
+
+def cmd_raw(d, a):
+    func = int(a.func, 0)
+    if a.buf is not None:
+        r = d.call(func, buf=bytes.fromhex(a.buf).ljust(256, b"\0"))
+    else:
+        r = d.call(func, int(a.arg, 0))
+    print(r.hex(" ") if isinstance(r, bytes) else (hex(r) if isinstance(r, int) else r))
+
+
+def main():
+    """Entry point: parse arguments and dispatch to cmd_<name>."""
+    p = argparse.ArgumentParser(prog="ripplectl", description=__doc__.split("\n")[0])
+    sp = p.add_subparsers(dest="cmd", required=True)
+    s = sp.add_parser("status", help="fan speeds, duty, temperatures")
+    s.add_argument("--watch", type=float, metavar="SEC", help="repeat every SEC seconds (Ctrl-C to stop)")
+    s = sp.add_parser("table", help="show firmware fan curves")
+    s.add_argument("--raw", action="store_true")
+    s = sp.add_parser("perf", help="set performance mode")
+    s.add_argument("mode", choices=PERF_MODES)
+    s.add_argument("--turbo-fan", action="store_true", help="performance + turbo fan")
+    s.add_argument("--dtt", action="store_true", help="performance + CPU dynamic (Intel DTT)")
+    s = sp.add_parser("fan", help="set fan mode")
+    s.add_argument("mode", choices=FAN_MODES)
+    s = sp.add_parser("curve", help="write custom fan curve (points as T:D%%,T:D%%)")
+    for n in FAN_NAMES:
+        s.add_argument(f"--{n}", type=parse_points, metavar="T2:D2,T3:D3")
+    s.add_argument("--force", action="store_true")
+    s = sp.add_parser("kbd", help="keyboard backlight")
+    s.add_argument("--color", help="hex RRGGBB")
+    s.add_argument("--brightness", type=int, help="0-100")
+    s = sp.add_parser("raw", help="raw DCHU call (expert)")
+    s.add_argument("func")
+    s.add_argument("arg", nargs="?", default="0")
+    s.add_argument("--buf", help="hex buffer argument")
+    a = p.parse_args()
+
+    if a.cmd == "kbd":
+        return cmd_kbd(None, a)
+    globals()[f"cmd_{a.cmd}"](Dchu(), a)
+
+
+if __name__ == "__main__":
+    main()
