@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>3.60.0.0</AssemblyVersion>
+    <FileVersion>3.60.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>BatteryUtility</AssemblyName>
+    <RootNamespace>BatteryUtility</RootNamespace>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <AvaloniaResource Include="Image/**" />
+    <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="battery.ini" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="batteryUtility.pow" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

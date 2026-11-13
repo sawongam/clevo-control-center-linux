@@ -1,0 +1,224 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:UControl="using:CC.UControl"
+             x:Class="CC.Page_Battery_Refresh" Width="1920" Height="1080" BorderBrush="#FFFF00D2" BorderThickness="2" FontSize="12">
+  <UserControl.Resources>
+    <ControlTheme x:Key="ButtonStyle1_OK" TargetType="Button">
+      <Setter Property="Background" Value="#FFDDDDDD" />
+      <Setter Property="BorderBrush" Value="#FF707070" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="FocusAdorner" Value="{x:Null}" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Color="#00000000" Offset="0" />
+                <GradientStop Color="#FF4B4B4B" Offset="1" />
+              </LinearGradientBrush>
+            </Border.Background>
+            <ContentPresenter Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+            <GradientStop Color="#00000000" Offset="0" />
+            <GradientStop Color="#FF959595" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+            <GradientStop Color="#00000000" Offset="1" />
+            <GradientStop Color="#FF4B4B4B" Offset="0" />
+          </LinearGradientBrush>
+        </Setter>
+        <Setter Property="Cursor" Value="Wait" />
+      </Style>
+      <Style Selector="^:disabled /template/ Border#border">
+        <Setter Property="BorderBrush" Value="#FFADB2B5" />
+        <Setter Property="Background" Value="#FF1B1B1B" />
+      </Style>
+      <Style Selector="^:disabled /template/ ContentPresenter#contentPresenter">
+        <Setter Property="Foreground" Value="#FF838383" />
+      </Style>
+    </ControlTheme>
+  </UserControl.Resources>
+  <Grid RowDefinitions="255*,283*">
+    <Grid Name="grid_batteryRefresh" Margin="38,113,40,0" Height="194" VerticalAlignment="Top">
+      <Path Data="M19.305864,35.682735 L10.059106,68.827436 L10.278445,171.83473 L458.27828,172.72397 L436.56285,34.017671" Margin="4,18.697,-2.6,0" Stretch="Fill" VerticalAlignment="Top" Height="132.703" RenderTransformOrigin="50%,50%"
+            Fill="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleX="-1" ScaleY="1" />
+            <TranslateTransform X="-0.40000000000009095" />
+          </TransformGroup>
+        </Path.RenderTransform>
+        <Path.OpacityMask>
+          <LinearGradientBrush StartPoint="100.1%,50.6%" EndPoint="1%,51.2%">
+            <GradientStop Color="#CC000000" Offset="1" />
+            <GradientStop Color="#33FFFFFF" Offset="0" />
+          </LinearGradientBrush>
+        </Path.OpacityMask>
+      </Path>
+      <TextBlock Name="T_BatteryRefreshStatus" HorizontalAlignment="Right" Margin="0,57.377,53.044,72.263" TextWrapping="Wrap" Width="312.2" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" TextAlignment="Center" FontSize="48" Text="Unexecuted" Height="65" />
+      <TextBlock Name="T_BatteryRefresh" Margin="91.8,57.377,0,71.463" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" TextAlignment="Center" FontSize="48" HorizontalAlignment="Left" Text="Battery Refresh" FontWeight="Bold" Height="65" />
+    </Grid>
+    <Rectangle Margin="40,290,0,36" StrokeThickness="2" HorizontalAlignment="Left" Width="819" Grid.RowSpan="2"
+               Fill="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}}">
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/Image/Page_BatteryRefresh/bg_system_info_dark2.png" />
+      </Rectangle.OpacityMask>
+    </Rectangle>
+    <Rectangle Margin="40,290,0,36" Stroke="#FF505050" StrokeThickness="2" HorizontalAlignment="Left" Width="819" Grid.RowSpan="2" />
+    <Grid Name="grid_note" Margin="40,290,0,36" HorizontalAlignment="Left" Width="819" Grid.RowSpan="2">
+      <TextBlock Name="T_details" Margin="47.933,58.094,0,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="32" HorizontalAlignment="Left" Text="Press [Refresh start] for fully details diagnostic by the battery refresh." Width="693.8" Height="129.723" VerticalAlignment="Top" />
+      <StackPanel Name="SP_Note" Margin="110.733,264.217,0,102">
+        <TextBlock Name="T_note1" TextWrapping="Wrap" Foreground="#FF939393" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="- Battery refresh need 24hous or more." Width="684.867" Margin="0,5,0,0" />
+        <TextBlock Name="T_note3" TextWrapping="Wrap" Foreground="#FF939393" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="-All power saving timer setting was automatically cancel until refreshing finish." Width="684.867" Margin="0,5,0,0" />
+        <TextBlock Name="T_note2" TextWrapping="Wrap" Foreground="#FF939393" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Width="684.867" Text="- Keep AC adapter connection till finish." Margin="0,5,0,0" />
+        <TextBlock Name="T_note4" TextWrapping="Wrap" Foreground="#FF939393" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="- Recommend save files before start." Width="684.867" Margin="0,5,0,0" />
+        <TextBlock Name="T_note5" TextWrapping="Wrap" Foreground="#FF939393" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="- Processing performance may decrease under refreshing." Width="684.867" Margin="0,5,0,0" />
+        <TextBlock Name="T_note6" TextWrapping="Wrap" Foreground="#FF939393" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="- Press [Exit] if need  cancel." Width="684.867" Margin="0,5,0,0" />
+      </StackPanel>
+      <Button Name="BTN_start" Content="Refresh Start" Height="69" Margin="0,0,423,28.465" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" Width="375" HorizontalAlignment="Right" Cursor="Hand" IsTabStop="False" Click="BTN_start_Click" />
+      <Button Name="BTN_stop" Content="Exit" Height="69" Margin="0,0,25.6,28" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" Width="375" HorizontalAlignment="Right" Cursor="Hand" IsEnabled="False" IsTabStop="False" Click="BTN_stop_Click" />
+    </Grid>
+    <TextBlock Name="T_note" Margin="161,510,0,530" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="32" HorizontalAlignment="Left" Text="Note:" Width="106" Grid.RowSpan="2" />
+    <Image Name="Image_dialog_ic_dialog_warning_png" HorizontalAlignment="Left" Margin="86,491,0,525" Source="/Image/dialog/ic_dialog_warning.png" Stretch="Fill" Width="60" Grid.RowSpan="2" />
+    <StackPanel Name="SP_Fail_note" Margin="0,0,1057,130" HorizontalAlignment="Right" Width="708" Height="385" VerticalAlignment="Bottom" Grid.Row="1">
+      <TextBlock Name="T_FailNote" TextWrapping="Wrap" Foreground="#FFC80000" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="Battery has failed. Need replacement." />
+      <TextBlock Name="T_FailNote1" TextWrapping="Wrap" Foreground="#FFC80000" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="Please contact our company, if this model can't replacement." />
+    </StackPanel>
+    <StackPanel Name="SP_Fail_nothingBAT" Margin="0,0,1057,130" HorizontalAlignment="Right" Width="708" Height="385" VerticalAlignment="Bottom" Grid.Row="1">
+      <TextBlock Name="T_FailNote2" TextWrapping="Wrap" Foreground="#FFC8C800" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="Nothing battery." />
+      <TextBlock Name="T_FailNote3" TextWrapping="Wrap" Foreground="#FFC8C800" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Text="Please exit the program" />
+    </StackPanel>
+    <Rectangle Margin="894,27.8,41,38" StrokeThickness="2" Stroke="#FF505050" Grid.Row="1" />
+    <Grid Name="grid_BatteryIcon" Margin="894,22.8,41,-30" RenderTransformOrigin="50%,50%" VerticalAlignment="Top" Height="573" Grid.Row="1" ColumnDefinitions="328*,271*">
+      <Grid.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform ScaleX="1" ScaleY="-1" />
+          <RotateTransform Angle="-90" />
+        </TransformGroup>
+      </Grid.RenderTransform>
+      <Rectangle Margin="0,144,-38.677,0" HorizontalAlignment="Right" Width="178" Height="275" VerticalAlignment="Top">
+        <Rectangle.Fill>
+          <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+            <GradientStop Color="Black" Offset="0" />
+            <GradientStop Color="White" Offset="1" />
+          </LinearGradientBrush>
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Name="R_BATCapacity" Margin="0,144,-38.677,0" Fill="#FF00FF00" HorizontalAlignment="Right" Width="178" Height="275" VerticalAlignment="Top" RenderTransformOrigin="50%,50%" />
+      <Rectangle Margin="0,144,-38.677,0" Fill="#FF000000" HorizontalAlignment="Right" Width="178" RenderTransformOrigin="50%,50%" Height="275" VerticalAlignment="Top">
+        <Rectangle.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleX="1" ScaleY="-1" />
+          </TransformGroup>
+        </Rectangle.RenderTransform>
+        <Rectangle.OpacityMask>
+          <LinearGradientBrush StartPoint="-28.5%,50%" EndPoint="128.5%,50%">
+            <GradientStop Color="#7F7E7E7E" Offset="0.755" />
+            <GradientStop Color="#CCFFFFFF" Offset="0.417" />
+            <GradientStop Color="Black" Offset="0.182" />
+            <GradientStop Color="#CC000000" Offset="0.852" />
+          </LinearGradientBrush>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Margin="0,0,11.053,125.426" Height="24.094" VerticalAlignment="Bottom" StrokeThickness="5" HorizontalAlignment="Right" Width="76.067" Stroke="#FFFFFFFF">
+        <Rectangle.Fill>
+          <LinearGradientBrush StartPoint="128.6%,50.2%" EndPoint="-28.6%,49.8%">
+            <GradientStop Color="#FF1B1B1B" Offset="0.211" />
+            <GradientStop Color="#FF555555" Offset="0.321" />
+            <GradientStop Color="#FF1B1A1A" Offset="0.758" />
+          </LinearGradientBrush>
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Height="6.046" Margin="0,0,-46.943,143.708" StrokeThickness="8" VerticalAlignment="Bottom" Fill="#FFFFFFFF" HorizontalAlignment="Right" Width="195.045" Stroke="#FFFFFFFF" />
+      <Rectangle Fill="#FFFFFFFF" Height="6.047" Margin="0,133.24,-51.144,0" StrokeThickness="8" VerticalAlignment="Top" Stroke="#FFFFFFFF" HorizontalAlignment="Right" Width="199.445" />
+      <Rectangle Fill="#FFFFFFFF" HorizontalAlignment="Right" Margin="0,133.24,143.101,143.474" StrokeThickness="8" Width="5.2" RenderTransformOrigin="50%,50%" Stroke="#FFFFFFFF" />
+      <Rectangle Fill="#FFFFFFFF" HorizontalAlignment="Left" Margin="44.744,133.04,0,143.674" StrokeThickness="8" Width="7" Stroke="#FFFFFFFF" Grid.Column="1" />
+      <TextBlock Name="T_BatteryValue" Margin="0,172.45,79.503,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" TextAlignment="Center" FontSize="26.667" Text="100%" Height="31.79" VerticalAlignment="Top" RenderTransformOrigin="50%,50%" HorizontalAlignment="Right" Width="80">
+        <TextBlock.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleX="-1" ScaleY="1" />
+            <RotateTransform Angle="90" />
+          </TransformGroup>
+        </TextBlock.RenderTransform>
+      </TextBlock>
+      <Image Name="I_AC" Height="45" Margin="-13.37,0,0,164.095" Source="/Image/Page_BatteryRefresh/icon_conservation.png" Stretch="Fill" VerticalAlignment="Bottom" RenderTransformOrigin="50%,50%" Grid.Column="1" HorizontalAlignment="Left" Width="52" IsVisible="False">
+        <Image.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleX="-1" ScaleY="1" />
+            <RotateTransform Angle="90" />
+          </TransformGroup>
+        </Image.RenderTransform>
+      </Image>
+    </Grid>
+    <Grid Name="grid_result" Margin="895,0,40,37" VerticalAlignment="Bottom" Height="500" Grid.Row="1">
+      <TextBlock Name="T_Result" Margin="44.833,9.54,268.767,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="32" Text="Instant diagnostics result" Height="39" VerticalAlignment="Top" />
+      <TextBlock Name="T_Result_Velue" Margin="0,77.05,0,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" TextAlignment="Center" FontSize="48" Text="Healthy" Height="72.1" VerticalAlignment="Top" />
+    </Grid>
+    <Grid Name="grid_info" Margin="895,290,40,0" Height="233" VerticalAlignment="Top" Grid.RowSpan="2">
+      <Rectangle Margin="0" StrokeThickness="3" Fill="#FF001B7A" Stroke="#FF505050" IsVisible="False">
+        <Rectangle.OpacityMask>
+          <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+            <GradientStop Color="#00000000" Offset="0.446" />
+            <GradientStop Color="#33FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Margin="0" StrokeThickness="2" Fill="#FF001B7A" Stroke="#FF505050" IsVisible="False">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/Page_BatteryRefresh/bg_system_info_dark2.png" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" />
+      <Grid Name="grid_RunRefresh" Height="105.265" VerticalAlignment="Bottom" Margin="0,0,0,31.2" Width="900" HorizontalAlignment="Center">
+        <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" />
+        <Rectangle Name="R_" StrokeThickness="2" Stroke="#FF505050" Margin="0,0,0,0.265" Width="0" HorizontalAlignment="Left" Opacity="0.5"
+                   Fill="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        <StackPanel Margin="0" Orientation="Horizontal">
+          <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" HorizontalAlignment="Left" Width="180" Height="105.265" />
+          <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" HorizontalAlignment="Left" Width="180" Height="105.265" />
+          <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" HorizontalAlignment="Left" Width="180" Height="105.265" />
+          <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" HorizontalAlignment="Left" Width="180" Height="105.265" />
+          <Rectangle Margin="0" StrokeThickness="2" Stroke="#FF505050" HorizontalAlignment="Left" Width="180" Height="105.265" />
+        </StackPanel>
+        <Image Name="I_tag1" Margin="59.7,20.765,0,14.5" Source="/Image/Page_BatteryRefresh/icon_voltage.png" Stretch="Fill" HorizontalAlignment="Left" Width="70" Height="70" Opacity="0.5" />
+        <Image Name="I_tag2" Margin="234.433,25.265,0,16" Source="/Image/Page_BatteryRefresh/icon_conservation.png" Stretch="Fill" HorizontalAlignment="Left" Width="74" Height="64" Opacity="0.5" />
+        <Image Name="I_tag3" Margin="0,9.765,45.067,7.5" Source="/Image/Page_BatteryRefresh/btn_default_normal.png" Stretch="Fill" Width="88" HorizontalAlignment="Right" Height="88" Opacity="0.5" />
+        <Image Name="I_tag2_Copy" Margin="0,21.765,225.567,19.5" Source="/Image/Page_BatteryRefresh/icon_conservation.png" Stretch="Fill" HorizontalAlignment="Right" Width="74" Height="64" Opacity="0.5" />
+        <Image Name="I_tag1_Copy" Margin="410.1,21.765,419.9,13.5" Source="/Image/Page_BatteryRefresh/icon_voltage.png" Stretch="Fill" Height="70" Opacity="0.5" />
+      </Grid>
+      <StackPanel Name="SP_LastTime" Height="58.4" Margin="40.6,0,-14.2,0" VerticalAlignment="Top" Orientation="Horizontal">
+        <TextBlock Name="T_lastTime" Margin="0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="32" Text="Last refreshed :" Height="42.19" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+        <TextBlock Name="T_lastTime_v" Margin="10,0,0,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="32" Width="285" Height="42" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+      </StackPanel>
+      <StackPanel Name="SP_ElapsedTime" Height="92.4" Margin="0" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Center" IsVisible="False">
+        <TextBlock Name="T_Time" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="48" Text="Elapsed time:" Height="58.19" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Name="T_Time_v" Margin="10,0,0,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="48" Text="00:00:00" Height="58.19" HorizontalAlignment="Center" VerticalAlignment="Center" />
+      </StackPanel>
+    </Grid>
+    <UControl:UserControl_DialogBox Name="UC_DialogBox" Height="1080" Margin="0,0,-4,-4" Width="1920" IsVisible="False" Grid.RowSpan="2" />
+    <Path Data="M2010.4,348" HorizontalAlignment="Right" Height="5" Margin="0,346,-93.4,0" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="5" VerticalAlignment="Top" Width="5">
+      <Path.Fill>
+        <LinearGradientBrush StartPoint="128.6%,49.8%" EndPoint="-28.6%,49.8%">
+          <GradientStop Color="#FF1B1B1B" Offset="0.211" />
+          <GradientStop Color="#FF555555" Offset="0.321" />
+          <GradientStop Color="#FF1B1A1A" Offset="0.758" />
+        </LinearGradientBrush>
+      </Path.Fill>
+    </Path>
+    <Rectangle Name="R_Hidden_CloseIcon" Fill="#FF242424" HorizontalAlignment="Right" Height="77" Margin="0" VerticalAlignment="Top" Width="120" IsVisible="False" />
+  </Grid>
+</UserControl>
