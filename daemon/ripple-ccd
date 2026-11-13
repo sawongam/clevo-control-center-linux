@@ -1,0 +1,260 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 ripple-cc contributors
+"""ripple-ccd - root daemon for the Ripple/Clevo Control Center Linux port.
+
+Owns /dev/ripple_dchu and serves the unprivileged UI apps over a unix socket
+(JSON lines, one request per connection):
+
+  {"op":"call","func":N,"int":X}          evaluate DCHU command with an integer argument
+  {"op":"call","func":N,"buf":"<hex>"}    ... with a 256-byte package buffer
+      -> {"ok":true,"int":V} | {"ok":true,"buf":"<hex>"} | {"ok":true}
+  {"op":"appget","page":P,"off":O,"len":L} -> {"ok":true,"data":"<hex>"}
+  {"op":"appset","page":P,"off":O,"data":"<hex>"} -> {"ok":true}
+  {"op":"info"} -> {"ok":true,"mock":bool,"oc_unlocked":bool}
+
+"App settings" replace the Windows-side store behind InsydeDCHU Read/WriteAppSettings.
+The last performance mode, fan mode and custom fan curve are remembered and re-applied
+at start (the firmware forgets them on reboot). Overclocking commands are refused unless
+/etc/ripple-cc/oc-unlocked exists.
+"""
+
+import argparse
+import fcntl
+import json
+import os
+import socket
+import struct
+import sys
+import threading
+
+DEV = "/dev/ripple_dchu"
+SOCK = "/run/ripple-cc/ccd.sock"
+STATE_DIR = "/var/lib/ripple-cc"
+OC_UNLOCK = "/etc/ripple-cc/oc-unlocked"
+
+CALL_FMT = "<IIII256sIIQ256s"
+IOC_CALL = (3 << 30) | (struct.calcsize(CALL_FMT) << 16) | (ord("R") << 8) | 0x01
+OUT_INT, OUT_BUF = 1, 2
+EX_CONFIG = 78  # sysexits.h; exit status meaning "do not restart"
+
+CMD_OPT, SUB_FAN_MODE, SUB_PERF_MODE, CMD_FAN_CURVE = 0x79, 0x01, 0x19, 0x0E
+
+# DCHU functions (and 0x79 sub-commands) that overclock, refused unless OC_UNLOCK exists.
+# Format: func -> None (whole func) or set of sub-commands. Currently empty: no overclock
+# DCHU function has been identified, so only the AppSettings ranges below are guarded.
+OC_LOCKED = {}
+
+# AppSettings ranges (page -> inclusive offset span) that hold CPU/GPU overclock values.
+OC_APPSET = {6: (32, 84), 5: (16, 23)}
+
+lock = threading.Lock()
+
+
+class Dchu:
+    """The real firmware bridge: /dev/ripple_dchu (kernel/ripple_dchu.ko)."""
+
+    def __init__(self):
+        self.fd = os.open(DEV, os.O_RDWR)
+
+    def call(self, func, arg=0, buf=None):
+        if buf is None:
+            req = struct.pack(CALL_FMT, func, 0, arg & 0xFFFFFFFF, 0, b"", 0, 0, 0, b"")
+        else:
+            buf = bytes(buf)[:256].ljust(256, b"\0")
+            req = struct.pack(CALL_FMT, func, 1, 0, len(buf), buf, 0, 0, 0, b"")
+        res = bytearray(req)
+        fcntl.ioctl(self.fd, IOC_CALL, res, True)
+        f = struct.unpack(CALL_FMT, res)
+        if f[5] == OUT_INT:
+            return {"int": f[7]}
+        if f[5] == OUT_BUF:
+            return {"buf": bytes(f[8][:f[6]]).ljust(256, b"\0").hex()}
+        return {}
+
+
+class MockDchu:
+    """No hardware: lets the daemon protocol be tested as a normal user (--mock)."""
+
+    def call(self, func, arg=0, buf=None):
+        return {"int": func} if buf is None else {"int": 0}
+
+
+class State:
+    """Persistent app-settings pages and the modes re-applied at start (state.json)."""
+
+    def __init__(self, d):
+        self.path = os.path.join(d, "state.json")
+        os.makedirs(d, exist_ok=True)
+        try:
+            with open(self.path) as f:
+                self.s = json.load(f)
+        except (OSError, ValueError):
+            self.s = {}
+        self.s.setdefault("pages", {})
+        self.s.setdefault("restore", {})
+
+    def save(self):
+        tmp = self.path + ".tmp"
+        with open(tmp, "w") as f:
+            json.dump(self.s, f)
+        os.replace(tmp, self.path)
+
+    def page(self, p):
+        return bytearray.fromhex(self.s["pages"].get(str(p), "00" * 256))
+
+    def appget(self, p, off, ln):
+        if not (0 <= off < 256) or not (0 < ln <= 256):
+            raise ValueError("range")
+        return bytes(self.page(p)[off:off + ln]).ljust(ln, b"\0")
+
+    def appset(self, p, off, data):
+        if not (0 <= off < 256) or off + len(data) > 256:
+            raise ValueError("range")
+        pg = self.page(p)
+        pg[off:off + len(data)] = data
+        self.s["pages"][str(p)] = pg.hex()
+        self.save()
+
+    def remember(self, func, arg, buf):
+        r = self.s["restore"]
+        if func == CMD_OPT and buf is None:
+            sub = (arg >> 24) & 0xFF
+            if sub == SUB_PERF_MODE:
+                r["perf"] = arg
+            elif sub == SUB_FAN_MODE:
+                r["fan"] = arg
+            else:
+                return
+        elif func == CMD_FAN_CURVE and buf is not None:
+            r["curve"] = bytes(buf).hex()
+        else:
+            return
+        self.save()
+
+
+def oc_locked(func, arg, buf):
+    """True if this DCHU call is an overclock command and OC writes are locked."""
+    if os.path.exists(OC_UNLOCK) or func not in OC_LOCKED:
+        return False
+    subs = OC_LOCKED[func]
+    return subs is None or (buf is None and ((arg >> 24) & 0xFF) in subs)
+
+
+def oc_appset_locked(page, off, ln):
+    """True if an AppSettings write touches an overclock range and OC writes are locked."""
+    if os.path.exists(OC_UNLOCK) or page not in OC_APPSET:
+        return False
+    lo, hi = OC_APPSET[page]
+    return off <= hi and off + ln - 1 >= lo
+
+
+def restore(dchu, state):
+    """Re-apply the remembered performance mode, fan curve and fan mode."""
+    r = state.s["restore"]
+    try:
+        if "perf" in r:
+            dchu.call(CMD_OPT, r["perf"])
+        if "curve" in r and (r.get("fan", 0) & 0xFFFFFF) == 6:
+            dchu.call(CMD_FAN_CURVE, buf=bytes.fromhex(r["curve"]))
+        if "fan" in r:
+            dchu.call(CMD_OPT, r["fan"])
+        print(f"restored: { {k: (hex(v) if isinstance(v, int) else 'curve') for k, v in r.items()} }", flush=True)
+    except Exception as e:
+        print(f"restore failed: {e}", file=sys.stderr, flush=True)
+
+
+def handle(req, dchu, state, mock):
+    """Dispatch one decoded request dict and return the response dict."""
+    op = req.get("op")
+    if op == "call":
+        func = int(req["func"])
+        if not 0 <= func <= 0xFF:
+            raise ValueError("func")
+        buf = bytes.fromhex(req["buf"]) if req.get("buf") is not None else None
+        arg = int(req.get("int", 0))
+        if oc_locked(func, arg, buf):
+            return {"ok": False, "err": "oc-locked"}
+        out = dchu.call(func, arg, buf)
+        state.remember(func, arg, buf)
+        return {"ok": True, **out}
+    if op == "appget":
+        return {"ok": True, "data": state.appget(int(req["page"]), int(req["off"]), int(req["len"])).hex()}
+    if op == "appset":
+        page, off, data = int(req["page"]), int(req["off"]), bytes.fromhex(req["data"])
+        if oc_appset_locked(page, off, len(data)):
+            return {"ok": False, "err": "oc-locked"}
+        state.appset(page, off, data)
+        return {"ok": True}
+    if op == "info":
+        return {"ok": True, "mock": mock, "oc_unlocked": os.path.exists(OC_UNLOCK)}
+    return {"ok": False, "err": "bad op"}
+
+
+def serve_one(conn, dchu, state, mock):
+    """Serve a single connection: read one JSON line, write one JSON line."""
+    with conn:
+        try:
+            conn.settimeout(5)
+            data = b""
+            while not data.endswith(b"\n") and len(data) < 8192:
+                chunk = conn.recv(4096)
+                if not chunk:
+                    break
+                data += chunk
+            with lock:
+                resp = handle(json.loads(data), dchu, state, mock)
+        except Exception as e:
+            resp = {"ok": False, "err": str(e)}
+        try:
+            conn.sendall((json.dumps(resp) + "\n").encode())
+        except OSError:
+            pass
+
+
+def main():
+    """Parse arguments, open the device, and serve requests forever."""
+    global OC_UNLOCK
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--socket", default=SOCK)
+    ap.add_argument("--state-dir", default=STATE_DIR)
+    ap.add_argument("--mock", action="store_true", help="no hardware (protocol testing)")
+    ap.add_argument("--no-restore", action="store_true")
+    ap.add_argument("--oc-unlock-file", default=OC_UNLOCK, help="path whose existence unlocks overclock writes (default %(default)s)")
+    a = ap.parse_args()
+    OC_UNLOCK = a.oc_unlock_file
+
+    if a.mock:
+        dchu = MockDchu()
+    else:
+        try:
+            dchu = Dchu()
+        except OSError as e:
+            # EX_CONFIG: the unit sets RestartPreventExitStatus=78 so systemd does not
+            # restart-loop while the module is missing.
+            print(f"ripple-ccd: cannot open {DEV}: {e.strerror}. Is the ripple_dchu "
+                  "module loaded (sudo modprobe ripple_dchu) and are you root?",
+                  file=sys.stderr, flush=True)
+            sys.exit(EX_CONFIG)
+    state = State(a.state_dir)
+    if not a.no_restore and not a.mock:
+        restore(dchu, state)
+
+    os.makedirs(os.path.dirname(a.socket), exist_ok=True)
+    try:
+        os.unlink(a.socket)
+    except FileNotFoundError:
+        pass
+    srv = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    srv.bind(a.socket)
+    # Any local user may use the control center (single-user laptop), as on Windows.
+    os.chmod(a.socket, 0o666)
+    srv.listen(16)
+    print(f"ripple-ccd listening on {a.socket}", flush=True)
+    while True:
+        conn, _ = srv.accept()
+        threading.Thread(target=serve_one, args=(conn, dchu, state, a.mock), daemon=True).start()
+
+
+if __name__ == "__main__":
+    main()
