@@ -1,0 +1,351 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Classic WPF colours used by the original templates -->
+  <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+  <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+  <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+
+  <!-- BTN_MIN / S_BTN_CLOSE (MainWindow title buttons) -->
+  <ControlTheme x:Key="BTN_MIN" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="grid" Background="{x:Null}">
+          <Image Source="/Image/main/ic_minimize.png" Stretch="Fill" Height="60" />
+          <Rectangle Name="rectangle" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0">
+            <Rectangle.OpacityMask>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#33FFFFFF" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="1" /><GradientStop Color="#66FFFFFF" Offset="0" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:pointerover:not(:pressed) /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#66FFFFFF" Offset="1" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+  </ControlTheme>
+  <ControlTheme x:Key="S_BTN_CLOSE" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="grid" Background="{x:Null}">
+          <Image Source="/Image/main/ic_close.png" Stretch="Fill" Height="60" />
+          <Rectangle Name="rectangle" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0">
+            <Rectangle.OpacityMask>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#33FFFFFF" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="1" /><GradientStop Color="#66FFFFFF" Offset="0" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:pointerover:not(:pressed) /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#66FFFFFF" Offset="1" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
+  <!-- CheckBox_FullScreen -->
+  <ControlTheme x:Key="CheckBox_FullScreen" TargetType="CheckBox">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF">
+          <Image Name="Image_ic_close_png" Source="/Image/main/ic_fullscreen.png" Stretch="Fill" Width="80" Height="60" />
+          <Rectangle Name="rectangle" Width="80" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0">
+            <Rectangle.OpacityMask>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#33FFFFFF" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#66FFFFFF" Offset="1" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle">
+      <Setter Property="OpacityMask">
+        <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+          <GradientStop Color="#66000000" Offset="0" /><GradientStop Color="Transparent" Offset="1" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="^:checked /template/ Image#Image_ic_close_png">
+      <Setter Property="Source" Value="/Image/main/ic_window.png" />
+    </Style>
+  </ControlTheme>
+
+  <!-- RadioButton_SYS (main menu, hidden in this app) -->
+  <ControlTheme x:Key="RadioButton_SYS" TargetType="RadioButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF">
+          <TextBlock Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Top" Height="35" Foreground="#FF898989" FontSize="18.667" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ TextBlock#textBlock"><Setter Property="FontSize" Value="26.667" /></Style>
+    <Style Selector="^:checked /template/ TextBlock#textBlock"><Setter Property="Foreground" Value="#FFFFFFFF" /><Setter Property="FontSize" Value="26.667" /></Style>
+  </ControlTheme>
+
+  <!-- RBTN_CPU (page tab buttons, hidden in this app) -->
+  <ControlTheme x:Key="RBTN_CPU" TargetType="RadioButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF">
+          <TextBlock Name="textBlock" HorizontalAlignment="Center" TextWrapping="Wrap" Width="232" Text="{TemplateBinding Content}" VerticalAlignment="Center" Foreground="#FF828282" TextAlignment="Center" FontSize="21.333" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ TextBlock#textBlock"><Setter Property="FontSize" Value="29.333" /></Style>
+    <Style Selector="^:checked /template/ TextBlock#textBlock"><Setter Property="Foreground" Value="#FFFFFFFF" /><Setter Property="FontSize" Value="29.333" /></Style>
+  </ControlTheme>
+
+  <!-- GPU selector radios -->
+  <ControlTheme x:Key="RBTN_GPU_selected" TargetType="RadioButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF">
+          <Rectangle Name="rectangle" Fill="{TemplateBinding Foreground}" StrokeThickness="0" Width="50">
+            <Rectangle.OpacityMask><ImageBrush Source="/Image/Page_SystemMonitor/btn_gpu1_normal.png" Stretch="Fill" /></Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <!-- WPF trigger sets OpacityMask on the RadioButton itself on hover -->
+    <Style Selector="^:pointerover"><Setter Property="OpacityMask"><ImageBrush Source="/Image/Page_SystemMonitor/btn_gpu1_hover.png" Stretch="Fill" /></Setter></Style>
+    <Style Selector="^:checked /template/ Rectangle#rectangle"><Setter Property="OpacityMask"><ImageBrush Source="/Image/Page_SystemMonitor/btn_gpu1_selected.png" Stretch="Fill" /></Setter></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="RBTN_GPUSelected2" TargetType="RadioButton">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot" Background="#00FFFFFF">
+          <Rectangle Name="rectangle" Fill="{TemplateBinding Foreground}" StrokeThickness="0" Width="50" Height="50">
+            <Rectangle.OpacityMask><ImageBrush Source="/Image/Page_SystemMonitor/btn_gpu2_normal.png" Stretch="Fill" /></Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover"><Setter Property="OpacityMask"><ImageBrush Source="/Image/Page_SystemMonitor/btn_gpu2_hover.png" Stretch="Fill" /></Setter></Style>
+    <Style Selector="^:checked /template/ Rectangle#rectangle"><Setter Property="OpacityMask"><ImageBrush Source="/Image/Page_SystemMonitor/btn_gpu2_selected.png" Stretch="Fill" /></Setter></Style>
+  </ControlTheme>
+
+  <!-- Dialog buttons -->
+  <ControlTheme x:Key="ButtonStyle1_OK" TargetType="Button">
+    <Setter Property="Padding" Value="1" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#FF4B4B4B" Offset="1" /></LinearGradientBrush>
+          </Border.Background>
+          <ContentPresenter Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#border">
+      <Setter Property="Background"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#FF959595" Offset="1" /></LinearGradientBrush></Setter>
+    </Style>
+    <Style Selector="^:pressed /template/ Border#border">
+      <Setter Property="Background"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="1" /><GradientStop Color="#FF4B4B4B" Offset="0" /></LinearGradientBrush></Setter>
+    </Style>
+    <Style Selector="^:disabled /template/ Border#border"><Setter Property="Background" Value="{StaticResource Button.Disabled.Background}" /><Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" /></Style>
+    <Style Selector="^:disabled /template/ ContentPresenter#contentPresenter"><Setter Property="Foreground" Value="{StaticResource Button.Disabled.Foreground}" /></Style>
+  </ControlTheme>
+
+  <!-- Default / Save buttons -->
+  <ControlTheme x:Key="ButtonStyle1_reset1" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border">
+          <WrapPanel>
+            <Image Name="img" Source="/Image/Page_SystemMonitor/btn_default_normal.png" Stretch="Fill" Width="56" Height="56" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" />
+            <TextBlock Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" />
+          </WrapPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Image#img"><Setter Property="Source" Value="/Image/Page_SystemMonitor/btn_default_hover.png" /></Style>
+    <Style Selector="^:pressed /template/ Image#img"><Setter Property="Source" Value="/Image/Page_SystemMonitor/btn_save_pressed.png" /></Style>
+    <Style Selector="^:pressed /template/ TextBlock#textBlock"><Setter Property="Foreground" Value="#FF808080" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="ButtonStyle1_SAVE" TargetType="Button">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border">
+          <WrapPanel>
+            <Image Name="img" Source="/Image/Page_SystemMonitor/btn_save_normal.png" Stretch="Fill" Width="56" Height="56" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" />
+            <TextBlock Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" />
+          </WrapPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Image#img"><Setter Property="Source" Value="/Image/Page_SystemMonitor/btn_save_hover.png" /></Style>
+    <Style Selector="^:pressed /template/ Image#img"><Setter Property="Source" Value="/Image/Page_SystemMonitor/btn_save_pressed.png" /></Style>
+    <Style Selector="^:pressed /template/ TextBlock#textBlock"><Setter Property="Foreground" Value="#FF808080" /></Style>
+    <!-- IsEnabled=False: static opacity 0.2; IsEnabled=True: opacity pulse 1 -> 0.2 -> 1 over 1 s, forever -->
+    <Style Selector="^:disabled"><Setter Property="Opacity" Value="0.2" /></Style>
+    <Style Selector="^:not(:disabled) /template/ Border#border">
+      <Style.Animations>
+        <Animation Duration="0:0:1" IterationCount="Infinite">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+          <KeyFrame Cue="50%"><Setter Property="Opacity" Value="0.2" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+  </ControlTheme>
+
+  <!-- Slider (SliderStyle_INC + SliderHorizontal + thumb + RepeatButtonStyle_L) -->
+  <ControlTheme x:Key="RepeatButtonStyle_L" TargetType="RepeatButton">
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ClipToBounds="True" Background="Transparent">
+          <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="355" Margin="6.025,16.033,-183.408,0">
+            <Rectangle.OpacityMask><ImageBrush Source="/Image/Page_SystemMonitor/CPUGPUSetting/slider_range_2.png" Stretch="Fill" /></Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="RepeatButtonTransparent" TargetType="RepeatButton">
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="Focusable" Value="False" />
+    <Setter Property="Template"><ControlTemplate><Rectangle Fill="Transparent" /></ControlTemplate></Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="SliderThumbHorizontalDefault" TargetType="Thumb">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent">
+          <Rectangle Name="rectangle" HorizontalAlignment="Stretch" Height="60" Margin="-20.487,-9.966,-19.514,-10.035" StrokeThickness="2" VerticalAlignment="Stretch" Width="48" Fill="{TemplateBinding BorderBrush}" RenderTransformOrigin="50%,50%" IsVisible="False">
+            <Rectangle.RenderTransform><SkewTransform AngleX="32" /></Rectangle.RenderTransform>
+            <Rectangle.OpacityMask><ImageBrush Source="/Image/Page_SystemMonitor/CPUGPUSetting/slider_handle_layer1.png" Stretch="Fill" /></Rectangle.OpacityMask>
+          </Rectangle>
+          <Path Name="grip" Data="M0,0 C0,0 11,0 11,0 C11,0 11,18 11,18 C11,18 0,18 0,18 C0,18 0,0 0,0" Stretch="Fill" VerticalAlignment="Center">
+            <Path.Fill>
+              <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Color="#FF606060" Offset="0.046" /><GradientStop Color="White" Offset="0.503" /><GradientStop Color="#FF606060" Offset="0.943" />
+              </LinearGradientBrush>
+            </Path.Fill>
+          </Path>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Rectangle#rectangle"><Setter Property="IsVisible" Value="True" /></Style>
+    <Style Selector="^:pressed /template/ Rectangle#rectangle"><Setter Property="IsVisible" Value="True" /></Style>
+  </ControlTheme>
+  <ControlTheme x:Key="SliderStyle_INC" TargetType="Slider">
+    <Setter Property="Background" Value="#00FFFFFF" />
+    <Setter Property="BorderBrush" Value="#00FFFFFF" />
+    <Setter Property="TickFrequency" Value="1" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="border" BorderBrush="Transparent" BorderThickness="0" Background="{TemplateBinding Background}">
+          <Grid>
+            <Track Name="PART_Track" Height="60" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}" Orientation="Horizontal">
+              <Track.DecreaseButton>
+                <RepeatButton Name="PART_DecreaseButton" Theme="{StaticResource RepeatButtonStyle_L}" BorderBrush="{TemplateBinding BorderBrush}" />
+              </Track.DecreaseButton>
+              <Track.IncreaseButton>
+                <RepeatButton Name="PART_IncreaseButton" Theme="{StaticResource RepeatButtonTransparent}" />
+              </Track.IncreaseButton>
+              <Thumb Name="thumb" Focusable="False" Height="40" Width="8" VerticalAlignment="Center" Theme="{StaticResource SliderThumbHorizontalDefault}" BorderBrush="{TemplateBinding BorderBrush}" />
+            </Track>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ProgressBar (RAM bar, hidden panel) -->
+  <ControlTheme x:Key="ProgressBarStyle1_ram" TargetType="ProgressBar">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid>
+          <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" />
+          <Border Name="PART_Indicator" HorizontalAlignment="Left" Margin="5" ClipToBounds="True" Background="{TemplateBinding Foreground}" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- Drop-down ScrollBar (ScrollBarStyle1: 10px wide, black thumb) -->
+  <ControlTheme x:Key="ScrollBarStyle1" TargetType="ScrollBar">
+    <Setter Property="Width" Value="10" />
+    <Setter Property="MinWidth" Value="10" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="Bg" Width="10" HorizontalAlignment="Right" Background="Transparent">
+          <Track Name="PART_Track" IsDirectionReversed="True" Orientation="Vertical" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}" ViewportSize="{TemplateBinding ViewportSize}">
+            <Track.DecreaseButton><RepeatButton Name="PART_PageUpButton" Theme="{StaticResource RepeatButtonTransparent}" /></Track.DecreaseButton>
+            <Track.IncreaseButton><RepeatButton Name="PART_PageDownButton" Theme="{StaticResource RepeatButtonTransparent}" /></Track.IncreaseButton>
+            <Thumb Name="thumb">
+              <Thumb.Template><ControlTemplate><Rectangle Name="rectangle" Fill="#FF000000" /></ControlTemplate></Thumb.Template>
+              <Thumb.Styles>
+                <Style Selector="Thumb:pointerover /template/ Rectangle#rectangle"><Setter Property="Fill" Value="#FF606060" /></Style>
+                <Style Selector="Thumb:pressed /template/ Rectangle#rectangle"><Setter Property="Fill" Value="#FF606060" /></Style>
+              </Thumb.Styles>
+            </Thumb>
+          </Track>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <!-- ComboBox (ComboBoxStyle_dropdown + ComboBoxTemplate2 + ToggleButtonStyle_dropdown1) -->
+  <ControlTheme x:Key="ComboBoxStyle_dropdown" TargetType="ComboBox">
+    <Setter Property="Padding" Value="6,3,5,3" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid Name="templateRoot">
+          <Border Name="templateRootB" Margin="0.267,0,10.566,0" RenderTransformOrigin="50%,50%">
+            <Border.RenderTransform><SkewTransform AngleX="-32" /></Border.RenderTransform>
+            <Border Name="splitBorder" Background="#FF242424" Cursor="Hand" />
+          </Border>
+          <ContentControl Name="contentPresenter" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding ItemTemplate}" IsHitTestVisible="False" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="Center" />
+          <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" PlacementTarget="templateRoot" Placement="Bottom" IsLightDismissEnabled="True" MinWidth="126" Width="126" HorizontalAlignment="Left">
+            <Border Name="dropDownBorder" Background="#FF272727" BorderThickness="0" Height="150" Margin="0,0,8,0" HorizontalAlignment="Left" Width="126">
+              <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                <ScrollViewer.Styles>
+                  <Style Selector="ScrollBar"><Setter Property="Theme" Value="{StaticResource ScrollBarStyle1}" /></Style>
+                </ScrollViewer.Styles>
+                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </ScrollViewer>
+            </Border>
+          </Popup>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#splitBorder"><Setter Property="Background" Value="#FF494949" /></Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:GPUOverclocking" xmlns:UControl="using:GPUOverclocking.UControl"
+  x:Class="GPUOverclocking.UControl.UserControl_CoreClock" Name="userControl">
+    <Grid>
+      <Path Name="p_layer7" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M625.8,0.33333333 L465.48681,182.9388 L527.35616,285.9317 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer8" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M625.8,0.33333333 L540.3,169.5 L677.70095,269.34349 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer9" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M625.8,0.33333333 L586.4,132 L770.2,203.2 L769.65001,0.45 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer10" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M625.8,0.33333333 L629.26667,96.066667 L770.06667,120.06667 L769,0.33333333 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer11" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Height="288" VerticalAlignment="Top" Data="M635.20001,0.20000145 L596,52.99988 L756.80005,52.19961 L736.80005,1.9997621 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer6" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M625.8,0.33333333 L384.11662,194.54551 L383.4916,288.02457 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer5" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M626.86217,3.1291872 L304.51318,189.59265 L243.71055,287.84947 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer4" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M626.62712,-0.16709664 L226.67648,171.23203 L71.536429,287.69939 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer3" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M626.62712,-0.16709664 L177.45381,135.22262 L2.6008398,204.50281 L-0.20000866,288.60016 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer2" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M626.62712,-0.16709664 L148.84514,95.476613 L-0.20000866,121.70698 L-0.20000866,288.60016 L769.86699,288.16667 L770.03333,0.16715794 M0,0 L770,0 L770,288 L0,288" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Path Name="p_layer1" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" Data="M626.62712,-0.16709664 L134.57415,54.143874 L-0.031172611,54.176263 L-0.099952375,290.20243 L770.06667,288.89037 L770.03333,0.16715794 M0,0 L770,0 L770.03333,288.90096 L-0.30003896,290.50523" Stretch="Fill" Height="288" VerticalAlignment="Top" Fill="{Binding #userControl.BorderBrush}">
+        <Path.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Path.OpacityMask>
+      </Path>
+      <Rectangle Name="p_layer12" HorizontalAlignment="Left" Margin="0" StrokeThickness="0" Width="770" VerticalAlignment="Top" Height="288" Fill="{Binding #userControl.BorderBrush}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/clock_full.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+    </Grid>
+
+</UserControl>

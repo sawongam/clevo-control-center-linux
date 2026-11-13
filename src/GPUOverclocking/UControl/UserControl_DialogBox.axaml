@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:GPUOverclocking" xmlns:UControl="using:GPUOverclocking.UControl"
+  x:Class="GPUOverclocking.UControl.UserControl_DialogBox" Name="UC_DialogBox" Width="1920" Height="1080">
+    <Grid Name="DialogBox" HorizontalAlignment="Left" Margin="0" Width="1920" Height="1080" VerticalAlignment="Top" Background="#B2242424">
+      <Image Name="Image_dialog_bg_dialog_png" Margin="0" Source="/Image/dialog/bg_dialog.png" Stretch="Fill" Width="950" HorizontalAlignment="Center" Height="460" VerticalAlignment="Center" />
+      <Image Name="Image_dialog_restart" HorizontalAlignment="Left" Margin="567.5,454,0,486" Source="/Image/dialog/ic_dialog_restart.png" Stretch="Fill" Width="140" IsVisible="False" />
+      <Image Name="Image_dialog_warning" HorizontalAlignment="Left" Margin="567.5,454,0,486" Source="/Image/dialog/ic_dialog_warning.png" Stretch="Fill" Width="140" />
+      <Button Name="BTN_Cancel" Content="Cancel" HorizontalAlignment="Right" Height="69" Margin="0,0,510.389,352.444" VerticalAlignment="Bottom" Width="449" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" />
+      <Grid Margin="739.5,324.5,511.5,417.5">
+        <TextBlock Name="T_Dialog_info" Margin="1.5,0" TextWrapping="Wrap" Text="Activating GPU Overclock may reduce system stability, useful life of the system and affect system data integrity." Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Center" VerticalAlignment="Center" Width="660" />
+      </Grid>
+      <Button Name="BTN_OK" Content="OK" HorizontalAlignment="Left" Height="69" Margin="507.5,0,0,352" VerticalAlignment="Bottom" Width="449" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" />
+    </Grid>
+
+</UserControl>

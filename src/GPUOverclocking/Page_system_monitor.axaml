@@ -1,0 +1,936 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:GPUOverclocking" xmlns:UControl="using:GPUOverclocking.UControl"
+  x:Class="GPUOverclocking.Page_system_monitor" Name="userControl" Width="1920" Height="1080" BorderBrush="#FFFF0000" FontSize="12">
+  <UserControl.Styles>
+    <Style Selector="ComboBoxItem">
+      <Setter Property="Foreground" Value="#FFFFFFFF" />
+      <Setter Property="Padding" Value="4,1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="Center" />
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="ComboBoxItem:pointerover /template/ ContentPresenter"><Setter Property="Background" Value="#1F26A0DA" /></Style>
+    <Style Selector="ComboBoxItem:selected /template/ ContentPresenter"><Setter Property="Background" Value="#3D26A0DA" /></Style>
+  </UserControl.Styles>
+
+    <Grid Name="page_system_monitor" Width="1920" Height="1080">
+      <Rectangle Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080" Fill="{Binding #userControl.BorderBrush}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/FanSpeedSetting/bg_fan_layer2.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080">
+        <Rectangle.Fill>
+          <ImageBrush Source="/Image/FanSpeedSetting/bg_fan_less_layer3.png" Stretch="Fill" />
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080">
+        <Rectangle.Fill>
+          <ImageBrush Source="/Image/GPUOverclocking/bg_cpu_layer3.png" Stretch="Fill" />
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Name="R2" Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080" Fill="{Binding #userControl.BorderBrush}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/bg_clock_layer2.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Name="R3" Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080">
+        <Rectangle.Fill>
+          <ImageBrush Source="/Image/GPUOverclocking/bg_clock_layer3.png" Stretch="Fill" />
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Name="R4" Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080" Fill="{Binding #userControl.BorderBrush}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/GPUOverclocking/bg_clock_layer4.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <UControl:UserControl_CoreClock Name="UC_GPUCoreClock" Width="770" Margin="0,254,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" BorderBrush="{Binding #info_GPU.Foreground}" />
+      <Rectangle Name="R5" Margin="0,0,0,-2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="1920" Height="1080">
+        <Rectangle.Fill>
+          <ImageBrush Source="/Image/GPUOverclocking/bg_gpu_clock_layer5.png" Stretch="Fill" />
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Name="bg_system_info_dgpu" HorizontalAlignment="Right" Height="343" Margin="0,0,35,56.432" StrokeThickness="0" VerticalAlignment="Bottom" Width="398" IsVisible="False" Fill="{Binding #bg_system_setting_tab.Fill}" Stroke="{x:Null}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/Page_SystemMonitor/bg_system_info_dgpu.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Name="bg_system_setting_tab" Height="127" Margin="391.267,0,390.732,-50.168" StrokeThickness="0" VerticalAlignment="Bottom" Width="1138" IsVisible="False" Fill="{Binding #userControl.BorderBrush}" Stroke="{x:Null}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/Page_SystemMonitor/bg_system_setting_tab.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle Name="bg_system_setting_tab_shadow" Margin="391.267,0,390.732,-50.168" StrokeThickness="0" Width="1138" Height="127" VerticalAlignment="Bottom" Fill="#FF000000" IsVisible="False" Stroke="{x:Null}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Image/Page_SystemMonitor/bg_system_setting_tab_shadow.png" Stretch="Fill" />
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Grid Name="info_FAN_CPU" HorizontalAlignment="Left" Margin="300,140,0,0" Width="568" Height="568" VerticalAlignment="Top" IsVisible="False">
+        <Rectangle Name="system_temperature_layer5" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%" Fill="{Binding #userControl.BorderBrush}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="90" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_layer1_1.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="system_temperature_layer6" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="89.5" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_layer2_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Image Name="Image_Page_SystemMonitor_system_gpu_temperature_layer3_png2" Margin="0" Source="/Image/FanSpeedSetting/system_fan_layer3_1.png" Stretch="Fill" Height="88" Width="88" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Name="T_7" HorizontalAlignment="Left" Height="20" Margin="423,106,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="39" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_8" HorizontalAlignment="Left" Height="20" Margin="304,46,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_9" HorizontalAlignment="Left" Height="20" Margin="160,0,0,479" TextWrapping="Wrap" Text="60" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_10" HorizontalAlignment="Left" Height="20" Margin="66,0,0,380" TextWrapping="Wrap" Text="40" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_11" HorizontalAlignment="Left" Height="20" Margin="48,0,0,240" TextWrapping="Wrap" Text="20" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_12" HorizontalAlignment="Left" Height="20" Margin="108,0,0,111" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_FanSpeed" Height="34" Margin="165,344,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="246" TextAlignment="Center" Text="{Binding #F_speed.Text}" />
+        <Rectangle Name="CPUFAN_needle_layer3" Margin="0" RenderTransformOrigin="50%,50%" Width="568" Height="568" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding #system_temperature_layer5.Fill}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="225" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_needle_layer1_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="CPUFAN_needle_layer4" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="225" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_needle_layer2_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <TextBlock Name="T_unit2" Height="25" Margin="342,193,0,0" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="29" />
+        <TextBlock Name="CPUFan_value1" Margin="225,171,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="48" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="115" TextAlignment="Center" Height="55" Text="100" />
+        <TextBlock Name="F_RPM_Copy" Margin="0,0,195.6,63.8" TextWrapping="Wrap" Text="RPM" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Right" Width="53" Height="20" VerticalAlignment="Bottom" />
+        <TextBlock Name="T_GPUFan_RPM_value_Copy" Margin="0,470.2,259.6,57.8" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontSize="36" FontFamily="Microsoft Sans Serif" TextAlignment="Right" HorizontalAlignment="Right" Width="94" Text="{Binding #T_CPUFan_RPM_value.Text}" />
+      </Grid>
+      <Grid Name="info_temp_fan_gpu" HorizontalAlignment="Right" Margin="0,0,55,260" Width="504" Height="504" VerticalAlignment="Bottom">
+        <TextBlock Name="info_GPU" Margin="-142.6,0,617.6,489.6" TextWrapping="Wrap" Text="GPU" Foreground="#FF00A8FF" FontSize="40" FontFamily="Microsoft Sans Serif" TextAlignment="Right" Height="46" VerticalAlignment="Bottom" IsVisible="False" />
+        <Rectangle Name="system_temperature_layer1" Margin="0" Width="504" Height="504" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%" Fill="{Binding #info_GPU.Foreground}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_layer1_1.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="system_temperature_layer2" Fill="#FFFFFFFF" Margin="0" Width="504" Height="504" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_layer2_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Image Name="Image_Page_SystemMonitor_system_gpu_temperature_layer3_png" Margin="0" Source="/Image/Page_SystemMonitor/Temp/system_gpu_temperature_layer3_1.png" Stretch="Fill" Height="78" Width="78" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Name="T_100" HorizontalAlignment="Left" Height="24" Margin="374.2,90,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="39" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_80" HorizontalAlignment="Left" Height="22.8" Margin="452,204.4,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_60" HorizontalAlignment="Right" Height="22.4" Margin="0,0,47.4,138.2" TextWrapping="Wrap" Text="60" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_40" HorizontalAlignment="Right" Height="20" Margin="0,0,137.4,49.6" TextWrapping="Wrap" Text="40" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_20" HorizontalAlignment="Left" Height="20" Margin="205.6,0,0,30.933" TextWrapping="Wrap" Text="20" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_0" HorizontalAlignment="Left" Height="20" Margin="90.4,0,0,92.6" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" />
+        <TextBlock Name="T_temp" Height="34" Margin="151.667,304,0,0" TextWrapping="Wrap" Text="Temperature" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="201.2" TextAlignment="Center" />
+        <Rectangle Name="GPUTemp_needle_layer1" Margin="0" RenderTransformOrigin="50%,50%" Width="504" Height="504" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding #info_GPU.Foreground}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="-135" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/GPUOverclocking/gauge_cpu_needle_layer1.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="GPUTemp_needle_layer2" Fill="#FFFFFFFF" Margin="0" Width="504" Height="504" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="-135" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_needle_layer2_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <TextBlock Name="T_unit" Height="37.8" Margin="318.8,69,0,0" TextWrapping="Wrap" Text="°C" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="32" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="43.4" />
+        <TextBlock Name="GPUTemp_value" Margin="196.2,143.8,0,0" TextWrapping="Wrap" Text="OFF" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="48" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="115" TextAlignment="Center" Height="55" />
+      </Grid>
+      <Grid Name="info_temp_fan_cpu" HorizontalAlignment="Right" Margin="0,140,300,0" Width="568" RenderTransformOrigin="50%,50%" Height="568" VerticalAlignment="Top" IsVisible="False">
+        <Grid.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="-1" />
+            <SkewTransform AngleY="0" AngleX="0" />
+            <RotateTransform Angle="0" />
+            <TranslateTransform />
+          </TransformGroup>
+        </Grid.RenderTransform>
+        <Rectangle Name="system_temperature_layer3" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{Binding #userControl.BorderBrush}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="90" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_layer1_1.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="system_temperature_layer4" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="90" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_layer2_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Image Name="Image_Page_SystemMonitor_system_gpu_temperature_layer3_png1" Margin="0" Source="/Image/Page_SystemMonitor/Temp/system_cpu_temperature_layer3_1.png" Stretch="Fill" Height="88" Width="88" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Image.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Image.RenderTransform>
+        </Image>
+        <TextBlock Name="T_1" HorizontalAlignment="Left" Height="25" Margin="433,111,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="39" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_2" HorizontalAlignment="Left" Height="25" Margin="302,46,0,0" TextWrapping="Wrap" Text="80" VerticalAlignment="Top" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_3" HorizontalAlignment="Left" Height="25" Margin="159,0,0,478" TextWrapping="Wrap" Text="60" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_4" HorizontalAlignment="Left" Height="25" Margin="68,0,0,381" TextWrapping="Wrap" Text="40" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_5" HorizontalAlignment="Left" Height="25" Margin="45,0,0,231" TextWrapping="Wrap" Text="20" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_6" HorizontalAlignment="Left" Height="25" Margin="75,0,0,128" TextWrapping="Wrap" Text="0" VerticalAlignment="Bottom" Width="29" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_cpu_temp_value" Height="58" Margin="227,178,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="48" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="112" TextAlignment="Center" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_unit1" Height="25" Margin="184,205,0,0" TextWrapping="Wrap" Text="°C" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="44" RenderTransformOrigin="50%,50%">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock Name="T_temp1" Height="40" Margin="149,346,0,0" TextWrapping="Wrap" Text="Temperature" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="22" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="255" RenderTransformOrigin="50%,50%" TextAlignment="Center">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+        <Rectangle Name="CPUTemp_needle_layer1" Margin="0" RenderTransformOrigin="50%,50%" Width="568" HorizontalAlignment="Center" VerticalAlignment="Center" Height="568" Fill="{Binding #system_temperature_layer3.Fill}">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="225" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_needle_layer1_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="CPUTemp_needle_layer2" Fill="#FFFFFFFF" Margin="0" Width="568" Height="568" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <Rectangle.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="225" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Rectangle.RenderTransform>
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/Temp/system_temperature_needle_layer2_2.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+      </Grid>
+      <Grid Name="Info_Clock" Margin="0" VerticalAlignment="Top" Height="642.4">
+        <Image Name="Image_Page_SystemMonitor_clock_clock_dotted_line_png" Margin="364.6,12.4,0,0" Source="/Image/Page_SystemMonitor/clock/clock_dotted_line_2.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1181" Height="518" IsVisible="False" />
+        <TextBlock Name="GPU_Unit2" Margin="517.934,0,0,217.667" TextWrapping="Wrap" Text="%" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Left" Width="15.999" />
+        <TextBlock Name="T_GPU_BASE" Margin="0,0,428,294.909" TextWrapping="Wrap" Text="Core Base" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+        <TextBlock Name="GPU_Unit" Margin="0,0,312.134,292.509" TextWrapping="Wrap" Text="MHz" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="37.733" />
+        <TextBlock Name="T_GPU_BOOST" Margin="0,210.941,511,0" TextWrapping="Wrap" Text="Core Boost" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" HorizontalAlignment="Right" />
+        <TextBlock Name="GPU_Unit1" Margin="0,212.291,384.134,0" TextWrapping="Wrap" Text="MHz" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" HorizontalAlignment="Right" Width="37.733" />
+        <TextBlock Name="GPU_BASE_Value" Margin="0,321,350,291.4" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="26.667" FontFamily="Microsoft Sans Serif" TextAlignment="Center" HorizontalAlignment="Right" Width="69" />
+        <TextBlock Name="GPU_BOOST_Value" Margin="0,202.707,431.867,0" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="26.667" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Right" Width="72" />
+        <TextBlock Name="T_Utilization" Margin="298.602,0,0,218.797" TextWrapping="Wrap" Text="Utilization" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Left" Width="167.332" RenderTransformOrigin="50%,50%" />
+        <TextBlock Name="GPU_util_value" Margin="470.935,0,0,219.546" TextWrapping="Wrap" Text="100" Foreground="#FFFFFFFF" FontSize="21.333" FontFamily="Microsoft Sans Serif" Height="21.46" VerticalAlignment="Bottom" TextAlignment="Center" HorizontalAlignment="Left" Width="45.599" RenderTransformOrigin="50%,50%" />
+        <Rectangle Name="gpu_unilization_layer1" Height="156" Margin="430.433,0,0,62.382" VerticalAlignment="Bottom" Width="525" HorizontalAlignment="Left" IsVisible="False" Fill="{Binding #info_GPU.Foreground}">
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/Image/Page_SystemMonitor/clock/clock_dotted_line_color_1.png" Stretch="Fill" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Path Data="M7.0210103,1.3713527 C20.938159,1.3937318 126.35041,1.5632375 126.35041,1.5632375 C181.55979,102.34604 380.3209,141.17487 521.43795,141.94572" Height="143.436" Margin="437.519,0,6.22,115.991" VerticalAlignment="Bottom" Stroke="#FF000100" StrokeDashArray="1,2,1,2" StrokeThickness="2" StrokeLineCap="Square" Stretch="Fill" StrokeDashOffset="2" IsVisible="False" />
+        <TextBlock Name="GPU_Unit_Copy" Margin="0,0,788,154.4" TextWrapping="Wrap" Text="MHz" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="38" />
+        <Grid Name="gpu_unilization_layer3" HorizontalAlignment="Right" Height="174" Margin="0,0,543.7,49.95" VerticalAlignment="Bottom" Width="0">
+          <Rectangle Name="gpu_unilization_layer2" Height="174" Margin="0" VerticalAlignment="Bottom" Width="830" HorizontalAlignment="Right" RenderTransformOrigin="50%,50%" Fill="{Binding #info_GPU.Foreground}">
+            <Rectangle.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/GPUOverclocking/utilization_full.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+        <Image Name="Image_Page_SystemMonitor_clock_gpu_clock_layer3_png" HorizontalAlignment="Right" Margin="0,185.2,16.566,129.2" Source="/Image/Page_SystemMonitor/clock/gpu_clock_layer3.png" Stretch="Fill" Width="376" IsVisible="False" />
+        <TextBlock Name="GPU_Core_Value2" Margin="0,0,0,71" TextWrapping="Wrap" FontSize="96" FontFamily="Microsoft Sans Serif" VerticalAlignment="Bottom" TextAlignment="Center" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" Text="{Binding #GPU_Core_Value.Text}">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="-1" ScaleX="1" />
+              <SkewTransform AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+          <TextBlock.Foreground>
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#00000000" Offset="0.524" />
+              <GradientStop Offset="1" Color="#7F7D7D7D" />
+            </LinearGradientBrush>
+          </TextBlock.Foreground>
+        </TextBlock>
+        <TextBlock Name="GPU_Core_Value1" Margin="0,0,0,100" TextWrapping="Wrap" FontSize="96" FontFamily="Microsoft Sans Serif" VerticalAlignment="Bottom" TextAlignment="Center" RenderTransformOrigin="50%,50%" HorizontalAlignment="Center" Text="{Binding #GPU_Core_Value.Text}" Foreground="{x:Null}" />
+        <TextBlock Name="GPU_Core_Value" Margin="0,0,0,159.517" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="96" FontFamily="Microsoft Sans Serif" VerticalAlignment="Bottom" TextAlignment="Center" RenderTransformOrigin="50%,50%" Height="94" HorizontalAlignment="Center" />
+        <TextBlock Name="GPU_clock_Unit" Margin="593.333,211.091,0,0" TextWrapping="Wrap" Text="MHz" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37.733" />
+        <TextBlock Name="GPU_BOOST_Value_Copy" Margin="530.133,202.707,0,0" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="26.667" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Left" Width="85" />
+        <UControl:UserControl_CoreClock Name="UC_CPUCoreClock" Margin="0,181.334,578.799,133.065" Width="376" Height="328" HorizontalAlignment="Right" RenderTransformOrigin="50%,50%" IsVisible="False" BorderBrush="{Binding #info_CPU.Foreground}">
+          <UControl:UserControl_CoreClock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </UControl:UserControl_CoreClock.RenderTransform>
+        </UControl:UserControl_CoreClock>
+        <Grid Name="info_Clock_CPU" Margin="952.2,4.8,0,0" RenderTransformOrigin="50%,50%" IsVisible="False">
+          <Grid.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Grid.RenderTransform>
+          <TextBlock Name="info_CPU" Margin="447,0,430.2,256.25" TextWrapping="Wrap" Text="CPU" FontSize="40" FontFamily="Microsoft Sans Serif" TextAlignment="Right" Height="45.15" VerticalAlignment="Bottom" RenderTransformOrigin="50%,50%" Foreground="#FFC3FF00">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_Unit3" Margin="0,0,243.4,116.6" TextWrapping="Wrap" Text="%" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Right" Width="15.999" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="21" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_NAME_Value" Margin="59,255.638,0,316.309" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Left" Width="297" RenderTransformOrigin="50%,50%" FlowDirection="RightToLeft">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <Image Name="ic_gpu_name1" HorizontalAlignment="Left" Margin="10,260.141,0,0" Source="/Image/Page_SystemMonitor/CPUGPUSetting/ic_cpu_setting.png" Stretch="Fill" Width="40" Height="40" VerticalAlignment="Top" RenderTransformOrigin="50%,50%">
+            <Image.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Image.RenderTransform>
+          </Image>
+          <TextBlock Name="T_CPU_TurboMin" Margin="0,274.608,400.4,0" TextWrapping="Wrap" Text="Core Base" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" HorizontalAlignment="Right" Width="79.333" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_Unit4" Margin="368.932,275.826,0,0" TextWrapping="Wrap" Text="MHz" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" HorizontalAlignment="Left" Width="37.733" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="T_CPU_util" Margin="0,0,31.733,91.567" TextWrapping="Wrap" Text="Utilization" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Right" Width="158.265" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="7" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="T_CPU_TurboMax" Margin="0,189.874,310.734,0" TextWrapping="Wrap" Text="Turbo Max" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" RenderTransformOrigin="50%,50%" HorizontalAlignment="Right" Width="86.933">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_Unit5" Margin="456.333,194.158,473.734,0" TextWrapping="Wrap" Text="MHz" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_TurboMin_Value" Margin="402.866,263.707,477.534,0" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="26.667" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" TextAlignment="Center" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_TurboMax_Value" Margin="0,181.907,388.134,0" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="26.667" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" TextAlignment="Center" HorizontalAlignment="Right" Width="85" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_util_value" Margin="0,0,195.999,107.813" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="21.333" FontFamily="Microsoft Sans Serif" Height="21.46" VerticalAlignment="Bottom" TextAlignment="Center" HorizontalAlignment="Right" Width="45.599" RenderTransformOrigin="50%,50%">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="10" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <Rectangle Name="cpu_unilization_layer1" Height="156" Margin="435.533,0,4.867,104.382" VerticalAlignment="Bottom" Width="525" IsVisible="True" RenderTransformOrigin="50%,50%" Fill="{Binding #UC_CPUCoreClock.BorderBrush}">
+            <Rectangle.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/Page_SystemMonitor/clock/clock_dotted_line_color_1.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Path Data="M7.0210103,1.3713527 C20.938159,1.3937318 126.35041,1.5632375 126.35041,1.5632375 C181.55979,102.34604 380.3209,141.17487 521.43795,141.94572" Height="143.436" Margin="437.519,0,6.22,115.991" VerticalAlignment="Bottom" Stroke="#FF000100" StrokeDashArray="1,2,1,2" StrokeThickness="2" StrokeLineCap="Square" Stretch="Fill" StrokeDashOffset="2" IsVisible="False" RenderTransformOrigin="50%,50%">
+            <Path.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Path.RenderTransform>
+          </Path>
+          <Grid Name="cpu_unilization_layer3" HorizontalAlignment="Right" Height="152" Margin="0,0,32.8,104.25" VerticalAlignment="Bottom" Width="0" RenderTransformOrigin="50%,50%">
+            <Grid.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Grid.RenderTransform>
+            <Rectangle Name="cpu_unilization_layer2" Height="152" Margin="0" VerticalAlignment="Bottom" Width="374" HorizontalAlignment="Right" Fill="{Binding #UC_CPUCoreClock.BorderBrush}">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/Image/Page_SystemMonitor/clock/gpu_utilization_layer2_1.png" Stretch="Fill" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+          <Image Name="Image_Page_SystemMonitor_clock_gpu_clock_layer3_png1" HorizontalAlignment="Right" Margin="0,181.2,13.566,133.2" Source="/Image/Page_SystemMonitor/clock/gpu_clock_layer3.png" Stretch="Fill" Width="376" RenderTransformOrigin="50%,50%">
+            <Image.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Image.RenderTransform>
+          </Image>
+          <TextBlock Name="CPU_Core_Value2" Margin="0,0,50.666,107.699" TextWrapping="Wrap" FontSize="80" FontFamily="Microsoft Sans Serif" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Right" Width="222.667" RenderTransformOrigin="50%,50%" FlowDirection="RightToLeft" Text="{Binding #CPU_Core_Value.Text}">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="-1" ScaleX="-1" />
+                <SkewTransform AngleY="13" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+            <TextBlock.Foreground>
+              <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                <GradientStop Color="#00000000" Offset="0.524" />
+                <GradientStop Offset="1" Color="#7F7D7D7D" />
+              </LinearGradientBrush>
+            </TextBlock.Foreground>
+          </TextBlock>
+          <TextBlock Name="CPU_Core_Value1" Margin="0,0,43,149.634" TextWrapping="Wrap" FontSize="80" FontFamily="Microsoft Sans Serif" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Right" Width="222.667" RenderTransformOrigin="50%,50%" FlowDirection="RightToLeft" Text="{Binding #CPU_Core_Value.Text}" Foreground="{x:Null}">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="0" AngleX="0" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+          <TextBlock Name="CPU_Core_Value" Margin="0,0,50.756,180.917" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="80" FontFamily="Microsoft Sans Serif" VerticalAlignment="Bottom" TextAlignment="Right" HorizontalAlignment="Right" Width="208.664" RenderTransformOrigin="50%,50%" Height="74.99" FlowDirection="RightToLeft">
+            <TextBlock.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+                <SkewTransform AngleY="13" />
+                <RotateTransform Angle="0" />
+                <TranslateTransform />
+              </TransformGroup>
+            </TextBlock.RenderTransform>
+          </TextBlock>
+        </Grid>
+        <Grid Name="GPU_VRAM_Clock_layer" Margin="0,87.689,0,201.711" HorizontalAlignment="Center" Width="484" Height="358">
+          <Grid.Background>
+            <ImageBrush Source="/Image/GPUOverclocking/clock_mem_0.png" Stretch="Fill" />
+          </Grid.Background>
+          <Rectangle Name="R_mem5" Height="353" Margin="0" Stroke="#FF000000" VerticalAlignment="Center" Width="484" HorizontalAlignment="Center" RenderTransformOrigin="100.4%,50%" IsVisible="False" Fill="{Binding #R_mem1.Fill}" StrokeThickness="1">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/GPUOverclocking/clock_mem_full.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Rectangle Name="R_mem4" Height="353" Margin="0" Stroke="#FF000000" VerticalAlignment="Center" Width="484" HorizontalAlignment="Center" IsVisible="False" Fill="{Binding #R_mem1.Fill}" StrokeThickness="1">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/GPUOverclocking/clock_mem_4006.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Rectangle Name="R_mem3" Height="353" Margin="0" Stroke="#FF000000" VerticalAlignment="Center" Width="484" HorizontalAlignment="Center" IsVisible="False" Fill="{Binding #R_mem1.Fill}" StrokeThickness="1">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/GPUOverclocking/clock_mem_2999.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Rectangle Name="R_mem2" Height="353" Stroke="#FF000000" VerticalAlignment="Center" Width="484" HorizontalAlignment="Center" Margin="0" IsVisible="False" Fill="{Binding #R_mem1.Fill}" StrokeThickness="1">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/GPUOverclocking/clock_mem_810.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Rectangle Name="R_mem1" Height="353" Margin="0" Stroke="#FF000000" VerticalAlignment="Center" Width="484" HorizontalAlignment="Center" IsVisible="False" Fill="{Binding #info_GPU.Foreground}" StrokeThickness="1">
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/Image/GPUOverclocking/clock_mem_405.png" Stretch="Fill" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Image Name="Image_GPUOverclocking_bg_clock_top_png" Height="202" Margin="0" Source="/Image/GPUOverclocking/bg_clock_top.png" Stretch="Fill" VerticalAlignment="Top" HorizontalAlignment="Center" Width="472" />
+          <TextBlock Name="VRAMClock_Value" Margin="168.4,62,168.4,0" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="48" RenderTransformOrigin="50%,50%" TextAlignment="Center" Foreground="#FFFFFFFF" Height="54.253" />
+          <TextBlock Name="T_clock_1_Copy" HorizontalAlignment="Right" Height="23.2" Margin="0,90,139.867,0" TextWrapping="Wrap" Text="MHz" VerticalAlignment="Top" Width="38.667" FontFamily="Microsoft Sans Serif" FontSize="16" RenderTransformOrigin="50%,50%" TextAlignment="Right" Foreground="#FFFFFFFF" />
+          <TextBlock Name="T_VRAM" Margin="0,0,0,205" TextWrapping="Wrap" Text="VRAM Clock" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Bottom" RenderTransformOrigin="50%,50%" TextAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+        <TextBlock Name="T_RAM" Margin="0,150.028,716.8,0" TextWrapping="Wrap" Text="Memory Clock" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" Height="19.6" VerticalAlignment="Top" RenderTransformOrigin="50%,50%" HorizontalAlignment="Right" Width="128.933" IsVisible="False">
+          <TextBlock.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform AngleY="-10" />
+              <RotateTransform />
+              <TranslateTransform />
+            </TransformGroup>
+          </TextBlock.RenderTransform>
+        </TextBlock>
+      </Grid>
+      <Grid Name="grid_name" HorizontalAlignment="Left" Margin="12,431.4,0,0" Width="596.8" VerticalAlignment="Top">
+        <Path Name="p_name" Data="M23.7,457.2 L27.3,494.4" HorizontalAlignment="Left" Height="37.2" Margin="19.967,16.934,0,0" Stretch="Fill" VerticalAlignment="Top" Width="3" StrokeThickness="3" Stroke="#FFFFFFFF" />
+        <Path Name="p_name_Copy" Data="M23.7,457.2 L27.3,494.4" HorizontalAlignment="Left" Height="37.2" Margin="38.367,1.299,0,0" Stretch="Fill" VerticalAlignment="Top" Width="3" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="90" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+        <Path Name="p_name_Copy1" Data="M23.7,457.2 L27.3,494.4" HorizontalAlignment="Right" Height="37.2" Margin="0,181.467,259.699,0" Stretch="Fill" VerticalAlignment="Top" Width="3" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" ScaleX="-1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="0" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+        <Path Name="p_name_Copy2" Data="M23.7,457.2 L23.798001,493.49284" HorizontalAlignment="Left" Height="36.366" Margin="223.634,0.899,0,0" Stretch="Fill" VerticalAlignment="Top" Width="3.033" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="1" />
+              <SkewTransform AngleY="0" AngleX="0" />
+              <RotateTransform Angle="-90" />
+              <TranslateTransform X="0.1664999999999992" Y="1.0004999999999953" />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+        <Path Name="p_name_Copy3" Data="M23.7,457.2 L27.3,494.4" HorizontalAlignment="Left" Height="157" Margin="126.1,-58.434,0,0" Stretch="Fill" VerticalAlignment="Top" Width="3" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%" StrokeDashArray="1,2,1,2">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="90" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+        <Path Name="p_name_Copy4" Data="M23.7,457.2 L27.3,494.4" HorizontalAlignment="Left" Margin="19.833,56.836,0,-402.288" Stretch="Fill" Width="3" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%" StrokeDashArray="1,2,1,2" Height="564.4" VerticalAlignment="Top" />
+        <Path Name="p_name_Copy5" Data="M23.7,457.2 L27.3,494.4" Margin="0,59.585,294.754,0" Stretch="Fill" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%" StrokeDashArray="1,2,1,2" Height="126" VerticalAlignment="Top" HorizontalAlignment="Right" Width="3">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="-30" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+        <TextBlock Name="GPU_NAME_Value" Margin="42.467,103.371,0,-15.676" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontSize="22.667" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" Height="131.253" HorizontalAlignment="Left" Width="232.866" />
+        <Image Name="ic_gpu_name" HorizontalAlignment="Left" Margin="41.196,44.941,0,0" Source="/Image/GPUOverclocking/ic_gpu_name.png" Stretch="Fill" Width="40" Height="40" VerticalAlignment="Top" />
+        <Path Name="p_name_Copy6" Data="M23.7,457.2 L27.3,494.4" HorizontalAlignment="Right" Margin="0,222.982,259.9,-65.034" Stretch="Fill" Width="3" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%" StrokeDashArray="1,2,1,2" Height="61" VerticalAlignment="Top" />
+        <Path Name="p_name_Copy11" Data="M23.7,457.2 L27.3,494.4" Margin="252.723,14.005,0,0" Stretch="Fill" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%" Height="58.094" VerticalAlignment="Top" HorizontalAlignment="Left" Width="3">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="-30" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+        <Path Name="p_name_Copy12" Data="M23.7,457.2 L27.3,494.4" Margin="0,130.405,273.343,0" Stretch="Fill" StrokeThickness="3" Stroke="#FFFFFFFF" RenderTransformOrigin="50%,50%" Height="58.094" VerticalAlignment="Top" HorizontalAlignment="Right" Width="3">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform />
+              <SkewTransform />
+              <RotateTransform Angle="-30" />
+              <TranslateTransform />
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+      </Grid>
+      <Grid Name="Setting" Margin="0,528,0,-1" Height="553">
+        <Grid Name="Setting_GPU" Margin="0" Height="553" VerticalAlignment="Top" HorizontalAlignment="Left">
+          <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_ic_gpu_setting_png" HorizontalAlignment="Left" Margin="144.794,211.2,0,0" Source="/Image/Page_SystemMonitor/CPUGPUSetting/ic_gpu_setting.png" Stretch="Fill" Width="46" Height="46" VerticalAlignment="Top" />
+          <Path Data="M166,483.73333 L171.33333,528.4" Fill="#FFF4F4F5" Stretch="Fill" StrokeThickness="3" Width="3" Stroke="#FFFFFFFF" StrokeDashArray="1,2,1,2" StrokeDashOffset="2" Margin="0,-172.75,332.561,-687.25" HorizontalAlignment="Right" RenderTransformOrigin="50%,50%" Height="1413">
+            <Path.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform Angle="90.104" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Path.RenderTransform>
+          </Path>
+          <Path Data="M166,483.73333 L171.33333,528.4" Fill="#FFF4F4F5" Stretch="Fill" StrokeThickness="3" Width="3" Stroke="#FFFFFFFF" StrokeDashArray="1,2,1,2" StrokeDashOffset="2" Margin="168.796,170.55,0,175.45" HorizontalAlignment="Left" RenderTransformOrigin="50%,50%" Height="207">
+            <Path.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform Angle="90.104" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Path.RenderTransform>
+          </Path>
+          <TextBlock Name="T_GPUSET" Margin="54.8,0,0,106.44" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="21.333" Foreground="#FFFFFFFF" Height="165.16" TextAlignment="Center" HorizontalAlignment="Left" Width="220.847">
+            <Run Text="GPU Setting" />
+            <LineBreak />
+            <Run />
+          </TextBlock>
+          <TextBlock Name="T_GPUSET_mode" Margin="498,0,0,192" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="36" Foreground="#FFFFFFFF" Height="47" TextAlignment="Center" HorizontalAlignment="Left" Text="Entertainment" Width="937" />
+          <TextBlock Name="T_GPUSET_mode1" Margin="504,0,0,36" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="20" Foreground="#FF949494" Height="107" TextAlignment="Center" HorizontalAlignment="Left" Text="Press Fn + 3  Change to situational mode" Width="922" />
+          <StackPanel Name="SP_GPUOC" Margin="351,104,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="418" Width="1092">
+            <StackPanel Name="SP_G0" Height="80" Margin="0.333,0,61.667,0" />
+            <StackPanel Name="SP_G1" Height="200" Margin="0" Width="1092" HorizontalAlignment="Left" VerticalAlignment="Center">
+              <Grid Name="G_GPUOC1" Width="1092" Height="200">
+                <Grid Name="grid_GPU_Core_inc" Margin="210,-10,0,106.866" HorizontalAlignment="Left" Width="783.6" Height="105.8" VerticalAlignment="Top">
+                  <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_icon_core_increment_png" HorizontalAlignment="Left" Margin="13.4,0,0,30" Source="/Image/Page_SystemMonitor/CPUGPUSetting/icon_core_increment.png" Stretch="Fill" Width="42" Height="42" VerticalAlignment="Bottom" />
+                  <Rectangle Name="R_sliderGPU_CoreINC" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="{Binding #info_GPU.Foreground}">
+                    <Rectangle.OpacityMask>
+                      <ImageBrush Source="/Image/Page_SystemMonitor/CPUGPUSetting/slider_gpu_setting_1.png" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                  </Rectangle>
+                  <TextBlock Name="T_CoreIncMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                  <TextBlock Name="T_CoreIncMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                  <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
+                    <Slider Name="slider_CoreInc" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC.Fill}" />
+                  </LayoutTransformControl>
+                  <Grid Name="G_T_GPU_CoreINC" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                    <TextBlock Name="T_GPU_CoreINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Core Increment" Width="170" HorizontalAlignment="Left" />
+                  </Grid>
+                  <ComboBox Name="comboBox_GPUMinc" HorizontalAlignment="Right" Margin="0,44.319,17.4,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" Background="#FF00A5FF" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" BorderBrush="{x:Null}" />
+                </Grid>
+                <Grid Name="grid_GPU_MEM_inc" Margin="210,0,0,0" HorizontalAlignment="Left" Width="783.6" Height="105.8" VerticalAlignment="Bottom">
+                  <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_icon_memory_increment_png" HorizontalAlignment="Left" Margin="15.667,34.8,0,29" Source="/Image/Page_SystemMonitor/CPUGPUSetting/icon_memory_increment.png" Stretch="Fill" Width="42" />
+                  <Rectangle Name="R_sliderGPU_CoreINC1" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="{Binding #R_sliderGPU_CoreINC.Fill}">
+                    <Rectangle.OpacityMask>
+                      <ImageBrush Source="/Image/Page_SystemMonitor/CPUGPUSetting/slider_gpu_setting_1.png" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                  </Rectangle>
+                  <TextBlock Name="T_MEMIncMin" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                  <TextBlock Name="T_MEMIncMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                  <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
+                    <Slider Name="slider_VRAMInc" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC1.Fill}" />
+                  </LayoutTransformControl>
+                  <Grid Name="G_T_GPU_MemINC" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                    <TextBlock Name="T_GPU_MemINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Memory Increment" Width="170" HorizontalAlignment="Left" />
+                  </Grid>
+                  <ComboBox Name="comboBox_VRAMinc" HorizontalAlignment="Right" Margin="0,44.319,17.4,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" Background="#FF00A5FF" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" BorderBrush="{x:Null}" />
+                </Grid>
+                <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_btn_gpu1_nomal_png" HorizontalAlignment="Left" Margin="93.055,78.844,0,69.156" Source="/Image/Page_SystemMonitor/CPUGPUSetting/btn_gpu1_selected.png" Stretch="Fill" Width="42" Height="42" />
+              </Grid>
+            </StackPanel>
+            <StackPanel Name="SP_G2" Height="200" Width="1092" HorizontalAlignment="Left" VerticalAlignment="Center">
+              <Grid Name="G_GPUOC2" Width="1092" Height="200">
+                <Path Name="GPUOC2_line" Data="M7.0210103,1.3713527 C20.938159,1.3937318 530.46338,1.0664579 530.46338,1.0664579" Margin="18.408,0.889,-54.778,0" StrokeDashArray="1,2,1,2" StrokeThickness="2" StrokeLineCap="Square" Stretch="Fill" StrokeDashOffset="2" Height="2.308" VerticalAlignment="Top" Stroke="#7F818181" />
+                <Grid Name="grid_GPU_Core_inc1" Margin="210,-10,0,106.866" HorizontalAlignment="Left" Width="783.6" Height="105.8" VerticalAlignment="Top">
+                  <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_icon_core_increment_png1" HorizontalAlignment="Left" Margin="13.4,0,0,30" Source="/Image/Page_SystemMonitor/CPUGPUSetting/icon_core_increment.png" Stretch="Fill" Width="42" Height="42" VerticalAlignment="Bottom" />
+                  <Rectangle Name="R_sliderGPU_CoreINC2" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="{Binding #R_sliderGPU_CoreINC1.Fill}">
+                    <Rectangle.OpacityMask>
+                      <ImageBrush Source="/Image/Page_SystemMonitor/CPUGPUSetting/slider_gpu_setting_1.png" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                  </Rectangle>
+                  <TextBlock Name="T_CoreIncMin1" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                  <TextBlock Name="T_CoreIncMax1" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                  <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
+                    <Slider Name="slider_CoreInc1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC2.Fill}" />
+                  </LayoutTransformControl>
+                  <Grid Name="G_T_GPU_CoreINC1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                    <TextBlock Name="T_GPU_CoreINC1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Core Increment" Width="170" HorizontalAlignment="Left" />
+                  </Grid>
+                  <ComboBox Name="comboBox_GPUMinc1" HorizontalAlignment="Right" Margin="0,44.319,17.4,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" Background="#FF00A5FF" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" BorderBrush="{x:Null}" />
+                </Grid>
+                <Grid Name="grid_GPU_MEM_inc1" Margin="210,0,0,0" HorizontalAlignment="Left" Width="783.6" Height="105.8" VerticalAlignment="Bottom">
+                  <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_icon_memory_increment_png1" HorizontalAlignment="Left" Margin="15.667,34.8,0,29" Source="/Image/Page_SystemMonitor/CPUGPUSetting/icon_memory_increment.png" Stretch="Fill" Width="42" />
+                  <Rectangle Name="R_sliderGPU_CoreINC3" Margin="68.934,43.652,0,0" StrokeThickness="2" Width="697" Height="42.881" HorizontalAlignment="Left" VerticalAlignment="Top" Fill="{Binding #R_sliderGPU_CoreINC2.Fill}">
+                    <Rectangle.OpacityMask>
+                      <ImageBrush Source="/Image/Page_SystemMonitor/CPUGPUSetting/slider_gpu_setting_1.png" Stretch="Fill" />
+                    </Rectangle.OpacityMask>
+                  </Rectangle>
+                  <TextBlock Name="T_MEMIncMin1" Margin="226.599,0,0,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
+                  <TextBlock Name="T_MEMIncMax1" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
+                  <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
+                    <Slider Name="slider_VRAMInc1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC3.Fill}" />
+                  </LayoutTransformControl>
+                  <Grid Name="G_T_GPU_MemINC1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
+                    <TextBlock Name="T_GPU_MemINC1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Memory Increment" Width="170" HorizontalAlignment="Left" />
+                  </Grid>
+                  <ComboBox Name="comboBox_VRAMinc1" HorizontalAlignment="Right" Margin="0,44.319,17.4,34.481" Width="154.267" Theme="{StaticResource ComboBoxStyle_dropdown}" Background="#FF00A5FF" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" HorizontalContentAlignment="Center" BorderThickness="0" Height="27" BorderBrush="{x:Null}" />
+                </Grid>
+                <Image Name="Image_Page_SystemMonitor_CPUGPUSetting_btn_gpu1_nomal_png1" HorizontalAlignment="Left" Margin="98.055,70.844,0,77.156" Source="/Image/Page_SystemMonitor/CPUGPUSetting/btn_gpu2_selected.png" Stretch="Fill" Width="42" Height="42" />
+              </Grid>
+            </StackPanel>
+          </StackPanel>
+          <Grid Name="Grid_save_reset_GPU" HorizontalAlignment="Right" Height="104" Margin="0,0,-300.413,10.067" VerticalAlignment="Bottom">
+            <WrapPanel Name="WP_save_reset_GPU" Height="59.667" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+              <Button Name="BTN_Reset_GPUOC" Content="Default" Height="56" Theme="{StaticResource ButtonStyle1_reset1}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Focusable="False" />
+              <Path Data="M166,483.73333 L171.33333,528.4" Fill="#FFF4F4F5" Height="53" Stretch="Fill" StrokeThickness="3" Width="3.333" Stroke="#FFFFFFFF" StrokeDashArray="1,2,1,2" StrokeDashOffset="2" Margin="15,0" />
+              <Button Name="BTN_SAVE_GPUOC" Content="Save" Height="56" Theme="{StaticResource ButtonStyle1_SAVE}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Focusable="False" />
+            </WrapPanel>
+          </Grid>
+          <Path Data="M166,483.73333 L171.33333,528.4" Fill="#FFF4F4F5" Stretch="Fill" StrokeThickness="3" Width="3" Stroke="#FFFFFFFF" StrokeDashArray="1,2,1,2" StrokeDashOffset="2" Margin="335.551,256.728,0,7.476" HorizontalAlignment="Left" RenderTransformOrigin="50%,50%">
+            <Path.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform />
+                <SkewTransform />
+                <RotateTransform Angle="-27.178" />
+                <TranslateTransform />
+              </TransformGroup>
+            </Path.RenderTransform>
+          </Path>
+        </Grid>
+      </Grid>
+      <RadioButton Name="RBTN_GPU1" Content="RadioButton" Height="50" Margin="909.4,0,960.6,386.2" VerticalAlignment="Bottom" Theme="{StaticResource RBTN_GPU_selected}" GroupName="GPU_Selected" Width="50" Cursor="Hand" Foreground="{Binding #info_GPU.Foreground}">
+        <RadioButton.Effect><DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="5" Color="Black" Opacity="1" /></RadioButton.Effect>
+      </RadioButton>
+      <RadioButton Name="RBTN_GPU2" Content="RadioButton" Height="50" Margin="0,0,903.6,386.2" VerticalAlignment="Bottom" Theme="{StaticResource RBTN_GPUSelected2}" GroupName="GPU_Selected" Width="50" HorizontalAlignment="Right" Cursor="Hand" Foreground="{Binding #info_GPU.Foreground}">
+        <RadioButton.Effect><DropShadowEffect OffsetX="0" OffsetY="0" BlurRadius="5" Color="Black" Opacity="1" /></RadioButton.Effect>
+      </RadioButton>
+      <Grid Name="Setting_PageBTN" Margin="400.7,0,397.732,0" Height="56.432" VerticalAlignment="Bottom" IsVisible="False">
+        <StackPanel Name="SP_SetPageBTN" Margin="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+          <StackPanel Name="SP_RBTN_FAN" HorizontalAlignment="Left" Height="37.6" Width="232" Orientation="Horizontal" Margin="5,0">
+            <RadioButton Name="RBTN_FAN" Content="FAN" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="14.667" VerticalContentAlignment="Center" Theme="{StaticResource RBTN_CPU}" GroupName="setting_pageBTN" Width="232" Height="37.6" IsChecked="True" Cursor="Hand" Focusable="False" />
+          </StackPanel>
+          <StackPanel Name="SP_RBTN_CPU" HorizontalAlignment="Left" Height="37.6" Width="232" Margin="5,0" Orientation="Horizontal">
+            <RadioButton Name="RBTN_CPU" Content="CPU" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="14.667" VerticalContentAlignment="Center" Theme="{StaticResource RBTN_CPU}" GroupName="setting_pageBTN" Margin="0,0,96.8,0" Width="232" Height="37.6" Cursor="Hand" Focusable="False" />
+          </StackPanel>
+          <StackPanel Name="SP_RBTN_MEM" HorizontalAlignment="Left" Height="37.6" Width="232" Orientation="Horizontal" Margin="5,0">
+            <RadioButton Name="RBTN_MEM" Content="Memory" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="14.667" VerticalContentAlignment="Center" Theme="{StaticResource RBTN_CPU}" GroupName="setting_pageBTN" Width="232" Height="37.6" Cursor="Hand" Focusable="False" />
+          </StackPanel>
+          <StackPanel Name="SP_RBTN_GPU" HorizontalAlignment="Left" Height="37.6" Width="232" Margin="5,0" Orientation="Horizontal">
+            <RadioButton Name="RBTN_GPU" Content="GPU" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="14.667" VerticalContentAlignment="Center" Theme="{StaticResource RBTN_CPU}" GroupName="setting_pageBTN" Width="232" Height="37.6" Cursor="Hand" Focusable="False" />
+          </StackPanel>
+        </StackPanel>
+      </Grid>
+      <Grid Name="info_status" HorizontalAlignment="Right" Height="383.6" Margin="0,0,11.4,32.8" VerticalAlignment="Bottom" Width="433.6" IsVisible="False">
+        <TextBlock Name="T_CPU_voltage_Value" Margin="138.8,0,204,108" TextWrapping="Wrap" Text="0" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Center" Height="19.6" VerticalAlignment="Bottom" />
+        <Image Name="image_cpu_voltage" HorizontalAlignment="Left" Margin="45.6,0,0,104.4" Width="46" Height="46" Source="/Image/Page_SystemMonitor/ic_system_cpu_voltage.png" VerticalAlignment="Bottom" />
+        <TextBlock Name="T_CPU_voltage" Margin="134,0,0,128.8" TextWrapping="Wrap" Text="CPU Voltage" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" HorizontalAlignment="Left" Width="259.2" TextAlignment="Right" Height="23.6" VerticalAlignment="Bottom" />
+        <TextBlock Name="T_CPU_voltage_unit" Margin="237.2,0,0,102.8" TextWrapping="Wrap" Text="V" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" HorizontalAlignment="Left" Width="20" TextAlignment="Right" Height="23.6" VerticalAlignment="Bottom" />
+        <TextBlock Name="T_RAM_Size_Value" HorizontalAlignment="Right" Height="19.6" Margin="0,121,67,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="57.2" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Center" />
+        <TextBlock Name="T_RAM_Usage_Value" HorizontalAlignment="Left" Height="40.4" Margin="29,80.2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="68.4" Foreground="#FFFFFFFF" FontSize="40" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Center" Text="{Binding #progressBar_RAM_Usage.Value}" />
+        <TextBlock Name="T_RAM_Size" Height="45.2" Margin="135.5,118,123.1,0" TextWrapping="Wrap" Text="Total Memory Size" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="16" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Right" Width="175" />
+        <TextBlock Name="T_RAM_Size_unit" Height="19.6" Margin="0,119,31.4,0" TextWrapping="Wrap" Text="GB" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Right" HorizontalAlignment="Right" Width="29.2" />
+        <TextBlock Name="T_RAM_Size_Copy" Height="25.6" Margin="135,64.2,57,0" TextWrapping="Wrap" Text="Memory Usage" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Right" />
+        <TextBlock Name="T_RAM_Size_unit_Copy" Height="19.6" Margin="104,96.6,0,0" TextWrapping="Wrap" Text="%" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontSize="18.667" FontFamily="Microsoft Sans Serif" FlowDirection="RightToLeft" TextAlignment="Right" HorizontalAlignment="Left" Width="19.6" />
+        <ProgressBar Name="progressBar_RAM_Usage" Height="20.4" Margin="133.6,94.6,31.6,0" VerticalAlignment="Top" Theme="{StaticResource ProgressBarStyle1_ram}" Foreground="#FFFFFFFF" BorderBrush="#FFFFFFFF" SmallChange="1" Background="{x:Null}" />
+      </Grid>
+      <UControl:UserControl_DialogBox Name="UC_DialogBox" Margin="0" IsVisible="False" />
+    </Grid>
+
+</UserControl>
