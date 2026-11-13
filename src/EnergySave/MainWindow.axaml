@@ -1,0 +1,195 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:DesktopBridge_EnergySave"
+        x:Class="DesktopBridge_EnergySave.MainWindow" Name="mainWindow" Title="Energy Save"
+        Width="1920" Height="1080" WindowDecorations="None" CanResize="True" Background="Black" FontSize="12">
+  <Window.Resources>
+    <ControlTheme x:Key="BTN_CLOSE" TargetType="Button">
+      <Setter Property="Background" Value="#FFDDDDDD" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Background="Transparent"><Image Source="/Assets/ic_close.png" Stretch="Fill" /><Rectangle Name="rectangle" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0"><Rectangle.OpacityMask><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#00000000" Offset="1" /></LinearGradientBrush></Rectangle.OpacityMask></Rectangle></Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#66FFFFFF" Offset="1" /></LinearGradientBrush></Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#66FFFFFF" Offset="0" /><GradientStop Color="#00000000" Offset="1" /></LinearGradientBrush></Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="BTN_MIN" TargetType="Button">
+      <Setter Property="Background" Value="#FFDDDDDD" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Background="Transparent"><Image Source="/Assets/ic_minimize.png" Stretch="Fill" /><Rectangle Name="rectangle" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0"><Rectangle.OpacityMask><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#00000000" Offset="1" /></LinearGradientBrush></Rectangle.OpacityMask></Rectangle></Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#66FFFFFF" Offset="1" /></LinearGradientBrush></Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#66FFFFFF" Offset="0" /><GradientStop Color="#00000000" Offset="1" /></LinearGradientBrush></Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="BTN_WINDOW" TargetType="Button">
+      <Setter Property="Background" Value="#FFDDDDDD" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Background="Transparent"><Rectangle Name="rectangle" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0"><Rectangle.OpacityMask><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#00000000" Offset="1" /></LinearGradientBrush></Rectangle.OpacityMask></Rectangle><Image Source="{TemplateBinding Tag}" Stretch="Fill" /></Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00000000" Offset="0" /><GradientStop Color="#66FFFFFF" Offset="1" /></LinearGradientBrush></Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask"><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#66FFFFFF" Offset="0" /><GradientStop Color="#00000000" Offset="1" /></LinearGradientBrush></Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="ModeItem" TargetType="ListBoxItem">
+      <Setter Property="Padding" Value="4,1" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="Bd" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" Padding="{TemplateBinding Padding}">
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#Bd"><Setter Property="Background" Value="#1F26A0DA" /><Setter Property="BorderBrush" Value="#A826A0DA" /></Style>
+      <Style Selector="^:selected /template/ Border#Bd"><Setter Property="Background" Value="#3DDADADA" /><Setter Property="BorderBrush" Value="#FFDADADA" /></Style>
+      <Style Selector="^:selected:focus /template/ Border#Bd"><Setter Property="Background" Value="#3D26A0DA" /><Setter Property="BorderBrush" Value="#FF26A0DA" /></Style>
+    </ControlTheme>
+  </Window.Resources>
+  <Window.Styles>
+    <Style Selector="Button.wpf">
+      <Setter Property="Background" Value="#FFDDDDDD" /><Setter Property="BorderBrush" Value="#FF707070" /><Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Padding" Value="1" /><Setter Property="CornerRadius" Value="0" /><Setter Property="Foreground" Value="Black" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" /><Setter Property="VerticalContentAlignment" Value="Center" /><Setter Property="FocusAdorner" Value="{x:Null}" />
+    </Style>
+    <Style Selector="Button.wpf:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="#FFBEE6FD" /><Setter Property="BorderBrush" Value="#FF3C7FB1" /><Setter Property="Foreground" Value="Black" /></Style>
+    <Style Selector="Button.wpf:pressed /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="#FFC4E5F6" /><Setter Property="BorderBrush" Value="#FF2C628B" /><Setter Property="Foreground" Value="Black" /></Style>
+    <Style Selector="TextBox.wpf">
+      <Setter Property="Background" Value="White" /><Setter Property="BorderBrush" Value="#FFABADB3" /><Setter Property="BorderThickness" Value="1" /><Setter Property="Padding" Value="1" />
+      <Setter Property="MinHeight" Value="0" /><Setter Property="CornerRadius" Value="0" /><Setter Property="Foreground" Value="Black" /><Setter Property="SelectionBrush" Value="#FF0078D7" /><Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBox.wpf:pointerover /template/ Border#PART_BorderElement"><Setter Property="Background" Value="White" /><Setter Property="BorderBrush" Value="#FF7EB4EA" /></Style>
+    <Style Selector="TextBox.wpf:focus /template/ Border#PART_BorderElement"><Setter Property="Background" Value="White" /><Setter Property="BorderBrush" Value="#FF569DE5" /></Style>
+    <Style Selector="TextBox.wpf /template/ Border#PART_BorderElement"><Setter Property="Background" Value="White" /><Setter Property="BorderBrush" Value="#FFABADB3" /></Style>
+  </Window.Styles>
+  <Grid>
+    <Viewbox Name="mainViewbox">
+      <Grid Name="mainGrid" Background="#242424">
+        <Canvas Name="Apps_main" Width="1900" Height="1060">
+          <Canvas.Background><ImageBrush Source="/Assets/bg_energy_save.png" Stretch="Fill" /></Canvas.Background>
+      <Button Name="btnClose" Width="80" Height="50" Content="" BorderThickness="0" Canvas.Left="1810" Canvas.Top="10" Cursor="Hand" BorderBrush="{x:Null}" Foreground="{x:Null}" Theme="{StaticResource BTN_CLOSE}" />
+      <Button Name="btnWindow" Width="80" Height="50" Content="" BorderThickness="0" Canvas.Left="1725" Canvas.Top="10" Cursor="Hand" BorderBrush="{x:Null}" Foreground="{x:Null}" Theme="{StaticResource BTN_WINDOW}" />
+      <Button Name="btnMinimize" Width="80" Height="50" Content="" BorderThickness="0" Canvas.Left="1640" Canvas.Top="10" Cursor="Hand" BorderBrush="{x:Null}" Foreground="{x:Null}" Theme="{StaticResource BTN_MIN}" />
+      <Image Source="/Assets/bg_energy_save_utility_title.png" Width="908" Height="81" Canvas.Left="506" />
+      <Image Source="/Assets/title_energy_save_utility.png" Width="670" Height="66" Canvas.Left="625" Canvas.Top="7" />
+      <Image Source="/Assets/title_energy_save_utility.png" Width="670" Height="66" Canvas.Left="625" Canvas.Top="7" />
+      <Image Name="Image_PowerPlan" Source="/Assets/btn_panel_selected.png" Width="950" Height="325" Canvas.Top="685" Canvas.Left="20" Cursor="Hand" />
+      <Image Name="Image_EnergySave" Source="/Assets/btn_panel_normal.png" Width="950" Height="325" Canvas.Top="685" Canvas.Left="952" Cursor="Hand" />
+      <Image Name="Image_StartUtility" Source="/Assets/utility_off_normal.png" Width="1840" Height="52" Canvas.Top="1010" Canvas.Left="40" Cursor="Hand" />
+      <Image Name="Image_PowerPlan_icon" Source="/Assets/ic_power_plan_selected.png" Width="78" Height="78" Canvas.Left="456" Canvas.Top="755" Cursor="Hand" />
+      <Image Name="Image_EnergySave_icon" Source="/Assets/ic_energy_save_normal.png" Width="78" Height="78" Canvas.Left="1428" Canvas.Top="755" Cursor="Hand" />
+      <Image Name="Image_PowerPlan_dotted_line" Source="/Assets/dotted_line_panel.png" Width="818" Height="1" Canvas.Left="86" Canvas.Top="880" Cursor="Hand" />
+      <Image Name="Image_EnergySave_dotted_line" Source="/Assets/dotted_line_panel.png" Width="818" Height="1" Canvas.Left="1020" Canvas.Top="880" Cursor="Hand" />
+      <Label Name="Label_PowerPlan_Title" Height="40" Width="300" Canvas.Left="370" Content="Power Plan &amp; CONSUMPTION" Canvas.Top="825" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}" Padding="5" />
+      <Label Name="Label_EnergySave_Title" Height="40" Canvas.Left="1396" Content="ENERGY SAVE" Canvas.Top="825" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}" Padding="5" />
+      <Label Name="Label_PowerPlan_Summary" Height="40" Canvas.Left="370" Content="Current Power Plan: Balanced" Canvas.Top="886" Foreground="#FFFFFFFF" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="300" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}" Padding="5" />
+      <Label Name="Label_EnergySave_Summary_left" Height="100" Canvas.Left="1020" Content="Model Name: Office B&#10;Schedule 1: 6 am - 2 pm&#10;Schedule 2: 12am - 2am" Canvas.Top="886" Foreground="#FFFFFFFF" FontSize="18" Width="265" VerticalAlignment="Top" HorizontalAlignment="Left" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}" Padding="5" />
+      <Label Name="Label_EnergySave_Summary_center" Height="100" Canvas.Left="1331" Content="Enable Days: Mon, Tue, Fri&#10;Discharge Limit: 20%" Canvas.Top="886" Foreground="#FFFFFFFF" FontSize="18" Width="275" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}" Padding="5" />
+      <Label Name="Label_EnergySave_Summary_right" Height="100" Canvas.Left="1611" Content="Battery Setting: Manually&#10;Charge Limit: 80%" Canvas.Top="886" Foreground="#FFFFFFFF" FontSize="18" Width="260" Cursor="Hand" Background="Transparent" BorderBrush="{x:Null}" Padding="5" />
+      <Canvas Name="Canvas_PowerPlan" Height="630" Canvas.Left="40" Canvas.Top="50" Width="1840">
+        <Label Name="Label_Legend" Height="40" Canvas.Left="40" Content="Power Usage [ W / sec. ]" Canvas.Top="262" Width="248" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_Minute" Source="/Assets/btn_checkbox_disable.png" Width="46" Height="46" Canvas.Left="685" Canvas.Top="580" Cursor="Hand" />
+        <Image Name="Image_Second" Source="/Assets/btn_checkbox_enable.png" Width="46" Height="46" Canvas.Left="1000" Canvas.Top="580" Cursor="Hand" />
+        <Label Name="Label_Minute" Height="34" Canvas.Left="736" Content="Minute" Canvas.Top="586" Width="103" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_Second" Height="34" Canvas.Left="1051" Content="Second" Canvas.Top="586" Width="103" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_Chart" Height="34" Canvas.Left="754" Content="POWER CONSUMPTION MONITOR" Canvas.Top="77" Width="376" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_AC" Source="/Assets/ic_ac.png" Width="18" Height="18" Canvas.Left="1680" Canvas.Top="159" />
+        <Label Name="Label_AC" Height="31" Canvas.Left="1700" Content="AC" Canvas.Top="152" Foreground="#FFFFFFFF" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_DC" Source="/Assets/ic_dc.png" Width="18" Height="18" Canvas.Left="1680" Canvas.Top="204" />
+        <Label Name="Label_DC" Height="31" Canvas.Left="1700" Content="DC" Canvas.Top="196" Foreground="#FFFFFFFF" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_ConsumptionCurrentValue" Source="/Assets/ic_power_usage_arrow.png" Width="16" Height="16" Canvas.Left="1593" Canvas.Top="485" />
+        <Label Name="Label_ConsumptionCurrentValue" Height="31" Canvas.Left="1614" Content="14.9 W" Canvas.Top="477" Foreground="#00FFED" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <local:PowerChart Name="mainChart" Width="1260" Height="414" Canvas.Left="317" Canvas.Top="140" />
+        <Image Name="ZoomIn" Height="37" Canvas.Left="1486" Canvas.Top="559" Width="43" Source="/Assets/btn_zoom_in.png" Cursor="Hand" />
+        <Image Name="ZoomOut" Height="37" Canvas.Left="1534" Canvas.Top="559" Width="43" Source="/Assets/btn_zoom_out.png" Cursor="Hand" />
+      </Canvas>
+      <Canvas Name="Canvas_EnergySave" Height="630" Canvas.Left="40" Canvas.Top="50" Width="1840" IsVisible="False">
+        <Image Name="Image_bg_EnergySave" Source="/Assets/dotted_line_energy_save.png" Width="1504" Height="501" Canvas.Left="3" Canvas.Top="60" />
+        <TextBlock Name="Label_EnergySave_Description" Height="384" Canvas.Left="10" Text="Description:&#10;&#10;This utility is designed to turn off AC power and use battery power instead during specified time period to avoid using AC power in peak time. Also this utility may be used to setup the start/stop charging threshold to maximize the battery pack life cycle." Canvas.Top="86" Foreground="#FFFFFF" FontSize="20" HorizontalAlignment="Left" Width="309" VerticalAlignment="Top" TextWrapping="Wrap" Background="{x:Null}" />
+        <Image Name="Image_EnergySave_lock" Source="/Assets/btn_lock_normal.png" Width="56" Height="56" Canvas.Left="10" Canvas.Top="565" Cursor="Hand" />
+        <Label Name="Label_EnergySave_lock" Canvas.Left="60" Content="UNLOCK TO MODIFY" Canvas.Top="575" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_Discharge" Height="105" Canvas.Left="489" Content="Schedule:" Canvas.Top="515" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_EnergySave_Everyday_Check" Source="/Assets/btn_checkbox_disable.png" Width="56" Height="56" Canvas.Left="621" Canvas.Top="515" Cursor="Hand" />
+        <Image Name="Image_EnergySave_Week_Check" Source="/Assets/btn_checkbox_enable.png" Width="56" Height="56" Canvas.Left="621" Canvas.Top="576" Cursor="Hand" />
+        <Label Name="Label_EnergySave_Everyday" Canvas.Left="677" Content="Everyday" Canvas.Top="526" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_Week" Canvas.Left="677" Content="Week Specified:" Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_Sunday" Canvas.Left="860" Content=" Sun " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Label Name="Label_EnergySave_Monday" Canvas.Left="925" Content=" Mon " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Label Name="Label_EnergySave_Tuesday" Canvas.Left="990" Content=" Tue " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Label Name="Label_EnergySave_Wednesday" Canvas.Left="1055" Content=" Wed " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Label Name="Label_EnergySave_Thursday" Canvas.Left="1120" Content=" Thu " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Label Name="Label_EnergySave_Friday" Canvas.Left="1185" Content=" Fri " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Label Name="Label_EnergySave_Saturday" Canvas.Left="1250" Content=" Sat " Canvas.Top="585" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Cursor="Hand" Width="65" BorderBrush="{x:Null}" Padding="5" Background="Transparent" />
+        <Image Name="Image_EnergySave_save" Source="/Assets/btn_save_normal.png" Width="56" Height="56" Canvas.Left="1709" Canvas.Top="575" Cursor="Hand" IsVisible="False" />
+        <Label Name="Label_EnergySave_save" Canvas.Left="1770" Content="SAVE" Canvas.Top="586" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_save_mode" Canvas.Left="386" Content="Choose an energy save mode:" Canvas.Top="81" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_EnergySave_line_mode" Source="/Assets/dotted_line_mode.png" Width="92" Height="60" Canvas.Left="485" Canvas.Top="137" />
+        <Image Name="Image_EnergySave_rename" Source="/Assets/btn_rename_normal.png" Width="90" Height="60" Canvas.Left="390" Canvas.Top="137" Cursor="Hand" />
+        <Image Name="Image_EnergySave_add" Source="/Assets/btn_add_normal.png" Width="90" Height="60" Canvas.Left="485" Canvas.Top="137" Cursor="Hand" />
+        <Image Name="Image_EnergySave_delete" Source="/Assets/btn_delete_normal.png" Width="92" Height="60" Canvas.Left="575" Canvas.Top="137" Cursor="Hand" />
+        <Label Name="Label_EnergySave_Warning" Height="63" Canvas.Left="696" Content="Two Schedules should not be overlapped. At least an hour gap between two schedules." Canvas.Top="445" Foreground="#FFF79D00" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" IsVisible="False" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <ListBox Name="ListBox_Save_Mode" Height="284" Canvas.Left="365" Canvas.Top="202" Width="331" Background="#00FFFFFF" SelectionMode="Single" BorderThickness="0,0,0,0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+        <Image Name="Image_EnergySave_battery_frame" Source="/Assets/battery_frame.png" Width="89" Height="311" Canvas.Left="1560" Canvas.Top="86" />
+        <Image Name="Image_EnergySave_battery_cabacity" Source="/Assets/battery.png" Width="89" Height="149" Canvas.Left="1560" Canvas.Top="250" Stretch="Fill" IsVisible="False" />
+        <Label Name="Label_EnergySave_battery_setting" Canvas.Left="1529" Content="Battery Setting:" Canvas.Top="423" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_EnergySave_auto" Source="/Assets/btn_checkbox_disable.png" Width="46" Height="46" Canvas.Left="1529" Canvas.Top="484" Cursor="Hand" />
+        <Label Name="Label_EnergySave_auto" Canvas.Left="1575" Content="Auto" Canvas.Top="490" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_EnergySave_manually" Source="/Assets/btn_checkbox_enable.png" Width="46" Height="46" Canvas.Left="1679" Canvas.Top="484" Cursor="Hand" />
+        <Label Name="Label_EnergySave_manually" Canvas.Left="1730" Content="Manually" Canvas.Top="490" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_EnergySave_battery_power" Source="/Assets/ic_battery_power_light.png" Width="22" Height="32" Canvas.Left="1587" Canvas.Top="210" />
+        <Label Name="Label_EnergySave_battery_power" Canvas.Left="1561" Content="50%" Canvas.Top="240" Foreground="#FF00FFED" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" Width="70" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Image Name="Image_EnergySave_charge" Source="/Assets/btn_battery_handle_normal2.png" Width="144" Canvas.Left="1550" Canvas.Top="85" Cursor="Hand" Stretch="Fill" Height="18" />
+        <Image Name="Image_EnergySave_discharge" Source="/Assets/btn_battery_handle_normal2.png" Width="144" Canvas.Left="1550" Canvas.Top="325" Cursor="Hand" Stretch="Fill" Height="18" />
+        <Label Name="Label_EnergySave_charge" Canvas.Left="1679" Content="100% Charge Limit" Canvas.Top="80" Foreground="#00FFDE" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_discharge" Canvas.Left="1679" Content="20% Discharge Limit" Canvas.Top="320" Foreground="#00FFDE" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <local:KnobStart Name="knob" Canvas.Left="750" Canvas.Top="100" Set="1" />
+        <local:KnobEnd Name="knob2" Canvas.Left="750" Canvas.Top="100" Set="1" />
+        <Label Name="Label_EnergySave_schedule_1_0" Canvas.Left="899" Content="0" Canvas.Top="65" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule_1_6" Canvas.Left="1065" Content="6" Canvas.Top="240" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule_1_12" Canvas.Left="883" Content="12" Canvas.Top="415" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule_1_18" Canvas.Left="711" Content="18" Canvas.Top="240" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_1" Canvas.Left="890" Content="1" Canvas.Top="178" Foreground="#FFFFFFFF" FontSize="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule1" Canvas.Left="860" Content="SCHEDULE" Canvas.Top="235" Foreground="#FFFFFFFF" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule1_time" Canvas.Left="875" Content="6 - 14" Canvas.Top="273" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Ellipse Name="Ellipse_schedule1" Fill="#00FFFFFF" Height="195" Canvas.Left="810" Canvas.Top="161" Width="195" />
+        <local:KnobStart Name="knob3" Canvas.Left="1150" Canvas.Top="100" Set="2" />
+        <local:KnobEnd Name="knob4" Canvas.Left="1150" Canvas.Top="100" Set="2" />
+        <Label Name="Label_EnergySave_schedule_2_0" Canvas.Left="1299" Content="0" Canvas.Top="65" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule_2_6" Canvas.Left="1465" Content="6" Canvas.Top="240" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule_2_12" Canvas.Left="1283" Content="12" Canvas.Top="415" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule_2_18" Canvas.Left="1111" Content="18" Canvas.Top="240" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_2" Canvas.Left="1290" Content="2" Canvas.Top="178" Foreground="#FFFFFFFF" FontSize="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule2" Canvas.Left="1260" Content="SCHEDULE" Canvas.Top="235" Foreground="#FFFFFFFF" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Label Name="Label_EnergySave_schedule2_time" Canvas.Left="1275" Content="6 - 14" Canvas.Top="273" Foreground="#FFFFFFFF" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Padding="5" />
+        <Ellipse Name="Ellipse_schedule2" Fill="#00FFFFFF" Height="195" Canvas.Left="1210" Canvas.Top="161" Width="195" />
+      </Canvas>
+        </Canvas>
+        <Grid Name="grid_Disable_background" Margin="380,100,10,400" Opacity="0.3" IsVisible="False">
+          <Grid.Background><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00353535" Offset="0" /><GradientStop Color="#00393939" Offset="1" /><GradientStop Color="#FF363636" Offset="0.117" /><GradientStop Color="#FF383838" Offset="0.91" /></LinearGradientBrush></Grid.Background>
+        </Grid>
+        <Button Name="Btn_Rename" Classes="wpf" Content="Rename" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="29" IsVisible="False" FontSize="20" Margin="420,299,0,0" />
+        <Button Name="Btn_Cancel" Classes="wpf" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="145" Height="29" IsVisible="False" FontSize="20" Margin="575,299,0,0" />
+        <TextBox Name="TextBox_Rename" Classes="wpf" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="300" IsVisible="False" FontSize="20" Margin="420,257,0,0" />
+        <Grid Name="grid_Disable_background_schedule2" Margin="380,100,10,400" Opacity="0.3" IsVisible="False">
+          <Grid.Background><LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%"><GradientStop Color="#00353535" Offset="0" /><GradientStop Color="#00393939" Offset="1" /><GradientStop Color="#FF363636" Offset="0.117" /><GradientStop Color="#FF383838" Offset="0.91" /></LinearGradientBrush></Grid.Background>
+        </Grid>
+      </Grid>
+    </Viewbox>
+    <local:ResizeGrip Name="resizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="17" Height="17" />
+  </Grid>
+</Window>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>3.98.0.0</AssemblyVersion>
+    <FileVersion>3.98.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>EnergySave</AssemblyName>
+    <RootNamespace>DesktopBridge_EnergySave</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <AvaloniaResource Include="Assets/**" />
+    <AvaloniaResource Include="ic_energy_save_utility_*.ico" />
+    <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
