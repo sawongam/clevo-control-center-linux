@@ -1,0 +1,14 @@
+<ControlTheme x:Key="ScrollBarThumbVertical" TargetType="Thumb">
+  <Setter Property="IsTabStop" Value="False" />
+  <Setter Property="Template">
+    <ControlTemplate>
+      <Rectangle Name="rectangle" Fill="{DynamicResource ScrollBar.Static.Thumb}" />
+    </ControlTemplate>
+  </Setter>
+  <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+    <Setter Property="Fill" Value="{DynamicResource ScrollBar.MouseOver.Thumb}" />
+  </Style>
+  <Style Selector="^:pressed /template/ Rectangle#rectangle">
+    <Setter Property="Fill" Value="{DynamicResource ScrollBar.Pressed.Thumb}" />
+  </Style>
+</ControlTheme>

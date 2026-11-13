@@ -1,0 +1,43 @@
+<ControlTheme x:Key="ComboBoxStyle1_dimmCustom" TargetType="ComboBox">
+  <Setter Property="Background" Value="{DynamicResource ComboBox.Static.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource ComboBox.Static.Border}" />
+  <Setter Property="Foreground" Value="#FF000000" />
+  <Setter Property="BorderThickness" Value="1" />
+  <Setter Property="Padding" Value="6,3,5,3" />
+  <Setter Property="ItemContainerTheme" Value="{StaticResource WpfComboBoxItem}" />
+  <Setter Property="Template">
+    <ControlTemplate>
+      <Grid Name="templateRoot" Background="Transparent" Margin="0" ColumnDefinitions="99*,*">
+        <Popup Name="PART_Popup" Grid.ColumnSpan="1" Margin="1,1,0,1" Placement="Bottom" PlacementTarget="{Binding #templateRoot}" IsLightDismissEnabled="True"
+               IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" MinWidth="{Binding #templateRoot.Bounds.Width}" MaxHeight="{TemplateBinding MaxDropDownHeight}" WindowManagerAddShadowHint="False">
+          <Border Name="dropDownBorder" BorderBrush="#FF646464" BorderThickness="0,2,0,0" Background="#FF2A2A2A"
+                  TextElement.Foreground="{TemplateBinding Foreground}" TextElement.FontSize="{TemplateBinding FontSize}" TextElement.FontFamily="{TemplateBinding FontFamily}">
+            <ScrollViewer Name="DropDownScrollViewer" HorizontalAlignment="Stretch" BorderThickness="0" Theme="{StaticResource ScrollViewerControlTemplate1}" Height="114" BorderBrush="{x:Null}">
+              <Grid Name="grid" Height="102.5">
+                <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+              </Grid>
+            </ScrollViewer>
+          </Border>
+        </Popup>
+        <!-- ComboBoxToggleButton: invisible hit area + dropdown frame image filled with the combo Background, outline rectangle -->
+        <Border Name="toggleRoot" Grid.ColumnSpan="2" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{DynamicResource ComboBox.Static.Border}" Opacity="0.01" />
+        <Rectangle Name="frameFill" Grid.ColumnSpan="2" StrokeThickness="0" Fill="{Binding #toggleRoot.Background}">
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/page_systemmonitor/memsetting/btn_mem_setting_dropdown_on.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Rectangle Name="frameStroke" Grid.ColumnSpan="2" StrokeThickness="1.5" Fill="{x:Null}" Stroke="{Binding #toggleRoot.Background}" />
+        <ContentPresenter Name="contentPresenter" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding ItemTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="False" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+      </Grid>
+    </ControlTemplate>
+  </Setter>
+  <Style Selector="^:pointerover /template/ Border#toggleRoot">
+    <Setter Property="Background" Value="{DynamicResource ComboBox.MouseOver.Background}" />
+  </Style>
+  <Style Selector="^:pressed /template/ Border#toggleRoot">
+    <Setter Property="Background" Value="{DynamicResource ComboBox.Pressed.Background}" />
+  </Style>
+  <Style Selector="^:disabled /template/ Border#toggleRoot">
+    <Setter Property="Background" Value="{DynamicResource ComboBox.Disabled.Background}" />
+  </Style>
+</ControlTheme>

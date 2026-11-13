@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>3.98.0.0</AssemblyVersion>
+    <FileVersion>3.98.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>LedKeyboardSetting</AssemblyName>
+    <RootNamespace>CC</RootNamespace>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <AvaloniaResource Include="image/**" />
+    <AvaloniaResource Include="ic_led.ico" />
+    <AvaloniaResource Include="tools/imagemap.json" />
+    <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

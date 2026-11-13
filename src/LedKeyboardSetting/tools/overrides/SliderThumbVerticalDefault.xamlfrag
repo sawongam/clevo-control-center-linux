@@ -1,0 +1,28 @@
+<ControlTheme x:Key="SliderThumbVerticalDefault" TargetType="Thumb">
+  <Setter Property="Template">
+    <ControlTemplate>
+      <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" Width="90" Height="90">
+        <Path Name="grip" Data="M0.5,0.5 L18.5,0.5 L18.5,11.5 L0.5,11.5" Fill="{TemplateBinding BorderBrush}" Stretch="Fill" Stroke="{DynamicResource SliderThumb.Static.Border}">
+          <Path.OpacityMask>
+            <ImageBrush Source="/image/page_leddevice/kb_brightness/ic_kb_brightness_layer2_selected.png" />
+          </Path.OpacityMask>
+        </Path>
+        <Rectangle Fill="#FFFFFFFF" Stroke="{DynamicResource SliderThumb.Static.Border}">
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/page_leddevice/kb_brightness/thumb_layer2.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+      </Grid>
+    </ControlTemplate>
+  </Setter>
+  <Style Selector="^:pointerover /template/ Path#grip">
+    <Setter Property="Stroke" Value="{DynamicResource SliderThumb.MouseOver.Border}" />
+  </Style>
+  <Style Selector="^:pressed /template/ Path#grip">
+    <Setter Property="Stroke" Value="{DynamicResource SliderThumb.Pressed.Border}" />
+  </Style>
+  <Style Selector="^:disabled /template/ Path#grip">
+    <Setter Property="Fill" Value="{DynamicResource SliderThumb.Disabled.Background}" />
+    <Setter Property="Stroke" Value="{DynamicResource SliderThumb.Disabled.Border}" />
+  </Style>
+</ControlTheme>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" x:Class="CC.loading" Title="LoadingWindow" Height="150" Width="150" WindowStartupLocation="CenterScreen" Topmost="True" Background="{x:Null}" WindowDecorations="None" FontSize="12">
+  <Viewbox Stretch="Fill" StretchDirection="DownOnly">
+    <Grid Height="300" Width="300">
+      <Canvas
+          Name="canvas"
+          Height="300"
+          Width="300"
+          Grid.ColumnSpan="2"
+          Grid.RowSpan="2"
+          RenderTransformOrigin="50%,50%"
+        >
+        <Canvas.RenderTransform>
+          <TransformGroup />
+        </Canvas.RenderTransform>
+        <Ellipse Name="circle_1" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="120.465" Canvas.Top="9" />
+        <Ellipse Name="circle_2" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="41.958" Canvas.Top="41.166" Opacity="0" />
+        <Ellipse Name="circle_3" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="9" Canvas.Top="120.166" Opacity="0.143" />
+        <Ellipse Name="circle_4" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="41.958" Canvas.Top="198.666" Opacity="0.286" />
+        <Ellipse Name="circle_5" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="120.465" Canvas.Top="230.958" Opacity="0.429" />
+        <Ellipse Name="circle_6" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="199.293" Canvas.Top="198.666" Opacity="0.571" />
+        <Ellipse Name="circle_7" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="232" Canvas.Top="120.166" Opacity="0.714" />
+        <Ellipse Name="circle_8" Fill="#FF545B5F" Width="58.959" Height="59.042" Canvas.Left="199.293" Canvas.Top="41.166" Opacity="0.857" />
+      </Canvas>
+    </Grid>
+  </Viewbox>
+</Window>

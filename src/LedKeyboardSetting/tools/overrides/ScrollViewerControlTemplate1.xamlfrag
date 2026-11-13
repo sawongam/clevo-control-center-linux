@@ -1,0 +1,12 @@
+<ControlTheme x:Key="ScrollViewerControlTemplate1" TargetType="ScrollViewer">
+  <Setter Property="Template">
+    <ControlTemplate>
+      <Grid Name="Grid" Background="{TemplateBinding Background}" ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
+        <ScrollContentPresenter Name="PART_ContentPresenter" Grid.Row="0" Grid.Column="0" Margin="{TemplateBinding Padding}"
+                                Extent="{Binding Extent, Mode=OneWayToSource, RelativeSource={RelativeSource TemplatedParent}}" Offset="{Binding Offset, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Viewport="{Binding Viewport, Mode=OneWayToSource, RelativeSource={RelativeSource TemplatedParent}}" />
+        <ScrollBar Name="PART_VerticalScrollBar" Orientation="Vertical" Grid.Row="0" Grid.Column="1" Theme="{StaticResource ScrollBarStyle1}" Cursor="Arrow" AllowAutoHide="False" />
+        <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Cursor="Arrow" AllowAutoHide="False" />
+      </Grid>
+    </ControlTemplate>
+  </Setter>
+</ControlTheme>

@@ -1,0 +1,26 @@
+<ControlTheme x:Key="WpfScrollBarH" TargetType="ScrollBar">
+  <Setter Property="Background" Value="{DynamicResource ScrollBar.Static.Background}" />
+  <Setter Property="BorderBrush" Value="{DynamicResource ScrollBar.Static.Border}" />
+  <Setter Property="MinHeight" Value="17" />
+  <Setter Property="Template">
+    <ControlTemplate>
+      <Grid Name="Bg" ColumnDefinitions="17,*,17" Background="{TemplateBinding Background}">
+        <RepeatButton Name="PART_LineUpButton" Grid.Column="0" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0">
+          <Path Data="M4,0 L0,3.5 L4,7 Z" Margin="0" Stretch="Uniform" Height="7" Fill="{DynamicResource ScrollBar.Static.Glyph}" />
+        </RepeatButton>
+        <Track Name="PART_Track" Grid.Column="1" Orientation="Horizontal" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" ViewportSize="{TemplateBinding ViewportSize}" Value="{TemplateBinding Value, Mode=TwoWay}">
+          <Track.DecreaseButton>
+            <RepeatButton Name="PART_PageUpButton" Theme="{StaticResource RepeatButtonTransparent}" />
+          </Track.DecreaseButton>
+          <Track.IncreaseButton>
+            <RepeatButton Name="PART_PageDownButton" Theme="{StaticResource RepeatButtonTransparent}" />
+          </Track.IncreaseButton>
+          <Thumb Theme="{StaticResource ScrollBarThumbVertical}" Margin="0,2" />
+        </Track>
+        <RepeatButton Name="PART_LineDownButton" Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0">
+          <Path Data="M0,0 L4,3.5 L0,7 Z" Margin="0" Stretch="Uniform" Height="7" Fill="{DynamicResource ScrollBar.Static.Glyph}" />
+        </RepeatButton>
+      </Grid>
+    </ControlTemplate>
+  </Setter>
+</ControlTheme>

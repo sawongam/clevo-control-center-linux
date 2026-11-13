@@ -1,0 +1,10 @@
+<ControlTheme x:Key="RepeatButtonTransparent" TargetType="RepeatButton">
+  <Setter Property="Background" Value="#00FFFFFF" />
+  <Setter Property="Focusable" Value="False" />
+  <Setter Property="IsTabStop" Value="False" />
+  <Setter Property="Template">
+    <ControlTemplate>
+      <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" />
+    </ControlTemplate>
+  </Setter>
+</ControlTheme>

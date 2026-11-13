@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" x:Class="CC.MainWindow" Name="window" Title="LED Keyboard Setting" Height="1080" Width="1920" WindowStartupLocation="Manual" Background="#FF242424" Icon="/image/main/control_center_logo.png" Topmost="True" BorderThickness="0,0,1,1" BorderBrush="{Binding #Check_FullSrceen.Background}" WindowDecorations="None" FontSize="12">
+  <Window.Resources>
+    <ResourceDictionary>
+      <ControlTheme x:Key="BTN_MIN" TargetType="Button">
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Grid Name="grid" Margin="0" Background="{x:Null}">
+              <Image Name="Image_ic_close_png" Margin="0" Source="/image/main/ic_minimize.png" Stretch="Fill" Height="60" />
+              <Rectangle
+                  Name="rectangle"
+                  Margin="0"
+                  Height="60"
+                  Fill="{TemplateBinding Background}"
+                  StrokeThickness="0"
+                  Stroke="{x:Null}"
+                >
+                <Rectangle.OpacityMask>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#00000000" />
+                    <GradientStop Color="#33FFFFFF" Offset="1" />
+                  </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+          </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pressed /template/ Rectangle#rectangle">
+          <Setter Property="OpacityMask">
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#66FFFFFF" Offset="0" />
+              <GradientStop Color="#00000000" Offset="1" />
+            </LinearGradientBrush>
+          </Setter>
+        </Style>
+        <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+          <Setter Property="OpacityMask">
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#00000000" />
+              <GradientStop Color="#66FFFFFF" Offset="1" />
+            </LinearGradientBrush>
+          </Setter>
+        </Style>
+      </ControlTheme>
+      <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
+      <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
+      <ControlTheme x:Key="CheckBox_FullScreen" TargetType="CheckBox">
+        <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+        <Setter Property="Foreground" Value="#FF000000" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Grid Name="templateRoot" Background="#00FFFFFF">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Image Name="Image_ic_close_png" Margin="0" Source="/image/main/ic_fullscreen.png" Stretch="Fill" Width="80" Height="60" />
+              <Rectangle
+                  Name="rectangle"
+                  Margin="0"
+                  Width="80"
+                  Height="60"
+                  Fill="{TemplateBinding Background}"
+                  StrokeThickness="0"
+                  Stroke="{x:Null}"
+                >
+                <Rectangle.OpacityMask>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#00000000" Offset="0" />
+                    <GradientStop Color="#33FFFFFF" Offset="1" />
+                  </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+          </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+          <Setter Property="OpacityMask">
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#00000000" Offset="0" />
+              <GradientStop Color="#66FFFFFF" Offset="1" />
+            </LinearGradientBrush>
+          </Setter>
+        </Style>
+        <Style Selector="^:pressed /template/ Rectangle#rectangle">
+          <Setter Property="OpacityMask">
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#66000000" Offset="0" />
+              <GradientStop Color="Transparent" Offset="1" />
+            </LinearGradientBrush>
+          </Setter>
+        </Style>
+        <Style Selector="^:checked /template/ Image#Image_ic_close_png">
+          <Setter Property="Source" Value="/image/main/ic_window.png" />
+        </Style>
+        <Style Selector="^:indeterminate /template/ Image#Image_ic_close_png">
+          <Setter Property="Source" Value="/image/main/ic_fullscreen.png" />
+        </Style>
+      </ControlTheme>
+      <ControlTheme x:Key="S_BTN_CLOSE" TargetType="Button">
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Grid Name="grid" Margin="0" Background="{x:Null}">
+              <Image Name="Image_ic_close_png" Margin="0" Source="/image/main/ic_close.png" Stretch="Fill" Height="60" />
+              <Rectangle
+                  Name="rectangle"
+                  Margin="0"
+                  Height="60"
+                  Fill="{TemplateBinding Background}"
+                  StrokeThickness="0"
+                  Stroke="{x:Null}"
+                >
+                <Rectangle.OpacityMask>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#00000000" />
+                    <GradientStop Color="#33FFFFFF" Offset="1" />
+                  </LinearGradientBrush>
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+          </ControlTemplate>
+        </Setter>
+        <Style Selector="^:pressed /template/ Rectangle#rectangle">
+          <Setter Property="OpacityMask">
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#66FFFFFF" Offset="0" />
+              <GradientStop Color="#00000000" Offset="1" />
+            </LinearGradientBrush>
+          </Setter>
+        </Style>
+        <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+          <Setter Property="OpacityMask">
+            <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+              <GradientStop Color="#00000000" />
+              <GradientStop Color="#66FFFFFF" Offset="1" />
+            </LinearGradientBrush>
+          </Setter>
+        </Style>
+      </ControlTheme>
+    </ResourceDictionary>
+  </Window.Resources>
+  <Grid Margin="0">
+    <Rectangle
+        Name="r1"
+        HorizontalAlignment="Left"
+        Height="1080"
+        Margin="0"
+        Stroke="#FF000000"
+        VerticalAlignment="Top"
+        Width="1920"
+      >
+      <Rectangle.Fill>
+        <ImageBrush Source="/image/page_extrasetting/bg_extra_setting_layer_3.png" Opacity="0.1" />
+      </Rectangle.Fill>
+    </Rectangle>
+    <Viewbox
+        Name="VB_main"
+        Margin="0"
+        Width="1920"
+        Height="1080"
+      >
+      <Grid Name="_base" Height="1080" Width="1920">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid
+            Name="grid_backgroundImage"
+            Height="1080"
+            Margin="0"
+            Width="1920"
+            IsVisible="False"
+          >
+          <Image Name="bg_system_layer3" Margin="0,187.5,0,103.5" Source="/image/page_systemmonitor/bg_system_layer3_3.png" Stretch="Fill" Width="1920" HorizontalAlignment="Center" />
+          <Rectangle
+              HorizontalAlignment="Left"
+              Height="100"
+              Margin="0,251,0,0"
+              StrokeThickness="0"
+              VerticalAlignment="Top"
+              Width="500"
+              Fill="{Binding #title_icon.Fill}"
+              Stroke="{x:Null}"
+            >
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/image/page_systemmonitor/bg_system_border.png" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Rectangle
+              Name="rectangle"
+              Height="100"
+              Margin="0,249.666,0,0"
+              StrokeThickness="0"
+              VerticalAlignment="Top"
+              RenderTransformOrigin="50%,50%"
+              HorizontalAlignment="Right"
+              Width="500"
+              Fill="{Binding #title_icon.Fill}"
+              Stroke="{x:Null}"
+            >
+            <Rectangle.RenderTransform>
+              <TransformGroup>
+                <ScaleTransform ScaleY="1" ScaleX="-1" />
+              </TransformGroup>
+            </Rectangle.RenderTransform>
+            <Rectangle.OpacityMask>
+              <ImageBrush Source="/image/page_systemmonitor/bg_system_border.png" />
+            </Rectangle.OpacityMask>
+          </Rectangle>
+          <Rectangle
+              Margin="0,483.2,0,0"
+              StrokeThickness="0"
+              Fill="{Binding #rectangle.Fill}"
+              Stroke="{x:Null}"
+            >
+            <Rectangle.OpacityMask>
+              <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                <GradientStop />
+                <GradientStop Color="#4C000000" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.OpacityMask>
+          </Rectangle>
+        </Grid>
+        <StackPanel Name="SP_page_led_device" Margin="0">
+          <local:Page_LED_Device Name="page_led_device" Height="1080" BorderBrush="{Binding #page_extra_setting.BorderBrush}" />
+        </StackPanel>
+        <Grid
+            Name="main_menu"
+            HorizontalAlignment="Left"
+            Height="184"
+            Margin="0"
+            VerticalAlignment="Top"
+            Width="750.067"
+            IsVisible="False"
+          >
+          <Image Name="Image_main_menu" HorizontalAlignment="Left" Margin="26.9,22.6,0,21.4" Source="/image/main/ic_system_monitor.png" Stretch="Fill" Width="140" Height="140" />
+        </Grid>
+      </Grid>
+    </Viewbox>
+    <Viewbox
+        Name="VB_title"
+        HorizontalAlignment="Center"
+        Height="81"
+        Margin="0"
+        VerticalAlignment="Top"
+        Width="1920"
+      >
+      <Grid
+          Name="main_title_icon"
+          HorizontalAlignment="Left"
+          Height="81"
+          Margin="0"
+          VerticalAlignment="Top"
+          Width="1920"
+        >
+        <Rectangle
+            Name="title_icon"
+            Margin="503.667,2.254,506.333,-0.254"
+            StrokeThickness="0"
+            Height="79"
+            Fill="#FFFF00D2"
+            Stroke="{Binding #title_icon.Fill}"
+          >
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/main/bg_title_bar_3.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <Image Name="Image_title" HorizontalAlignment="Left" Margin="600,0,0,0" Source="/image/main/title_led_keyboard.png" Stretch="Fill" Width="740" Height="75" />
+        <Image Name="Image_logo" HorizontalAlignment="Left" Margin="584.7,10.5,0,10.5" Source="/image/main/control_center_logo.png" Stretch="Fill" Width="60" Height="60" Opacity="0" IsVisible="False" />
+        <Path Name="title_move" Data="M510.66635,-0.26633186 L1408.2798,0.26699932 L1409.0529,47.920679 C1379.296,61.663167 1347.4821,73.013403 1312.9944,81.254006 L608.3589,81.200006 C570.69768,71.593271 538.53856,60.18705 511.14966,47.137546" Fill="#02FFFFFF" Margin="510.667,-0.267,511.494,-0.254" Stretch="Fill" StrokeThickness="0" Cursor="SizeAll" Stroke="{x:Null}" />
+        <Rectangle
+            Name="title_icon_Copy"
+            HorizontalAlignment="Left"
+            Margin="0"
+            StrokeThickness="0"
+            Width="1920"
+            Height="2"
+            VerticalAlignment="Top"
+            Fill="{Binding #title_icon.Fill}"
+          >
+          <Rectangle.OpacityMask>
+            <LinearGradientBrush EndPoint="0.1%,0.2%" StartPoint="99.8%,-1.1%">
+              <GradientStop Color="#00181818" Offset="0.038" />
+              <GradientStop Color="Black" Offset="0.426" />
+              <GradientStop Color="#FF202020" Offset="0.579" />
+              <GradientStop Offset="0.992" />
+            </LinearGradientBrush>
+          </Rectangle.OpacityMask>
+        </Rectangle>
+      </Grid>
+    </Viewbox>
+    <Viewbox
+        Name="VB_Style"
+        HorizontalAlignment="Right"
+        Margin="0,5,5,0"
+        VerticalAlignment="Top"
+        Width="500"
+        Height="77"
+      >
+      <Grid
+          Name="main_windowStyle"
+          Height="78"
+          VerticalAlignment="Top"
+          Width="247.649"
+          Background="#FF242424"
+          HorizontalAlignment="Right"
+        >
+        <Path
+            Name="title_move_Copy"
+            Data="M510.66635,-0.26633186 L1408.2798,0.26699932 L1408.0422,81.518425 C1408.0422,81.518425 506.33946,80.988292 506.33946,80.988292"
+            Margin="-189.455,0,247.747,-0.254"
+            Stretch="Fill"
+            StrokeThickness="0"
+            Cursor="SizeAll"
+            HorizontalAlignment="Right"
+            Width="189.357"
+            Stroke="{x:Null}"
+          >
+          <Path.Fill>
+            <LinearGradientBrush EndPoint="-4%,49.5%" StartPoint="84.4%,49.8%">
+              <GradientStop Color="#FF242424" Offset="0" />
+              <GradientStop Color="#00242424" Offset="1" />
+            </LinearGradientBrush>
+          </Path.Fill>
+        </Path>
+        <CheckBox Name="Check_FullSrceen" Content="" Margin="0" BorderThickness="0" Theme="{DynamicResource CheckBox_FullScreen}" IsChecked="True" Width="80" Height="60" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{Binding #title_icon.Fill}" />
+        <Button Name="BTN_min" Content="" Margin="0" BorderThickness="0" Theme="{DynamicResource BTN_MIN}" Width="80" HorizontalAlignment="Left" Height="60" VerticalAlignment="Center" Cursor="Hand" Focusable="False" BorderBrush="{x:Null}" Background="{Binding #title_icon.Fill}" Foreground="{x:Null}" />
+        <Button Name="BTN_close" Content="" BorderThickness="0" Theme="{DynamicResource S_BTN_CLOSE}" Width="80" HorizontalAlignment="Right" Height="60" VerticalAlignment="Center" Cursor="Hand" Focusable="False" BorderBrush="{x:Null}" Background="{Binding #title_icon.Fill}" Foreground="{x:Null}" />
+      </Grid>
+    </Viewbox>
+  </Grid>
+</Window>
