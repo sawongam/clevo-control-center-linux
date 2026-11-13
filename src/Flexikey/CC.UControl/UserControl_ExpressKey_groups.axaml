@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" xmlns:UControl="using:CC.UControl"
+    x:Class="CC.UControl.UserControl_ExpressKey_groups"
+    x:Name="userControl"
+    Width="410"
+    Height="NaN"
+    Margin="0"
+    BorderBrush="#FFFF0000"
+    IsEnabled="False">
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+    <ControlTheme x:Key="ButtonStyle_Delete" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Padding" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Grid Margin="0,0,-0.8,-4.8">
+              <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="10.876,22.38,9.676,25.18" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+              <Ellipse x:Name="ellipse" Margin="0" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="3" Width="40" Height="40"/>
+              <Rectangle x:Name="rectangle" Margin="0" Stroke="#FF000000" StrokeThickness="2" Width="50" Height="40" Fill="{TemplateBinding BorderBrush}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/main/ic_close.png"/>
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#ellipse">
+        <Setter Property="Fill">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="Black" Offset="1"/>
+            <GradientStop Color="#FF6B6B6B"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Ellipse#ellipse">
+        <Setter Property="Fill" Value="#FF424242"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Ellipse#ellipse">
+        <Setter Property="Fill">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="Black" Offset="0"/>
+            <GradientStop Color="#FF575757" Offset="1"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+    </ControlTheme>
+  </UserControl.Resources>
+  <Grid Margin="0">
+    <Button x:Name="BTN_Delete_KeyGroup" Content="" Height="50" Margin="0" Width="50" VerticalAlignment="Top" HorizontalAlignment="Right" Theme="{StaticResource ButtonStyle_Delete}" BorderThickness="0" Cursor="Hand" Background="{x:Null}" BorderBrush="{Binding Stroke, ElementName=rectangle}"/>
+    <WrapPanel x:Name="WPanel_Key" Margin="0,10" HorizontalAlignment="Left" Width="355" VerticalAlignment="Top"/>
+    <Rectangle x:Name="rectangle" Margin="0,10" StrokeThickness="2" HorizontalAlignment="Left" Width="360" Stroke="{Binding BorderBrush, ElementName=userControl}"/>
+    <Rectangle x:Name="R_Disable" Margin="0" StrokeThickness="0" Opacity="0.5">
+      <Rectangle.Fill>
+        <LinearGradientBrush EndPoint="-5.9%,105.6%" StartPoint="98.9%,0.9%">
+          <GradientStop Color="Black" Offset="0.193"/>
+          <GradientStop Offset="1" Color="#19000000"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+  </Grid>
+</UserControl>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" xmlns:UControl="using:CC.UControl"
+    x:Class="CC.UControl.UserControl_FAN"
+    x:Name="userControl"
+    Width="168"
+    Height="168"
+    BorderBrush="#FF00A8FF"
+    Loaded="UserControl_Loaded">
+  <Grid Width="168" Height="168">
+    <Grid.Background>
+      <ImageBrush Source="/image/page_systemmonitor/fan/system_fan_layer1_1.png"/>
+    </Grid.Background>
+    <Rectangle x:Name="R_FanLayer2" Margin="0" Width="168" Height="168" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%" Fill="{Binding BorderBrush, ElementName=userControl}">
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/image/page_systemmonitor/fan/system_fan_layer2_1.png"/>
+      </Rectangle.OpacityMask>
+    </Rectangle>
+    <Rectangle x:Name="R_FanLayer3" Fill="#FFFFFFFF" Margin="0" Width="168" Height="168" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%">
+      <Rectangle.OpacityMask>
+        <ImageBrush Source="/image/page_systemmonitor/fan/system_fan_layer3_1.png"/>
+      </Rectangle.OpacityMask>
+    </Rectangle>
+  </Grid>
+</UserControl>

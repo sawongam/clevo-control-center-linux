@@ -1,0 +1,27 @@
+<Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CC.App" RequestedThemeVariant="Light">
+  <Application.Resources>
+    <!-- WPF Aero2 look of the stock TextBox (the original uses the unstyled one in several places) -->
+    <ControlTheme x:Key="ClassicTextBox" TargetType="TextBox">
+      <Setter Property="Background" Value="#FFFFFFFF"/>
+      <Setter Property="BorderBrush" Value="#FFABADB3"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="1"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+            <ScrollViewer x:Name="PART_ScrollViewer" Focusable="False" Padding="{TemplateBinding Padding}" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+              <TextPresenter x:Name="PART_TextPresenter" Text="{TemplateBinding Text, Mode=TwoWay}" CaretIndex="{TemplateBinding CaretIndex}" SelectionStart="{TemplateBinding SelectionStart}" SelectionEnd="{TemplateBinding SelectionEnd}" CaretBrush="{TemplateBinding CaretBrush}" SelectionBrush="{TemplateBinding SelectionBrush}" SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}"/>
+            </ScrollViewer>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:disabled /template/ Border#border"><Setter Property="Opacity" Value="0.56"/></Style>
+    </ControlTheme>
+  </Application.Resources>
+  <Application.Styles>
+    <FluentTheme />
+    <Style Selector="TextBox"><Setter Property="Theme" Value="{StaticResource ClassicTextBox}"/></Style>
+  </Application.Styles>
+</Application>

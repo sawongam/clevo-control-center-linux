@@ -1,0 +1,1019 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" xmlns:UControl="using:CC.UControl"
+    x:Class="CC.Page_extra_setting"
+    x:Name="userControl_Extra"
+    Width="1920"
+    Height="1078"
+    BorderBrush="#FFFF0000">
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="RadioButton.MouseOver.Background" Color="#FFF3F9FF"/>
+    <SolidColorBrush x:Key="RadioButton.MouseOver.Border" Color="#FF5593FF"/>
+    <SolidColorBrush x:Key="RadioButton.MouseOver.Glyph" Color="#FF212121"/>
+    <SolidColorBrush x:Key="RadioButton.Disabled.Background" Color="#FFE6E6E6"/>
+    <SolidColorBrush x:Key="RadioButton.Disabled.Border" Color="#FFBCBCBC"/>
+    <SolidColorBrush x:Key="RadioButton.Disabled.Glyph" Color="#FF707070"/>
+    <SolidColorBrush x:Key="RadioButton.Pressed.Background" Color="#FFD9ECFF"/>
+    <SolidColorBrush x:Key="RadioButton.Pressed.Border" Color="#FF3C77DD"/>
+    <SolidColorBrush x:Key="RadioButton.Pressed.Glyph" Color="#FF212121"/>
+    <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="#FF212121"/>
+    <ControlTheme x:Key="RadioButtonStyle1_colorFF0000" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Opacity="1" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Path Grid.ColumnSpan="2" Data="M178.33403,105.09762 L92.108437,6.1884978 C92.108437,6.1884978 49.998264,6.8066798 49.998264,6.8066798 C-5.8494273,108.20731 2.024249,102.89788 -6.1486339,111.89794" Margin="-5,5.667,-1,15.333" Stretch="Fill" Fill="#02000000"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff0000_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_ff0000.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Width="222" Height="87" Focusable="True"/>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff0000_png">
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="-23,54,-14,-6"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff0000_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff0000_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Margin" Value="-22,81,-22,-33"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_colorFF7200" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M-5.3336626,73.33351 L149.99957,129.99962 L198.66588,12.000354 L163.99957,-0.66586293" Fill="#02000000" Margin="-5.334,-0.666,1.667,0.333" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_ff7200.png" Stretch="Fill" Width="207" Height="114" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="-25.333,29.334,0,-13.001"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Margin" Value="-36.666,42.667,0,-26.334"/>
+      </Style>
+    </ControlTheme>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+    <ControlTheme x:Key="RadioButtonStyle1_colorFFEA00" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M-0.89272967,14.365831 C5.9616669,56.56687 21.292614,91.376449 46.507602,117.56725 L200.76588,27.630468 L188.76616,5.1591914" Fill="#02000000" Margin="-0.4,4,-0.666,10.292" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_ffea00.png" Stretch="Fill" Height="125" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="-16,-11.333,0,-9.334"/>
+        <Setter Property="Width" Value="147"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Width" Value="147"/>
+        <Setter Property="Margin" Value="-42.666,-6,0,-14.667"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_colorA2FF00" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M49.344411,-0.27284262 C42.122237,4.0904127 1.3664362,67.874869 1.9282758,127.33643 L194.17158,123.49946 L198.56779,81.507947" Fill="#02000000" Margin="2.589,0.679,1.667,4.321" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_a2ff00.png" Stretch="Fill" Width="145" Height="118" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="-20,-19.333,0,-15.667"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="-43,-24.666,0,-10.334"/>
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_color3CFF00" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M133.53058,-1.1876817 C126.3084,3.1755736 28.164009,30.715318 0.55117721,64.414948 L168.77357,129.56785 L199.29383,101.70934" Fill="#02000000" Margin="1.332,0,1.001,2.666" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_3cff00.png" Stretch="Fill" Width="185" Height="104" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="-21.333,-18.333,0,0"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="-36.334,-30.999,0,0"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_color00FFE4" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M198.85424,3.59712 C128.658,0.93894466 53.635767,-0.92119928 -0.32715129,12.632577 L81.714263,131.69502 L150.15559,131.16349" Fill="#02000000" Margin="0.665,1.82,1.335,1.332" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_00ffe4.png" Stretch="Fill" Width="197" Height="85" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="-24.666,-24.333,-19.001,0"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="-26.001,-35.666,-17.666,0"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_color0066FF" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M198.08271,58.81212 C164.56122,35.728363 99.855698,11.721138 46.844458,8.0279489 L1.9619071,113.5685 L49.903264,134.69808" Fill="#02000000" Margin="0,3.211,4.618,2.332" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_0066ff.png" Stretch="Fill" Width="190" Height="97" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="1.667,-19.333,-19.334,0"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="11.999,-33.666,-29.666,0"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_colorA200FF" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path Grid.ColumnSpan="2" Data="M199.17569,127.16458 C191.77477,94.888065 172.14623,37.130302 129.99314,-0.2431787 L0.31608552,97.719344 L4.4992164,134.52653" Fill="#02000000" Margin="1.331,0.667,1.002,-0.335" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_a200ff.png" Stretch="Fill" Width="157" Height="114" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="67,-19,-15.667,-15.334"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="88.666,-23.666,-37.333,-10.668"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_colorFF00D2" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path x:Name="path" Grid.ColumnSpan="2" Data="M171.85669,137.23198 C178.36837,117.74785 206.95842,67.412457 195.68129,1.3816198 L6.6694174,11.123887 L-2.2242513,46.845306" Fill="#02000000" Margin="-1.336,1.668,1.935,-2.001" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_ff00d2.png" Stretch="Fill" Width="132" Height="126" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="101.333,-22.333,-22.333,-20.334"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="128.666,-18.666,-49.666,-24.001"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_colorFF006C" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <Path x:Name="path" Grid.ColumnSpan="2" Data="M82.115879,136.07858 C95.45777,123.3782 170.74442,110.67851 200.28723,61.03292 L27.160347,-0.15776976 L-0.79412583,14.850936" Fill="#02000000" Margin="0.165,0.335,-0.165,-1.002" Stretch="Fill"/>
+            <Image x:Name="Image_Page_ExtraSetting_skinColor_color_select_ff7200_png" Grid.ColumnSpan="2" Source="/image/page_extrasetting/skincolor/color_select_ff006c.png" Stretch="Fill" Width="196" Height="120" VerticalAlignment="Top"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="IsVisible" Value="False"/>
+        <Setter Property="Margin" Value="38.333,14.334,-23.333,-17.001"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_Page_ExtraSetting_skinColor_color_select_ff7200_png">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="62.332,31.334,-47.332,-34.001"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="ButtonStyle1_QR" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Padding" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Grid HorizontalAlignment="Stretch" Margin="0" Width="NaN" Background="#02000000">
+              <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="Left" Margin="30.455,0,0,0" VerticalAlignment="Center" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+              <Image x:Name="Image_Page_ExtraSetting_btn_qr_code_png" HorizontalAlignment="Left" Margin="159,22,0,0" Source="/image/page_extrasetting/btn_qr_code.png" Stretch="Fill" Width="69" VerticalAlignment="Top" Height="69"/>
+              <Rectangle x:Name="rectangle" Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Right" Height="32" Margin="0,10,11.5,0" Stroke="#FF000000" VerticalAlignment="Top" Width="33">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/page_extrasetting/btn_qr_code_open_1.png"/>
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="False"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="S_BTN_CLOSE" TargetType="Button">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="grid" Margin="0" Width="NaN" Height="NaN" Background="{x:Null}">
+            <Image x:Name="Image_ic_close_png" Margin="0" Source="/image/main/ic_close.png" Stretch="Fill" Width="NaN" Height="60"/>
+            <Rectangle x:Name="rectangle" Margin="0" Width="NaN" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000"/>
+            <GradientStop Color="#33FFFFFF" Offset="1"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1"/>
+            <GradientStop Color="#66FFFFFF" Offset="0"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000"/>
+            <GradientStop Color="#66FFFFFF" Offset="1"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_FAN" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle x:Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}"/>
+            </Grid>
+            <Border x:Name="radioButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False"/>
+            <TextBlock x:Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="21.333"/>
+        <Setter Property="Foreground" Value="#FFB4B4B4"/>
+      </Style>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_enable.png"/>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_disable.png"/>
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_ONOFF" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle x:Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}"/>
+            </Grid>
+            <Border x:Name="radioButtonBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False"/>
+            <TextBlock x:Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="21.333"/>
+        <Setter Property="Foreground" Value="#FFB4B4B4"/>
+      </Style>
+      <Style Selector="^ /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_enable.png"/>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/page_systemmonitor/fan/btn_disable.png"/>
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="RadioButtonStyle1_HP" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="radioButtonBorder" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,1,2,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" OpacityMask="{x:Null}">
+              <Grid x:Name="markGrid" Margin="2">
+                <Ellipse x:Name="optionMark" MinWidth="6" MinHeight="6"/>
+              </Grid>
+            </Border>
+            <Grid x:Name="grid" Height="29" Margin="0" VerticalAlignment="Stretch" Width="335">
+              <ContentPresenter x:Name="contentPresenter" Grid.Column="0" Focusable="False" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+              <Rectangle x:Name="rectangle" Margin="0" Width="NaN" Height="NaN" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/page_extrasetting/btn_headphone_enable_layer_1.png"/>
+                </Rectangle.OpacityMask>
+              </Rectangle>
+              <TextBlock x:Name="textBlock" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Border#radioButtonBorder">
+        <Setter Property="Background" Value="{TemplateBinding Background}"/>
+        <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#optionMark">
+        <Setter Property="Fill" Value="{StaticResource RadioButton.Static.Glyph}"/>
+        <Setter Property="Opacity" Value="0"/>
+      </Style>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="18.667"/>
+        <Setter Property="Foreground" Value="#FF6D6D6D"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#radioButtonBorder">
+        <Setter Property="Background" Value="{StaticResource RadioButton.MouseOver.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RadioButton.MouseOver.Border}"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Ellipse#optionMark">
+        <Setter Property="Fill" Value="{StaticResource RadioButton.MouseOver.Glyph}"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+      </Style>
+      <Style Selector="^:disabled /template/ Border#radioButtonBorder">
+        <Setter Property="Background" Value="{StaticResource RadioButton.Disabled.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Disabled.Border}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ Ellipse#optionMark">
+        <Setter Property="Fill" Value="{StaticResource RadioButton.Disabled.Glyph}"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Border#radioButtonBorder">
+        <Setter Property="Background" Value="{StaticResource RadioButton.Pressed.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Pressed.Border}"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Ellipse#optionMark">
+        <Setter Property="Fill" Value="{StaticResource RadioButton.Pressed.Glyph}"/>
+      </Style>
+      <Style Selector="^:checked /template/ Ellipse#optionMark">
+        <Setter Property="Opacity" Value="1"/>
+      </Style>
+      <Style Selector="^:checked /template/ Grid#grid">
+        <Setter Property="Background" Value="#FF000000"/>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="FontSize" Value="26.667"/>
+      </Style>
+      <Style Selector="^:checked">
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderHorizontal2" TargetType="Slider">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <TickBar x:Name="TopTick" Height="4" Margin="0,0,0,2" Grid.Row="0" IsVisible="False"/>
+              <TickBar x:Name="BottomTick" Height="4" Margin="0,2,0,0" Grid.Row="2" IsVisible="False"/>
+              <Border x:Name="TrackBackground" BorderThickness="0" Background="#FF5B5B5B" Height="4.0" Margin="5,0" Grid.Row="1" VerticalAlignment="Center">
+                <Canvas Margin="-6,-1">
+                  <Rectangle x:Name="PART_SelectionRange" Fill="#FF0078D7" Height="4.0" IsVisible="False"/>
+                </Canvas>
+              </Border>
+              <Track x:Name="PART_Track" Grid.Row="1" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}" Orientation="{TemplateBinding Orientation}">
+                <Track.DecreaseButton>
+                  <RepeatButton Theme="{StaticResource RepeatButtonTransparent}" x:Name="PART_DecreaseButton"/>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Theme="{StaticResource RepeatButtonTransparent}" x:Name="PART_IncreaseButton"/>
+                </Track.IncreaseButton>
+                <Track.Thumb>
+                  <Thumb x:Name="Thumb" Focusable="False" Height="37" Theme="{StaticResource SliderThumbHorizontalDefault_onoff}" VerticalAlignment="Center" Width="66" ClipToBounds="False" BorderBrush="{TemplateBinding BorderBrush}"/>
+                </Track.Thumb>
+              </Track>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="RBTN_CPU" TargetType="RadioButton">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid x:Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="textBlock" Grid.ColumnSpan="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Top" Height="NaN" TextAlignment="Center"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="#FF828282"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Width" Value="100"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="18.667"/>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="FontSize" Value="18.667"/>
+      </Style>
+    </ControlTheme>
+    <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5"/>
+    <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC"/>
+    <SolidColorBrush x:Key="SliderThumb.MouseOver.Border" Color="#FF7Eb4EA"/>
+    <SolidColorBrush x:Key="SliderThumb.Pressed.Background" Color="#FFDAECFC"/>
+    <SolidColorBrush x:Key="SliderThumb.Pressed.Border" Color="#FF569DE5"/>
+    <SolidColorBrush x:Key="SliderThumb.Disabled.Background" Color="#FFF0F0F0"/>
+    <SolidColorBrush x:Key="SliderThumb.Disabled.Border" Color="#FFD9D9D9"/>
+    <SolidColorBrush x:Key="SliderThumb.Static.Background" Color="#FFF0F0F0"/>
+    <SolidColorBrush x:Key="SliderThumb.Static.Border" Color="#FFACACAC"/>
+    <SolidColorBrush x:Key="SliderThumb.Track.Border" Color="#FFD6D6D6"/>
+    <SolidColorBrush x:Key="SliderThumb.Track.Background" Color="#FFE7EAEA"/>
+    <ControlTheme x:Key="RepeatButtonTransparent" TargetType="RepeatButton">
+      <Setter Property="Background" Value="#00FFFFFF"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="IsTabStop" Value="False"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderThumbHorizontalDefault_onoff" TargetType="Thumb">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+            <Path x:Name="grip" Data="M0,0 C0,0 11,0 11,0 C11,0 11,18 11,18 C11,18 0,18 0,18 C0,18 0,0 0,0" Stretch="Fill" StrokeThickness="1" UseLayoutRounding="True" VerticalAlignment="Center" IsVisible="False"/>
+            <Image x:Name="image_1" HorizontalAlignment="Center" Height="15" Margin="0" VerticalAlignment="Center" Width="44" Source="/image/page_extrasetting/switch_handle_layer_2.png" Stretch="Uniform"/>
+            <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Center" Height="37" Margin="0" VerticalAlignment="Center" Width="66">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/page_extrasetting/switch_handle_layer_1.png"/>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Static.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Static.Border}"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.MouseOver.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.MouseOver.Border}"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Pressed.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Pressed.Border}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Disabled.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Disabled.Border}"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderThumbVerticalLeft" TargetType="Thumb">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+            <Path x:Name="grip" Data="M6,11 C6,11 0,5.5 0,5.5 C0,5.5 6,0 6,0 C6,0 18,0 18,0 C18,0 18,11 18,11 C18,11 6,11 6,11" Stretch="Fill"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Static.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Static.Border}"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.MouseOver.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.MouseOver.Border}"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Pressed.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Pressed.Border}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Disabled.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Disabled.Border}"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderThumbVerticalRight" TargetType="Thumb">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+            <Path x:Name="grip" Data="M12,11 C12,11 18,5.5 18,5.5 C18,5.5 12,0 12,0 C12,0 0,0 0,0 C0,0 0,11 0,11 C0,11 12,11 12,11" Stretch="Fill"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Static.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Static.Border}"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.MouseOver.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.MouseOver.Border}"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Pressed.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Pressed.Border}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Disabled.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Disabled.Border}"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderThumbVerticalDefault" TargetType="Thumb">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
+            <Path x:Name="grip" Data="M0.5,0.5 L18.5,0.5 L18.5,11.5 L0.5,11.5" Stretch="Fill"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Static.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Static.Border}"/>
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.MouseOver.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.MouseOver.Border}"/>
+      </Style>
+      <Style Selector="^:pressed /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Pressed.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Pressed.Border}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ Path#grip">
+        <Setter Property="Fill" Value="{StaticResource SliderThumb.Disabled.Background}"/>
+        <Setter Property="Stroke" Value="{StaticResource SliderThumb.Disabled.Border}"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderVertical" TargetType="Slider">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition MinWidth="{TemplateBinding MinWidth}" Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+              </Grid.ColumnDefinitions>
+              <TickBar x:Name="TopTick" Grid.Column="0" Fill="{TemplateBinding Foreground}" Margin="0,0,2,0" Width="4"/>
+              <TickBar x:Name="BottomTick" Grid.Column="2" Fill="{TemplateBinding Foreground}" Margin="2,0,0,0" Width="4"/>
+              <Border x:Name="TrackBackground" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Center" Width="4.0" BorderBrush="{StaticResource SliderThumb.Track.Border}" Background="{StaticResource SliderThumb.Track.Background}">
+                <Canvas Margin="-1,-6">
+                  <Rectangle x:Name="PART_SelectionRange" Fill="#FF0078D7" Width="4.0"/>
+                </Canvas>
+              </Border>
+              <Track x:Name="PART_Track" Grid.Column="1" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}" Orientation="{TemplateBinding Orientation}">
+                <Track.DecreaseButton>
+                  <RepeatButton Theme="{StaticResource RepeatButtonTransparent}" x:Name="PART_DecreaseButton"/>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Theme="{StaticResource RepeatButtonTransparent}" x:Name="PART_IncreaseButton"/>
+                </Track.IncreaseButton>
+                <Track.Thumb>
+                  <Thumb x:Name="Thumb" Focusable="False" Height="11" VerticalAlignment="Top" Width="18" Theme="{StaticResource SliderThumbVerticalDefault}"/>
+                </Track.Thumb>
+              </Track>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ TickBar#TopTick">
+        <Setter Property="IsVisible" Value="False"/>
+      </Style>
+      <Style Selector="^ /template/ Border#TrackBackground">
+        <Setter Property="Margin" Value="0,5"/>
+      </Style>
+      <Style Selector="^ /template/ TickBar#BottomTick">
+        <Setter Property="IsVisible" Value="False"/>
+      </Style>
+      <Style Selector="^ /template/ Rectangle#PART_SelectionRange">
+        <Setter Property="IsVisible" Value="False"/>
+      </Style>
+      <Style Selector="^:focus /template/ Thumb#Thumb">
+        <Setter Property="Foreground" Value="#FF0000FF"/>
+      </Style>
+    </ControlTheme>
+    <ControlTheme x:Key="SliderStyle1_ONOFF" TargetType="Slider">
+      <Setter Property="Background" Value="#00FFFFFF"/>
+      <Setter Property="BorderBrush" Value="#00FFFFFF"/>
+      <Setter Property="Foreground" Value="{StaticResource SliderThumb.Static.Foreground}"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <TickBar x:Name="TopTick" Height="4" Margin="0,0,0,2" Grid.Row="0" IsVisible="False"/>
+              <TickBar x:Name="BottomTick" Height="4" Margin="0,2,0,0" Grid.Row="2" IsVisible="False"/>
+              <Border x:Name="TrackBackground" BorderThickness="0" Background="#FF5B5B5B" Height="4.0" Margin="5,0" Grid.Row="1" VerticalAlignment="Center">
+                <Canvas Margin="-6,-1">
+                  <Rectangle x:Name="PART_SelectionRange" Fill="#FF0078D7" Height="4.0" IsVisible="False"/>
+                </Canvas>
+              </Border>
+              <Track x:Name="PART_Track" Grid.Row="1" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value, Mode=TwoWay}" Orientation="{TemplateBinding Orientation}">
+                <Track.DecreaseButton>
+                  <RepeatButton Theme="{StaticResource RepeatButtonTransparent}" x:Name="PART_DecreaseButton"/>
+                </Track.DecreaseButton>
+                <Track.IncreaseButton>
+                  <RepeatButton Theme="{StaticResource RepeatButtonTransparent}" x:Name="PART_IncreaseButton"/>
+                </Track.IncreaseButton>
+                <Track.Thumb>
+                  <Thumb x:Name="Thumb" Focusable="False" Height="37" Theme="{StaticResource SliderThumbHorizontalDefault_onoff}" VerticalAlignment="Center" Width="66" ClipToBounds="False" BorderBrush="{TemplateBinding BorderBrush}"/>
+                </Track.Thumb>
+              </Track>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^[Orientation=Vertical]">
+      </Style>
+    </ControlTheme>
+  </UserControl.Resources>
+  <Grid x:Name="main" Width="1920" Height="1080">
+    <Image x:Name="image" HorizontalAlignment="Left" Margin="0" Width="1913" Source="/image/page_extrasetting/bg_extra_setting_layer_3.png" VerticalAlignment="Bottom" Height="1046" Stretch="Uniform"/>
+    <Rectangle Margin="0,483.2,0,0" StrokeThickness="0" Fill="{Binding BorderBrush, ElementName=userControl_Extra}" Stroke="{x:Null}">
+      <Rectangle.OpacityMask>
+        <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+          <GradientStop Color="#4C000000" Offset="1"/>
+          <GradientStop/>
+        </LinearGradientBrush>
+      </Rectangle.OpacityMask>
+    </Rectangle>
+    <Image x:Name="Image_Page_ExtraSetting_ic_skin_color_png" HorizontalAlignment="Left" Height="46" Margin="570,150.5,0,0" Source="/image/page_extrasetting/ic_skin_color.png" Stretch="Fill" VerticalAlignment="Top" Width="46"/>
+    <TextBlock x:Name="T_SkinColor" Margin="631.5,159.5,688.5,0" TextWrapping="Wrap" Text="Change Skin Color" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" Width="600"/>
+    <RadioButton x:Name="RB_Skin_FF0000" Content="" Margin="895,378,847,0" Theme="{StaticResource RadioButtonStyle1_colorFF0000}" Height="135" VerticalAlignment="Top" GroupName="skinColor" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_FF7200" Content="" HorizontalAlignment="Left" Height="130.333" Margin="732.667,370.333,0,0" VerticalAlignment="Top" Width="200.333" Theme="{StaticResource RadioButtonStyle1_colorFF7200}" GroupName="skinColor" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_FFEA00" Content="" HorizontalAlignment="Left" Height="104.333" Margin="662.668,343,0,0" VerticalAlignment="Top" Width="222.999" Theme="{StaticResource RadioButtonStyle1_colorFFEA00}" GroupName="skinColor" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_A2FF00" Content="" HorizontalAlignment="Left" Height="83" Margin="665.335,268.333,0,0" VerticalAlignment="Top" Width="212.999" Theme="{StaticResource RadioButtonStyle1_colorA2FF00}" GroupName="skinColor" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_3CFF00" HorizontalAlignment="Left" Height="99.666" Margin="729.002,213.333,0,0" VerticalAlignment="Top" Width="184.666" Theme="{StaticResource RadioButtonStyle1_color3CFF00}" GroupName="skinColor" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked">
+      <Image x:Name="Image_Page_ExtraSetting_bg_extra_setting_layer_3_png" Height="8.667" Source="/image/page_extrasetting/bg_extra_setting_layer_3.png" Stretch="Fill" Width="6.605"/>
+    </RadioButton>
+    <RadioButton x:Name="RB_Skin_00FFE4" Height="84.666" Margin="863.002,204.666,903.665,0" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_color00FFE4}" GroupName="skinColor" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_0066FF" Content="" Height="96.999" Margin="0,208.666,755.998,0" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_color0066FF}" GroupName="skinColor" HorizontalAlignment="Right" Width="172.333" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_A200FF" Content="" Height="79.666" Margin="0,249.666,673.998,0" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_colorA200FF}" GroupName="skinColor" HorizontalAlignment="Right" Width="208.333" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_FF00D2" Content="" Height="83.333" Margin="0,332.999,669.331,0" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_colorFF00D2}" GroupName="skinColor" HorizontalAlignment="Right" Width="211" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <RadioButton x:Name="RB_Skin_FF006C" Content="" Height="117.333" Margin="0,369.332,710.998,0" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_colorFF006C}" GroupName="skinColor" HorizontalAlignment="Right" Width="211" Cursor="Hand" IsCheckedChanged="RB_Skin_Color_Checked"/>
+    <Grid x:Name="grid_FA" Height="489" Margin="0" Width="1496" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+      <Rectangle x:Name="rectangle2" Height="359" Stroke="#FF000000" Margin="70,0,0,37" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="1336" Fill="{Binding BorderBrush, ElementName=userControl_Extra}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_extrasetting/bg_info_flexiaccess_layer_1.png"/>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Image x:Name="Image_Page_ExtraSetting_ic_flexiaccess_png" HorizontalAlignment="Left" Height="46" Margin="100,158.5,0,0" Source="/image/page_extrasetting/ic_flexiaccess.png" Stretch="Fill" VerticalAlignment="Top" Width="46"/>
+      <TextBlock x:Name="textBlock_Copy" Margin="159.5,165.647,0,0" TextWrapping="Wrap" Text="FlexiAccess 2.0" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" Width="347.333" HorizontalAlignment="Left"/>
+      <Image x:Name="Image_Page_ExtraSetting_ic_laptop_png" HorizontalAlignment="Left" Margin="544,237.955,0,133.045" Source="/image/page_extrasetting/ic_laptop.png" Stretch="Fill" Width="176"/>
+      <Image x:Name="Image_Page_ExtraSetting_ic_phone_png" HorizontalAlignment="Right" Margin="0,233.955,310,133.045" Source="/image/page_extrasetting/ic_phone.png" Stretch="Fill" Width="61"/>
+      <Button x:Name="BTN_QRCode" Content="QR Code" HorizontalAlignment="Left" Height="107" Margin="125,0,0,74.5" VerticalAlignment="Bottom" Width="254" FontFamily="Microsoft Sans Serif" FontSize="18.667" Theme="{StaticResource ButtonStyle1_QR}" Foreground="#FFFFFFFF" Cursor="Hand" Background="{x:Null}" BorderBrush="{Binding Fill, ElementName=rectangle2}" Click="BTN_QRCode_Click"/>
+      <TextBlock x:Name="T_IPAddress" Margin="587.333,165.647,0,0" TextWrapping="Wrap" Text="IP Address" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" HorizontalAlignment="Left" Height="30"/>
+      <TextBlock x:Name="T_IP_value" Margin="0,149.647,446.787,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="40" HorizontalAlignment="Right" Height="46" Background="#7F3D3D3D" Width="324.213" TextAlignment="Center"/>
+      <Path Data="M808.95284,130.00253 L796.83302,129.83366 L796.19614,213.59293 L807.03939,214.2669" HorizontalAlignment="Left" Height="75" Margin="536.333,137.833,0,0" Stretch="Fill" Stroke="#FFFFFFFF" VerticalAlignment="Top" Width="10"/>
+      <Path Data="M808.95284,130.00253 L796.83302,129.83366 L796.19614,213.59293 L807.03939,214.2669" HorizontalAlignment="Right" Height="75" Margin="0,134.833,162.332,0" Stretch="Fill" Stroke="#FFFFFFFF" VerticalAlignment="Top" Width="10" RenderTransformOrigin="50%,50%">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+            <SkewTransform AngleY="0" AngleX="0"/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform/>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+      <TextBlock x:Name="T_connect_staus" Margin="725,0,376,205.045" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" Height="30" TextAlignment="Center" Width="395" HorizontalAlignment="Right"/>
+      <TextBlock x:Name="T_NB_name" Margin="513,0,747.623,52.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" Height="60.545" TextAlignment="Center"/>
+      <TextBlock x:Name="T_phome_name" Margin="0,0,220.623,52.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" Height="60.545" TextAlignment="Center" HorizontalAlignment="Right" Width="235.377"/>
+      <Rectangle x:Name="image_connect_line_laye1" Height="20" Stroke="#FF000000" Margin="725,0,376,161.5" VerticalAlignment="Bottom" Fill="{Binding BorderBrush, ElementName=userControl_Extra}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_extrasetting/connect_line_layer_1.png"/>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <TextBlock x:Name="tb_port_txt" Margin="1065.833,165.647,0,0" TextWrapping="Wrap" Text="Port: " VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" HorizontalAlignment="Left" Height="30"/>
+      <TextBlock x:Name="tb_port_value" Margin="1139.333,149.647,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="40" HorizontalAlignment="Left" Height="46" Background="#7F3D3D3D" Width="158.236" TextAlignment="Center"/>
+      <WrapPanel x:Name="WP_FAOnOff" HorizontalAlignment="Left" Margin="100,233.955,0,186.5" Width="431.333">
+        <RadioButton x:Name="RB_FA_OFF" Content="OFF" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_ONOFF}" VerticalContentAlignment="Center" Cursor="Hand" GroupName="FA_OnOff" IsChecked="True" Height="46" Background="{Binding Fill, ElementName=rectangle2}" Click="RB_FA_OFF_Click"/>
+        <RadioButton x:Name="RB_FA_ON" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" GroupName="FA_OnOff" Content="ON" Height="46" Margin="20,0,0,0" Background="{Binding Fill, ElementName=rectangle2}" Click="RB_FA_ON_Click"/>
+      </WrapPanel>
+    </Grid>
+    <Grid x:Name="grid_FA_QR" Height="485" Margin="357.666,434.333,623.333,160.667" Width="939" IsVisible="False">
+      <Grid.Background>
+        <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+          <GradientStop Color="Black" Offset="1"/>
+          <GradientStop Color="#BF000000"/>
+        </LinearGradientBrush>
+      </Grid.Background>
+      <Rectangle x:Name="rectangle1" Margin="0" Fill="{Binding Fill, ElementName=rectangle}">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_extrasetting/bg_qr_code_layer_2.png"/>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Image x:Name="Image_Page_ExtraSetting_FA_AppStore_png" HorizontalAlignment="Right" Height="100" Margin="0,65.834,176.667,0" Source="/image/page_extrasetting/fa/appstore.png" Stretch="Fill" VerticalAlignment="Top" Width="300"/>
+      <Image x:Name="Image_Page_ExtraSetting_FA_GooglePlay_png" HorizontalAlignment="Left" Height="100" Margin="64.333,65.834,0,0" Source="/image/page_extrasetting/fa/googleplay.png" Stretch="Fill" VerticalAlignment="Top" Width="300"/>
+      <Rectangle x:Name="QR_A" Margin="64.333,170.833,0,12.166" Fill="#FFFFFFFF" Height="302" HorizontalAlignment="Left" Width="300" Cursor="Hand" ToolTip.Tip="https://play.google.com/store/apps/details?id=com.fa.flexiaccess" PointerPressed="QR_A_MouseDown">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_extrasetting/fa/qrcode_awifi.png"/>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Rectangle x:Name="QR_I" Margin="462.333,170.833,176.667,12.166" Fill="#FFFFFFFF" Height="302" Cursor="Hand" ToolTip.Tip="https://itunes.apple.com/app/flexiaccess/id1170989382?mt=8" PointerPressed="QR_I_MouseDown">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/image/page_extrasetting/fa/qrcode_ios.png"/>
+        </Rectangle.OpacityMask>
+      </Rectangle>
+      <Button x:Name="BTN_close" Content="" Margin="0,9.583,11.3,0" BorderThickness="0" Theme="{StaticResource S_BTN_CLOSE}" Width="80" HorizontalAlignment="Right" Height="60" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="{Binding Fill, ElementName=rectangle1}" Foreground="{x:Null}" Click="BTN_FA_QR_close_Click"/>
+    </Grid>
+    <Grid x:Name="grid_Headphone" HorizontalAlignment="Right" Margin="0" Width="605.5" VerticalAlignment="Bottom" Height="961">
+      <Path x:Name="path_hp" Data="M24.5,0 L382,0" Height="2" Margin="104.5,151,46.283,0" Stretch="Fill" VerticalAlignment="Top" StrokeThickness="2" StrokeDashArray="1.5,1.5" Stroke="{Binding BorderBrush, ElementName=userControl_Extra}"/>
+      <Path x:Name="path_hp2" Data="M24.5,0 L382,0" Height="2" Margin="104.5,0,95,14.1" Stretch="Fill" VerticalAlignment="Bottom" StrokeThickness="2" StrokeDashArray="1.5,1.5" Stroke="{Binding Stroke, ElementName=path_hp}"/>
+      <Path x:Name="path_hp3" Data="M19.5,108.434 L19.5,357.434" HorizontalAlignment="Right" Margin="0,254.884,19.1,92.116" Stretch="Fill" StrokeThickness="2" Width="2" StrokeDashArray="1.5,1.5" Stroke="{Binding Stroke, ElementName=path_hp}"/>
+      <Path x:Name="path_hp4" Data="M2.5663332,348.23433 L2.5666668,375.23434 L48.007342,424.29785 L75.872747,424.36834" HorizontalAlignment="Right" Height="78.133" Margin="0,0,19,14.083" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="75.233" RenderTransformOrigin="50%,50%" Stroke="{Binding Stroke, ElementName=path_hp}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+            <SkewTransform AngleY="0" AngleX="0"/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform/>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+      <Path x:Name="path_hp5" Data="M27.432996,1.9338688 L2.7653421,1.9338688 L2.7663342,104.36994" HorizontalAlignment="Right" Height="104.333" Margin="0,150.909,19.217,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="26.666" RenderTransformOrigin="50%,50%" Stroke="{Binding Stroke, ElementName=path_hp}">
+        <Path.RenderTransform>
+          <TransformGroup>
+            <ScaleTransform ScaleY="1" ScaleX="-1"/>
+            <SkewTransform AngleY="0" AngleX="0"/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform/>
+          </TransformGroup>
+        </Path.RenderTransform>
+      </Path>
+      <StackPanel x:Name="SP_Hpadphone" Margin="104.5,151,27,41">
+        <StackPanel x:Name="SP_ESS" Height="373.8" Margin="22.2,0,10,0">
+          <Grid Height="447.667" Margin="0,0,-32.2,0">
+            <Image x:Name="image3" HorizontalAlignment="Left" Height="46" Margin="22.001,22.333,0,0" VerticalAlignment="Top" Width="46" Source="/image/page_extrasetting/hp_impedance/ic_headphone_impedance.png" Stretch="Uniform"/>
+            <TextBlock x:Name="T_HPI" Margin="91.001,32.113,34.166,0" TextWrapping="Wrap" Text="Headphone Impedance" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667"/>
+            <Rectangle Margin="147.801,0,71.199,81.738" Height="255" VerticalAlignment="Bottom">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/page_extrasetting/hp_impedance/bg_impedance_range_inactive.png"/>
+              </Rectangle.Fill>
+            </Rectangle>
+            <TextBlock x:Name="T_i49" Margin="119.074,0,0,197.591" TextWrapping="Wrap" Text="49" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="T_i96" Margin="191.074,103.129,0,0" TextWrapping="Wrap" Text="96" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" HorizontalAlignment="Left"/>
+            <TextBlock x:Name="T_i240" Margin="0,107.609,95.999,0" TextWrapping="Wrap" Text="240" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="T_i630" Margin="0,0,30.609,197.591" TextWrapping="Wrap" Text="630" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="21.333" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="T_ESS_vaule" Margin="0,0,138.162,191.431" TextWrapping="Wrap" Text="Unknown" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="29.333" HorizontalAlignment="Right"/>
+          </Grid>
+        </StackPanel>
+        <StackPanel x:Name="SP_HP" Height="312" Margin="10,0">
+          <Grid Height="447.667" Margin="0,0,-20,0">
+            <Image x:Name="image1" HorizontalAlignment="Left" Height="46" Margin="22.001,22.333,0,0" VerticalAlignment="Top" Width="46" Source="/image/page_extrasetting/ic_headphone.png" Stretch="Uniform"/>
+            <TextBlock x:Name="T_HP" Margin="91.001,32.113,34.166,0" TextWrapping="Wrap" Text="Headphone" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667"/>
+            <RadioButton x:Name="CB_HP_music" Content="Music" Height="29" Margin="91.001,0,47.999,331.668" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" GroupName="HP" Theme="{StaticResource RadioButtonStyle1_HP}" Cursor="Hand" Width="335" BorderBrush="{x:Null}" Click="CB_HP_music_Click"/>
+            <RadioButton x:Name="CB_HP_game" Content="Game" Margin="91.001,138.332,47.999,0" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" GroupName="HP" Theme="{StaticResource RadioButtonStyle1_HP}" Cursor="Hand" Width="335" Height="29" VerticalAlignment="Top" BorderBrush="{x:Null}" Click="CB_HP_game_Click"/>
+            <RadioButton x:Name="CB_HP_theater" Content="Theater" Height="29" Margin="91.001,186.665,47.999,0" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" GroupName="HP" Theme="{StaticResource RadioButtonStyle1_HP}" Cursor="Hand" Width="335" BorderBrush="{x:Null}" Click="CB_HP_theater_Click"/>
+            <RadioButton x:Name="CB_HP_direct" Content="Direct" Height="29" Margin="91.001,0,47.999,181.335" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" GroupName="HP" Theme="{StaticResource RadioButtonStyle1_HP}" Cursor="Hand" Width="335" BorderBrush="{x:Null}" Click="CB_HP_direct_Click"/>
+          </Grid>
+        </StackPanel>
+      </StackPanel>
+    </Grid>
+    <Grid x:Name="grid_switch" HorizontalAlignment="Left" Margin="59.5,249.666,0,404.334" Width="382">
+      <Path x:Name="path_sw" Data="M24.5,0 L382,0" Height="2" Margin="29.983,1,-0.75,0" Stretch="Fill" VerticalAlignment="Top" StrokeThickness="2" StrokeDashArray="1.5,1.5" Stroke="{Binding BorderBrush, ElementName=userControl_Extra}"/>
+      <Path x:Name="path_sw2" Data="M24.5,0 L382,0" Height="2" Margin="79.033,0,-2.4,0.835" Stretch="Fill" VerticalAlignment="Bottom" StrokeThickness="2" StrokeDashArray="1.5,1.5" Stroke="{Binding Stroke, ElementName=path_sw}"/>
+      <Path x:Name="path_sw3" Data="M19.5,108.434 L19.5,357.434" HorizontalAlignment="Left" Margin="1.75,106.934,0,79.566" Stretch="Fill" StrokeThickness="2" Width="2" StrokeDashArray="1.5,1.5" Stroke="{Binding Stroke, ElementName=path_sw}"/>
+      <Path x:Name="path_sw4" Data="M2.5663332,348.23433 L2.5666668,375.23434 L48.007342,424.29785 L75.872747,424.36834" HorizontalAlignment="Left" Height="78.133" Margin="1.567,0,0,0.633" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="75.233" Stroke="{Binding Stroke, ElementName=path_sw}"/>
+      <Path x:Name="path_sw5" Data="M27.432996,1.9338688 L2.7653421,1.9338688 L2.7663342,104.36994" HorizontalAlignment="Left" Height="104.333" Margin="1.767,0.934,0,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="26.666" Stroke="{Binding Stroke, ElementName=path_sw}"/>
+      <Grid x:Name="grid_GPUSwitch" Margin="24.5,28,33,227">
+        <Image x:Name="image2" HorizontalAlignment="Left" Height="46" Margin="22.001,22.333,0,0" VerticalAlignment="Top" Width="46" Source="/image/page_extrasetting/ic_gpu_switch.png" Stretch="Uniform"/>
+        <TextBlock x:Name="t_GPUSwitch" Margin="91.001,32.113,0,0" TextWrapping="Wrap" Text="GPU Switch" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Left" Height="30"/>
+        <Slider x:Name="SL_GPUSwitch" Margin="91.001,79.334,15.5,0" Theme="{StaticResource SliderStyle1_ONOFF}" Maximum="1" SmallChange="1" Cursor="Hand" Tag="MSHybrid" VerticalAlignment="Top" Height="37" BorderBrush="{Binding BorderBrush, ElementName=userControl_Extra}" ValueChanged="SL_GPUSwitch_ValueChanged"/>
+        <RadioButton x:Name="RBTN_GPUSwitch_MSHybrid" Content="MSHybrid" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="16" VerticalContentAlignment="Center" Theme="{StaticResource RBTN_CPU}" GroupName="GPUSwitchBTN" IsChecked="True" Cursor="Hand" Margin="81.868,0,142.632,33.539" VerticalAlignment="Bottom" Width="100" IsCheckedChanged="RBTN_GPUSwitch_MSHybrid_Checked"/>
+        <RadioButton x:Name="RBTN_GPUSwitch_Discrete" Content="Discrete" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="16" VerticalContentAlignment="Center" Theme="{StaticResource RBTN_CPU}" GroupName="GPUSwitchBTN" Cursor="Hand" Margin="0,0,0,34.096" VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Right" IsCheckedChanged="RBTN_GPUSwitch_Discrete_Checked"/>
+      </Grid>
+    </Grid>
+    <UControl:UserControl_DialogBox x:Name="UC_DialogBox" Margin="0" Width="NaN" IsVisible="False"/>
+    <Grid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
+  </Grid>
+</UserControl>

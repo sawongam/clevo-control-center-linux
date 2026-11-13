@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" xmlns:UControl="using:CC.UControl"
+    x:Class="CC.UControl.UserControl_profile"
+    Width="130"
+    Height="110">
+  <Grid Cursor="Hand">
+    <TextBlock x:Name="T_porfileName" Height="20" Margin="0" TextWrapping="Wrap" Text="Profile" VerticalAlignment="Bottom" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="16" HorizontalAlignment="Center" Width="130" TextAlignment="Center"/>
+    <Image x:Name="image_profile" Margin="0" Source="/image/page_flexikey/profile/btn_profile_normal.png" Width="87" Height="87" VerticalAlignment="Top" HorizontalAlignment="Center" Stretch="Uniform"/>
+  </Grid>
+</UserControl>

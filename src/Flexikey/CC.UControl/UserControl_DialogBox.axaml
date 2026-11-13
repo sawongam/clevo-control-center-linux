@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" xmlns:UControl="using:CC.UControl"
+    x:Class="CC.UControl.UserControl_DialogBox"
+    x:Name="UC_DialogBox"
+    Width="1920"
+    Height="1080">
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+    <ControlTheme x:Key="ButtonStyle1_OK" TargetType="Button">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+      <Setter Property="Foreground" Value="#FF000000"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Padding" Value="1"/>
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}">
+            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^ /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="0"/>
+            <GradientStop Color="#FF4B4B4B" Offset="1"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="0"/>
+            <GradientStop Color="#FF959595" Offset="1"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1"/>
+            <GradientStop Color="#FF4B4B4B" Offset="0"/>
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:disabled /template/ Border#border">
+        <Setter Property="Background" Value="{StaticResource Button.Disabled.Background}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ ContentPresenter#contentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Button.Disabled.Foreground}"/>
+      </Style>
+    </ControlTheme>
+  </UserControl.Resources>
+  <Grid x:Name="DialogBox" HorizontalAlignment="Left" Margin="0" Width="1920" Height="1080" VerticalAlignment="Top" Background="#B2242424">
+    <Image x:Name="Image_dialog_bg_dialog_png" Margin="0" Source="/image/dialog/bg_dialog.png" Stretch="Fill" Width="950" HorizontalAlignment="Center" Height="460" VerticalAlignment="Center"/>
+    <Image x:Name="Image_dialog_restart" HorizontalAlignment="Left" Margin="567.5,454,0,486" Source="/image/dialog/ic_dialog_restart.png" Stretch="Fill" Width="140" IsVisible="False"/>
+    <Image x:Name="Image_dialog_warning" HorizontalAlignment="Left" Margin="567.5,454,0,486" Source="/image/dialog/ic_dialog_warning.png" Stretch="Fill" Width="140"/>
+    <Button x:Name="BTN_Cancel" Content="Cancel" HorizontalAlignment="Right" Height="69" Margin="0,0,510.389,352.444" VerticalAlignment="Bottom" Width="449" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" Click="BTN_Cancel_Click"/>
+    <Grid Margin="739.5,324.5,511.5,417.5">
+      <TextBlock x:Name="T_Dialog_info" Margin="1.5,0" TextWrapping="Wrap" Text="Activating GPU Overclock may reduce system stability, useful life of the system and affect system data integrity." Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="26.667" HorizontalAlignment="Center" VerticalAlignment="Center" Width="660"/>
+    </Grid>
+    <Button x:Name="BTN_OK" Content="OK" HorizontalAlignment="Left" Height="69" Margin="507.5,0,0,352" VerticalAlignment="Bottom" Width="449" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" BorderBrush="{x:Null}" Click="BTN_OK_Click"/>
+  </Grid>
+</UserControl>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:CC" xmlns:UControl="using:CC.UControl"
+    x:Class="CC.UControl.UserControl_ExpressKey"
+    Width="355"
+    Height="40">
+  <Grid x:Name="main">
+    <Rectangle Height="30" StrokeThickness="0" VerticalAlignment="Top" Opacity="0.2" Margin="0,5,33.6,0">
+      <Rectangle.Fill>
+        <LinearGradientBrush EndPoint="108.6%,53.9%" StartPoint="0.4%,48.5%">
+          <GradientStop Color="#00000000" Offset="1"/>
+          <GradientStop Color="White" Offset="0.325"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+    <WrapPanel Height="30" Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350">
+      <TextBlock x:Name="T_KeyName" TextWrapping="Wrap" Text="backspace" Width="200" Foreground="#FFFFFFFF" FontSize="24" FontFamily="Microsoft Sans Serif" TextAlignment="Center" Height="30" Margin="10,0,0,0"/>
+      <Grid x:Name="grid_action" Height="19" Width="20" Margin="20,0">
+        <Path x:Name="path_up" Data="M0.5,13.25 L7.4,0.25 L14.9,13.1" Fill="#FF7D00FF" Stretch="Fill" Width="20" StrokeThickness="0" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsVisible="False"/>
+        <Path x:Name="path_down" Data="M0.5,13.25 L7.4,0.25 L14.9,13.1" Fill="#FFFFA200" Height="19" Stretch="Fill" Width="20" StrokeThickness="0" Margin="0" RenderTransformOrigin="50%,50%" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+          <Path.RenderTransform>
+            <TransformGroup>
+              <ScaleTransform ScaleY="-1" ScaleX="1"/>
+              <SkewTransform AngleY="0" AngleX="0"/>
+              <RotateTransform Angle="0"/>
+              <TranslateTransform/>
+            </TransformGroup>
+          </Path.RenderTransform>
+        </Path>
+      </Grid>
+      <TextBox x:Name="TB_Delay_Time" Height="30" TextWrapping="Wrap" Text="60000" FontSize="24" FontFamily="Microsoft Sans Serif" TextAlignment="Center" Foreground="#FFFFFFFF" Width="80" BorderBrush="#FFFFFFFF" Background="{x:Null}" KeyUp="TB_Delay_Time_KeyUp"/>
+    </WrapPanel>
+    <TextBlock x:Name="T_Delay_Time0" Margin="0,0,5,0" TextWrapping="Wrap" Width="80" Text="0" Foreground="#FFA5A5A5" FontFamily="Microsoft Sans Serif" FontSize="24" TextAlignment="Center" HorizontalAlignment="Right" Height="30" IsVisible="False"/>
+  </Grid>
+</UserControl>
