@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- original Windows app version; some code reads it (UI text, firmware handshake) -->
+    <AssemblyVersion>3.94.0.0</AssemblyVersion>
+    <FileVersion>3.94.0.0</FileVersion>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>ControlCenter30</AssemblyName>
+    <RootNamespace>ControlCenter30</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <AvaloniaResource Include="image/**" />
+    <AvaloniaResource Include="ic_close.png;ic_fullscreen.png;ic_minimize.png;logo.ico" />
+    <Content Include="Data/mtlanguage.ini" Link="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

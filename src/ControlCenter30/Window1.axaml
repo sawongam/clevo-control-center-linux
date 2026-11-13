@@ -1,0 +1,941 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:ControlCenter30"
+    x:Class="ControlCenter30.Window1"
+    Title="ControlCenter3.0" Icon="/logo.ico" FontSize="12"
+    Width="1068" Height="692" CanResize="False" WindowDecorations="None"
+    TransparencyLevelHint="Transparent" Background="Transparent"
+    Topmost="True" WindowStartupLocation="CenterScreen">
+  <Window.Resources>
+    <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070" />
+    <ControlTheme TargetType="Button" x:Key="S_BTN_CLOSE">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Margin="0" Background="{x:Null}">
+            <Image Name="Image_ic_close_png" Margin="0" Source="/image/ic_close.png" Stretch="Fill" />
+            <Rectangle Name="rectangle" Margin="0" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                  <GradientStop Color="#00000000" />
+                  <GradientStop Color="#33FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1" />
+            <GradientStop Color="#66FFFFFF" Offset="0" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" />
+            <GradientStop Color="#66FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="Button" x:Key="BTN_MIN">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Margin="0" Background="{x:Null}">
+            <Image Name="Image_ic_close_png" Margin="0" Source="/ic_minimize.png" Stretch="Fill" />
+            <Rectangle Name="rectangle" Margin="0" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                  <GradientStop Color="#00000000" />
+                  <GradientStop Color="#33FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1" />
+            <GradientStop Color="#66FFFFFF" Offset="0" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" />
+            <GradientStop Color="#66FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle1_entertainment2">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Path Name="path" Grid.ColumnSpan="2" Data="M6.6676679,118.66715 C9.6683379,115.33392 145.8404,34.700784 148.13518,35.776978 C393.33471,138.0007 318.26326,309.64176 239.0899,358.40174 C239.0899,358.40174 6.4231495,216.73505 6.4231495,216.73505 C6.4231495,216.73505 88.00104,182.66696 6.6676679,118.66715" Margin="6.423,35.766,53.675,52.597" Stretch="Fill" StrokeThickness="0" VerticalAlignment="Stretch" Fill="#FF000000" Opacity="0.8" Focusable="False" Stroke="{x:Null}" />
+            <Rectangle Name="btn_normal" Grid.Column="1" Margin="0" StrokeThickness="0" Width="369" Height="411" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" IsHitTestVisible="False" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/btn_mode_entertainment_layer1_selected_2.png" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Name="btn_selected" Grid.Column="1" Fill="{TemplateBinding BorderBrush}" Margin="0" StrokeThickness="0" Width="369" Height="411" HorizontalAlignment="Left" VerticalAlignment="Top" IsVisible="False" IsHitTestVisible="False" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/btn_mode_entertainment_layer1_selected_1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="ic_disable" Grid.Column="1" Margin="0,0,0,175" StrokeThickness="0" Width="140" Height="140" HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/ic_performance.png" Stretch="Fill" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <ContentPresenter Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="92,217,0,0" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+            <TextBlock Name="textBlock" Grid.ColumnSpan="2" Height="94.2" Margin="47,0,47,99.8" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#FFADADAD" FontSize="24" Text="{Binding #contentPresenter.Content}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#btn_normal">
+        <Setter Property="Opacity" Value="0.8" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#btn_selected">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#ic_disable">
+        <Setter Property="Height" Value="160" />
+        <Setter Property="Width" Value="160" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle1_performance2">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" IsHitTestVisible="True">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="738" />
+            </Grid.ColumnDefinitions>
+            <Path Grid.ColumnSpan="1" Data="M284.88763,3.1116801 L55.109417,135.99827 C55.113549,140.52295 55.994629,141.25135 55.99876,145.77603 C115.98609,196.20018 430.43016,303.31027 689.77673,147.5533 C688.66138,143.02851 689.5587,139.63362 688.44334,135.10883 C688.44334,135.10883 461.5258,2.0099109 457.77664,3.5560538 C366.44327,41.221719 284.88763,3.1116801 284.88763,3.1116801" Margin="55.111,3.111,48.222,21.196" Stretch="Fill" StrokeThickness="0" Focusable="False" Opacity="0.8" Fill="#FF000000" Stroke="{x:Null}" />
+            <Rectangle Name="btn_normal" Grid.Column="0" Margin="53,0,0,0" StrokeThickness="0" Width="638" Height="231" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Focusable="False" IsHitTestVisible="False" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/btn_mode_performance_layer1_selected_2.png" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Name="btn_selected" Grid.Column="0" Fill="{TemplateBinding BorderBrush}" Margin="0" StrokeThickness="0" Width="738" Height="250" HorizontalAlignment="Left" VerticalAlignment="Top" IsVisible="False" Focusable="False" IsHitTestVisible="False" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/btn_mode_performance_layer1_selected_1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="ic_disable" Margin="0,0,0,70" StrokeThickness="0" Width="140" Height="140" HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/ic_entertainment.png" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <ContentPresenter Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="92,217,0,0" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+            <TextBlock Name="textBlock" Grid.ColumnSpan="1" Height="57.2" Margin="134,0,130,33" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#FFADADAD" FontSize="24" IsHitTestVisible="True" Text="{Binding #contentPresenter.Content}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#btn_normal">
+        <Setter Property="Opacity" Value="0.8" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#btn_selected">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#ic_disable">
+        <Setter Property="Width" Value="180" />
+        <Setter Property="Height" Value="180" />
+      </Style>
+      <Style Selector="^:not(:checked) /template/ Rectangle#ic_disable">
+        <Setter Property="Width" Value="140" />
+        <Setter Property="Height" Value="140" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle1_PowerSaving2">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Path Name="path" Grid.ColumnSpan="2" Data="M6.6676679,118.66715 C9.6683379,115.33392 145.8404,34.700784 148.13518,35.776978 C393.33471,138.0007 318.26326,309.64176 239.0899,358.40174 C239.0899,358.40174 6.4231495,216.73505 6.4231495,216.73505 C6.4231495,216.73505 88.00104,182.66696 6.6676679,118.66715" Margin="53.756,41.099,6.342,47.264" Stretch="Fill" StrokeThickness="0" VerticalAlignment="Stretch" Fill="#FF000000" Opacity="0.8" Focusable="False" RenderTransformOrigin="50%,50%" Stroke="{x:Null}">
+              <Path.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="-1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Path.RenderTransform>
+            </Path>
+            <Rectangle Name="btn_normal" Grid.Column="1" Margin="48,36.667,0,0" StrokeThickness="0" Width="315" Height="324" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" IsHitTestVisible="False" RenderTransformOrigin="50%,50%" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/btn_mode_power_saving_layer1_selected_2.png" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Name="btn_selected" Grid.Column="1" Fill="{TemplateBinding BorderBrush}" Margin="0" StrokeThickness="0" Width="363" Height="403" HorizontalAlignment="Left" VerticalAlignment="Top" IsVisible="False" IsHitTestVisible="False" RenderTransformOrigin="50%,50%" Stroke="{x:Null}">
+              <Rectangle.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="1" ScaleX="1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform />
+                </TransformGroup>
+              </Rectangle.RenderTransform>
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/btn_mode_power_saving_layer1_selected_1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="ic_disable" Grid.Column="1" Margin="0,0,0,166" StrokeThickness="0" Width="140" Height="140" HorizontalAlignment="Center" VerticalAlignment="Bottom" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/ic_power_saving.png" Stretch="Fill" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <ContentPresenter Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="92,217,0,0" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+            <TextBlock Name="textBlock" Grid.ColumnSpan="2" Height="77.311" Margin="80.222,0,60.334,105.616" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#FFADADAD" FontSize="24" Text="{Binding #contentPresenter.Content}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#btn_normal">
+        <Setter Property="Opacity" Value="0.8" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#btn_selected">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#ic_disable">
+        <Setter Property="Height" Value="160" />
+        <Setter Property="Width" Value="160" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle1_quiet2">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" IsHitTestVisible="True" ShowGridLines="False" ClipToBounds="False" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="600.002" />
+            </Grid.ColumnDefinitions>
+            <Path Grid.ColumnSpan="1" Data="M248.68859,-18.037764 L55.56945,146.2245 C55.573582,150.74918 56.787519,148.84188 56.79165,153.36656 C133.79461,200.68098 419.80751,297.09581 683.20815,156.0441 C682.0928,151.51931 686.15698,148.96383 685.04162,144.43904 C685.04162,144.43904 495.32084,-18.464315 491.92176,-16.252304 C362.9718,67.664079 248.68859,-18.037764 248.68859,-18.037764" Margin="75.001,35.418,67.079,-8.764" Stretch="Fill" StrokeThickness="0" Focusable="False" Opacity="0.8" Fill="#FF000000" RenderTransformOrigin="50%,50%" Stroke="{x:Null}">
+              <Path.RenderTransform>
+                <TransformGroup>
+                  <ScaleTransform ScaleY="-1" ScaleX="1" />
+                  <SkewTransform AngleY="0" AngleX="0" />
+                  <RotateTransform Angle="0" />
+                  <TranslateTransform Y="-10.986999999999966" />
+                </TransformGroup>
+              </Path.RenderTransform>
+            </Path>
+            <Rectangle Name="btn_normal" Grid.Column="0" Margin="73.889,20,0,0" StrokeThickness="0" Width="459" Height="130" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Focusable="False" IsHitTestVisible="False" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/btn_mode_quiet_layer1_selected_2.png" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Name="btn_selected" Grid.Column="0" Fill="{TemplateBinding BorderBrush}" Margin="0" StrokeThickness="0" Width="600" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" IsVisible="False" Focusable="True" IsHitTestVisible="False" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/btn_mode_quiet_layer1_selected_1.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="ic_disable" Grid.Column="0" Margin="0,-200,0,51" StrokeThickness="0" Width="140" Height="140" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsHitTestVisible="True" Stroke="{x:Null}" OpacityMask="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/ic_quite.png" Stretch="Fill" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <ContentPresenter Name="contentPresenter" Grid.Column="0" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="92,217,0,-67" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" IsVisible="False" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+            <TextBlock Name="textBlock" Grid.ColumnSpan="1" Height="40.756" Margin="175.001,0,175.001,28.815" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" Foreground="#FFADADAD" FontSize="24" IsHitTestVisible="True" Width="250" Text="{Binding #contentPresenter.Content}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#btn_normal">
+        <Setter Property="Opacity" Value="0.8" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#btn_selected">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#ic_disable">
+        <Setter Property="Width" Value="160" />
+        <Setter Property="Height" Value="160" />
+      </Style>
+    </ControlTheme>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+    <ControlTheme TargetType="Button" x:Key="Btn_back">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Image Name="image" Margin="0" Source="/image/btn_back_normal.png" Stretch="Fill" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Image#image">
+        <Setter Property="Source" Value="/image/btn_back_hover.png" />
+      </Style>
+      <Style Selector="^:pressed /template/ Image#image">
+        <Setter Property="Source" Value="/image/btn_back_pressed.png" />
+      </Style>
+    </ControlTheme>
+    <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
+    <ControlTheme TargetType="CheckBox" x:Key="CheckBoxStyle2">
+      <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle_Copy" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="#FF575757" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFB4B4B4" FontSize="24" FontFamily="Microsoft Sans Serif" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:disabled /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:disabled /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:not(:checked):not(:disabled) /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:not(:checked):not(:disabled) /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/btn_enable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:not(:checked):not(:disabled) /template/ Rectangle#rectangle_Copy">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked:not(:disabled) /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked:not(:disabled) /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/btn_disable.png" />
+        </Setter>
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="Button" x:Key="ButtonStyle_APP">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Margin="0" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <Rectangle Name="R_BR" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1.6" StrokeDashArray="1,2,1,2" Margin="5,0,0,0" Fill="#02000000" />
+            <Rectangle Name="R_image" StrokeThickness="2" StrokeDashArray="1,2,1,2" Margin="5,0,0,0" Width="140" Height="140" Fill="{TemplateBinding Background}" IsVisible="False" />
+            <Image Name="App" Height="140" Width="140" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center" IsVisible="False" Source="/image/btn_disable.png" />
+            <TextBlock Name="textBlock" HorizontalAlignment="Stretch" Margin="0,200,0,0" TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Text="{TemplateBinding Tag}" />
+            <ContentPresenter HorizontalAlignment="Center" Height="140" Margin="0" VerticalAlignment="Center" Width="140" Content="{TemplateBinding Content}" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#R_BR">
+        <Setter Property="Fill">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="Transparent" Offset="0" />
+            <GradientStop Color="#19FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#R_BR">
+        <Setter Property="Fill" Value="#4C000000" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle1">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle_Copy" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="#FF575757" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFB4B4B4" FontSize="18.667" FontFamily="Microsoft Sans Serif" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/btn_disable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle2_newPerformance">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="{x:Null}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Name="rectangle1" Fill="{TemplateBinding BorderBrush}" Margin="2" StrokeThickness="0" Grid.ColumnSpan="2" IsVisible="False" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <RadialGradientBrush RadiusX="248.6%" RadiusY="112.6%" Center="50.9%,18.6%" GradientOrigin="50.9%,19.7%">
+                  <GradientStop Color="#CCFFFFFF" Offset="0" />
+                  <GradientStop Color="#19818181" Offset="0.353" />
+                  <GradientStop Color="#7FB9B9B9" Offset="0.087" />
+                  <GradientStop Color="#00818181" Offset="0.546" />
+                </RadialGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="R_BR_Copy" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1.6" StrokeDashArray="1,2,1,2" Margin="0" Fill="#02000000" Grid.ColumnSpan="2" IsVisible="False" />
+            <Path Name="path" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Right" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="2" Margin="0" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path1" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Right" Height="2" Margin="0,0,-1,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="21" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path2" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Left" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="2" Margin="0" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path3" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Left" Height="2" Margin="-1,0,0,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="21" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path4" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Left" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="2" Margin="0" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path5" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Left" Height="2" Margin="-1,0,0,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="21" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path6" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Right" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="2" Margin="0" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Path Name="path7" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Right" Height="2" Margin="0,0,-1,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="21" Stroke="{TemplateBinding BorderBrush}" IsVisible="False" />
+            <Rectangle Name="rectangle" Margin="2" StrokeThickness="0" Grid.ColumnSpan="2" IsVisible="True" Fill="#FF1A1A1A" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                  <GradientStop Color="#4C000000" Offset="0" />
+                  <GradientStop Offset="0.647" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <Rectangle Name="R_BR" Stroke="#FF5C5C5C" StrokeThickness="1.6" StrokeDashArray="1,2,1,2" Margin="0" Fill="#02000000" Grid.ColumnSpan="2" />
+            <Path Name="path8" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Right" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="2" Margin="0" Stroke="#FF5C5C5C" />
+            <Path Name="path9" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Right" Height="2" Margin="0,0,-1,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="21" Stroke="#FF5C5C5C" />
+            <Path Name="path10" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Left" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="2" Margin="0" Stroke="#FF5C5C5C" />
+            <Path Name="path11" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Left" Height="2" Margin="-1,0,0,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Top" Width="21" Stroke="#FF5C5C5C" />
+            <Path Name="path12" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Left" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="2" Margin="0" Stroke="#FF5C5C5C" />
+            <Path Name="path13" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Left" Height="2" Margin="-1,0,0,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="21" Stroke="#FF5C5C5C" />
+            <Path Name="path14" Grid.ColumnSpan="2" Data="M2,20.222222 L2,0" Fill="#02000000" HorizontalAlignment="Right" Height="21.266" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="2" Margin="0" Stroke="#FF5C5C5C" />
+            <Path Name="path15" Grid.ColumnSpan="2" Data="M229.66667,5.0833333 L248.95833,5.125" HorizontalAlignment="Right" Height="2" Margin="0,0,-1,0" Stretch="Fill" StrokeThickness="2" VerticalAlignment="Bottom" Width="21" Stroke="#FF5C5C5C" />
+            <Rectangle Name="ic_disable" Margin="0,30,0,0" StrokeThickness="0" Width="140" Height="140" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Fill="{TemplateBinding Background}" Stroke="{x:Null}" OpacityMask="{x:Null}" />
+            <TextBlock Name="textBlock_Copy3" Height="94.2" Margin="0,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Foreground="#FFADADAD" FontSize="24" Text="{TemplateBinding Content}" HorizontalAlignment="Center" Grid.ColumnSpan="2" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="Fill" Value="#FFFFFFFF" />
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#66FFFFFF" Offset="0" />
+            <GradientStop Offset="0.587" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#R_BR">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path8">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path9">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path10">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path11">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path12">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path13">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path14">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:pointerover /template/ Path#path15">
+        <Setter Property="Stroke" Value="#FF383838" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle1">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock_Copy3">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#R_BR_Copy">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path1">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path2">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path3">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path4">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path5">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path6">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path7">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#R_BR">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path8">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path9">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path10">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path11">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path12">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path13">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path14">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked /template/ Path#path15">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="CheckBox" x:Key="CheckBoxStyle_new">
+      <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
+              <Rectangle Name="rectangle_Copy" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="#FF575757" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+              <Rectangle Name="rectangle" Margin="0" Width="46" Height="46" StrokeThickness="0" Fill="{TemplateBinding Background}" Stroke="{x:Null}">
+                <Rectangle.OpacityMask>
+                  <ImageBrush Source="/image/btn_enable.png" />
+                </Rectangle.OpacityMask>
+              </Rectangle>
+            </Grid>
+            <TextBlock Name="textBlock" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FFB4B4B4" FontSize="20" FontFamily="Microsoft Sans Serif" />
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:disabled /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:disabled /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:checked:disabled /template/ Rectangle#rectangle">
+        <Setter Property="IsVisible" Value="False" />
+      </Style>
+      <Style Selector="^:checked:disabled /template/ Rectangle#rectangle_Copy">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/btn_disable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:not(:checked):not(:disabled) /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFB4B4B4" />
+      </Style>
+      <Style Selector="^:not(:checked):not(:disabled) /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/btn_enable.png" />
+        </Setter>
+      </Style>
+      <Style Selector="^:not(:checked):not(:disabled) /template/ Rectangle#rectangle_Copy">
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+      <Style Selector="^:checked:not(:disabled) /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked:not(:disabled) /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <ImageBrush Source="/image/btn_disable.png" />
+        </Setter>
+        <Setter Property="IsVisible" Value="True" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="ComboBox" x:Key="ComboBoxStyle1">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot">
+            <Rectangle Margin="-6.834,-16.833,-39.166,-15.167" StrokeThickness="0" HorizontalAlignment="Left" Width="149" Fill="{Binding #BTN_close.Background}">
+              <Rectangle.OpacityMask>
+                <ImageBrush Source="/image/btn_gpu_setting_dropdown.png" />
+              </Rectangle.OpacityMask>
+            </Rectangle>
+            <ContentControl Name="contentPresenter" Content="{TemplateBinding SelectionBoxItem}" IsHitTestVisible="False" Margin="0,3,20,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" />
+            <ToggleButton Name="toggleButton" Background="Transparent" BorderThickness="0" Focusable="False" ClickMode="Press" Opacity="0.01" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsChecked="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" />
+            <Popup Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}" MaxHeight="{TemplateBinding MaxDropDownHeight}" PlacementTarget="templateRoot" IsLightDismissEnabled="True" Width="126" Placement="Bottom">
+              <Border Background="#FF272727" BorderThickness="0">
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Height="150">
+                  <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+                </ScrollViewer>
+              </Border>
+            </Popup>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <ControlTheme TargetType="ComboBoxItem" x:Key="{x:Type ComboBoxItem}">
+      <Setter Property="Foreground" Value="#FFFFFFFF" />
+      <Setter Property="Padding" Value="4,3" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ContentPresenter Name="PART_ContentPresenter" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" Content="{TemplateBinding Content}" />
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="#FF3A3A3A" /></Style>
+      <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter"><Setter Property="Background" Value="#FF4A4A4A" /></Style>
+    </ControlTheme>
+  </Window.Resources>
+    <Viewbox Name="VB_main" Margin="0">
+      <Grid Height="692" Width="1068">
+        <Grid.Background>
+          <ImageBrush Source="/image/bg_main_layer1.png" />
+        </Grid.Background>
+        <Rectangle StrokeThickness="0" Margin="0" Width="1034" Height="658" Fill="{Binding #BTN_min.Background}" Stroke="{x:Null}">
+          <Rectangle.OpacityMask>
+            <ImageBrush Source="/image/bg_main_layer2.png" />
+          </Rectangle.OpacityMask>
+        </Rectangle>
+        <UniformGrid Name="Grid_app" Margin="17,142.5,17,25.5" Height="524" VerticalAlignment="Center" IsVisible="True" Columns="1">
+          <Button Name="button_1" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Cursor="Hand" ClipToBounds="True" Tag="app1" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_flexiaccess.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_2" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Cursor="Hand" ClipToBounds="True" IsVisible="False" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_3" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" Cursor="Hand" ClipToBounds="True" IsVisible="False" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_4" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Cursor="Hand" ClipToBounds="True" IsVisible="False" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_5" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Cursor="Hand" ClipToBounds="True" IsVisible="False" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_6" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Cursor="Hand" ClipToBounds="True" IsVisible="False" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_7" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsVisible="False" Cursor="Hand" ClipToBounds="True" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Button Name="button_8" Content="POWER SVAING" Margin="5" Theme="{StaticResource ButtonStyle_APP}" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="19" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" IsVisible="False" Cursor="Hand" ClipToBounds="True" BorderBrush="{Binding #BTN_close.Background}">
+            <Button.Background>
+              <ImageBrush Source="/image/ic_led.png" />
+            </Button.Background>
+          </Button>
+          <Grid Name="G_UpDn_S2" Margin="5" IsVisible="False">
+            <Rectangle Name="R_BR1" StrokeThickness="1.6" StrokeDashArray="1,2,1,2" Margin="5,0,0,0" Stroke="{Binding #BTN_close.Background}" />
+            <Grid HorizontalAlignment="Center" Height="199" Margin="0,18.5,0,0" VerticalAlignment="Top" Width="401">
+              <Path Data="M148.90119,149.45275 C148.06785,149.57741 147.16977,150.80964 147.16974,151.30586 C147.16721,182.89972 147.3231,189.97892 147.3231,189.97892 C148.54768,189.96608 230.11122,189.86273 230.86125,189.86273 C235.60029,189.94079 235.21959,189.81374 235.2196,185.8137 C235.16452,184.56481 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Right" Height="181.794" Margin="0,0,0,-0.333" Stretch="Fill" VerticalAlignment="Bottom" Width="344.866" StrokeThickness="2">
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="Black" Offset="1" />
+                    <GradientStop Color="#19171717" Offset="0.365" />
+                    <GradientStop Color="#192C2C2C" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.26176,151.22355 148.26173,151.71977 C148.2592,183.31363 148.33211,189.86707 148.33211,189.86707 C149.55669,189.85423 230.11122,189.86273 230.86125,189.86273 C235.60029,189.94079 235.21959,189.81374 235.2196,185.8137 C235.16452,184.56481 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="180.115" Margin="56.909,14.2,0,0" Stretch="Fill" VerticalAlignment="Top" Width="338.387" StrokeThickness="2">
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF191717" Offset="1" />
+                    <GradientStop Color="#7F292929" Offset="0.483" />
+                    <GradientStop Color="#190F0F0F" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.28446,151.13593 148.28443,151.63215 C148.2819,183.22601 148.20037,178.78365 148.20037,178.78365 C147.61783,184.94955 150.4504,190.78406 156.11736,190.53372 C157.53231,190.47121 228.037,189.86737 228.78703,189.86737 C233.6621,189.24237 235.66263,184.24232 235.66264,180.24228 C235.42609,179.53267 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="42.275" Margin="70.124,142.867,0,0" Stretch="Fill" VerticalAlignment="Top" Width="89.136" Stroke="#FF000000" StrokeThickness="2">
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF050505" Offset="0.119" />
+                    <GradientStop Color="#FF1E1E1E" Offset="0.273" />
+                    <GradientStop Color="#FF141414" Offset="1" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.28446,151.13593 148.28443,151.63215 C148.2819,183.22601 148.20037,178.78365 148.20037,178.78365 C147.61783,184.94955 150.4504,190.78406 156.11736,190.53372 C157.53231,190.47121 228.037,189.86737 228.78703,189.86737 C233.6621,189.24237 235.66263,184.24232 235.66264,180.24228 C235.42609,179.53267 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="42.275" Margin="183.124,142.224,0,0" Stretch="Fill" VerticalAlignment="Top" Width="89.136" Stroke="#FF000000" StrokeThickness="2">
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF050505" Offset="0.119" />
+                    <GradientStop Color="#FF1E1E1E" Offset="0.273" />
+                    <GradientStop Color="#FF141414" Offset="1" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.28446,151.13593 148.28443,151.63215 C148.2819,183.22601 148.20037,178.78365 148.20037,178.78365 C147.61783,184.94955 150.4504,190.78406 156.11736,190.53372 C157.53231,190.47121 228.037,189.86737 228.78703,189.86737 C233.6621,189.24237 235.66263,184.24232 235.66264,180.24228 C235.42609,179.53267 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="42.275" Margin="295.624,142.224,0,0" Stretch="Fill" VerticalAlignment="Top" Width="89.136" Stroke="#FF000000" StrokeThickness="2">
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF050505" Offset="0.119" />
+                    <GradientStop Color="#FF1E1E1E" Offset="0.273" />
+                    <GradientStop Color="#FF141414" Offset="1" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.28446,151.13593 148.28443,151.63215 C148.2819,183.22601 148.20037,178.78365 148.20037,178.78365 C147.61783,184.94955 150.4504,190.78406 156.11736,190.53372 C157.53231,190.47121 228.037,189.86737 228.78703,189.86737 C233.6621,189.24237 235.66263,184.24232 235.66264,180.24228 C235.42609,179.53267 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="42.275" Margin="295.124,96.391,0,0" Stretch="Fill" VerticalAlignment="Top" Width="89.136" Stroke="#FF000000" RenderTransformOrigin="50%,50%" StrokeThickness="2">
+                <Path.RenderTransform>
+                  <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="1" />
+                    <SkewTransform AngleY="0" AngleX="0" />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                  </TransformGroup>
+                </Path.RenderTransform>
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF050505" Offset="0.119" />
+                    <GradientStop Color="#FF1E1E1E" Offset="0.273" />
+                    <GradientStop Color="#FF141414" Offset="1" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.28446,151.13593 148.28443,151.63215 C148.2819,183.22601 148.20037,178.78365 148.20037,178.78365 C147.61783,184.94955 150.4504,190.78406 156.11736,190.53372 C157.53231,190.47121 228.037,189.86737 228.78703,189.86737 C233.6621,189.24237 235.66263,184.24232 235.66264,180.24228 C235.42609,179.53267 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="42.275" Margin="183.124,96.224,0,0" Stretch="Fill" VerticalAlignment="Top" Width="89.136" Stroke="#FF000000" RenderTransformOrigin="50%,50%" StrokeThickness="2">
+                <Path.RenderTransform>
+                  <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="1" />
+                    <SkewTransform AngleY="0" AngleX="0" />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                  </TransformGroup>
+                </Path.RenderTransform>
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF050505" Offset="0.119" />
+                    <GradientStop Color="#FF1E1E1E" Offset="0.273" />
+                    <GradientStop Color="#FF141414" Offset="1" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Path Data="M149.99318,149.86666 C149.15984,149.99132 148.28446,151.13593 148.28443,151.63215 C148.2819,183.22601 148.20037,178.78365 148.20037,178.78365 C147.61783,184.94955 150.4504,190.78406 156.11736,190.53372 C157.53231,190.47121 228.037,189.86737 228.78703,189.86737 C233.6621,189.24237 235.66263,184.24232 235.66264,180.24228 C235.42609,179.53267 235.2987,154.39105 235.28597,151.53298 C235.36931,150.74132 235.16097,150.07465 234.41096,149.90799" HorizontalAlignment="Left" Height="42.275" Margin="70.124,96.724,0,0" Stretch="Fill" VerticalAlignment="Top" Width="89.136" Stroke="#FF000000" RenderTransformOrigin="50%,50%" StrokeThickness="2">
+                <Path.RenderTransform>
+                  <TransformGroup>
+                    <ScaleTransform ScaleY="-1" ScaleX="1" />
+                    <SkewTransform AngleY="0" AngleX="0" />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                  </TransformGroup>
+                </Path.RenderTransform>
+                <Path.Fill>
+                  <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                    <GradientStop Color="#FF050505" Offset="0.119" />
+                    <GradientStop Color="#FF1E1E1E" Offset="0.274" />
+                    <GradientStop Color="#FF141414" Offset="1" />
+                  </LinearGradientBrush>
+                </Path.Fill>
+              </Path>
+              <Image Margin="58,96,0,0" Source="/image/epson/pgup3.png" Stretch="Fill" Width="324" Height="88" HorizontalAlignment="Left" VerticalAlignment="Top" />
+              <Image Name="I_PgUp" Margin="58,96,0,0" Source="/image/epson/pgup4.png" Stretch="Fill" Width="324" Height="88" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Grid>
+            <CheckBox Name="CB_EnablePgUpDn" Theme="{StaticResource CheckBoxStyle_new}" Cursor="Hand" Margin="-125,32.75,0,0" VerticalAlignment="Top" FontSize="10" HorizontalAlignment="Center" Content="Enable PgUp &amp; PgDn" Background="{Binding #BTN_close.Background}" />
+          </Grid>
+        </UniformGrid>
+        <Canvas Name="Apps_FnKey" Width="1034" Height="658" Margin="17">
+          <Label Name="labelBack" Content="BACK" Canvas.Left="10" Canvas.Top="77" FontSize="20" HorizontalContentAlignment="Center" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Center" VerticalAlignment="Center" Width="166" />
+          <Button Name="BTN_back" Content="Button" Height="60" Width="60" Theme="{StaticResource Btn_back}" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="59.5" Canvas.Top="17.105" Cursor="Hand" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
+          <Grid Name="Grid_Mode" Canvas.Left="0" Canvas.Top="0" Width="1034" Height="658" Margin="0">
+            <Viewbox Name="VB_mode" IsVisible="True" Margin="0,19.315,-11,2.685" VerticalAlignment="Top">
+              <Grid Height="655.385" Width="1045.426">
+                <Image Name="bg_system_layer3" Source="/image/bg_mode_1_layer1.png" Stretch="Fill" Height="496" HorizontalAlignment="Left" Width="910" VerticalAlignment="Top" Margin="71.5,151.5,-48.933,-53.509" />
+                <RadioButton Name="RB_performance" Content="Performance" HorizontalAlignment="Left" Width="369" Height="411" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_entertainment2}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="29.333" GroupName="MODE" BorderBrush="#FFFFBC00" Focusable="False" ToolTip.ShowDelay="1000" Margin="612,177.5,-48.433,0" />
+                <RadioButton Name="RB_Entertainment" Content="Entertainment" Theme="{StaticResource RadioButtonStyle1_performance2}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="29.333" GroupName="MODE" Width="738" IsChecked="True" BorderThickness="0" BorderBrush="#FF3D938D" Focusable="False" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" ToolTip.ShowDelay="1000" Margin="153,397.5,0,-53.509" Background="{x:Null}" />
+                <RadioButton Name="RB_powerSaving" Content="Power Saving" Height="403" VerticalAlignment="Top" Theme="{StaticResource RadioButtonStyle1_PowerSaving2}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="29.333" GroupName="MODE" BorderBrush="#FF50F000" Focusable="False" IsTabStop="False" HorizontalAlignment="Left" Width="363" ToolTip.ShowDelay="1000" Margin="71.5,177.5,0,0" />
+                <RadioButton Name="RB_Quite" Content="Quiet" Theme="{StaticResource RadioButtonStyle1_quiet2}" Cursor="Hand" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="29.333" GroupName="MODE" BorderThickness="0" BorderBrush="#FF00A7FF" Focusable="False" IsTabStop="False" HorizontalAlignment="Left" Width="600.002" Height="150" VerticalAlignment="Top" ToolTip.ShowDelay="1000" Margin="220,151.5,0,0" Background="{x:Null}" />
+              </Grid>
+            </Viewbox>
+            <CheckBox Name="CB_CPUDynamic" Content="Enable dynamic boost for CPU" HorizontalAlignment="Left" Theme="{StaticResource CheckBoxStyle2}" Cursor="Hand" Background="#FFFF00D1" Width="530.132" IsVisible="False" Margin="514.747,543.132,-10.879,-7.132" />
+            <Grid Name="grid_AMD_Mode" Margin="5,439,41,3">
+              <RadioButton Name="Radio_AutoMode" Content="Auto Mode" Foreground="#FFFFFFFF" RenderTransformOrigin="-3.1%,50%" IsChecked="True" Cursor="Hand" Theme="{StaticResource RadioButtonStyle1}" HorizontalAlignment="Left" Margin="2.666,3.333,0,0" VerticalAlignment="Top" Background="{Binding #BTN_close.Background}" />
+              <RadioButton Name="Radio_ManualMode" Content="Manual Mode" Foreground="#FFFFFFFF" IsChecked="True" Cursor="Hand" Theme="{StaticResource RadioButtonStyle1}" HorizontalAlignment="Left" Margin="0.999,63.666,0,106.333" Background="{Binding #BTN_close.Background}" />
+              <Grid Name="grid_manalMode" Margin="42,0,479,10" Height="96.333" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Name="T_CPUVoltagelimit" HorizontalAlignment="Left" Margin="56.333,10.667,0,0" TextWrapping="Wrap" Text="CPU Voltage limit" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="17" />
+                <Image Name="Image_btn_cpu_voltage_selected_png" Margin="14.833,3.167,0,0" Source="/image/btn_cpu_voltage_selected.png" Stretch="Fill" HorizontalAlignment="Left" Width="35" Height="35" VerticalAlignment="Top" />
+                <Image Name="Image_btn_cache_ratio_override_selected_png" Height="35" Margin="16.5,0,0,10.333" Source="/image/btn_cache_ratio_override_selected.png" Stretch="Fill" VerticalAlignment="Bottom" Width="35" HorizontalAlignment="Left" />
+                <Rectangle Height="1" Margin="55.666,32.5,0,0" StrokeThickness="0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="276.667" Fill="{Binding #BTN_close.Background}" Stroke="{x:Null}" />
+                <TextBlock Name="T_CPUFrequencylimit" HorizontalAlignment="Left" Margin="57.333,0,0,13.666" TextWrapping="Wrap" Text="CPU Frequency limit" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="17" />
+                <Rectangle Height="1" Margin="52.666,0,0,10.833" StrokeThickness="0" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="276.667" Fill="{Binding #BTN_close.Background}" Stroke="{x:Null}" />
+                <TextBlock Name="textBlock_Copy1" HorizontalAlignment="Right" Margin="0,15,21.667,0" TextWrapping="Wrap" Text="V" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="13.333" Foreground="#FFC1C1C1" Height="17" />
+                <TextBlock Name="textBlock_Copy2" HorizontalAlignment="Right" Margin="0,0,1.667,14.333" TextWrapping="Wrap" Text="MHz" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="13.333" Foreground="#FFC1C1C1" Height="17" />
+                <ComboBox Name="ComboBox_SetVoltage" Height="27" FontSize="14" MaxDropDownHeight="600" Margin="290,7,0,0" VerticalAlignment="Top" Theme="{StaticResource ComboBoxStyle1}" Foreground="#FFFFFFFF" Cursor="Hand" BorderThickness="1" HorizontalAlignment="Left" Width="103" BorderBrush="{Binding #BTN_close.Background}">
+                  <ComboBoxItem Content="1.150000" IsSelected="True" />
+                </ComboBox>
+                <ComboBox Name="ComboBox_SetFreq" FontSize="14" MaxDropDownHeight="600" Margin="291,0,0,11.333" Theme="{StaticResource ComboBoxStyle1}" Foreground="#FFFFFFFF" Cursor="Hand" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="103" BorderBrush="{Binding #BTN_close.Background}">
+                  <ComboBoxItem Content="2200" IsSelected="True" />
+                </ComboBox>
+              </Grid>
+            </Grid>
+            <CheckBox Name="CB_PanelLowRefreshRate" Content="Exchanging Panel Refresh Rate" HorizontalAlignment="Left" Theme="{StaticResource CheckBoxStyle2}" Cursor="Hand" Background="#FFFF00D1" Margin="514.747,0,0,20" VerticalAlignment="Bottom" IsVisible="False" />
+            <CheckBox Name="CB_TurnOnTruboFan" Content="Enable turbo fan" HorizontalAlignment="Left" Theme="{StaticResource CheckBoxStyle2}" Cursor="Hand" Background="#FFFF00D1" Width="530.132" IsVisible="False" Margin="514.747,543.132,-10.879,-7.132" />
+          </Grid>
+          <UniformGrid Name="Grid_NewMode" Rows="1" Height="528" Canvas.Left="0" Canvas.Top="0" Width="1026" Margin="5,123,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Columns="4">
+            <Grid Name="Grid_NewMode_performance" Margin="0,0,4,0">
+              <RadioButton Name="RB_performance_newUI" Margin="0" Theme="{StaticResource RadioButtonStyle2_newPerformance}" BorderBrush="#FFFFBC00" GroupName="NewMode" Cursor="Hand" IsChecked="True" Content="{Binding #RB_performance.Content}">
+                <RadioButton.Background>
+                  <ImageBrush Source="/image/ic_performance.png" />
+                </RadioButton.Background>
+              </RadioButton>
+              <CheckBox Name="CB_CPUDynamic_Copy" Theme="{StaticResource CheckBoxStyle_new}" Cursor="Hand" Background="#FFFF00D1" Margin="0,0,0,6" VerticalAlignment="Bottom" FontSize="10" IsVisible="False" Content="{Binding #CB_CPUDynamic.Content}" IsChecked="{Binding #CB_CPUDynamic.IsChecked, Mode=TwoWay}" IsEnabled="{Binding #RB_performance_newUI.IsChecked}" />
+            </Grid>
+            <Grid Name="Grid_NewMode_Entertainment" Margin="0,0,4,0">
+              <RadioButton Name="RB_Entertainment_newUI" Margin="0" Theme="{StaticResource RadioButtonStyle2_newPerformance}" BorderBrush="#FF3D938D" GroupName="NewMode" Cursor="Hand" Content="{Binding #RB_Entertainment.Content}">
+                <RadioButton.Background>
+                  <ImageBrush Source="/image/ic_entertainment.png" />
+                </RadioButton.Background>
+              </RadioButton>
+            </Grid>
+            <Grid Name="Grid_NewMode_PowerSaving" Margin="0,0,4,0">
+              <RadioButton Name="RB_powerSaving_newUI" Margin="0" Theme="{StaticResource RadioButtonStyle2_newPerformance}" BorderBrush="#FF50F000" GroupName="NewMode" Cursor="Hand" Content="{Binding #RB_powerSaving.Content}">
+                <RadioButton.Background>
+                  <ImageBrush Source="/image/ic_power_saving.png" />
+                </RadioButton.Background>
+              </RadioButton>
+              <CheckBox Name="CB_PanelLowRefreshRate_new" Theme="{StaticResource CheckBoxStyle_new}" Cursor="Hand" Background="#FFFF00D1" Margin="0,0,0,6" VerticalAlignment="Bottom" FontSize="10" IsVisible="False" Content="{Binding #CB_PanelLowRefreshRate.Content}" IsChecked="{Binding #CB_PanelLowRefreshRate.IsChecked, Mode=TwoWay}" IsEnabled="{Binding #RB_powerSaving_newUI.IsChecked}" />
+            </Grid>
+            <Grid Name="Grid_NewMode_Quiet" Margin="0,0,4,0">
+              <RadioButton Name="RB_Quite_newUI" Margin="0" Theme="{StaticResource RadioButtonStyle2_newPerformance}" BorderBrush="#FF00A7FF" GroupName="NewMode" Cursor="Hand" Content="{Binding #RB_Quite.Content}">
+                <RadioButton.Background>
+                  <ImageBrush Source="/image/ic_quite.png" />
+                </RadioButton.Background>
+              </RadioButton>
+            </Grid>
+          </UniformGrid>
+        </Canvas>
+        <Image Source="/image/logo.png" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="60" Height="60" />
+        <Image Name="Title_name" Source="/image/title.png" Margin="0,100,0,0" HorizontalAlignment="Center" Width="404" Height="13" VerticalAlignment="Top" />
+        <Button Name="BTN_close" Content="" BorderThickness="0" Theme="{StaticResource S_BTN_CLOSE}" Cursor="Hand" Focusable="False" Background="#FFFF00D2" Margin="965,21,23,621" BorderBrush="{x:Null}" Foreground="{x:Null}" />
+        <Button Name="BTN_min" Content="" Margin="880,21,108,621" BorderThickness="0" Theme="{StaticResource BTN_MIN}" Cursor="Hand" Focusable="False" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{Binding #BTN_close.Background}" />
+        <Path Name="title_move" Data="M510.66635,-0.26633186 L1408.2798,0.26699932 L1409.0529,47.920679 C1379.296,61.663167 1347.4821,73.013403 1312.9944,81.254006 L608.3589,81.200006 C570.69768,71.593271 538.53856,60.18705 511.14966,47.137546" Fill="#02FFFFFF" Margin="216.081,19.61,218.096,567.247" Stretch="Fill" StrokeThickness="0" Cursor="SizeAll" Stroke="{x:Null}" />
+        <local:UserControl_DialogBox Name="UC_DialogBox" Margin="0" Width="1034" Height="658" IsVisible="False" />
+        <local:UserControl_DialogBox2 Name="UC_DialogBox_panel" IsVisible="False" />
+      </Grid>
+    </Viewbox>
+</Window>

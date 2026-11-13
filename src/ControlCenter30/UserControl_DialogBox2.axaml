@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="ControlCenter30.UserControl_DialogBox2"
+    Name="UC_DialogBox"
+    Width="1034"
+    Height="658">
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+    <ControlTheme TargetType="Button" x:Key="ButtonStyle1_OK">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <Border.Background>
+              <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                <GradientStop Color="#00000000" Offset="0" />
+                <GradientStop Color="#FF4B4B4B" Offset="1" />
+              </LinearGradientBrush>
+            </Border.Background>
+            <ContentPresenter Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="0" />
+            <GradientStop Color="#FF959595" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Border#border">
+        <Setter Property="Background">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1" />
+            <GradientStop Color="#FF4B4B4B" Offset="0" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:disabled /template/ Border#border">
+        <Setter Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Border}" />
+      </Style>
+      <Style Selector="^:disabled /template/ ContentPresenter#contentPresenter">
+        <Setter Property="Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+      </Style>
+    </ControlTheme>
+  </UserControl.Resources>
+    <Grid Name="DialogBox" HorizontalAlignment="Left" Margin="0" Width="1034" Height="658" VerticalAlignment="Top" Background="#B2242424">
+      <Viewbox Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="870" Height="469">
+        <Grid Margin="0,0,0,4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="1000" Height="500">
+          <Image Name="Image_dialog_bg_dialog_png" Margin="23,22,27,18" Source="/image/dialog/bg_dialog.png" Stretch="Fill" />
+          <Image Name="Image_dialog_restart" HorizontalAlignment="Left" Margin="105.5,166,0,194" Source="/image/dialog/ic_dialog_restart.png" Stretch="Fill" Width="140" />
+          <Image Name="Image_dialog_warning" HorizontalAlignment="Left" Margin="105.5,166,0,194" Source="/image/dialog/ic_dialog_warning.png" Stretch="Fill" Width="140" />
+          <Image Name="Image_dialog_info" HorizontalAlignment="Left" Margin="105.5,166,0,194" Source="/image/dialog/ic_dialog_info.png" Stretch="Fill" Width="140" IsVisible="False" />
+          <Button Name="BTN_Cancel" Content="Cancel" Height="69" Margin="498.611,0,52.389,60.444" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" Cursor="Hand" BorderBrush="{x:Null}" />
+          <TextBlock Name="T_Dialog_info_Copy" Margin="286.5,47.725,429.5,0" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="32" VerticalAlignment="Top" Height="40.22" />
+          <Grid Margin="278,82,54,126">
+            <TextBlock Name="T_Dialog_info" Margin="0,0,2,0" TextWrapping="Wrap" Text="Panel refresh rate varies from personal usage. You could switch ON the button to extend battery life, conserve battery power in the circumstances of the lowest panel refresh rate. Simultaneously, the panel is likely to turn black in seconds. (Depending on panel's property.)" Foreground="#FFC5BBBB" FontFamily="Microsoft Sans Serif" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+          </Grid>
+          <Button Name="BTN_OK" Content="OK" HorizontalAlignment="Left" Height="69" Margin="45.5,0,0,60" VerticalAlignment="Bottom" Width="449" FontFamily="Microsoft Sans Serif" FontSize="32" Foreground="#FFFFFFFF" Theme="{StaticResource ButtonStyle1_OK}" BorderThickness="0" Cursor="Hand" BorderBrush="{x:Null}" />
+        </Grid>
+      </Viewbox>
+    </Grid>
+</UserControl>

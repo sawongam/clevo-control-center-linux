@@ -1,0 +1,288 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="ControlCenter30.Window_MOUSE"
+    Name="window_mouse" Title="Control center 3.0"
+    Height="657.8" Width="1034" MinWidth="680" MinHeight="350" FontSize="20"
+    WindowStartupLocation="Manual" WindowDecorations="None" CanResize="True"
+    TransparencyLevelHint="Transparent" Topmost="True">
+  <Window.Background>
+    <ImageBrush Source="/image/mouse/220225_ccuwallpaper_clevo_woblack.png" />
+  </Window.Background>
+  <Window.Resources>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+    <ControlTheme TargetType="Button" x:Key="ButtonStyle1">
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="border" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+            <Grid Margin="0">
+              <Rectangle Fill="{TemplateBinding BorderBrush}" Height="30" Width="30" StrokeThickness="0" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Stroke="{x:Null}" />
+              <TextBlock HorizontalAlignment="Left" Margin="53,0,0,0" TextWrapping="Wrap" Text="{TemplateBinding Content}" VerticalAlignment="Center" />
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Background" Value="#19FFFFFF" />
+      </Style>
+      <Style Selector="^:pressed /template/ Border#border">
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Background" Value="#FF000000" />
+      </Style>
+    </ControlTheme>
+    <SolidColorBrush x:Key="RadioButton.Static.Background" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="RadioButton.Static.Border" Color="#FF707070" />
+    <SolidColorBrush x:Key="RadioButton.MouseOver.Background" Color="#FFF3F9FF" />
+    <SolidColorBrush x:Key="RadioButton.MouseOver.Border" Color="#FF5593FF" />
+    <SolidColorBrush x:Key="RadioButton.MouseOver.Glyph" Color="#FF212121" />
+    <SolidColorBrush x:Key="RadioButton.Disabled.Background" Color="#FFE6E6E6" />
+    <SolidColorBrush x:Key="RadioButton.Disabled.Border" Color="#FFBCBCBC" />
+    <SolidColorBrush x:Key="RadioButton.Disabled.Glyph" Color="#FF707070" />
+    <SolidColorBrush x:Key="RadioButton.Pressed.Background" Color="#FFD9ECFF" />
+    <SolidColorBrush x:Key="RadioButton.Pressed.Border" Color="#FF3C77DD" />
+    <SolidColorBrush x:Key="RadioButton.Pressed.Glyph" Color="#FF212121" />
+    <SolidColorBrush x:Key="RadioButton.Static.Glyph" Color="#FF212121" />
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle1">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF" Margin="2" MinWidth="100">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Column="1" Margin="0">
+              <Rectangle Name="rectangle" Height="11" StrokeThickness="0" Width="11" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center" Stroke="{x:Null}">
+                <Rectangle.Fill>
+                  <ImageBrush Source="/image/mouse/220202_radio-button_off.png" />
+                </Rectangle.Fill>
+              </Rectangle>
+              <Rectangle Fill="{TemplateBinding BorderBrush}" Height="32" Width="32" StrokeThickness="0" Margin="29,0,0,0" Grid.ColumnSpan="1" HorizontalAlignment="Left" VerticalAlignment="Center" Stroke="{x:Null}" />
+              <WrapPanel Orientation="Vertical" Margin="80,0,0,0" MinWidth="0" Grid.ColumnSpan="1">
+                <TextBlock Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Content}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Foreground="#FF858585" FontSize="16" FontWeight="Bold" />
+                <TextBlock Name="textBlock_Copy" TextWrapping="Wrap" Text="{TemplateBinding Tag}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" Foreground="#FF646464" FontSize="14" FontWeight="Normal" />
+              </WrapPanel>
+            </Grid>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Grid#templateRoot">
+        <Setter Property="Background" Value="#4C323232" />
+      </Style>
+      <Style Selector="^:checked /template/ TextBlock#textBlock">
+        <Setter Property="Foreground" Value="#FFFFFFFF" />
+      </Style>
+      <Style Selector="^:checked /template/ Rectangle#rectangle">
+        <Setter Property="Fill">
+          <ImageBrush Source="/image/mouse/220202_radio-button_on.png" />
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="RadioButton" x:Key="RadioButtonStyle2">
+      <Setter Property="Background" Value="{StaticResource RadioButton.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource RadioButton.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+    <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
+    <ControlTheme TargetType="CheckBox" x:Key="CheckBox_FullScreen">
+      <Setter Property="Background" Value="{StaticResource OptionMark.Static.Background}" />
+      <Setter Property="BorderBrush" Value="{StaticResource OptionMark.Static.Border}" />
+      <Setter Property="Foreground" Value="#FF000000" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="templateRoot" Background="#00FFFFFF">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Name="Image_ic_close_png" Margin="0" Source="/ic_fullscreen.png" Stretch="Fill" Width="80" Height="60" />
+            <Rectangle Name="rectangle" Margin="0" Width="80" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                  <GradientStop Color="#00000000" Offset="0" />
+                  <GradientStop Color="#33FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="0" />
+            <GradientStop Color="#66FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#66000000" Offset="0" />
+            <GradientStop Color="Transparent" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:checked /template/ Image#Image_ic_close_png">
+        <Setter Property="Source" Value="/image/main/ic_window.png" />
+      </Style>
+      <Style Selector="^:indeterminate /template/ Image#Image_ic_close_png">
+        <Setter Property="Source" Value="/image/main/ic_fullscreen.png" />
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="Button" x:Key="BTN_MIN">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Margin="0" Background="{x:Null}">
+            <Image Name="Image_ic_close_png" Margin="0" Source="/image/main/ic_minimize.png" Stretch="Fill" Height="60" />
+            <Rectangle Name="rectangle" Margin="0" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                  <GradientStop Color="#00000000" />
+                  <GradientStop Color="#33FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1" />
+            <GradientStop Color="#66FFFFFF" Offset="0" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" />
+            <GradientStop Color="#66FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+    </ControlTheme>
+    <ControlTheme TargetType="Button" x:Key="S_BTN_CLOSE">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Grid Name="grid" Margin="0" Background="{x:Null}">
+            <Image Name="Image_ic_close_png" Margin="0" Source="/ic_close.png" Stretch="Fill" Height="60" />
+            <Rectangle Name="rectangle" Margin="0" Height="60" Fill="{TemplateBinding Background}" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.OpacityMask>
+                <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+                  <GradientStop Color="#00000000" />
+                  <GradientStop Color="#33FFFFFF" Offset="1" />
+                </LinearGradientBrush>
+              </Rectangle.OpacityMask>
+            </Rectangle>
+          </Grid>
+        </ControlTemplate>
+      </Setter>
+      <Style Selector="^:pressed /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" Offset="1" />
+            <GradientStop Color="#66FFFFFF" Offset="0" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+      <Style Selector="^:pointerover /template/ Rectangle#rectangle">
+        <Setter Property="OpacityMask">
+          <LinearGradientBrush EndPoint="50%,100%" StartPoint="50%,0%">
+            <GradientStop Color="#00000000" />
+            <GradientStop Color="#66FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Setter>
+      </Style>
+    </ControlTheme>
+  </Window.Resources>
+    <Grid Name="main" Margin="0">
+      <Rectangle Height="80" Margin="0,0,36,29" Width="122" RenderTransformOrigin="53.5%,52.8%" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <Rectangle.Fill>
+          <ImageBrush Source="/image/mouse/220210_mouselogo.png" />
+        </Rectangle.Fill>
+      </Rectangle>
+      <Grid HorizontalAlignment="Left" Margin="0" Width="342" Background="#193E3E3E">
+        <StackPanel Name="SP_APP" HorizontalAlignment="Right" ScrollViewer.HorizontalScrollBarVisibility="Visible" VerticalAlignment="Top" Margin="0,80,0,0" Width="266">
+          <WrapPanel Name="WP_PowerMode" HorizontalAlignment="Stretch" Margin="0,5,0,28" VerticalAlignment="Stretch">
+            <Rectangle Name="WP_PowerMode_Icon" Height="30" Width="30" StrokeThickness="0" Stroke="{x:Null}">
+              <Rectangle.Fill>
+                <ImageBrush Source="/image/mouse/power-mode.png" />
+              </Rectangle.Fill>
+            </Rectangle>
+            <TextBlock Name="WP_PowerMode_text" TextWrapping="Wrap" Text="Power mdoe" Foreground="#FFFFFFFF" FontFamily="Yu Gothic UI" FontSize="14" Margin="23,0,13,0" VerticalAlignment="Center" />
+          </WrapPanel>
+          <Button Name="BTN_FanSpeedSetting" Content="Fan speed setting" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Yu Gothic UI" FontSize="14" Theme="{StaticResource ButtonStyle1}" Padding="0" Cursor="Hand" Margin="0,0,0,29" Background="{x:Null}">
+            <Button.BorderBrush>
+              <ImageBrush Source="/image/mouse/fan-speed-setting.png" />
+            </Button.BorderBrush>
+          </Button>
+          <Button Name="BTN_LEDKeyboard" Content="LED Keyboard Setting" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Yu Gothic UI" FontSize="14" Theme="{StaticResource ButtonStyle1}" Padding="0" Cursor="Hand" Margin="0,0,0,28" Background="{x:Null}">
+            <Button.BorderBrush>
+              <ImageBrush Source="/image/mouse/led-keyboard-setting.png" />
+            </Button.BorderBrush>
+          </Button>
+          <Button Name="BTN_Flexikey" Content="Flexikey" VerticalAlignment="Top" Foreground="#FFFFFFFF" FontFamily="Yu Gothic UI" FontSize="14" Theme="{StaticResource ButtonStyle1}" Padding="0" Cursor="Hand" Margin="0,0,0,28" Background="{x:Null}">
+            <Button.BorderBrush>
+              <ImageBrush Source="/image/mouse/flexikey.png" />
+            </Button.BorderBrush>
+          </Button>
+        </StackPanel>
+      </Grid>
+      <ScrollViewer Background="#19EAEAEA" Margin="342,0,0,0" VerticalScrollBarVisibility="Auto">
+        <StackPanel Name="SP_PowerMode" VerticalAlignment="Top" UseLayoutRounding="False" ClipToBounds="True" Margin="70,80,0,0">
+          <TextBlock Name="WP_PowerMode_text_Copy" TextWrapping="Wrap" Foreground="#FFFFFFFF" FontFamily="Yu Gothic UI" FontSize="20" Margin="0,0,13,15" VerticalAlignment="Center" Text="{Binding #WP_PowerMode_text.Text}" />
+          <RadioButton Name="RB_performance" Content="Performance" Margin="0,2,0,0" Foreground="#FFFFFFFF" FontSize="14" FontFamily="Yu Gothic UI" Theme="{StaticResource RadioButtonStyle1}" VerticalAlignment="Top" GroupName="powermode" Cursor="Hand" FontWeight="Bold" Tag="Enables the maximum system performance" Background="{x:Null}">
+            <RadioButton.BorderBrush>
+              <ImageBrush Source="/image/mouse/tasktray_performance.png" />
+            </RadioButton.BorderBrush>
+          </RadioButton>
+          <RadioButton Name="RB_Entertainment" Content="Balance" Margin="0,8,0,0" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Yu Gothic UI" Theme="{StaticResource RadioButtonStyle1}" VerticalAlignment="Top" GroupName="powermode" IsChecked="True" Cursor="Hand" FontWeight="Bold" Tag="Balances among the system performance, skin temperature and fan noise." Background="{x:Null}">
+            <RadioButton.BorderBrush>
+              <ImageBrush Source="/image/mouse/tasktray_balance.png" />
+            </RadioButton.BorderBrush>
+          </RadioButton>
+          <RadioButton Name="RB_Quiet" Content="Quiet" Margin="0,8,0,0" Foreground="#FFFFFFFF" FontSize="20" FontFamily="Yu Gothic UI" Theme="{StaticResource RadioButtonStyle1}" VerticalAlignment="Top" GroupName="powermode" Cursor="Hand" FontWeight="Bold" Tag="Limits the system performance and fan noise for quiet places." Background="{x:Null}">
+            <RadioButton.BorderBrush>
+              <ImageBrush Source="/image/mouse/tasktray_quiet.png" />
+            </RadioButton.BorderBrush>
+          </RadioButton>
+        </StackPanel>
+      </ScrollViewer>
+      <Viewbox Name="VB_Style" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Top" Width="1025.5" Height="36">
+        <Grid HorizontalAlignment="Left" Height="78" Margin="0" VerticalAlignment="Top" Width="2223.5">
+          <Rectangle Name="title_move" Margin="0" StrokeThickness="0" Fill="#02000000" Stroke="{x:Null}" />
+          <Grid Name="main_windowStyle" Height="78" VerticalAlignment="Top" Width="247.649" HorizontalAlignment="Right" Margin="0">
+            <CheckBox Name="Check_FullSrceen" Content="" Margin="83.824,9,83.825,9" BorderThickness="0" Theme="{StaticResource CheckBox_FullScreen}" IsChecked="True" Width="80" Height="60" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{Binding #title_icon.Fill}" />
+            <Button Name="BTN_min" Content="" Margin="0" BorderThickness="0" Theme="{StaticResource BTN_MIN}" Width="80" HorizontalAlignment="Left" Height="60" VerticalAlignment="Center" Cursor="Hand" Focusable="False" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" />
+            <Button Name="BTN_close" Content="" BorderThickness="0" Theme="{StaticResource S_BTN_CLOSE}" Width="80" HorizontalAlignment="Right" Height="60" VerticalAlignment="Center" Cursor="Hand" Focusable="False" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{x:Null}" />
+          </Grid>
+        </Grid>
+      </Viewbox>
+    </Grid>
+</Window>
