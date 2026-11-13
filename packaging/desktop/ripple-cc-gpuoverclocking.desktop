@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 ripple-cc contributors
+[Desktop Entry]
+Type=Application
+Name=GPU Overclocking
+Comment=Ripple Control Center 3.0 (Linux port)
+Exec=/opt/ripple-cc/GPUOverclocking/GPUOverclocking
+Icon=ripple-cc-gpuoverclocking
+Terminal=false
+Categories=Settings;HardwareSettings;
+StartupNotify=false

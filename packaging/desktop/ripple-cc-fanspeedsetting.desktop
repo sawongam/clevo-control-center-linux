@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 ripple-cc contributors
+[Desktop Entry]
+Type=Application
+Name=Fan Speed Control
+Comment=Ripple Control Center 3.0 (Linux port)
+Exec=/opt/ripple-cc/FanSpeedSetting/FanSpeedSetting
+Icon=ripple-cc-fanspeedsetting
+Terminal=false
+Categories=Settings;HardwareSettings;
+StartupNotify=false

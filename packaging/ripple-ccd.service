@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright (C) 2026 ripple-cc contributors
+[Unit]
+Description=Ripple Control Center hardware daemon
+After=systemd-modules-load.service
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/modprobe ripple_dchu
+ExecStart=/opt/ripple-cc/bin/ripple-ccd
+RuntimeDirectory=ripple-cc
+StateDirectory=ripple-cc
+Restart=on-failure
+# ripple-ccd exits 78 when /dev/ripple_dchu is missing: do not restart-loop on that.
+RestartPreventExitStatus=78
+RestartSec=2
+ProtectHome=yes
+ProtectSystem=strict
+NoNewPrivileges=yes
+PrivateNetwork=yes
+RestrictAddressFamilies=AF_UNIX
+
+[Install]
+WantedBy=multi-user.target
