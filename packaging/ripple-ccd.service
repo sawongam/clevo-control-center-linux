@@ -8,7 +8,7 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStartPre=-/usr/bin/modprobe ripple_dchu
+ExecStartPre=-/sbin/modprobe ripple_dchu
 ExecStart=/opt/ripple-cc/bin/ripple-ccd
 RuntimeDirectory=ripple-cc
 StateDirectory=ripple-cc
