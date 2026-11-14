@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  apps:
+    name: Apps
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Install fonts
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-liberation fonts-noto-core
+      - name: Build
+        run: scripts/build.sh
+      - name: Render every app against the simulator
+        run: |
+          mkdir -p screenshots
+          for app in ControlCenter30 FanSpeedSetting LedKeyboardSetting Flexikey CPUOC GPUOverclocking EnergySave BatteryUtility FnKey; do
+            RIPPLE_CC_CONFIG="$RUNNER_TEMP/config" "dist/$app/$app" --screenshot "screenshots/$app.png" --after-ms 1500
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/
+
+  kernel:
+    name: Kernel module
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install kernel headers
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends "linux-headers-$(uname -r)"
+      - name: Build
+        run: make -C kernel
+
+  scripts:
+    name: Scripts and daemon
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shellcheck
+        run: shellcheck scripts/*.sh packaging/deb/build.sh packaging/deb/postinst packaging/deb/prerm packaging/tarball/build.sh
+      - name: Compile Python
+        run: python3 -m py_compile daemon/ripple-ccd cli/ripplectl
+      - name: Daemon answers on its socket (simulated hardware)
+        run: |
+          daemon/ripple-ccd --mock --socket "$RUNNER_TEMP/ccd.sock" --state-dir "$RUNNER_TEMP/state" --no-restore &
+          for _ in $(seq 20); do [ -S "$RUNNER_TEMP/ccd.sock" ] && break; sleep 0.2; done
+          python3 - "$RUNNER_TEMP/ccd.sock" <<'PY'
+          import json, socket, sys
+          s = socket.socket(socket.AF_UNIX)
+          s.connect(sys.argv[1])
+          s.sendall(b'{"op":"info"}\n')
+          reply = json.loads(s.makefile().readline())
+          print(reply)
+          assert reply["ok"] and reply["mock"]
+          PY

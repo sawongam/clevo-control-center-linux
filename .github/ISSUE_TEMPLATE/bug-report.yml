@@ -1,0 +1,29 @@
+name: Bug report
+description: Something is broken or behaves differently from the Windows Control Center
+labels: [bug]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Laptop model and BIOS version
+      placeholder: Clevo NH5x_NH7xHP, BIOS 1.07.09
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Distribution, kernel and ripple-cc version
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Output of `journalctl -u ripple-ccd -b` and anything the app printed when started from a terminal.
+      render: text

@@ -1,0 +1,84 @@
+name: Release
+
+# Pushing a tag vX.Y.Z builds the packages and publishes a GitHub release.
+# A manual run builds the same packages and keeps them as workflow artifacts only.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  packages:
+    name: Tarball and .deb
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check that the tag matches VERSION
+        if: github.ref_type == 'tag'
+        run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Build
+        run: scripts/build.sh --self-contained
+      - name: Check that the self-contained build starts
+        run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-liberation fonts-noto-core
+          RIPPLE_CC_CONFIG="$RUNNER_TEMP/config" dist/ControlCenter30/ControlCenter30 --screenshot "$RUNNER_TEMP/launcher.png"
+      - name: Package
+        run: |
+          mkdir out
+          packaging/tarball/build.sh out
+          packaging/deb/build.sh out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packages
+          path: out/
+
+  arch:
+    name: Arch package
+    runs-on: ubuntu-24.04
+    container: archlinux:base-devel
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with makepkg
+        run: |
+          pacman -Syu --noconfirm dotnet-sdk
+          version=$(cat VERSION)
+          # makepkg uses a source file that is already next to the PKGBUILD, so the package is
+          # built from this checkout and not from the tag on GitHub.
+          tar -czf "/tmp/ripple-cc-$version.tar.gz" --transform "s|^\.|clevo-control-center-linux-$version|" .
+          mv "/tmp/ripple-cc-$version.tar.gz" packaging/arch/
+          useradd -m builder
+          chown -R builder packaging/arch
+          cd packaging/arch
+          sudo -u builder makepkg --nodeps
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arch-package
+          path: packaging/arch/*.pkg.tar.zst
+
+  publish:
+    name: Publish release
+    if: github.ref_type == 'tag'
+    needs: [packages, arch]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd out
+          sha256sum * > SHA256SUMS
+          flags=()
+          case "$GITHUB_REF_NAME" in *-*) flags+=(--prerelease) ;; esac
+          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --generate-notes "${flags[@]}" *

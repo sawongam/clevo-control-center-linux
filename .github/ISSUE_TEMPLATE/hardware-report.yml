@@ -1,0 +1,38 @@
+name: Hardware report
+description: Tell us how it runs on your laptop, working or not
+labels: [hardware]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Laptop model
+      description: Brand name and Clevo board name. `cat /sys/class/dmi/id/board_name` prints the board name.
+      placeholder: Clevo NH5x_NH7xHP
+    validations:
+      required: true
+  - type: input
+    id: bios
+    attributes:
+      label: BIOS version
+      description: Output of `cat /sys/class/dmi/id/bios_version`
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Distribution and kernel
+      placeholder: Arch Linux, 6.17.7-arch1-1
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of `sudo ripplectl status` and `sudo ripplectl table`
+      render: text
+  - type: textarea
+    id: results
+    attributes:
+      label: What works and what does not
+      description: Fan readings, fan modes, performance modes, keyboard backlight, each app you tried.
+    validations:
+      required: true
