@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0-only
 # Copyright (C) 2026 ripple-cc contributors
-"""ripple-ccd - root daemon for the Ripple/Clevo Control Center Linux port.
+"""ripple-ccd - root daemon for the Clevo Control Center Linux port.
 
 Owns /dev/ripple_dchu and serves the unprivileged UI apps over a unix socket
 (JSON lines, one request per connection):

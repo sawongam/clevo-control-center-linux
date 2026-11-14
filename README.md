@@ -1,14 +1,13 @@
 # Clevo Control Center for Linux
 
-[![CI](https://github.com/sawongam/clevo-control-center-linux/actions/workflows/ci.yml/badge.svg)](https://github.com/sawongam/clevo-control-center-linux/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/sawongam/clevo-control-center-linux?label=version)](https://github.com/sawongam/clevo-control-center-linux/releases/latest)
 [![License: GPL-2.0](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](LICENSE)
 
 An unofficial Linux port of Control Center 3.0, the Windows utility that ships with Clevo laptops and their
 rebrands. It reads fan speeds and temperatures, switches fan and performance modes, edits fan curves and sets the
 keyboard backlight, through the same firmware interface the Windows software uses.
 
-The short name of the project is `ripple-cc`. It started on a Clevo NH5x_NH7xHP, and
-that name is used for the package, the commands and the install paths.
+The package, the commands and the install paths use the project's short name, `ripple-cc`.
 
 ![Control Center launcher](docs/screenshots/controlcenter30.png)
 
@@ -25,13 +24,14 @@ This is early software, and only part of it has run on real hardware.
 | Graphical apps | Tested against the simulator only |
 | CPU and GPU overclocking | Interface only. Writes are locked and not connected to a back-end |
 
-No release has been tagged yet, so for now the way to install is [from source](#from-source).
-[docs/roadmap.md](docs/roadmap.md) has the details and the list of open work.
+Every change on `master` that passes the checks is published as a new
+[release](https://github.com/sawongam/clevo-control-center-linux/releases), so the latest release is always the
+current code. [docs/roadmap.md](docs/roadmap.md) has the details and the list of open work.
 
 ## Supported hardware
 
 One machine has been tested: the Clevo NH5x_NH7xHP (Intel i7-11800H, RTX 3060, two fans, BIOS 1.07.09).
-It is sold under several brand names.
+Clevo boards are sold under many brand names; `cat /sys/class/dmi/id/board_name` shows which one you have.
 
 Other Clevo models expose the same ACPI device (`CLV0001`, method `\_SB.DCHU._DSM`), and the original software
 carries code paths for many of them, which the port keeps. None of those have been tested. A firmware call that is
@@ -61,41 +61,80 @@ There is also `ripplectl`, a command line tool that needs neither the service no
 
 ## Install
 
-All three ways install the same things: the kernel module (built by DKMS, so it survives kernel updates), the
-`ripple-ccd` service, `ripplectl`, and the apps under `/opt/ripple-cc` with one "Control Center" entry in the
-application menu.
+Each [release](https://github.com/sawongam/clevo-control-center-linux/releases/latest) has three downloads. Pick
+the one for your distribution. All of them install the same things: the kernel module (built by DKMS, so it
+survives kernel updates), the `ripple-ccd` service, `ripplectl`, and the apps under `/opt/ripple-cc` with one
+"Control Center" entry in the application menu.
 
-You need the headers for your running kernel (`linux-headers` on Arch, `linux-headers-$(uname -r)` on Debian and
-Ubuntu) so that DKMS can build the module.
+| Distribution | File |
+|---|---|
+| Debian, Ubuntu, Mint, Pop!_OS | `ripple-cc_<version>_amd64.deb` |
+| Arch, Manjaro, EndeavourOS | `ripple-cc-<version>-1-x86_64.pkg.tar.zst` |
+| Anything else with systemd | `ripple-cc-<version>-linux-x64.tar.gz` |
 
 ### Debian and Ubuntu
 
-Download `ripple-cc_<version>_amd64.deb` from the
-[releases page](https://github.com/sawongam/clevo-control-center-linux/releases), then:
-
-```sh
-sudo apt install ./ripple-cc_*_amd64.deb
-```
+1. Install the headers for your kernel, so that DKMS can build the module:
+   ```sh
+   sudo apt install linux-headers-$(uname -r)
+   ```
+2. Download the `.deb` from the [latest release](https://github.com/sawongam/clevo-control-center-linux/releases/latest),
+   or fetch it from a terminal:
+   ```sh
+   curl -s https://api.github.com/repos/sawongam/clevo-control-center-linux/releases/latest \
+     | grep -o 'https://[^"]*_amd64\.deb' | xargs curl -LO
+   ```
+3. Install it. This builds the module and starts the service:
+   ```sh
+   sudo apt install ./ripple-cc_*_amd64.deb
+   ```
 
 ### Arch Linux
 
-Download `ripple-cc-<version>-x86_64.pkg.tar.zst` from the releases page and install it with `sudo pacman -U`, or
-build it yourself from [packaging/arch/PKGBUILD](packaging/arch/PKGBUILD). Then start the service:
+1. Install the headers for your kernel (`linux-headers` for the stock kernel, `linux-lts-headers` for LTS):
+   ```sh
+   sudo pacman -S --needed linux-headers
+   ```
+2. Download the package from the [latest release](https://github.com/sawongam/clevo-control-center-linux/releases/latest),
+   or fetch it from a terminal:
+   ```sh
+   curl -s https://api.github.com/repos/sawongam/clevo-control-center-linux/releases/latest \
+     | grep -o 'https://[^"]*\.pkg\.tar\.zst' | xargs curl -LO
+   ```
+3. Install it, then start the service:
+   ```sh
+   sudo pacman -U ripple-cc-*.pkg.tar.zst
+   sudo systemctl enable --now ripple-ccd
+   ```
+
+### Any other distribution
+
+The tarball contains the built apps with the .NET runtime included. You need systemd, `dkms`, the headers for your
+kernel, `python3`, and the Liberation and Noto fonts.
+
+1. Download the tarball from the [latest release](https://github.com/sawongam/clevo-control-center-linux/releases/latest),
+   or fetch it from a terminal:
+   ```sh
+   curl -s https://api.github.com/repos/sawongam/clevo-control-center-linux/releases/latest \
+     | grep -o 'https://[^"]*linux-x64\.tar\.gz' | xargs curl -LO
+   ```
+2. Unpack it and run the installer:
+   ```sh
+   tar xf ripple-cc-*-linux-x64.tar.gz
+   cd ripple-cc-*-linux-x64
+   sudo scripts/install.sh
+   ```
+
+### Check that it works
 
 ```sh
-sudo systemctl enable --now ripple-ccd
+systemctl status ripple-ccd     # should be "active (running)"
+sudo ripplectl status           # fan speeds and temperatures
 ```
 
-### Any distribution
-
-Download `ripple-cc-<version>-linux-x64.tar.gz` from the releases page. It contains the built apps with the .NET
-runtime included. You need `dkms`, `python3`, the Liberation and Noto fonts, and systemd.
-
-```sh
-tar xf ripple-cc-*-linux-x64.tar.gz
-cd ripple-cc-*-linux-x64
-sudo scripts/install.sh
-```
+If the service is not running, the module probably did not load. Reboot if a kernel update was pending, and check
+`sudo dkms status` and `journalctl -u ripple-ccd -b`. To verify a download, compare it with the `SHA256SUMS` file
+attached to the release.
 
 ### From source
 
@@ -111,6 +150,10 @@ sudo scripts/install.sh
 
 If the installed kernel is newer than the running one, the module is built for the new kernel and the installer
 asks you to reboot.
+
+### Update
+
+Install the newer release the same way. Your settings are kept.
 
 ### Uninstall
 
@@ -180,7 +223,7 @@ Hardware reports from other Clevo models are the most useful contribution right 
 
 The code in this repository is licensed under [GPL-2.0](LICENSE).
 
-This project is not affiliated with, endorsed by or supported by Clevo or Ripple. The apps are ports of the
+This project is not affiliated with, endorsed by or supported by Clevo or any laptop brand. The apps are ports of the
 vendor's Control Center 3.0 and include its artwork, which remains the property of its owners, as do all
 trademarks and product names. The firmware protocol was worked out by analysing the software and firmware of one
 machine, for interoperability.

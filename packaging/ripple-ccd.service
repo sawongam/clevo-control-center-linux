@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-only
 # Copyright (C) 2026 ripple-cc contributors
 [Unit]
-Description=Ripple Control Center hardware daemon
+Description=Clevo Control Center hardware daemon
 After=systemd-modules-load.service
 StartLimitIntervalSec=60
 StartLimitBurst=5

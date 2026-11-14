@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0-only
 # Copyright (C) 2026 ripple-cc contributors
-"""ripplectl - Linux port of the Clevo/Ripple Control Center 3.0 hardware controls.
+"""ripplectl - Linux port of the Clevo Control Center 3.0 hardware controls.
 
 Talks to the firmware's \\_SB.DCHU._DSM through /dev/ripple_dchu (kernel/ripple_dchu.ko),
 using the exact command encoding reverse-engineered from the Windows apps

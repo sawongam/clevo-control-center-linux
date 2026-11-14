@@ -1,24 +1,45 @@
 name: Release
 
-# Pushing a tag vX.Y.Z builds the packages and publishes a GitHub release.
-# A manual run builds the same packages and keeps them as workflow artifacts only.
+# Every push to master runs the checks, builds the packages and publishes them as a release.
+# The version is MAJOR.MINOR from the VERSION file plus the number of commits on master.
+# A manual run does everything except publishing.
 on:
   push:
-    tags: ['v*']
+    branches: [master]
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
+  checks:
+    name: Checks
+    uses: ./.github/workflows/ci.yml
+
+  version:
+    name: Version
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: version
+        run: echo "version=$(cut -d. -f1,2 VERSION).$(git rev-list --count HEAD)" >> "$GITHUB_OUTPUT"
+
   packages:
     name: Tarball and .deb
+    needs: version
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Check that the tag matches VERSION
-        if: github.ref_type == 'tag'
-        run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+      - name: Set version
+        run: echo "${{ needs.version.outputs.version }}" > VERSION
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
@@ -40,6 +61,7 @@ jobs:
 
   arch:
     name: Arch package
+    needs: version
     runs-on: ubuntu-24.04
     container: archlinux:base-devel
     steps:
@@ -47,9 +69,11 @@ jobs:
       - name: Build with makepkg
         run: |
           pacman -Syu --noconfirm dotnet-sdk
-          version=$(cat VERSION)
+          version=${{ needs.version.outputs.version }}
+          echo "$version" > VERSION
+          sed -i "s/^pkgver=.*/pkgver=$version/" packaging/arch/PKGBUILD
           # makepkg uses a source file that is already next to the PKGBUILD, so the package is
-          # built from this checkout and not from the tag on GitHub.
+          # built from this checkout and not from a tag on GitHub.
           tar -czf "/tmp/ripple-cc-$version.tar.gz" --transform "s|^\.|clevo-control-center-linux-$version|" .
           mv "/tmp/ripple-cc-$version.tar.gz" packaging/arch/
           useradd -m builder
@@ -63,8 +87,8 @@ jobs:
 
   publish:
     name: Publish release
-    if: github.ref_type == 'tag'
-    needs: [packages, arch]
+    if: github.event_name == 'push'
+    needs: [checks, version, packages, arch]
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -76,9 +100,8 @@ jobs:
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: v${{ needs.version.outputs.version }}
         run: |
           cd out
           sha256sum * > SHA256SUMS
-          flags=()
-          case "$GITHUB_REF_NAME" in *-*) flags+=(--prerelease) ;; esac
-          gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --verify-tag --generate-notes "${flags[@]}" *
+          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "$TAG" --generate-notes *

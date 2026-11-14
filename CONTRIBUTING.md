@@ -61,16 +61,15 @@ RIPPLE_CC_SOCKET=/tmp/ccd.sock dist/FanSpeedSetting/FanSpeedSetting
 protocol (JSON lines, one request per connection) is documented at the top of `daemon/ripple-ccd`.
 
 ## Continuous integration and releases
-Every push and pull request runs [CI](.github/workflows/ci.yml): it builds the apps and renders each one against
-the simulator, builds the kernel module, runs shellcheck, and starts the daemon with simulated hardware.
+Pull requests run the [checks](.github/workflows/ci.yml): they build the apps and render each one against the
+simulator, build the kernel module, run shellcheck, and start the daemon with simulated hardware.
 
-To publish a release, set the new version in `VERSION`, commit, then push a tag with the same number:
-```sh
-git tag v0.2.0 && git push origin v0.2.0
-```
-The [release workflow](.github/workflows/release.yml) builds the tarball, the `.deb` and the Arch package and
-attaches them to a GitHub release. A tag with a hyphen, such as `v0.2.0-rc.1`, is published as a pre-release.
-Running the workflow by hand builds the same packages without publishing them.
+Every push to `master` runs the same checks and then [publishes a release](.github/workflows/release.yml) with
+the tarball, the `.deb` and the Arch package. Nothing is released if a check fails.
+
+The version is `MAJOR.MINOR.PATCH`. `MAJOR.MINOR` comes from the `VERSION` file and `PATCH` is the number of
+commits on `master`, so it goes up with every push. Edit `VERSION` only to start a new major or minor series.
+Local builds use the number in `VERSION` as it is.
 
 ## Commits
 Use Conventional Commits: `type(scope): summary`.

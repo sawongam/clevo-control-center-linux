@@ -40,8 +40,8 @@ are in the per-app notes.
 | [FnKey](apps/FnKey.md) (OSD popups) | 74 popups render; test events work | not fed by real Fn keys (the kernel module has no event path); tray icon not ported; first-run init is opt-in via `--first-run` / `FNKEY_FIRST_RUN=1`; not in any autostart |
 
 ## Open work
-1. First release: the packages built by the release workflow (tarball, `.deb`, Arch package) have not been
-   installed on a real machine yet.
+1. Release packages: the tarball, `.deb` and Arch package published with each release have not been installed
+   on a real machine yet.
 2. Hardware tests, to be done with the install in place: daemon, FanSpeedSetting (first launch writes defaults),
    keyboard colours, power modes, custom fan curve.
 3. Click-through testing of every app on a real display; mouse paths are largely untested.
@@ -57,4 +57,4 @@ are in the per-app notes.
 - Windows fonts are mapped to free look-alikes (Liberation Sans, Noto Sans), so glyph shapes differ slightly.
 - Run an app's own binary (`./EnergySave`), not `dotnet EnergySave.dll`: the single-instance check depends on it.
 - `src/LedKeyboardSetting/tools/regen.sh` regenerates its `.axaml` and overwrites hand edits.
-- Vendor artwork in the apps belongs to Clevo/Ripple; see the README disclaimer.
+- Vendor artwork in the apps belongs to Clevo; see the README disclaimer.

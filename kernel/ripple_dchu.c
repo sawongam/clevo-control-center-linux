@@ -151,6 +151,6 @@ static void __exit ripple_dchu_exit(void)
 module_init(ripple_dchu_init);
 module_exit(ripple_dchu_exit);
 
-MODULE_DESCRIPTION("Clevo DCHU ACPI _DSM userspace bridge (Ripple Control Center port)");
+MODULE_DESCRIPTION("Clevo DCHU ACPI _DSM userspace bridge (Control Center port)");
 MODULE_AUTHOR("ripple-cc contributors");
 MODULE_LICENSE("GPL");

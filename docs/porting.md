@@ -1,4 +1,4 @@
-# Porting guide: Clevo/Ripple Control Center 3.0 (WPF) to Avalonia 12 on Linux
+# Porting guide: Clevo Control Center 3.0 (WPF) to Avalonia 12 on Linux
 
 This guide is for contributors who port or fix an app. It records the rules used for the existing nine apps.
 

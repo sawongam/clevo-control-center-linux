@@ -1,6 +1,7 @@
 # Maintainer: Sangam Adhikari <sawongam at users dot noreply dot github dot com>
 #
-# Builds from the release tag. After bumping pkgver run `updpkgsums`.
+# Builds from a release tag. The release workflow sets pkgver; to build by hand, set it to a
+# released version (see the releases page) and run `updpkgsums`.
 
 pkgname=ripple-cc
 pkgver=0.1.0
