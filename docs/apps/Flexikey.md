@@ -1,6 +1,6 @@
 # Flexikey port notes
 
-Status: all pages/dialogs ported, builds clean (0 errors), screenshots in `src/Flexikey/screenshots/`.
+Status: all pages and dialogs are ported and render against the simulator. Macros are saved but not applied yet.
 Driver (kb.dll) is a documented STUB. Recording only works inside the app window.
 
 ## Project layout

@@ -1,4 +1,7 @@
-# FanSpeedSetting port notes (status: builds clean; main page, modes, curve editor, anti-dust screenshot-verified in mock)
+# FanSpeedSetting port notes
+
+Port of `FanSpeedSetting.exe`: fan and temperature gauges, fan modes, custom curve editor and anti-dust.
+The main page, modes, curve editor and anti-dust are checked against the simulator.
 
 ## Layout
 - `FanSpeedSetting.csproj`, `Program.cs`, `App.axaml(.cs)` (App.cs also has `MockOverlay`, see below)
@@ -10,7 +13,7 @@
 - Images copied to `image/` (lower-case, all XAML refs lower-cased). mtlanguage.ini/oem.ini copied to output.
 
 ## Conversion method
-XAML was machine-converted from the ilspy output (a python script, since lost), then hand-trimmed: only used styles kept.
+XAML was machine-converted from the ILSpy output, then trimmed by hand: only the styles in use were kept.
 Template triggers were converted to `ControlTheme` + `^:pointerover /template/ X#name` styles; base values touched by triggers moved into styles.
 
 ## Deviations / stubs
@@ -29,7 +32,7 @@ Template triggers were converted to `ControlTheme` + `^:pointerover /template/ X
 First run (registry First_run==0) writes defaults + curve + mode 0 + offset 0, as the original.
 
 ## Verification (mock backend)
-Screenshots in `src/FanSpeedSetting/screenshots/`: auto.png, max.png, custom.png (curve editor), antidust.png (RIPPLE_CC_MOCK_ANTIDUST=1), act.png.
+Rendered with `--screenshot` and checked against the XAML: auto, max, custom (curve editor), antidust (RIPPLE_CC_MOCK_ANTIDUST=1).
 Test hooks: `--page auto|max|maxq|silent|custom|custom-gpu1|custom-gpu2|antidust`, `--act "click:RB_FAN_max;drag:CPU:2:210:150;save-curve;reset-curve"`; use with RIPPLE_CC_MOCK_LOG=file and RIPPLE_CC_CONFIG=<fresh dir>.
 MOCK_LOG verified: mode clicks send 0x79 sub01 data 1/5/0/6; dragging CPU T2 to (210,150) then Save sends pkg 0x0E with T2=65 D2=0x80 T3=80 D3=0xDB (curve math as FAN.cs); first run sends 0x79/0x22, 0x0E, mode 0, offset 0, anti-dust scheduler 0x79/0x28 (as original: LoadMultiLang resets CB_AM items which fires the scheduler handler).
 Headless screen is 3:2 so the window is 1440x960 with the 16:9 content letter-boxed (WPF would do the same on that screen).

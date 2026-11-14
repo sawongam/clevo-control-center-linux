@@ -66,11 +66,6 @@ Entry: `\_SB.DCHU._DSM(UUID 93f224e4-fbdc-4bbf-add6-db71bdc0afad, rev 0, func, P
 ReadAppSettings/WriteAppSettings(page, off, len) = Windows-side persisted settings (page 1 off 1 = power mode,
 page 4 off 5 = fan mode, off 8 = turbo fan). Not hardware state.
 
-## Linux components
-- `kernel/ripple_dchu`: misc device `/dev/ripple_dchu`; the ioctl evaluates the DCHU `_DSM` with an integer or buffer package argument.
-- `cli/ripplectl`: CLI (status, table, perf, fan, curve, kbd, raw).
-- `daemon/ripple-ccd`: root daemon serving the apps over a unix socket.
-
 ## Hardware verification log
 
 ### Test 1 (2026-11-08, read-only): passed
@@ -89,11 +84,7 @@ Perf mode left at quiet after the test.
 PK0D byte 14 is not purely fan mode: reads 0x80 in auto while perf=quiet, 0x08 after `perf performance`,
 0x02 at boot (Nov 8). ripplectl labels updated; powersave/entertainment values still unmapped.
 
-## GUI port design
-- Exact clone of all nine Windows apps, built with Avalonia 12 / .NET 10 by porting the decompiled XAML and C#. Rules: [porting.md](porting.md).
-- Apps run without root. Without the daemon they use `MockBackend`; headless screenshots via `<App> --screenshot out.png`.
-- CPU/GPU overclock writes are locked behind `HardwareGate.GuardOcWrite` (unlock file `/etc/ripple-cc/oc-unlocked`) until tested on hardware.
-  The daemon-side `OC_LOCKED` table in `daemon/ripple-ccd` is still empty for DCHU functions.
-- Layout: `src/RippleCC.Platform` (InsydeDCHU drop-in routing to the daemon socket or the mock; Ini/Reg/CcPaths shims; AppHost),
-  `src/<App>` one project per Windows app, `daemon/ripple-ccd` (root, `/run/ripple-cc/ccd.sock`, persists app settings and
-  re-applies perf/fan/curve at boot), `scripts/build.sh` producing `dist/`, `scripts/install.sh` (DKMS + systemd + `/opt/ripple-cc`).
+## Overclock lock
+CPU and GPU overclock writes go through `HardwareGate.GuardOcWrite` in the apps and are refused by the daemon unless
+`/etc/ripple-cc/oc-unlocked` exists. The daemon's `OC_LOCKED` table for DCHU functions is still empty: no overclock DCHU
+function has been identified yet, so only the app-settings ranges that hold overclock values are protected.

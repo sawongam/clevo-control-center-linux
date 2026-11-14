@@ -58,10 +58,9 @@ Real NVAPI offset ranges, base/boost values, behaviour of Save on real hardware,
 Plus AppSettings reads page 1 off 1/2, page 0 off 24 (+ write of the app version there when it differs), per timer/language refresh.
 No other DCHU write exists; Save/Default only touch AppSettings page 5 (gated) and NVGPU (gated).
 
-## Screenshots (src/GPUOverclocking/screenshots/)
+## Rendered states
 01 main (idle, real nvidia-smi values), 02/03 sliders + gauges at different loads (RIPPLE_GPU_FAKE), 04 GPU-OC warning dialog,
 05 dGPU asleep (OFF), 06 on battery in performance mode ("Please plug in the power."), 07 quiet mode, 08 entertainment mode, 09 "This machine does not support." dialog.
 
 ## Status
 Complete (all visible UI ported, builds clean, screenshots checked). Unverified: hover/pressed visuals, real mouse/slider interaction, popup drop-down rendering (headless capture cannot open it), loading splash, fullscreen/resize behaviour, pixel comparison with Windows.
-Helper scripts used to convert the XAML are in _tools/ (not part of the build).

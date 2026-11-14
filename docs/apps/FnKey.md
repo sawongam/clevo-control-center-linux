@@ -1,4 +1,4 @@
-# FnKey port notes (Avalonia 12 / .NET 10)
+# FnKey port notes
 
 Status legend: DONE / STUB (logged no-op, reason given) / UNVERIFIED (needs real hardware).
 
@@ -92,12 +92,11 @@ Tray icon + menu (OSD toggle, language, power mode, GPU switch, battery saver, o
 ClevoID: GetProductdll!GetProductID_PCI has no Linux equivalent; env FNKEY_CLEVO_ID (hex), default 0 -> Intel/generic branches.
 
 ## Verification status
-- Builds clean (`dotnet restore --source ~/.nuget/packages` once, then `dotnet build --no-restore -p:BuildProjectReferences=false`).
-- Screenshots: `src/FnKey/screenshots/` holds every OsdImage enum value (`osd_*.png`, 67) plus bar variants (`bar_volume_37/100/0`, `bar_brightness_60`, `bar_kbwhite6_3`, `bar_kbwhite5_2`, `bar_volumemute`), rendered with `--screenshot out.png --page <name>`. Window sizes equal the source image sizes (429x90, 263x90 for 3G/GPS, 420x82 docking, ...). Shown at opacity 0.8/0.9 over a simulated grey desktop (screenshot mode only), so they look dimmer than the raw PNGs. Checked visually against OsdForm layout: bar fill width, value label position, image placement OK. Volume max/min text ("100"/"0"/MAXIMUM) is part of the PNGs.
+- Every OsdImage enum value (`osd_*.png`, 67) was rendered, plus the bar variants (`bar_volume_37/100/0`, `bar_brightness_60`, `bar_kbwhite6_3`, `bar_kbwhite5_2`, `bar_volumemute`), rendered with `--screenshot out.png --page <name>`. Window sizes equal the source image sizes (429x90, 263x90 for 3G/GPS, 420x82 docking, ...). Shown at opacity 0.8/0.9 over a simulated grey desktop (screenshot mode only), so they look dimmer than the raw PNGs. Checked visually against OsdForm layout: bar fill width, value label position, image placement OK. Volume max/min text ("100"/"0"/MAXIMUM) is part of the PNGs.
 - Not visually verifiable here: real window behaviour on X11/Wayland (topmost, no-focus, position (50,60), fade timing) - only headless rendering was run.
 - Socket + CLI verified against a running `--no-init` agent with the mock backend (events 0xC9, 0x59, 0x6A, 0x20, 0xF6, `--osd`): handled, DCHU calls logged (e.g. 0x20 -> DCHU 0x67). With `--no-init` the SupportPowerMode flag is unread, so event 0x59 is a no-op until a normal start (faithful to the original gating).
 - Mock quirk: with all-zero AppSettings, KB brightness-down computes brightness -1 exactly as the original would on uninitialised settings; real runs initialise it through OnFirstRun/KB.Init.
 - Screenshot mode does not read the ShowOSD setting (forced on); in `--no-init` mode ShowOSD stays default true. `toggle-osd` flips the persisted setting.
 
 ## First run is opt-in (port change)
-`OnFirstRun` + `KB.FirstRun` (zero AppSettings pages 0-15, DCHU 0x79 sub34 fan defaults) now run only with `--first-run` or `FNKEY_FIRST_RUN=1` (`Form1.AllowFirstRun`); otherwise a log line is written and start-up continues with OnStart. Without it, uninitialised AppSettings may leave ShowOSD=0. FnKey is in no autostart (packaging has only a menu entry).
+`OnFirstRun` + `KB.FirstRun` (zero AppSettings pages 0-15, DCHU 0x79 sub34 fan defaults) now run only with `--first-run` or `FNKEY_FIRST_RUN=1` (`Form1.AllowFirstRun`); otherwise a log line is written and start-up continues with OnStart. Without it, uninitialised AppSettings may leave ShowOSD=0. FnKey is not started automatically and has no menu entry.

@@ -1,6 +1,6 @@
 # CPUOC (CPU / DRAM Overclocking, CPUOC2.0.exe) - port notes
 
-Status: see bottom. Project/assembly `CPUOC`, namespaces kept (`CPUOC30.View`, `CPUOC30.ViewModel`, `CPUOC30.Model`, `CPUOC.Model`).
+Status is at the [end](#status). Project/assembly `CPUOC`, namespaces kept (`CPUOC30.View`, `CPUOC30.ViewModel`, `CPUOC30.Model`, `CPUOC.Model`).
 
 ## Structure
 - `Views/index.axaml(.cs)` main window (converted from index.xaml by script, then post-processed; ratio handlers generated in `index.Ratio.cs`).
@@ -65,7 +65,7 @@ Classification: R = read, H = harmless setting, OC = overclock write (every OC w
 | Named pipe `CPUOCBackgroundPipe` | "Close_Loading" | splash close | H | only in unused MainWindow stub: not ported |
 
 ## Status
-- Complete: main window (all four left panels: ratio override, power limit, VR limit, voltage), save dialog, Window1 error windows, power-mode gating (quiet/powersave/entertainment/unplugged messages), live gauges, translations from mtlanguage.ini. Builds clean; screenshots in `src/CPUOC/screenshots/` (main_quiet, main_perf, main_power, main_vr, main_voltage, main_dialog, main_powersave, main_entertainment, main_unplugged, err_xtu, err_model, err_bios) were checked against the XAML.
+- Complete: main window (all four left panels: ratio override, power limit, VR limit, voltage), save dialog, Window1 error windows, power-mode gating (quiet/powersave/entertainment/unplugged messages), live gauges, translations from mtlanguage.ini. Pages rendered with `--screenshot` (main_quiet, main_perf, main_power, main_vr, main_voltage, main_dialog, main_powersave, main_entertainment, main_unplugged, err_xtu, err_model, err_bios) were checked against the XAML.
 - Not verified: real-hardware values (needs the daemon), mouse interaction with sliders/combos (only rendered, not driven), Window1 transparent corners, dropdown popup rendering (not screenshot-able headless), OC writes on real hardware (locked by HardwareGate; XTU apply never performed).
 - Screenshot window size follows the headless screen (1440x960 here), see WindowFitSize.
 - Ratio panel scroll list shows only P cores 1..8 (stub, no E-cores); other core rows are removed like the original does.

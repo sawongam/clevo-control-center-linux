@@ -33,7 +33,7 @@ Data files the app reads at run time (mtlanguage.ini, oem.ini, …) go in as
 `<Content Include="..." CopyToOutputDirectory="PreserveNewest"/>` and are read relative to
 `AppContext.BaseDirectory`.
 
-Build: `cd src/<App> && dotnet build 2>&1 | grep -E ' error |Build succeeded' | sort -u`
+Build: `dotnet build src/<App>/<App>.csproj`
 
 ## Reading the decompiled XAML
 ilspy prints BAML verbosely. Normalise while porting:
@@ -107,7 +107,7 @@ Never P/Invoke Windows DLLs. Replace each `[DllImport]`:
 | `Microsoft.Win32.Registry` | `RippleCC.Platform.Reg.GetValue/SetValue/GetInt/GetString(keyPath, name, …)` |
 | Windows paths (`C:\ProgramData\…`, `Environment.SpecialFolder.*`, backslashes) | `RippleCC.Platform.CcPaths.Map(path)`; app-relative data via `AppContext.BaseDirectory` |
 | `user32` window messages between the CC apps (`FindWindow`, `SendMessage`, `RegisterWindowMessage`, `WndProc` hooks), named pipes, EventLog IPC to DCHUService | The Windows service does not exist. Where the app asked the service to do a hardware call, do that DCHU call directly. App-to-app notifications: implement with a small file-watcher or unix-socket helper inside your project if the feature needs it, otherwise make it a no-op and note it. |
-| UWP `Launcher.LaunchUriAsync`, `Process.Start` of another CC app | `AppHost.LaunchSibling("<ProjectName>")`. Project names: `ControlCenter30`, `FanSpeedSetting`, `LedKeyboardSetting`, `Flexikey`, `CPUOC`, `GPUOverclocking`, `EnergySave`, `BatteryUtility`, `FnKey`. |
+| UWP `Launcher.LaunchUriAsync`, `Process.Start` of another CC app | `AppHost.LaunchSibling("<ProjectName>")`, which starts `../<ProjectName>/<ProjectName>` next to the running app. Project names: `ControlCenter30`, `FanSpeedSetting`, `LedKeyboardSetting`, `Flexikey`, `CPUOC`, `GPUOverclocking`, `EnergySave`, `BatteryUtility`, `FnKey`. |
 | power plans (`powrprof`), brightness, Wi-Fi/Bluetooth/camera/touchpad toggles, audio, battery info, CPU/GPU usage & temps, RAM | Linux equivalents where there is a clean unprivileged one: `/sys/class/power_supply/BAT*`, `/sys/class/backlight/*`, `/proc/stat`, `/proc/meminfo`, `/sys/class/hwmon`, `/sys/class/thermal`, `nvidia-smi --query-gpu=… --format=csv,noheader,nounits` (read-only), `rfkill`, `powerprofilesctl`, `/sys/class/leds/rgb:kbd_backlight`. Put each in a small adapter class named after the DLL it replaces. If there is no sane equivalent, stub it with a plausible fixed value and list it in the app notes. |
 | CPU/GPU overclock writes (voltages, ratios, power limits, GPU clock/voltage offsets, memory timings/XMP) | route **every** such write through `HardwareGate.GuardOcWrite(() => …)`. When it returns false the UI must behave exactly as normal but skip the hardware write. Reads are fine. Fan mode / fan curve / performance mode / keyboard LED are **not** OC writes. |
 
@@ -119,10 +119,10 @@ that a click sends the same command the Windows code would.
 UI development needs no root: do not load kernel modules, open `/dev/ripple_dchu` or write to `/sys` from an app
 under development. Keep NuGet dependencies to Avalonia-family packages.
 
-## Checking your work (mandatory)
+## Checking your work
 There are no Windows reference screenshots. The XAML is the spec: sizes, margins, colours, image names.
 1. `dotnet build` with 0 errors.
-2. `dotnet bin/Debug/net10.0/<App>.dll --screenshot /abs/out.png [--after-ms 1500] [--page NAME]`
+2. `bin/Debug/net10.0/<App> --screenshot out.png [--after-ms 1500] [--page NAME]`
    renders the main window off-screen (no display needed) and writes a PNG. Implement `--page`
    (read `AppHost.PageArg` at startup) so every page / tab / dialog / notable state can be
    captured, and `--lang` if the app has languages.
@@ -130,11 +130,11 @@ There are no Windows reference screenshots. The XAML is the spec: sizes, margins
    element present, positions, images not missing (a missing image is silent), text not
    clipped, right colours, right initial state. Fix and repeat. Do this for every page.
 4. Run it for real for 5 s to catch runtime exceptions:
-   `timeout 5 dotnet bin/Debug/net10.0/<App>.dll; echo $?` (124 = still running = good).
+   `timeout 5 bin/Debug/net10.0/<App>; echo $?` (124 means it was still running, which is what you want).
    Unhandled exceptions in timers/handlers must not be swallowed silently during development.
 5. With `RIPPLE_CC_MOCK_LOG`, confirm start-up hardware calls match what the original would send.
 
-Save final screenshots in `src/<App>/screenshots/`.
+The screenshot shown in the README for each app lives in `docs/screenshots/`; update it when the main window changes.
 
 ## Per-app notes
 Each app has a notes file in [`apps/`](README.md#per-app-notes), kept up to date as you work:

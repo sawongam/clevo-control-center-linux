@@ -6,7 +6,7 @@ single page. No charge-threshold UI exists in it; the only battery-related DCHU 
 ## Status
 Complete: main page (all states), dialog box (all messages), loading splash, window logic, language (mtlanguage.ini, `--lang xx`).
 Build: `dotnet restore --source ~/.nuget/packages` once (offline), then `dotnet build --no-restore -p:BuildProjectReferences=false`.
-Screenshots: `src/BatteryUtility/screenshots/*.png` (main, healthy, deteriorated, failure, discharge1..adjusting, finish, dialog6-9, unsupported, nobattery, lang_de, loading).
+Pages rendered with `--screenshot --page NAME` (main, healthy, deteriorated, failure, discharge1..adjusting, finish, dialog6-9, unsupported, nobattery, lang_de, loading).
 `--page` values: healthy deteriorated replace failure discharge1 charge1 discharge2 charge2 adjusting finish dialog6 dialog7 dialog8 dialog9 loading.
 Env: RIPPLE_BAT_NONE=1 (simulate no battery), RIPPLE_BAT_UNSUPPORTED=1 (feature bit missing -> "This machine does not support."). Use RIPPLE_CC_CONFIG=<tmp dir> when screenshotting (state is persisted in registry.json: OngoingStatus, elapsed time, last refresh date).
 

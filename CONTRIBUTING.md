@@ -4,9 +4,17 @@ Contributions are welcome, particularly hardware test reports and fixes. Please 
 [README](README.md#safety) first: changes touch laptop firmware.
 
 ## Layout
-`kernel/` (kernel module), `daemon/` (Python root daemon), `cli/` (`ripplectl`), `src/` (Avalonia apps and the shared
-`RippleCC.Platform` library), `packaging/`, `scripts/`, `docs/`. Start with [docs/README.md](docs/README.md) and
-[docs/porting.md](docs/porting.md).
+| Path | Contents |
+|---|---|
+| `kernel/` | `ripple_dchu` kernel module |
+| `daemon/` | `ripple-ccd`, the root service (Python, standard library only) |
+| `cli/` | `ripplectl` |
+| `src/` | the Avalonia apps, one project each, and the shared `RippleCC.Platform` library |
+| `scripts/` | build, install and uninstall |
+| `packaging/` | systemd unit, menu entry, and the Arch, Debian and tarball packaging |
+| `docs/` | protocol, porting guide, per-app notes, roadmap |
+
+Start with [docs/README.md](docs/README.md) and [docs/porting.md](docs/porting.md).
 
 ## Dev setup
 - .NET SDK 10, Python 3, and for the kernel module `dkms` and the headers for your kernel (Arch: `dotnet-sdk dkms linux-headers python`).
@@ -15,11 +23,13 @@ Contributions are welcome, particularly hardware test reports and fixes. Please 
 
 ## Building
 ```sh
-scripts/build.sh     # publishes all apps to dist/<App>/
+scripts/build.sh                    # publishes every app to dist/<App>/
+scripts/build.sh --offline          # restore NuGet packages from ~/.nuget/packages only
+scripts/build.sh --self-contained   # bundle the .NET runtime, as the release packages do
 ```
-If an online NuGet restore hangs or you are offline, restore from the local cache first:
-`dotnet restore src/<App>/<App>.csproj --source ~/.nuget/packages`, then `dotnet build --no-restore`.
-`scripts/build.sh` already uses the local package cache as its source.
+The apps share most of their files (Avalonia, Skia, the runtime). After publishing, `build.sh` moves every file
+that is identical in more than one app to `dist/lib/` and leaves a relative symlink in its place. Each app keeps
+its own directory because the ported code reads its data files next to its executable.
 
 ## Running apps against the simulator
 `RippleCC.Platform` picks a backend at start (`Backend.cs`):
@@ -30,7 +40,7 @@ If an online NuGet restore hangs or you are offline, restore from the local cach
 RIPPLE_CC_MOCK=1 dist/FanSpeedSetting/FanSpeedSetting
 RIPPLE_CC_MOCK_LOG=/tmp/calls.log RIPPLE_CC_MOCK=1 dist/FanSpeedSetting/FanSpeedSetting   # log each hardware call
 ```
-Run the apphost binary, not `dotnet App.dll` (single-instance check). With the simulator the overclock
+Run the app's own binary, not `dotnet App.dll`: the single-instance check depends on the process name. With the simulator the overclock
 guard allows writes, since nothing real is touched.
 
 ### Headless screenshots
@@ -50,10 +60,22 @@ RIPPLE_CC_SOCKET=/tmp/ccd.sock dist/FanSpeedSetting/FanSpeedSetting
 `--oc-unlock-file PATH` changes the file whose existence unlocks overclock writes (for tests only). The wire
 protocol (JSON lines, one request per connection) is documented at the top of `daemon/ripple-ccd`.
 
+## Continuous integration and releases
+Every push and pull request runs [CI](.github/workflows/ci.yml): it builds the apps and renders each one against
+the simulator, builds the kernel module, runs shellcheck, and starts the daemon with simulated hardware.
+
+To publish a release, set the new version in `VERSION`, commit, then push a tag with the same number:
+```sh
+git tag v0.2.0 && git push origin v0.2.0
+```
+The [release workflow](.github/workflows/release.yml) builds the tarball, the `.deb` and the Arch package and
+attaches them to a GitHub release. A tag with a hyphen, such as `v0.2.0-rc.1`, is published as a pre-release.
+Running the workflow by hand builds the same packages without publishing them.
+
 ## Commits
 Use Conventional Commits: `type(scope): summary`.
 - Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `build`, `ci`, `test`.
-- Scopes: `kernel`, `daemon`, `cli`, `ui` (shared platform library), or an app name (`fanspeed`, `flexikey`, ...).
+- Scopes: `kernel`, `daemon`, `cli`, `platform` (shared library), `packaging`, or an app name (`fan`, `flexikey`, ...).
 - Examples: `fix(kernel): handle buffer replies shorter than 256 bytes`, `docs: update roadmap`.
 - Keep commits focused; say in the message what you verified and on which hardware.
 
@@ -61,7 +83,7 @@ Use Conventional Commits: `type(scope): summary`.
 - Match the surrounding code. C#: 4-space indent, the original namespaces and class names are kept in ported files so they stay diffable against the originals.
 - Ported UI is a faithful clone: do not restyle or simplify; see [docs/porting.md](docs/porting.md).
 - Never change command numbers, byte layouts or call order of hardware calls without evidence from the firmware or a hardware test; document findings in [docs/protocol.md](docs/protocol.md).
-- Python (daemon, CLI): standard library only, PEP 8, type of change explained in comments where the firmware behaviour is non-obvious.
+- Python (daemon, CLI): standard library only, PEP 8. Add a comment where the firmware behaves in a way a reader would not expect.
 - Kernel: Linux kernel coding style, GPL-2.0.
 - Route every CPU/GPU overclock write through `HardwareGate.GuardOcWrite`.
 - Update the relevant `docs/apps/<App>.md` and [docs/roadmap.md](docs/roadmap.md) with your change.

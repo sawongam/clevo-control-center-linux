@@ -1,4 +1,6 @@
-# ControlCenter30 port notes (status: complete for Window1, Window_MOUSE, dialogs; see below)
+# ControlCenter30 port notes
+
+Port of `ControlCenter30.exe`, the launcher and power-mode window. Window1, Window_MOUSE and the dialogs are ported.
 
 ## Layout
 - Window1.axaml(.cs): main launcher (UniformGrid of app tiles + "Power Modes" sub-page + AMD manual mode + PgUp/PgDn tile). 
@@ -6,7 +8,7 @@
 - UserControl_DialogBox / DialogBox2: modal overlays.
 - Page_1App..Page_8Apps (in the original decompiled sources): NOT referenced anywhere in the app (dead code; Window1 holds button_1..8 itself). Not ported.
 - App.axaml(.cs): startup logic of original App.cs (feature detection) + ToolTip theme.
-- XAML was converted mechanically from the ILSpy XAML (script kept outside project), then hand-fixed. Only resource
+- XAML was converted mechanically from the ILSpy XAML, then hand-fixed. Only resource
   styles actually used were converted. ComboBoxStyle1 (AMD only) was rewritten by hand (simplified popup).
 - Images: lower-case paths (Img.Load lower-cases, ' ' -> '-').
 - ContentStringFormat (used by WPF templates as a label carrier) -> `Tag`.
@@ -38,19 +40,13 @@ Power-mode changes by FnKey are picked up by polling AppSettings(1,1) every 1 s 
 - Tooltip placement rectangles not replicated (ToolTip.ShowDelay=1000 kept).
 - Window_MOUSE resize grip not implemented.
 
-## TODO / verification
-See bottom of file for screenshot status.
-
 ## Verification status
-Built clean (dotnet build --no-restore -p:BuildProjectReferences=false). Screenshots in src/ControlCenter30/screenshots/: main (7 tiles), apps3, pgupdn,
+Rendered with `--screenshot` and checked against the XAML: main (7 tiles), apps3, pgupdn,
 fnkey (new 4-mode UI), oldmodes (circular UI), amd (RIPPLE_CC30_P7_17=0 --page amd), mouse, dialog, dialog2. 5 s run: no exceptions;
-startup DCHU reads: 0x46, 0x0D, 0x11, 0x7A, 0x10, 0x60 (+ AppSettings). `./shot.sh <page>` takes a screenshot.
+startup DCHU reads: 0x46, 0x0D, 0x11, 0x7A, 0x10, 0x60 (+ AppSettings).
 Click paths (mode buttons -> ServiceBridge writes 0x79 sub 0x19, tile launch -> LaunchSibling) are coded but were NOT exercised
 (no UI automation); tooltips, hover/pressed states, real-hardware feature bits unverified. Negative-margin quirk: Avalonia clamps
 desired size for negative bottom margins, so tile label margin was changed to Margin="0,200,0,0" (same position). Other
 negative-margin spots inside RadioButton templates looked correct in screenshots.
 ComboBox popup art (dropdown arrow) simplified. With 7 apps + PgUp/PgDn tile (pgupdn page) the extra tile overflows; original has
 no special-case for that combination either.
-
-## Release publish
-The `XamlLoadException: No precompiled XAML found` came from stale bin/obj; a clean rebuild (rm bin obj) publishes and renders fine in Release. csproj/App.axaml were already equivalent to the working apps. Sibling project names used by MapApp match the dist/ folder names.

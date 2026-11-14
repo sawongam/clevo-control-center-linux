@@ -38,8 +38,7 @@ Window declared 1920x1080 but MaxWidth/MaxHeight = (0.75*screen)+20 / +18 (rate 
 | SetWMI 121 sub 28 / 29 | | ACOFF / refresh | BatteryRefreshCommand |
 
 ## Status
-- Complete: all pages/states ported and screenshotted (src/EnergySave/screenshots/): power plan (+data), energy save locked/unlocked/manual/overlap/rename, minute mode, fullscreen toggle state, message dialogs (msg-save/overlap/last), --lang.
-- Build note: the shared NuGet restore hung under parallel builds; `dotnet restore --source ~/.nuget/packages` then `dotnet build --no-restore -p:BuildProjectReferences=false` works.
-- Run the apphost (`bin/Debug/net10.0/EnergySave`), not `dotnet EnergySave.dll`: the single-instance check counts processes named like the host and would exit.
+- Complete: all pages/states ported and rendered with `--screenshot`: power plan (+data), energy save locked/unlocked/manual/overlap/rename, minute mode, fullscreen toggle state, message dialogs (msg-save/overlap/last), --lang.
+- Run the `EnergySave` binary, not `dotnet EnergySave.dll`: the single-instance check counts processes named like the host and would exit.
 - Not verified: real pointer dragging of the schedule knobs, battery-limit handle dragging, list/rename/add/delete clicks (logic ported unchanged, only screenshot-verified in static states); real maximise on a desktop; behaviour on real hardware (cmd 65 values, 118/121 writes).
 - Screenshot window is 1460x978 because the headless screen is 1920x1280.
