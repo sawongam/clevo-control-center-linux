@@ -1,0 +1,33 @@
+# Maintainer: Sangam Adhikari <sawongam at users dot noreply dot github dot com>
+#
+# Builds from the release tag. After bumping pkgver run `updpkgsums`.
+
+pkgname=ripple-cc
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Control Center for Clevo laptops: fan, performance mode and keyboard backlight control"
+arch=('x86_64')
+url="https://github.com/sawongam/clevo-control-center-linux"
+license=('GPL-2.0-only')
+depends=('dotnet-runtime' 'dkms' 'python' 'ttf-liberation' 'noto-fonts' 'hicolor-icon-theme')
+makedepends=('dotnet-sdk')
+optdepends=('linux-headers: build the kernel module for the stock kernel'
+            'power-profiles-daemon: power plans in the Energy Save app'
+            'nvidia-utils: GPU readings'
+            'tuxedo-drivers-dkms: keyboard backlight LED')
+options=('!strip' '!debug')
+install=ripple-cc.install
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "clevo-control-center-linux-$pkgver"
+  export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1
+  export DOTNET_CLI_HOME="$srcdir/.dotnet" NUGET_PACKAGES="$srcdir/.nuget"
+  scripts/build.sh
+}
+
+package() {
+  cd "clevo-control-center-linux-$pkgver"
+  scripts/stage.sh "$pkgdir"
+}

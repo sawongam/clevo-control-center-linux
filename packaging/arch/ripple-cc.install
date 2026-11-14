@@ -1,0 +1,13 @@
+post_install() {
+  echo "The kernel module is built by DKMS and needs the headers for your kernel (for example linux-headers)."
+  echo "Start the hardware service with:  systemctl enable --now ripple-ccd"
+}
+
+post_upgrade() {
+  systemctl try-restart ripple-ccd 2>/dev/null || true
+}
+
+pre_remove() {
+  systemctl disable --now ripple-ccd 2>/dev/null || true
+  rmmod ripple_dchu 2>/dev/null || true
+}

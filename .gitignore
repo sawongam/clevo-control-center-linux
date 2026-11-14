@@ -25,3 +25,11 @@ modules.order
 
 # original Windows suite, decompiled sources and other reference material (not redistributable)
 reference/
+
+# packaging output
+*.deb
+*.pkg.tar.zst
+/ripple-cc-*.tar.gz
+packaging/arch/src/
+packaging/arch/pkg/
+packaging/arch/*.tar.gz

@@ -1,0 +1,17 @@
+Package: ripple-cc
+Version: @VERSION@
+Architecture: amd64
+Maintainer: Sangam Adhikari <sawongam@users.noreply.github.com>
+Installed-Size: @INSTALLED_SIZE@
+Depends: dkms, python3, kmod, libicu78 | libicu76 | libicu74 | libicu72 | libicu70, libfontconfig1, libx11-6, libice6, libsm6, fonts-liberation, fonts-noto-core
+Recommends: linux-headers-generic | linux-headers-amd64, fonts-noto-cjk
+Suggests: power-profiles-daemon
+Section: utils
+Priority: optional
+Homepage: https://github.com/sawongam/clevo-control-center-linux
+Description: Control Center for Clevo laptops
+ Unofficial Linux port of the Clevo Control Center 3.0 suite: fan monitoring
+ and fan curves, performance modes and keyboard backlight control.
+ .
+ Contains the ripple_dchu kernel module (built with DKMS), the ripple-ccd
+ hardware service, the ripplectl command line tool and the graphical apps.
