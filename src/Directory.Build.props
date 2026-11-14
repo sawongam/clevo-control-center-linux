@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>0.1.0</Version>
+    <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)../VERSION').Trim())</Version>
     <Authors>ripple-cc contributors</Authors>
     <PackageLicenseExpression>GPL-2.0-only</PackageLicenseExpression>
     <AvaloniaVersion>12.1.6</AvaloniaVersion>
