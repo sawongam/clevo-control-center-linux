@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CC;
 

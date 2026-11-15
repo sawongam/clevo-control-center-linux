@@ -6,7 +6,7 @@ Status is at the [end](#status). Project/assembly `CPUOC`, namespaces kept (`CPU
 - `Views/index.axaml(.cs)` main window (converted from index.xaml by script, then post-processed; ratio handlers generated in `index.Ratio.cs`).
 - `Views/Window1.axaml(.cs)` error/warning window (platform / BIOS / XTU problems).
 - `Styles/Theme.axaml` hand-ported WPF styles: slider (SliderStyle_INC), combobox (dropdown), scrollviewer/scrollbars, checkbox, radiobutton, buttons, TextBox (chromeless).
-- `Model/DCHU.cs` original DCHU wrapper, externs redirected to `RippleCC.Platform.InsydeDCHU`. `Model/OverClockModel.cs`, `Model/DCHUModel.cs` ported; `ViewModel/IndexViewModel.cs` unchanged.
+- `Model/DCHU.cs` original DCHU wrapper, externs redirected to `CCenter.Platform.InsydeDCHU`. `Model/OverClockModel.cs`, `Model/DCHUModel.cs` ported; `ViewModel/IndexViewModel.cs` unchanged.
 - `Platform/Xtu.cs` XtuStub (Intel XTU SDK stand-in), LinuxSensors (read-only Linux readings), SeedMock (simulator seed for screenshots).
 - Assets in `Assets/` (the Windows `assets/` folder; XAML says `../Assets/`). `mtlanguage.ini` copied from the installed package.
 - Screenshots: `dotnet bin/Debug/net10.0/CPUOC.dll --screenshot out.png --page NAME`; pages: (none)=quiet power mode, `perf` (ratio override panel), `power`, `vr`, `voltage`, `dialog`, `quiet|powersave|entertainment`, `unplugged`, `error`, `error_model`, `error_bios`.
@@ -26,7 +26,7 @@ FnKey power-mode change events ("clevofnkey^202") and AC events (SystemEvents.Po
 - Intel XTU SDK (tuning controls, monitors, service checks, platform compatibility): stubbed for i7-11800H (8C/16T, 45 W): base ratio 23, bclk 100, PL1 45 W (list 10..330), PL2 107 W, PL time list 1..128 s, ICCmax auto, per-core ratios 46/46/45/45/43/43/42/42 (range 8..48), no E-cores (so ratio list shows only P cores). XTU service is always "present and running".
 - Per-second readings: CPU MHz = mean scaling_cur_freq; usage = /proc/stat delta; temperature = EC pkg 0x0C byte 18 via DCHU (identity as in the original for 45 W), fallback hwmon coretemp; **voltage = STUB** (0.80..0.92 V random, needs MSR); **memory clock = STUB 3200 MHz** (needs MCHBAR/dmidecode). CPU name from /proc/cpuinfo. Memory size from /proc/meminfo (unused by UI).
 - `Memory_Speed_Max` is never assigned in the original either (stays 0) -> memory bar shows "full" above 810 MHz (faithful).
-- Capability checks (DCHU func 16 bit 0x40, func 122 bit 23) are read from the firmware; in the simulator they are seeded as supported. `RIPPLE_CC_CPUOC_FORCE=1` bypasses both checks on real hardware (addition, off by default).
+- Capability checks (DCHU func 16 bit 0x40, func 122 bit 23) are read from the firmware; in the simulator they are seeded as supported. `CCENTER_CPUOC_FORCE=1` bypasses both checks on real hardware (addition, off by default).
 - Slider.Focus()/ComboBox.Focus() calls in the original value-changed handlers are omitted. ComboBox.Text is replaced by helpers (SelectedItem text).
 - Windows event-log writes, GC.Collect calls, WMI memory query, PowerShell CIM query, performance counters: replaced as above.
 - Embedded font "BankGothic Md BT": NOT referenced anywhere in the original XAML/C# of this app and no .ttf ships with it; nothing to bundle. Text uses Microsoft Sans Serif (mapped by AppHost) and default (Segoe UI -> Noto Sans).

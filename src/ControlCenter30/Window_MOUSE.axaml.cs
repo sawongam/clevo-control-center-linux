@@ -5,7 +5,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace ControlCenter30;
 

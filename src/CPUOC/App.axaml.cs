@@ -5,7 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using CPUOC30.Model;
 using CPUOC30.View;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CPUOC30;
 

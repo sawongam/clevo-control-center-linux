@@ -6,7 +6,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CC;
 

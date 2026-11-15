@@ -23,7 +23,7 @@ public static class Sock
 		{
 			var d = Environment.GetEnvironmentVariable("XDG_RUNTIME_DIR");
 			if (string.IsNullOrEmpty(d) || !Directory.Exists(d)) d = "/tmp";
-			return System.IO.Path.Combine(d, "ripple-cc-fnkey.sock");
+			return System.IO.Path.Combine(d, "ccenter-fnkey.sock");
 		}
 	}
 

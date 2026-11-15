@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (C) 2026 ripple-cc contributors
+# Copyright (C) 2026 ccenter contributors
 # build output
 bin/
 obj/
@@ -29,7 +29,7 @@ reference/
 # packaging output
 *.deb
 *.pkg.tar.zst
-/ripple-cc-*.tar.gz
+/ccenter-*.tar.gz
 packaging/arch/src/
 packaging/arch/pkg/
 packaging/arch/*.tar.gz

@@ -41,5 +41,5 @@ internal static class Msg
 		if (Dispatcher.UIThread.CheckAccess()) Do(); else Dispatcher.UIThread.Invoke(Do);
 	}
 
-	static bool AppHost_IsScreenshot => RippleCC.Platform.AppHost.IsScreenshot;
+	static bool AppHost_IsScreenshot => CCenter.Platform.AppHost.IsScreenshot;
 }

@@ -2,7 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace GPUOverclocking;
 

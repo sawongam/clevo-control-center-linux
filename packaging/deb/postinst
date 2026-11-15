@@ -3,11 +3,11 @@ set -e
 
 if [ "$1" = configure ]; then
     # Registers, builds and installs the module for the installed kernels.
-    /usr/lib/dkms/common.postinst ripple_dchu @MODULE_VERSION@ /usr/share/ripple-cc "" "$2" || true
-    modprobe ripple_dchu 2>/dev/null || true
+    /usr/lib/dkms/common.postinst ccenter_dchu @MODULE_VERSION@ /usr/share/ccenter "" "$2" || true
+    modprobe ccenter_dchu 2>/dev/null || true
     if [ -d /run/systemd/system ]; then
         systemctl daemon-reload
-        systemctl enable ripple-ccd >/dev/null 2>&1 || true
-        systemctl restart ripple-ccd >/dev/null 2>&1 || true
+        systemctl enable ccenterd >/dev/null 2>&1 || true
+        systemctl restart ccenterd >/dev/null 2>&1 || true
     fi
 fi

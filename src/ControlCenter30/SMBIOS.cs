@@ -60,8 +60,8 @@ internal class SMBIOS
 
 	static string Dmi(string name)
 	{
-		// RIPPLE_CC_DMI_<NAME> lets screenshots/tests simulate other OEM strings (e.g. MEDION, AORUS).
-		var ov = Environment.GetEnvironmentVariable("RIPPLE_CC_DMI_" + name.ToUpperInvariant());
+		// CCENTER_DMI_<NAME> lets screenshots/tests simulate other OEM strings (e.g. MEDION, AORUS).
+		var ov = Environment.GetEnvironmentVariable("CCENTER_DMI_" + name.ToUpperInvariant());
 		if (ov != null) return ov;
 		try { return File.ReadAllText("/sys/class/dmi/id/" + name).Trim(); }
 		catch { return ""; }

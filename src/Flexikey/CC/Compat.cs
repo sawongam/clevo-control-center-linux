@@ -96,7 +96,7 @@ public static class MessageBox
 	public static MessageBoxResult Show(string text, string caption) => Show(text, caption, MessageBoxButton.OK, MessageBoxImage.None);
 	public static MessageBoxResult Show(string text, string caption, MessageBoxButton b, MessageBoxImage i)
 	{
-		if (RippleCC.Platform.AppHost.IsScreenshot) { Console.WriteLine($"MessageBox[{caption}]: {text}"); return b == MessageBoxButton.YesNo ? MessageBoxResult.Yes : MessageBoxResult.OK; }
+		if (CCenter.Platform.AppHost.IsScreenshot) { Console.WriteLine($"MessageBox[{caption}]: {text}"); return b == MessageBoxButton.YesNo ? MessageBoxResult.Yes : MessageBoxResult.OK; }
 		var w = new MsgWindow(text, caption, b, i);
 		var owner = Sync.MainWin;
 		var t = owner != null ? w.ShowDialog<object>(owner) : Task.FromResult<object>(null);

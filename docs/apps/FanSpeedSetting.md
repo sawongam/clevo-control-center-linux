@@ -8,7 +8,7 @@ The main page, modes, curve editor and anti-dust are checked against the simulat
 - `MainWindow.axaml(.cs)`: title bar, window sizing, skin colour, test hooks (`--page`, `--act`)
 - `Page_system_monitor.axaml(.cs)`: the only page (fan gauges, temp gauges, mode radios, custom curve, anti-dust)
 - `UControl/UserControl_FAN`, `UserControl_FanTable2` (curve editor), `UserControl_DialogBox`; `loading.axaml` splash
-- Non-UI logic copied from original with minimal edits: FAN.cs, InsydeDriver.cs (externs redirected to RippleCC.Platform.InsydeDCHU), RWReg.cs, RWIni.cs, language.cs, Support_BIT.cs, Global.cs
+- Non-UI logic copied from original with minimal edits: FAN.cs, InsydeDriver.cs (externs redirected to CCenter.Platform.InsydeDCHU), RWReg.cs, RWIni.cs, language.cs, Support_BIT.cs, Global.cs
 - `Platform.cs`: `Img` loader, `Registry` shim (-> Reg), `MutableThickness`
 - Images copied to `image/` (lower-case, all XAML refs lower-cased). mtlanguage.ini/oem.ini copied to output.
 
@@ -24,7 +24,7 @@ Template triggers were converted to `ControlTheme` + `^:pointerover /template/ X
 - Slider LayoutTransform skew -> to verify (RenderTransform).
 - ComboBox `Text=` (non-editable) replaced with SelectedIndex = FanOffset.
 - Hidden vs Collapsed both -> IsVisible=false.
-- `MockOverlay` (App.axaml.cs): in mock mode answers WMI 16 = 0xF1 (fan setting supported), WMI 96 = 0 (0x80 with RIPPLE_CC_MOCK_ANTIDUST=1), seeds app page1 off1 = 3.
+- `MockOverlay` (App.axaml.cs): in mock mode answers WMI 16 = 0xF1 (fan setting supported), WMI 96 = 0 (0x80 with CCENTER_MOCK_ANTIDUST=1), seeds app page1 off1 = 3.
 - Window defaults to maximised when registry value absent (as WPF); screenshot mode stays windowed.
 - Resize grip not yet implemented.
 
@@ -32,8 +32,8 @@ Template triggers were converted to `ControlTheme` + `^:pointerover /template/ X
 First run (registry First_run==0) writes defaults + curve + mode 0 + offset 0, as the original.
 
 ## Verification (mock backend)
-Rendered with `--screenshot` and checked against the XAML: auto, max, custom (curve editor), antidust (RIPPLE_CC_MOCK_ANTIDUST=1).
-Test hooks: `--page auto|max|maxq|silent|custom|custom-gpu1|custom-gpu2|antidust`, `--act "click:RB_FAN_max;drag:CPU:2:210:150;save-curve;reset-curve"`; use with RIPPLE_CC_MOCK_LOG=file and RIPPLE_CC_CONFIG=<fresh dir>.
+Rendered with `--screenshot` and checked against the XAML: auto, max, custom (curve editor), antidust (CCENTER_MOCK_ANTIDUST=1).
+Test hooks: `--page auto|max|maxq|silent|custom|custom-gpu1|custom-gpu2|antidust`, `--act "click:RB_FAN_max;drag:CPU:2:210:150;save-curve;reset-curve"`; use with CCENTER_MOCK_LOG=file and CCENTER_CONFIG=<fresh dir>.
 MOCK_LOG verified: mode clicks send 0x79 sub01 data 1/5/0/6; dragging CPU T2 to (210,150) then Save sends pkg 0x0E with T2=65 D2=0x80 T3=80 D3=0xDB (curve math as FAN.cs); first run sends 0x79/0x22, 0x0E, mode 0, offset 0, anti-dust scheduler 0x79/0x28 (as original: LoadMultiLang resets CB_AM items which fires the scheduler handler).
 Headless screen is 3:2 so the window is 1440x960 with the 16:9 content letter-boxed (WPF would do the same on that screen).
 

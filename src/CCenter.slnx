@@ -8,5 +8,5 @@
   <Project Path="FnKey/FnKey.csproj" />
   <Project Path="GPUOverclocking/GPUOverclocking.csproj" />
   <Project Path="LedKeyboardSetting/LedKeyboardSetting.csproj" />
-  <Project Path="RippleCC.Platform/RippleCC.Platform.csproj" />
+  <Project Path="CCenter.Platform/CCenter.Platform.csproj" />
 </Solution>

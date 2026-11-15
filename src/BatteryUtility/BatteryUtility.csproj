@@ -9,7 +9,7 @@
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <ProjectReference Include="../CCenter.Platform/CCenter.Platform.csproj" />
     <AvaloniaResource Include="Image/**" />
     <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="battery.ini" CopyToOutputDirectory="PreserveNewest" />

@@ -1,5 +1,5 @@
 using System;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CPUOC30.Model;
 

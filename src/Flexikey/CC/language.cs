@@ -18,7 +18,7 @@ public class language
 
 	private string lang = "en-US";
 
-	public static int GetPrivateProfileString(string section, string key, string def, StringBuilder retStr, int bufferSize, string filePath) => RippleCC.Platform.Ini.GetPrivateProfileString(section, key, def, retStr, bufferSize, filePath);
+	public static int GetPrivateProfileString(string section, string key, string def, StringBuilder retStr, int bufferSize, string filePath) => CCenter.Platform.Ini.GetPrivateProfileString(section, key, def, retStr, bufferSize, filePath);
 
 	
 

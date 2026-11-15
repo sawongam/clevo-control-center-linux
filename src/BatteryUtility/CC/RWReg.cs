@@ -1,9 +1,9 @@
 using System;
 using System.Globalization;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 /// <summary>Registry-backed settings (HKCU\Software\ControlCenter2.0\...). Only the members this app uses are ported;
-/// storage goes through RippleCC.Platform.Reg (JSON file in ~/.config/ripple-cc/registry.json).</summary>
+/// storage goes through CCenter.Platform.Reg (JSON file in ~/.config/ccenter/registry.json).</summary>
 public class RWReg
 {
 	const string UI = "HKEY_CURRENT_USER\\Software\\ControlCenter2.0\\UI\\";

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (C) 2026 ripple-cc contributors
+# Copyright (C) 2026 ccenter contributors
 #
 # Build the Control Center into dist/. Run as your normal user, not with sudo.
 #

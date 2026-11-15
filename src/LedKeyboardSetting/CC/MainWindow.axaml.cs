@@ -9,7 +9,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using CC.other_Class;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CC;
 

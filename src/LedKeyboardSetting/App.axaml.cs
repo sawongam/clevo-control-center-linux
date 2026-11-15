@@ -10,7 +10,7 @@ public partial class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime d)
         {
             // dev/screenshot only: --page dialogN shows the (otherwise unused) UserControl_DialogBox
-            var pg = RippleCC.Platform.AppHost.PageArg;
+            var pg = CCenter.Platform.AppHost.PageArg;
             if (pg != null && pg.StartsWith("dialog"))
             {
                 CC.Global.RW_REG = new RWReg();

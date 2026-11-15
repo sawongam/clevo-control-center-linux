@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir -p screenshots
           for app in ControlCenter30 FanSpeedSetting LedKeyboardSetting Flexikey CPUOC GPUOverclocking EnergySave BatteryUtility FnKey; do
-            RIPPLE_CC_CONFIG="$RUNNER_TEMP/config" "dist/$app/$app" --screenshot "screenshots/$app.png" --after-ms 1500
+            CCENTER_CONFIG="$RUNNER_TEMP/config" "dist/$app/$app" --screenshot "screenshots/$app.png" --after-ms 1500
           done
       - uses: actions/upload-artifact@v4
         with:
@@ -50,10 +50,10 @@ jobs:
       - name: Shellcheck
         run: shellcheck scripts/*.sh packaging/deb/build.sh packaging/deb/postinst packaging/deb/prerm packaging/tarball/build.sh
       - name: Compile Python
-        run: python3 -m py_compile daemon/ripple-ccd cli/ripplectl
+        run: python3 -m py_compile daemon/ccenterd cli/ccenterctl
       - name: Daemon answers on its socket (simulated hardware)
         run: |
-          daemon/ripple-ccd --mock --socket "$RUNNER_TEMP/ccd.sock" --state-dir "$RUNNER_TEMP/state" --no-restore &
+          daemon/ccenterd --mock --socket "$RUNNER_TEMP/ccd.sock" --state-dir "$RUNNER_TEMP/state" --no-restore &
           for _ in $(seq 20); do [ -S "$RUNNER_TEMP/ccd.sock" ] && break; sleep 0.2; done
           python3 - "$RUNNER_TEMP/ccd.sock" <<'PY'
           import json, socket, sys

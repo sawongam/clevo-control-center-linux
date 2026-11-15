@@ -13,7 +13,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using CPUOC30.Model;
 using CPUOC30.ViewModel;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CPUOC30.View;
 

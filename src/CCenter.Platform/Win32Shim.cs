@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json;
 
-namespace RippleCC.Platform;
+namespace CCenter.Platform;
 
 /// <summary>Where the port keeps per-user state (replaces registry / ProgramData / AppData).</summary>
 public static class CcPaths
@@ -14,8 +14,8 @@ public static class CcPaths
     {
         get
         {
-            var d = Environment.GetEnvironmentVariable("RIPPLE_CC_CONFIG")
-                    ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".config", "ripple-cc");
+            var d = Environment.GetEnvironmentVariable("CCENTER_CONFIG")
+                    ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".config", "ccenter");
             Directory.CreateDirectory(d);
             return d;
         }
@@ -205,7 +205,7 @@ public static class Reg
 /// <summary>Overclocking writes stay switched off until explicitly enabled by creating the unlock file (see UnlockFile).</summary>
 public static class HardwareGate
 {
-    public const string UnlockFile = "/etc/ripple-cc/oc-unlocked";
+    public const string UnlockFile = "/etc/ccenter/oc-unlocked";
     public static bool OcWritesEnabled => File.Exists(UnlockFile) || Backend.IsMock;
     /// <summary>Run a hardware write that changes voltages / ratios / power limits / GPU clocks only if unlocked.</summary>
     public static bool GuardOcWrite(Action write)

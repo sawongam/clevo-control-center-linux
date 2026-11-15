@@ -8,7 +8,7 @@
     <RootNamespace>FnKey</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <ProjectReference Include="../CCenter.Platform/CCenter.Platform.csproj" />
     <!-- FnKey.Properties.Resources.resx images, extracted by tools/extract_resx.py (same names as the resx keys) -->
     <AvaloniaResource Include="Assets/**" />
     <Content Include="Data/**" CopyToOutputDirectory="PreserveNewest" LinkBase="" />

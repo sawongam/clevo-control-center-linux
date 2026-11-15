@@ -48,7 +48,7 @@ jobs:
       - name: Check that the self-contained build starts
         run: |
           sudo apt-get update && sudo apt-get install -y --no-install-recommends fonts-liberation fonts-noto-core
-          RIPPLE_CC_CONFIG="$RUNNER_TEMP/config" dist/ControlCenter30/ControlCenter30 --screenshot "$RUNNER_TEMP/launcher.png"
+          CCENTER_CONFIG="$RUNNER_TEMP/config" dist/ControlCenter30/ControlCenter30 --screenshot "$RUNNER_TEMP/launcher.png"
       - name: Package
         run: |
           mkdir out
@@ -74,8 +74,8 @@ jobs:
           sed -i "s/^pkgver=.*/pkgver=$version/" packaging/arch/PKGBUILD
           # makepkg uses a source file that is already next to the PKGBUILD, so the package is
           # built from this checkout and not from a tag on GitHub.
-          tar -czf "/tmp/ripple-cc-$version.tar.gz" --transform "s|^\.|clevo-control-center-linux-$version|" .
-          mv "/tmp/ripple-cc-$version.tar.gz" packaging/arch/
+          tar -czf "/tmp/ccenter-$version.tar.gz" --transform "s|^\.|clevo-control-center-linux-$version|" .
+          mv "/tmp/ccenter-$version.tar.gz" packaging/arch/
           useradd -m builder
           chown -R builder packaging/arch
           cd packaging/arch

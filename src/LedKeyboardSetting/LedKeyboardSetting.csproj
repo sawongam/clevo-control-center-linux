@@ -9,7 +9,7 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <ProjectReference Include="../CCenter.Platform/CCenter.Platform.csproj" />
     <AvaloniaResource Include="image/**" />
     <AvaloniaResource Include="ic_led.ico" />
     <AvaloniaResource Include="tools/imagemap.json" />

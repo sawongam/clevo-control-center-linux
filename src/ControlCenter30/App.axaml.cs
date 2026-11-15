@@ -6,7 +6,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace ControlCenter30;
 
@@ -92,7 +92,7 @@ public partial class App : Application
 		try
 		{
 			var dir = Environment.GetEnvironmentVariable("XDG_RUNTIME_DIR") ?? Path.GetTempPath();
-			instanceLock = new FileStream(Path.Combine(dir, "ripple-cc-controlcenter30.lock"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+			instanceLock = new FileStream(Path.Combine(dir, "ccenter-controlcenter30.lock"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
 			return true;
 		}
 		catch (IOException) { return false; }

@@ -26,7 +26,7 @@ def conv(src):
     s = re.sub(r'^using (System\.Windows[\w\.]*|System\.CodeDom[\w\.]*|Microsoft\.Win32|System\.Drawing[\w\.]*|System\.Windows\.Forms);\n', '', s, flags=re.M)
     hdr = ('using Avalonia;\nusing Avalonia.Controls;\nusing Avalonia.Controls.Primitives;\nusing Avalonia.Controls.Shapes;\n'
            'using Avalonia.Input;\nusing Avalonia.Interactivity;\nusing Avalonia.Layout;\nusing Avalonia.Media;\n'
-           'using Avalonia.Media.Imaging;\nusing Avalonia.Threading;\nusing RippleCC.Platform;\nusing CC.Compat;\n')
+           'using Avalonia.Media.Imaging;\nusing Avalonia.Threading;\nusing CCenter.Platform;\nusing CC.Compat;\n')
     s = hdr + s
     # casts
     for _ in range(3):

@@ -5,13 +5,13 @@ namespace CC.Device;
 /// <summary>
 /// Adapter for the vendor's native perkey_api.dll (USB HID ITE controller). Linux stub: no hidraw access.
 /// Same method names / signatures as the original P/Invoke declarations. See PORT_NOTES.md for the
-/// reports the original sends (RIPPLE_CC_PERKEY_LOG=/path logs each call instead of doing I/O).
+/// reports the original sends (CCENTER_PERKEY_LOG=/path logs each call instead of doing I/O).
 /// </summary>
 public static class PerkeyApi
 {
     static void Log(string s)
     {
-        var p = Environment.GetEnvironmentVariable("RIPPLE_CC_PERKEY_LOG");
+        var p = Environment.GetEnvironmentVariable("CCENTER_PERKEY_LOG");
         if (p != null) try { File.AppendAllText(p, s + "\n"); } catch { }
     }
     public static IntPtr InitPerkeyIo() { Log("InitPerkeyIo"); return IntPtr.Zero; }
@@ -27,7 +27,7 @@ public static class LineLEDAPI
 {
     static void Log(string s)
     {
-        var p = Environment.GetEnvironmentVariable("RIPPLE_CC_PERKEY_LOG");
+        var p = Environment.GetEnvironmentVariable("CCENTER_PERKEY_LOG");
         if (p != null) try { File.AppendAllText(p, s + "\n"); } catch { }
     }
     /// <summary>Stub: reports success so the UI is usable; no device I/O is performed.</summary>

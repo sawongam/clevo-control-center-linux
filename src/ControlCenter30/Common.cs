@@ -84,7 +84,7 @@ public class Common
 		Thread.Sleep(1000);
 		if (!IsProcessExist(project ?? processName))
 		{
-			if (project != null) RippleCC.Platform.AppHost.LaunchSibling(project);
+			if (project != null) CCenter.Platform.AppHost.LaunchSibling(project);
 		}
 	}
 

@@ -9,7 +9,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using Avalonia.Layout;
-using RippleCC.Platform;
+using CCenter.Platform;
 using System.Text;
 using System.Threading;
 using CC.other_Class;
@@ -155,10 +155,10 @@ public abstract class BaseKB
 		{
 			GetWmi13();
 		}
-		// dev/screenshot only: --page kbN (or RIPPLE_CC_FORCE_KBTYPE=N) forces the keyboard type byte (PK0D byte 15)
+		// dev/screenshot only: --page kbN (or CCENTER_FORCE_KBTYPE=N) forces the keyboard type byte (PK0D byte 15)
 		byte kbtp = _wmi13[15];
-		string force = Environment.GetEnvironmentVariable("RIPPLE_CC_FORCE_KBTYPE");
-		if (force == null && RippleCC.Platform.AppHost.PageArg != null && RippleCC.Platform.AppHost.PageArg.StartsWith("kb")) force = RippleCC.Platform.AppHost.PageArg.Substring(2);
+		string force = Environment.GetEnvironmentVariable("CCENTER_FORCE_KBTYPE");
+		if (force == null && CCenter.Platform.AppHost.PageArg != null && CCenter.Platform.AppHost.PageArg.StartsWith("kb")) force = CCenter.Platform.AppHost.PageArg.Substring(2);
 		if (force != null && int.TryParse(force, out var fk)) kbtp = (byte)fk;
 		if (kbtp == 3 || kbtp == 19 || kbtp == 35 || kbtp == 51 || kbtp == 243)
 		{
@@ -188,8 +188,8 @@ public abstract class BaseKB
 
 	/// <summary>
 	/// Original: `_wmi122 = GetDCHU_Data_Integer(122, ref _wmi122)` (assigns the call's return value). The Windows DLL returns the
-	/// integer itself; RippleCC.Platform returns 1/0 (status), so the value is taken from the ref parameter instead (PORT_NOTES.md).
-	/// Dev override: RIPPLE_CC_FORCE_WMI122=<int>.
+	/// integer itself; CCenter.Platform returns 1/0 (status), so the value is taken from the ref parameter instead (PORT_NOTES.md).
+	/// Dev override: CCENTER_FORCE_WMI122=<int>.
 	/// </summary>
 	private void LoadWmi122()
 	{
@@ -197,7 +197,7 @@ public abstract class BaseKB
 		{
 			int data = 0;
 			InsydeAcpiProt.GetDCHU_Data_Integer(122, ref data);
-			var f = Environment.GetEnvironmentVariable("RIPPLE_CC_FORCE_WMI122");
+			var f = Environment.GetEnvironmentVariable("CCENTER_FORCE_WMI122");
 			if (f != null && int.TryParse(f, out var fv)) data = fv;
 			_wmi122 = data;
 		}
@@ -219,7 +219,7 @@ public abstract class BaseKB
 	{
 		int data = 0;
 		InsydeAcpiProt.GetDCHU_Data_Integer(96, ref data);
-		if (Environment.GetEnvironmentVariable("RIPPLE_CC_FORCE_X170") == "1") data |= 1 << 11; // dev/screenshot only
+		if (Environment.GetEnvironmentVariable("CCENTER_FORCE_X170") == "1") data |= 1 << 11; // dev/screenshot only
 		if (((data >> 11) & 1).Equals(1))
 		{
 			return true;

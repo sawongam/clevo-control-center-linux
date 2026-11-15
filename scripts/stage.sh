@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (C) 2026 ripple-cc contributors
+# Copyright (C) 2026 ccenter contributors
 #
 # Copy every installed file into a directory tree. Used by install.sh (with DESTDIR=/) and by
 # the distribution packages. It only copies files: registering the DKMS module and enabling the
@@ -16,26 +16,26 @@ dest=${dest%/}
 module_version=$(sed -n 's/^PACKAGE_VERSION="\(.*\)"/\1/p' kernel/dkms.conf)
 
 # Apps and daemon. cp -a keeps the symlinks into lib/.
-rm -rf "$dest/opt/ripple-cc"
-install -d "$dest/opt/ripple-cc/bin"
-cp -a --no-preserve=ownership dist/. "$dest/opt/ripple-cc/"
-install -m 755 daemon/ripple-ccd "$dest/opt/ripple-cc/bin/ripple-ccd"
+rm -rf "$dest/opt/ccenter"
+install -d "$dest/opt/ccenter/bin"
+cp -a --no-preserve=ownership dist/. "$dest/opt/ccenter/"
+install -m 755 daemon/ccenterd "$dest/opt/ccenter/bin/ccenterd"
 
 # Commands on PATH.
 install -d "$dest/usr/bin"
-install -m 755 cli/ripplectl "$dest/usr/bin/ripplectl"
-ln -sf /opt/ripple-cc/ControlCenter30/ControlCenter30 "$dest/usr/bin/ripple-cc"
+install -m 755 cli/ccenterctl "$dest/usr/bin/ccenterctl"
+ln -sf /opt/ccenter/ControlCenter30/ControlCenter30 "$dest/usr/bin/ccenter"
 
 # Kernel module source for DKMS, and loading it at boot.
-rm -rf "$dest/usr/src/ripple_dchu-$module_version"
-install -d "$dest/usr/src/ripple_dchu-$module_version"
-install -m 644 kernel/Makefile kernel/dkms.conf kernel/ripple_dchu.c kernel/ripple_dchu.h \
-  "$dest/usr/src/ripple_dchu-$module_version/"
-install -D -m 644 packaging/ripple_dchu.conf "$dest/usr/lib/modules-load.d/ripple_dchu.conf"
+rm -rf "$dest/usr/src/ccenter_dchu-$module_version"
+install -d "$dest/usr/src/ccenter_dchu-$module_version"
+install -m 644 kernel/Makefile kernel/dkms.conf kernel/ccenter_dchu.c kernel/ccenter_dchu.h \
+  "$dest/usr/src/ccenter_dchu-$module_version/"
+install -D -m 644 packaging/ccenter_dchu.conf "$dest/usr/lib/modules-load.d/ccenter_dchu.conf"
 
 # Service, menu entry, icon, licence.
-install -D -m 644 packaging/ripple-ccd.service "$dest/usr/lib/systemd/system/ripple-ccd.service"
-install -D -m 644 packaging/ripple-cc.desktop "$dest/usr/share/applications/ripple-cc.desktop"
-install -D -m 644 packaging/ripple-cc.png "$dest/usr/share/icons/hicolor/256x256/apps/ripple-cc.png"
-install -D -m 644 LICENSE "$dest/usr/share/licenses/ripple-cc/LICENSE"
-install -d "$dest/etc/ripple-cc"
+install -D -m 644 packaging/ccenterd.service "$dest/usr/lib/systemd/system/ccenterd.service"
+install -D -m 644 packaging/ccenter.desktop "$dest/usr/share/applications/ccenter.desktop"
+install -D -m 644 packaging/ccenter.png "$dest/usr/share/icons/hicolor/256x256/apps/ccenter.png"
+install -D -m 644 LICENSE "$dest/usr/share/licenses/ccenter/LICENSE"
+install -d "$dest/etc/ccenter"

@@ -3,11 +3,11 @@ set -e
 
 if [ "$1" = remove ] || [ "$1" = upgrade ]; then
     if [ -d /run/systemd/system ]; then
-        systemctl stop ripple-ccd >/dev/null 2>&1 || true
+        systemctl stop ccenterd >/dev/null 2>&1 || true
         if [ "$1" = remove ]; then
-            systemctl disable ripple-ccd >/dev/null 2>&1 || true
+            systemctl disable ccenterd >/dev/null 2>&1 || true
         fi
     fi
-    rmmod ripple_dchu 2>/dev/null || true
-    dkms remove -m ripple_dchu -v @MODULE_VERSION@ --all >/dev/null 2>&1 || true
+    rmmod ccenter_dchu 2>/dev/null || true
+    dkms remove -m ccenter_dchu -v @MODULE_VERSION@ --all >/dev/null 2>&1 || true
 fi

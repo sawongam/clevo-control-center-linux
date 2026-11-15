@@ -110,7 +110,7 @@ public class OsdForm
 		InitOsd();
 	}
 
-	static bool AppHostIsShot() => RippleCC.Platform.AppHost.IsScreenshot;
+	static bool AppHostIsShot() => CCenter.Platform.AppHost.IsScreenshot;
 
 	private double Scale => win.Screens?.Primary?.Scaling ?? 1.0;
 

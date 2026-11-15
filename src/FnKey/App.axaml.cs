@@ -6,7 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace FnKey;
 

@@ -7,7 +7,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 using Clevo;
 using FnKey.Device;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace FnKey;
 

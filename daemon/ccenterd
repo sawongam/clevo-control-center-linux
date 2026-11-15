@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (C) 2026 ripple-cc contributors
-"""ripple-ccd - root daemon for the Clevo Control Center Linux port.
+# Copyright (C) 2026 ccenter contributors
+"""ccenterd - root daemon for the Clevo Control Center Linux port.
 
-Owns /dev/ripple_dchu and serves the unprivileged UI apps over a unix socket
+Owns /dev/ccenter_dchu and serves the unprivileged UI apps over a unix socket
 (JSON lines, one request per connection):
 
   {"op":"call","func":N,"int":X}          evaluate DCHU command with an integer argument
@@ -16,7 +16,7 @@ Owns /dev/ripple_dchu and serves the unprivileged UI apps over a unix socket
 "App settings" replace the Windows-side store behind InsydeDCHU Read/WriteAppSettings.
 The last performance mode, fan mode and custom fan curve are remembered and re-applied
 at start (the firmware forgets them on reboot). Overclocking commands are refused unless
-/etc/ripple-cc/oc-unlocked exists.
+/etc/ccenter/oc-unlocked exists.
 """
 
 import argparse
@@ -28,10 +28,10 @@ import struct
 import sys
 import threading
 
-DEV = "/dev/ripple_dchu"
-SOCK = "/run/ripple-cc/ccd.sock"
-STATE_DIR = "/var/lib/ripple-cc"
-OC_UNLOCK = "/etc/ripple-cc/oc-unlocked"
+DEV = "/dev/ccenter_dchu"
+SOCK = "/run/ccenter/ccd.sock"
+STATE_DIR = "/var/lib/ccenter"
+OC_UNLOCK = "/etc/ccenter/oc-unlocked"
 
 CALL_FMT = "<IIII256sIIQ256s"
 IOC_CALL = (3 << 30) | (struct.calcsize(CALL_FMT) << 16) | (ord("R") << 8) | 0x01
@@ -52,7 +52,7 @@ lock = threading.Lock()
 
 
 class Dchu:
-    """The real firmware bridge: /dev/ripple_dchu (kernel/ripple_dchu.ko)."""
+    """The real firmware bridge: /dev/ccenter_dchu (kernel/ccenter_dchu.ko)."""
 
     def __init__(self):
         self.fd = os.open(DEV, os.O_RDWR)
@@ -232,8 +232,8 @@ def main():
         except OSError as e:
             # EX_CONFIG: the unit sets RestartPreventExitStatus=78 so systemd does not
             # restart-loop while the module is missing.
-            print(f"ripple-ccd: cannot open {DEV}: {e.strerror}. Is the ripple_dchu "
-                  "module loaded (sudo modprobe ripple_dchu) and are you root?",
+            print(f"ccenterd: cannot open {DEV}: {e.strerror}. Is the ccenter_dchu "
+                  "module loaded (sudo modprobe ccenter_dchu) and are you root?",
                   file=sys.stderr, flush=True)
             sys.exit(EX_CONFIG)
     state = State(a.state_dir)
@@ -250,7 +250,7 @@ def main():
     # Any local user may use the control center (single-user laptop), as on Windows.
     os.chmod(a.socket, 0o666)
     srv.listen(16)
-    print(f"ripple-ccd listening on {a.socket}", flush=True)
+    print(f"ccenterd listening on {a.socket}", flush=True)
     while True:
         conn, _ = srv.accept()
         threading.Thread(target=serve_one, args=(conn, dchu, state, a.mock), daemon=True).start()

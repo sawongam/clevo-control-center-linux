@@ -9,7 +9,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using Avalonia.Layout;
-using RippleCC.Platform;
+using CCenter.Platform;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;

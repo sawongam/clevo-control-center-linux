@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace DesktopBridge_EnergySave;
 
@@ -102,7 +102,7 @@ internal class PowerSchemeHelper
 }
 
 /// <summary>System.Windows.Forms.SystemInformation.PowerStatus replacement (/sys/class/power_supply).
-/// Dev overrides: RIPPLE_ES_BATTERY=0..100, RIPPLE_ES_AC=0|1.</summary>
+/// Dev overrides: CCENTER_ES_BATTERY=0..100, CCENTER_ES_AC=0|1.</summary>
 internal static class PowerStatusAdapter
 {
 	const string Root = "/sys/class/power_supply";
@@ -112,7 +112,7 @@ internal static class PowerStatusAdapter
 	{
 		get
 		{
-			var o = Environment.GetEnvironmentVariable("RIPPLE_ES_BATTERY");
+			var o = Environment.GetEnvironmentVariable("CCENTER_ES_BATTERY");
 			if (int.TryParse(o, out var ov)) return ov / 100f;
 			try
 			{
@@ -130,7 +130,7 @@ internal static class PowerStatusAdapter
 	{
 		get
 		{
-			var o = Environment.GetEnvironmentVariable("RIPPLE_ES_AC");
+			var o = Environment.GetEnvironmentVariable("CCENTER_ES_AC");
 			if (int.TryParse(o, out var ov)) return ov != 0 ? 1 : 0;
 			try
 			{

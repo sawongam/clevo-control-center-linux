@@ -12,7 +12,7 @@ body:
   - type: input
     id: system
     attributes:
-      label: Distribution, kernel and ripple-cc version
+      label: Distribution, kernel and ccenter version
     validations:
       required: true
   - type: textarea
@@ -25,5 +25,5 @@ body:
     id: logs
     attributes:
       label: Logs
-      description: Output of `journalctl -u ripple-ccd -b` and anything the app printed when started from a terminal.
+      description: Output of `journalctl -u ccenterd -b` and anything the app printed when started from a terminal.
       render: text

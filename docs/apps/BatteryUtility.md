@@ -8,9 +8,9 @@ Complete: main page (all states), dialog box (all messages), loading splash, win
 Build: `dotnet restore --source ~/.nuget/packages` once (offline), then `dotnet build --no-restore -p:BuildProjectReferences=false`.
 Pages rendered with `--screenshot --page NAME` (main, healthy, deteriorated, failure, discharge1..adjusting, finish, dialog6-9, unsupported, nobattery, lang_de, loading).
 `--page` values: healthy deteriorated replace failure discharge1 charge1 discharge2 charge2 adjusting finish dialog6 dialog7 dialog8 dialog9 loading.
-Env: RIPPLE_BAT_NONE=1 (simulate no battery), RIPPLE_BAT_UNSUPPORTED=1 (feature bit missing -> "This machine does not support."). Use RIPPLE_CC_CONFIG=<tmp dir> when screenshotting (state is persisted in registry.json: OngoingStatus, elapsed time, last refresh date).
+Env: CCENTER_BAT_NONE=1 (simulate no battery), CCENTER_BAT_UNSUPPORTED=1 (feature bit missing -> "This machine does not support."). Use CCENTER_CONFIG=<tmp dir> when screenshotting (state is persisted in registry.json: OngoingStatus, elapsed time, last refresh date).
 
-## DCHU commands (all via RippleCC.Platform.InsydeDCHU; unchanged from the original)
+## DCHU commands (all via CCenter.Platform.InsydeDCHU; unchanged from the original)
 | func | sub | data | when |
 |---|---|---|---|
 | 0x79 (121) | 0x1C (28) | 1 / 0 | SetACOFF: Start click (1), every stage change (0 during discharge stages, 1 during charge/stop), AC-out handling |
@@ -27,7 +27,7 @@ Nothing is sent at startup except those reads and the version stamp (app setting
 - Package 7: real DCHU answer used; if design capacity is 0 (simulator / unserved) the package is synthesised from sysfs (full/design charge, cycle_count, status) + Battery.ini thresholds/criteria (BatteryPackage.cs). Manufacturer date = now-1y and stop-charging threshold = 5 are guesses (not in sysfs).
 - Events 85/90/91 (firmware via Windows EventLog/WM_COPYDATA) and PowerModeChanged: no source on Linux; a 2 s poll calls Update_Battery_Full_Status() while a refresh runs (reads pkg 7 bit 0x10/0x20) and UpdatePowerStatus() on AC/percent change when idle. ACOutEvent (event 90) is NOT emulated (UpdatePowerStatus' own AC-out handling remains).
 - OutLog messages ("clevobattery^207^x" to the tray) -> Debug output only. Clevo_MSG window messages: no-op.
-- C:\LOG\ battery logs -> ~/.config/ripple-cc/LOG/. WMI_7 registry blob stored as hex string.
+- C:\LOG\ battery logs -> ~/.config/ccenter/LOG/. WMI_7 registry blob stored as hex string.
 - Init_WMI: under the mock backend (func 16 returns 0) the BatteryUtility support bit is forced on so the main page shows; real backend unchanged.
 - Read_battery_ini: exception on malformed package falls back to default criteria instead of crashing.
 - Window: starts maximised as in the original (window_FullSrceen getter is constant 1); Viewbox scales the 1920x1080 design. Resize grip / Windows' AllowsTransparency not reproduced (WindowDecorations=None, CanResize).

@@ -8,7 +8,7 @@
     <RootNamespace>DesktopBridge_EnergySave</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <ProjectReference Include="../CCenter.Platform/CCenter.Platform.csproj" />
     <AvaloniaResource Include="Assets/**" />
     <AvaloniaResource Include="ic_energy_save_utility_*.ico" />
     <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />

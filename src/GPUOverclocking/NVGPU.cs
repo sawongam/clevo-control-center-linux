@@ -5,7 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace GPUOverclocking;
 
@@ -88,8 +88,8 @@ public static class NVGPU
 
 	static Snap Fake()
 	{
-		// development override, e.g. RIPPLE_GPU_FAKE="temp=75,util=60,clk=1650,mem=7001"
-		var f = Environment.GetEnvironmentVariable("RIPPLE_GPU_FAKE");
+		// development override, e.g. CCENTER_GPU_FAKE="temp=75,util=60,clk=1650,mem=7001"
+		var f = Environment.GetEnvironmentVariable("CCENTER_GPU_FAKE");
 		if (string.IsNullOrEmpty(f)) return null;
 		var s = new Snap { Ok = true, Temp = 45, Util = 0, GClk = 210, MClk = 405 };
 		foreach (var kv in f.Split(','))

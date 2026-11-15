@@ -1,6 +1,6 @@
 using System.IO;
 using System.Reflection;
-using RippleCC.Platform;
+using CCenter.Platform;
 using System.Text;
 
 namespace DesktopBridge_EnergySave;

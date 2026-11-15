@@ -6,13 +6,13 @@ namespace ControlCenter30;
 /// <summary>
 /// Original: Windows Event Log IPC ("OutLog" read by FnKey/DCHUService, "PowerBiosServerLog" read by the service).
 /// Linux port: an in-process bus. Messages for the service side (clevocc30^...) are executed directly by
-/// <see cref="ServiceBridge"/>; every message is also appended to $RIPPLE_CC_LOG when set.
+/// <see cref="ServiceBridge"/>; every message is also appended to $CCENTER_LOG when set.
 /// </summary>
 internal class DebugLog
 {
 	public static event Action<string> OutLogWritten;
 
-	static readonly string LogPath = Environment.GetEnvironmentVariable("RIPPLE_CC_LOG");
+	static readonly string LogPath = Environment.GetEnvironmentVariable("CCENTER_LOG");
 
 	static void File_(string kind, string log)
 	{

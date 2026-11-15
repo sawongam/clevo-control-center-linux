@@ -1,10 +1,10 @@
 using System;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace ControlCenter30;
 
 // Original: P/Invoke wrapper around InsydeDCHU.dll. The extern declarations are redirected to
-// RippleCC.Platform.InsydeDCHU (same names/signatures); everything else is unchanged.
+// CCenter.Platform.InsydeDCHU (same names/signatures); everything else is unchanged.
 internal class DCHU
 {
 	private static int GetDCHU_Data_Integer(int command, ref int data) => InsydeDCHU.GetDCHU_Data_Integer(command, ref data);

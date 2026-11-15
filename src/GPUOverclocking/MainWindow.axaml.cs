@@ -5,7 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace GPUOverclocking;
 

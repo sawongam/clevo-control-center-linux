@@ -14,7 +14,7 @@ namespace CC;
 public static class SystemParameters
 {
     public static double PrimaryScreenWidth = 1920, PrimaryScreenHeight = 1080;
-    static bool _screenshot => RippleCC.Platform.AppHost.IsScreenshot;
+    static bool _screenshot => CCenter.Platform.AppHost.IsScreenshot;
     public static void Init(Window w)
     {
         try

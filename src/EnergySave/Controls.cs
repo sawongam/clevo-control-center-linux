@@ -267,7 +267,7 @@ public static class MessageBox
         ok.Click += (_, _) => dlg.Close();
         dlg.KeyDown += (_, e) => { if (e.Key == Key.Escape || e.Key == Key.Enter) dlg.Close(); };
         Last = dlg;
-        if (RippleCC.Platform.AppHost.IsScreenshot) { dlg.Show(Owner); return; }
+        if (CCenter.Platform.AppHost.IsScreenshot) { dlg.Show(Owner); return; }
         var frame = new Avalonia.Threading.DispatcherFrame();
         dlg.Closed += (_, _) => frame.Continue = false;
         if (Owner != null) dlg.ShowDialog(Owner); else dlg.Show();

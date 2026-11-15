@@ -1,4 +1,4 @@
-Package: ripple-cc
+Package: ccenter
 Version: @VERSION@
 Architecture: amd64
 Maintainer: Sangam Adhikari <sawongam@users.noreply.github.com>
@@ -13,5 +13,5 @@ Description: Control Center for Clevo laptops
  Unofficial Linux port of the Clevo Control Center 3.0 suite: fan monitoring
  and fan curves, performance modes and keyboard backlight control.
  .
- Contains the ripple_dchu kernel module (built with DKMS), the ripple-ccd
- hardware service, the ripplectl command line tool and the graphical apps.
+ Contains the ccenter_dchu kernel module (built with DKMS), the ccenterd
+ hardware service, the ccenterctl command line tool and the graphical apps.

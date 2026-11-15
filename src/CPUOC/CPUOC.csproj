@@ -8,7 +8,7 @@
     <RootNamespace>CPUOC30</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../RippleCC.Platform/RippleCC.Platform.csproj" />
+    <ProjectReference Include="../CCenter.Platform/CCenter.Platform.csproj" />
     <AvaloniaResource Include="Assets/**" />
     <Content Include="mtlanguage.ini" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

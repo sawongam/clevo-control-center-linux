@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using CC.other_Class;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 
 /// <summary>

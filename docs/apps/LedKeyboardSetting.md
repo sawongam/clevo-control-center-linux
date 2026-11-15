@@ -30,7 +30,7 @@ All variants are ported; runtime detection chooses. `--page` selects a variant f
 
 ## Native adapters (stubs)
 `CC.Device/NativeAdapters.cs`: `PerkeyApi` (perkey_api.dll: InitPerkeyIo, SetLEDStatus(cmd,d0..d3), GetLedData(cmd,type,arr,size)),
-`LineLEDAPI` (InitLineLEDIo, SetLightBarData62(cmd, 62-byte data)). No HID I/O; set RIPPLE_CC_PERKEY_LOG=/file to log calls.
+`LineLEDAPI` (InitLineLEDIo, SetLightBarData62(cmd, 62-byte data)). No HID I/O; set CCENTER_PERKEY_LOG=/file to log calls.
 
 ## Dev workflow
 - Build: `dotnet build --no-restore -p:BuildProjectReferences=false` (restore once with `dotnet restore --no-dependencies`).
@@ -38,20 +38,20 @@ All variants are ported; runtime detection chooses. `--page` selects a variant f
   Slider/ScrollBar/ScrollViewer/ComboBox themes). NOTE: hand edits to the .axaml are lost on regen; put fixes in the converter or overrides.
 - Screenshot: `dotnet bin/Debug/net10.0/LedKeyboardSetting.dll --screenshot out.png --after-ms 2500 --page kbN [--click NAME,NAME]`
   `--page kbN` forces PK0D byte 15 (keyboard type) = N for the screenshot (1 white, 2 rgb, 6 this laptop, 22 rgb, 3 per-key);
-  `--page loading` shows the loading window; `--click` clicks named controls in order. Env: RIPPLE_CC_FORCE_X170=1 (light bar
-  support), RIPPLE_CC_FORCE_WMI122=<int> (caps word: bit12 light bar, bit18 logo, bit14 6-level white kb).
+  `--page loading` shows the loading window; `--click` clicks named controls in order. Env: CCENTER_FORCE_X170=1 (light bar
+  support), CCENTER_FORCE_WMI122=<int> (caps word: bit12 light bar, bit18 logo, bit14 6-level white kb).
 - Screenshot mode uses a 1920x1080 virtual screen (SystemParameters) so the window = original design size.
 
 ## Deviations
 - `BaseKB.SupportLogo/Lightbar/WhiteKB6Level`: original `_wmi122 = GetDCHU_Data_Integer(122, ref _wmi122)` assigns the call's
-  return value; RippleCC.Platform returns 1 (status) so the value is read from the ref parameter instead (otherwise logo/lightbar
+  return value; CCenter.Platform returns 1 (status) so the value is read from the ref parameter instead (otherwise logo/lightbar
   support could never be true).
 - WPF Window.Loaded ordering: page.main_Loaded (Init_UI/Open_UI) is invoked from MainWindow.Window_Loaded after Global.KB exists.
 - HkeyTray WM_COPYDATA (WndProc, Clevo_MSG, SendMessage) removed: no tray process on Linux. `MainWindow.ExecMessageCommand`/`Update_Event`
   kept for a future daemon hook; `KBModule.OnServiceMessage` replaces the EventLog "PowerBIOSServer_Out" listener.
-- EventLog writes (ClevoLog) are no-ops unless RIPPLE_CC_KB_LOG=/file is set.
+- EventLog writes (ClevoLog) are no-ops unless CCENTER_KB_LOG=/file is set.
 - SMBIOS WMI (System.ManufacturerName) -> /sys/class/dmi/id/sys_vendor.
-- Registry -> RippleCC.Platform.Reg (window size/fullscreen/FirstRun).
+- Registry -> CCenter.Platform.Reg (window size/fullscreen/FirstRun).
 - loading window animation (Storyboard_load) re-implemented with Avalonia Animation (CC/loading.axaml.cs).
 - Per-key colour picker: PixelAt() reads the bitmap pixel (WPF CroppedBitmap.CopyPixels).
 - WPF `Slider.IsMoveToPointEnabled` not available in Avalonia (dropped, noted).
@@ -65,15 +65,15 @@ The managed code reveals only function-level calls (the HID report layout lives 
   (22,113..116 / 161..164) snake; (23,161,RGB1),(23,162,RGB2) scan colours; (24,161,RGB) fn colour; (32,v) override boot effect; (7,0).
 - LineLEDAPI (light bar X170): `InitLineLEDIo()`, `SetLightBarData62(cmd, byte[62])` with cmd 176 static, 178 breath, 179 blink, 181 meteor, 191 brightness/off;
   data[0]=custom flag (or level for 191), data[1]=speed, data[2..4]=R,G,B. Persisted via WriteAppSettings(page 2, off 108..126).
-Set `RIPPLE_CC_PERKEY_LOG=/file` to get a line per call. Linux hidraw access is NOT implemented (future work: ITE 8291-type HID reports; unknown from managed code).
+Set `CCENTER_PERKEY_LOG=/file` to get a line per call. Linux hidraw access is NOT implemented (future work: ITE 8291-type HID reports; unknown from managed code).
 
-## DCHU / app-settings calls (through RippleCC.Platform.InsydeDCHU, unchanged)
+## DCHU / app-settings calls (through CCenter.Platform.InsydeDCHU, unchanged)
 Startup reads: 0x46(70), 0x0D (PK0D: byte15 KBTP), 0x11 (wmi17: skin colour, palette), 0x7A (caps), 0x60 (96: light bar x170 bit11, perkey default colours bit8), 0x04 pkg 0x0C (panel size).
 First run only (`Reg ...\LED FirstRun`): 0x79 0x22000001 (reset wmi13), 0x79 0x18001EFF (sleep timer 30 s) and RGBKB.FirstRun colour/status defaults via WriteAppSettings.
 UI: colour -> 0x67 0xF0/F1/F2(/F3 light bar,/F6 logo)<<24 | B<<16|R<<8|G (types 6/22; types 2: B scaled 200/255, order B,R,G);
 brightness 1..4 -> 0x67 0xF4000000+{47,95,143,191}; LED on/off flags 0x67 0xE0000000+bits; effects 0x67 {0x70000000 random, 0xA0000000 flash, 0x90000000 tempo,
 0x80000000 dance, 0xB0000000 wave, 0x33000000 cycle, 0xA000|0x10020000 breath}; white kb 0x27 (39) brightness; sleep timer 0x79 0x18000000|sec<<8|0xFF (off 0x18000000);
-override boot effect 0x79 0x1E000000+v. Verified in mock with RIPPLE_CC_MOCK_LOG for: colour pick (kb6), brightness slider, sleep timer off, boot effect.
+override boot effect 0x79 0x1E000000+v. Verified in mock with CCENTER_MOCK_LOG for: colour pick (kb6), brightness slider, sleep timer off, boot effect.
 
 ## Pages / variants
 | rendered state | what |
@@ -82,10 +82,10 @@ override boot effect 0x79 0x1E000000+v. Verified in mock with RIPPLE_CC_MOCK_LOG
 | kb6_red.png / kb6_b2.png | after colour select / brightness 2 + sleep timer off + boot effect on |
 | kb1_main.png | white keyboard (3-level slider) |
 | kb2_main/all/partial/partial_left/effect, kb2_effect_{wave,Breath,cycle,random,Flash,Dance,Tempo}.png | RGB 3-zone: whole / partial / each effect |
-| kb2_logo.png, kb2_lightbar.png, kb2_logo_lightbar.png | RGB with logo + light bar support (RIPPLE_CC_FORCE_WMI122=266240) |
+| kb2_logo.png, kb2_lightbar.png, kb2_logo_lightbar.png | RGB with logo + light bar support (CCENTER_FORCE_WMI122=266240) |
 | kb22_main.png | RGB type 0x16 |
 | kb3_main/static, kb3_effect_*.png, kb3_wave_custom.png, kb3_ripple_custom.png | per-key (static keys, effects wave/ripple/scan/snake/random/breath/blink/fn) |
-| x170.png, x170_static/breath/wave.png | front light bar X170 page (RIPPLE_CC_FORCE_X170=1) |
+| x170.png, x170_static/breath/wave.png | front light bar X170 page (CCENTER_FORCE_X170=1) |
 | dialog_cpuoc.png, dialog_restart.png | UserControl_DialogBox (unused by the original app; shown with --page dialogN) |
 | loading.png | loading spinner window |
 
@@ -96,4 +96,4 @@ override boot effect 0x79 0x1E000000+v. Verified in mock with RIPPLE_CC_MOCK_LOG
 - Pointer-driven code (colour picker hover pixel read, per-key rubber-band selection, Ctrl-key handling, mouse capture) is ported but only exercised through code paths, not by real pointer input.
 - WPF `IsMoveToPointEnabled` on the 3 sliders is dropped (Avalonia Slider has no such property); WPF Window Topmost start behaviour kept.
 - Perkey and light bar hardware I/O: stubs (see above). The daemon bridge handles only DCHU 0x67/0x27/0x79 paths.
-- `BaseKB.GetKBType` honours `RIPPLE_CC_FORCE_KBTYPE` / `--page kbN` (dev only).
+- `BaseKB.GetKBType` honours `CCENTER_FORCE_KBTYPE` / `--page kbN` (dev only).

@@ -1,11 +1,11 @@
 using System;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace GPUOverclocking;
 
 public class InsydeDriver
 {
-	// [DllImport("InsydeDCHU.dll")] externs redirected to RippleCC.Platform.InsydeDCHU (same signatures)
+	// [DllImport("InsydeDCHU.dll")] externs redirected to CCenter.Platform.InsydeDCHU (same signatures)
 	public static int GetDCHU_Data_Integer(int command, ref int data) => InsydeDCHU.GetDCHU_Data_Integer(command, ref data);
 	public static int SetDCHU_Data(int command, byte[] buffer, int length) => InsydeDCHU.SetDCHU_Data(command, buffer, length);
 	public static int GetDCHU_Data_Buffer(int command, ref byte buffer) => InsydeDCHU.GetDCHU_Data_Buffer(command, ref buffer);

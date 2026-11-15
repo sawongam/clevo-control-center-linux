@@ -1,4 +1,4 @@
-using RippleCC.Platform;
+using CCenter.Platform;
 using System;
 using System.IO;
 using System.Runtime.InteropServices;

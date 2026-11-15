@@ -7,7 +7,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 
 public partial class MainWindow : Window

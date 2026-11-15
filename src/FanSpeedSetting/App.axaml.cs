@@ -2,7 +2,7 @@ using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace FanSpeedSetting;
 
@@ -29,7 +29,7 @@ public class App : Application
 /// <summary>
 /// Wraps the shared MockBackend so the simulated laptop reports "fan setting supported" (WMI 16 bit 7)
 /// and a neutral situational mode. Only active in mock mode. Anti-dust support can be simulated with
-/// RIPPLE_CC_MOCK_ANTIDUST=1 (WMI 96 bit 7).
+/// CCENTER_MOCK_ANTIDUST=1 (WMI 96 bit 7).
 /// </summary>
 sealed class MockOverlay : IBackend
 {
@@ -45,13 +45,13 @@ sealed class MockOverlay : IBackend
         if (buf == null && arg == 0)
         {
             if (func == 16) { Log(func); return new DchuResult { Int = 0xF1 }; }
-            if (func == 96) { Log(func); return new DchuResult { Int = Environment.GetEnvironmentVariable("RIPPLE_CC_MOCK_ANTIDUST") == "1" ? 0x80u : 0u }; }
+            if (func == 96) { Log(func); return new DchuResult { Int = Environment.GetEnvironmentVariable("CCENTER_MOCK_ANTIDUST") == "1" ? 0x80u : 0u }; }
         }
         return _in.Call(func, arg, buf);
     }
     static void Log(int func)
     {
-        var p = Environment.GetEnvironmentVariable("RIPPLE_CC_MOCK_LOG");
+        var p = Environment.GetEnvironmentVariable("CCENTER_MOCK_LOG");
         if (p != null) try { System.IO.File.AppendAllText(p, $"func=0x{func:X2} arg=0x00000000 buf=-\n"); } catch { }
     }
     public byte[] AppGet(int page, int offset, int length) => _in.AppGet(page, offset, length);

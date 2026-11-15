@@ -24,7 +24,7 @@ OC write = anything that changes clocks/offsets/voltage/power/thermal/fan overri
 | ControlGPU `set_lock_frequency` / `GC6` / `info` | helper only | OC WRITE / registry / AppSettings | lock gated; GC6 and info not ported (never requested) |
 | SetAPPData(0,24,4) app version | MainWindow | not OC (bookkeeping) | direct |
 | NVGPU reads: InitGPU_API, Check_NVStatus, Get_GPU_Temp/Util/Graphics_Clock/Memory_Clock/Processor_Clock, Base/Boost, ranges, Get_Memory_OC_max, name, TotalNumber, DeviceID, driver ver, Pstate, ... | Page | READ | nvidia-smi (cached 1 s, background thread) / constants |
-| GetDCHU_Data_Integer 16/70/122, GetDCHU_Data_Buffer 17 (skin colours) | MainWindow | READ | RippleCC.Platform.InsydeDCHU |
+| GetDCHU_Data_Integer 16/70/122, GetDCHU_Data_Buffer 17 (skin colours) | MainWindow | READ | CCenter.Platform.InsydeDCHU |
 | ReadAppSettings (1,1,1 mode) (1,2,1 lang) (5,2,4 default increments) (0,24,4) | Page/MainWindow/language | READ | InsydeDCHU |
 
 No SetDCHU_Data call is made by this app at all.
@@ -32,10 +32,10 @@ No SetDCHU_Data call is made by this app at all.
 ## NVGPU adapter (NVGPU.cs)
 * Reads: `nvidia-smi --query-gpu=name,temperature.gpu,utilization.gpu,utilization.memory,memory.used,memory.total,clocks.current.graphics,clocks.current.memory,power.draw,fan.speed`, plus once `clocks.max.*,driver_version,pci.device_id`. Never run when sysfs `power/runtime_status` says the dGPU is `suspended` (would wake it) -> UI shows OFF like Windows.
 * Constants (nvidia-smi has no equivalent): base 1283 / boost 1703 MHz, max temp 87, core offset range -200..+200, memory offset range -500..+500 (UNVERIFIED guesses for the NVAPI limits), voltage reads return 0.
-* `RIPPLE_GPU_FAKE="temp=75,util=60,clk=1650,mem=7001,off=0"` dev override for screenshots.
+* `CCENTER_GPU_FAKE="temp=75,util=60,clk=1650,mem=7001,off=0"` dev override for screenshots.
 * Writes: value clamped+recorded, hardware step is a stub. A real implementation needs the proprietary driver with Coolbits (>=8) under X11 and
   `nvidia-settings -a [gpu:0]/GPUGraphicsClockOffsetAllPerformanceLevels=N` / `GPUMemoryTransferRateOffsetAllPerformanceLevels=N` (Wayland: none; NVML needs root).
-  Even with `/etc/ripple-cc/oc-unlocked` present nothing is applied until this stub is replaced.
+  Even with `/etc/ccenter/oc-unlocked` present nothing is applied until this stub is replaced.
 
 ## Deviations
 * Under the in-process mock (screenshot / no daemon) `SeededMock` answers cmd 16 with 0xB0 and AppSettings(1,1)=2 (performance mode); otherwise the original code shows "This machine does not support." and hides the OC controls. With the real daemon real values are used.
@@ -50,7 +50,7 @@ No SetDCHU_Data call is made by this app at all.
 ## Not verifiable without hardware / Windows
 Real NVAPI offset ranges, base/boost values, behaviour of Save on real hardware, pixel comparison with Windows.
 
-## DCHU commands sent at start-up (verified with RIPPLE_CC_MOCK_LOG; all reads)
+## DCHU commands sent at start-up (verified with CCENTER_MOCK_LOG; all reads)
 | func | when |
 |---|---|
 | 16 (0x10) get, 70 (0x46) get, 122 (0x7A) get | Init_WMI at first render (16 answered by SeededMock in mock mode) |
@@ -59,7 +59,7 @@ Plus AppSettings reads page 1 off 1/2, page 0 off 24 (+ write of the app version
 No other DCHU write exists; Save/Default only touch AppSettings page 5 (gated) and NVGPU (gated).
 
 ## Rendered states
-01 main (idle, real nvidia-smi values), 02/03 sliders + gauges at different loads (RIPPLE_GPU_FAKE), 04 GPU-OC warning dialog,
+01 main (idle, real nvidia-smi values), 02/03 sliders + gauges at different loads (CCENTER_GPU_FAKE), 04 GPU-OC warning dialog,
 05 dGPU asleep (OFF), 06 on battery in performance mode ("Please plug in the power."), 07 quiet mode, 08 entertainment mode, 09 "This machine does not support." dialog.
 
 ## Status

@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 
-namespace RippleCC.Platform;
+namespace CCenter.Platform;
 
 public interface IBackend
 {
@@ -18,7 +18,7 @@ public interface IBackend
 
 public static class Backend
 {
-    public const string SocketPath = "/run/ripple-cc/ccd.sock";
+    public const string SocketPath = "/run/ccenter/ccd.sock";
     static IBackend _cur;
     static readonly object Gate = new();
 
@@ -29,8 +29,8 @@ public static class Backend
             lock (Gate)
             {
                 if (_cur != null) return _cur;
-                bool mock = Environment.GetEnvironmentVariable("RIPPLE_CC_MOCK") == "1";
-                string sock = Environment.GetEnvironmentVariable("RIPPLE_CC_SOCKET") ?? SocketPath;
+                bool mock = Environment.GetEnvironmentVariable("CCENTER_MOCK") == "1";
+                string sock = Environment.GetEnvironmentVariable("CCENTER_SOCKET") ?? SocketPath;
                 _cur = (!mock && File.Exists(sock)) ? new DaemonBackend(sock) : new MockBackend();
                 return _cur;
             }
@@ -41,7 +41,7 @@ public static class Backend
     public static bool IsMock => Current.IsMock;
 }
 
-/// <summary>JSON-lines client for ripple-ccd. One connection per call (simple, robust).</summary>
+/// <summary>JSON-lines client for ccenterd. One connection per call (simple, robust).</summary>
 public sealed class DaemonBackend : IBackend
 {
     readonly string _path;

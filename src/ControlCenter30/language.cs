@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using Clevo;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace ControlCenter30;
 
@@ -12,7 +12,7 @@ public class language
 
 	public static language Instance => LazyInstance.Value;
 
-	// kernel32 GetPrivateProfileString -> RippleCC.Platform.Ini
+	// kernel32 GetPrivateProfileString -> CCenter.Platform.Ini
 	public static int GetPrivateProfileString(string section, string key, string def, StringBuilder retStr, int bufferSize, string filePath)
 		=> Ini.GetPrivateProfileString(section, key, def, retStr, bufferSize, filePath);
 

@@ -13,7 +13,7 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace ControlCenter30;
 
@@ -1328,7 +1328,7 @@ public partial class Window1 : Window
 	// Original: HKLM\HARDWARE\DESCRIPTION\System\CentralProcessor\0 ProcessorNameString. Port: /proc/cpuinfo "model name".
 	private static string ProcessorNameString()
 	{
-		var ov = Environment.GetEnvironmentVariable("RIPPLE_CC30_CPU");
+		var ov = Environment.GetEnvironmentVariable("CCENTER_CC30_CPU");
 		if (ov != null) return ov;
 		if (AppHost.PageArg == "amd") return "AMD Ryzen 5 3600 6-Core Processor";
 		try

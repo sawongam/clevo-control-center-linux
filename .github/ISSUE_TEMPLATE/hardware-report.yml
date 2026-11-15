@@ -27,7 +27,7 @@ body:
   - type: textarea
     id: status
     attributes:
-      label: Output of `sudo ripplectl status` and `sudo ripplectl table`
+      label: Output of `sudo ccenterctl status` and `sudo ccenterctl table`
       render: text
   - type: textarea
     id: results

@@ -1,6 +1,6 @@
 using System;
 using CPUOC.Model;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CPUOC30.Model;
 
@@ -48,7 +48,7 @@ internal class DCHUModel
 		return CPUOC30.LinuxSensors.MemoryMHz();
 	}
 
-	static bool Forced => Environment.GetEnvironmentVariable("RIPPLE_CC_CPUOC_FORCE") == "1";
+	static bool Forced => Environment.GetEnvironmentVariable("CCENTER_CPUOC_FORCE") == "1";
 
 	public bool IsSupport_CPUOC_WMI16()
 	{

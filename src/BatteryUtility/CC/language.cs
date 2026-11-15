@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 public class language
 {

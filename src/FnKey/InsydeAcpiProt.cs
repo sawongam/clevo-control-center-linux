@@ -6,12 +6,12 @@ namespace FnKey.other_Class;
 
 internal class InsydeAcpiProt
 {
-	public static int GetDCHU_Data_Integer(int command, ref int data) => RippleCC.Platform.InsydeDCHU.GetDCHU_Data_Integer(command, ref data);
-	public static int SetDCHU_Data(int command, byte[] buffer, int length) => RippleCC.Platform.InsydeDCHU.SetDCHU_Data(command, buffer, length);
-	public static int SetDCHU_DataEx(int command, byte[] buffer, int length, ref byte OutputBuffer) => RippleCC.Platform.InsydeDCHU.SetDCHU_DataEx(command, buffer, length, ref OutputBuffer);
-	public static int GetDCHU_Data_Buffer(int command, ref byte buffer) => RippleCC.Platform.InsydeDCHU.GetDCHU_Data_Buffer(command, ref buffer);
-	public static int ReadAppSettings(int page, int offset, int length, ref byte buffer) => RippleCC.Platform.InsydeDCHU.ReadAppSettings(page, offset, length, ref buffer);
-	public static int WriteAppSettings(int page, int offset, int length, ref byte buffer) => RippleCC.Platform.InsydeDCHU.WriteAppSettings(page, offset, length, ref buffer);
+	public static int GetDCHU_Data_Integer(int command, ref int data) => CCenter.Platform.InsydeDCHU.GetDCHU_Data_Integer(command, ref data);
+	public static int SetDCHU_Data(int command, byte[] buffer, int length) => CCenter.Platform.InsydeDCHU.SetDCHU_Data(command, buffer, length);
+	public static int SetDCHU_DataEx(int command, byte[] buffer, int length, ref byte OutputBuffer) => CCenter.Platform.InsydeDCHU.SetDCHU_DataEx(command, buffer, length, ref OutputBuffer);
+	public static int GetDCHU_Data_Buffer(int command, ref byte buffer) => CCenter.Platform.InsydeDCHU.GetDCHU_Data_Buffer(command, ref buffer);
+	public static int ReadAppSettings(int page, int offset, int length, ref byte buffer) => CCenter.Platform.InsydeDCHU.ReadAppSettings(page, offset, length, ref buffer);
+	public static int WriteAppSettings(int page, int offset, int length, ref byte buffer) => CCenter.Platform.InsydeDCHU.WriteAppSettings(page, offset, length, ref buffer);
 
 	public static int ReadAcpiBrightness()
 	{

@@ -5,7 +5,7 @@
     <Nullable>disable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)../VERSION').Trim())</Version>
-    <Authors>ripple-cc contributors</Authors>
+    <Authors>ccenter contributors</Authors>
     <PackageLicenseExpression>GPL-2.0-only</PackageLicenseExpression>
     <AvaloniaVersion>12.1.6</AvaloniaVersion>
     <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>

@@ -38,7 +38,7 @@ t = re.sub(r'\n\tinternal [\w.<>]+ \w+;\n', '\n', t)
 t = re.sub(r', IComponentConnector(, IStyleConnector)?', '', t)
 # usings
 t = re.sub(r'using System\.(Windows[\w.]*|CodeDom\.Compiler|ComponentModel|Diagnostics);\n', '', t)
-t = t.replace('using System;', 'using System;\nusing Avalonia;\nusing Avalonia.Controls;\nusing Avalonia.Controls.Primitives;\nusing Avalonia.Controls.Shapes;\nusing Avalonia.Input;\nusing Avalonia.Interactivity;\nusing Avalonia.Media;\nusing Avalonia.Media.Imaging;\nusing Avalonia.Threading;\nusing Avalonia.Layout;\nusing RippleCC.Platform;', 1)
+t = t.replace('using System;', 'using System;\nusing Avalonia;\nusing Avalonia.Controls;\nusing Avalonia.Controls.Primitives;\nusing Avalonia.Controls.Shapes;\nusing Avalonia.Input;\nusing Avalonia.Interactivity;\nusing Avalonia.Media;\nusing Avalonia.Media.Imaging;\nusing Avalonia.Threading;\nusing Avalonia.Layout;\nusing CCenter.Platform;', 1)
 # visibility
 def vis(v): return 'true' if v in ('0',) else 'false'
 t = re.sub(r'\(\((?:UIElement|FrameworkElement|Control)\)([\w.\[\]]+)\)\.Visibility = \(Visibility\)(\d)', lambda m: '%s.IsVisible = %s' % (m.group(1), vis(m.group(2))), t)

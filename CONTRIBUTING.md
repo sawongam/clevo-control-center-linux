@@ -6,10 +6,10 @@ Contributions are welcome, particularly hardware test reports and fixes. Please 
 ## Layout
 | Path | Contents |
 |---|---|
-| `kernel/` | `ripple_dchu` kernel module |
-| `daemon/` | `ripple-ccd`, the root service (Python, standard library only) |
-| `cli/` | `ripplectl` |
-| `src/` | the Avalonia apps, one project each, and the shared `RippleCC.Platform` library |
+| `kernel/` | `ccenter_dchu` kernel module |
+| `daemon/` | `ccenterd`, the root service (Python, standard library only) |
+| `cli/` | `ccenterctl` |
+| `src/` | the Avalonia apps, one project each, and the shared `CCenter.Platform` library |
 | `scripts/` | build, install and uninstall |
 | `packaging/` | systemd unit, menu entry, and the Arch, Debian and tarball packaging |
 | `docs/` | protocol, porting guide, per-app notes, roadmap |
@@ -18,7 +18,7 @@ Start with [docs/README.md](docs/README.md) and [docs/porting.md](docs/porting.m
 
 ## Dev setup
 - .NET SDK 10, Python 3, and for the kernel module `dkms` and the headers for your kernel (Arch: `dotnet-sdk dkms linux-headers python`).
-- Solution: `src/RippleCC.slnx`. Per-app build: `dotnet build src/<App>/<App>.csproj`.
+- Solution: `src/CCenter.slnx`. Per-app build: `dotnet build src/<App>/<App>.csproj`.
 - No root is needed to develop the apps or the daemon.
 
 ## Building
@@ -32,13 +32,13 @@ that is identical in more than one app to `dist/lib/` and leaves a relative syml
 its own directory because the ported code reads its data files next to its executable.
 
 ## Running apps against the simulator
-`RippleCC.Platform` picks a backend at start (`Backend.cs`):
-- if `RIPPLE_CC_MOCK=1`, or the daemon socket does not exist, the in-process `MockBackend` simulator is used;
-- otherwise the app talks to the daemon at `/run/ripple-cc/ccd.sock`, overridable with `RIPPLE_CC_SOCKET`.
+`CCenter.Platform` picks a backend at start (`Backend.cs`):
+- if `CCENTER_MOCK=1`, or the daemon socket does not exist, the in-process `MockBackend` simulator is used;
+- otherwise the app talks to the daemon at `/run/ccenter/ccd.sock`, overridable with `CCENTER_SOCKET`.
 
 ```sh
-RIPPLE_CC_MOCK=1 dist/FanSpeedSetting/FanSpeedSetting
-RIPPLE_CC_MOCK_LOG=/tmp/calls.log RIPPLE_CC_MOCK=1 dist/FanSpeedSetting/FanSpeedSetting   # log each hardware call
+CCENTER_MOCK=1 dist/FanSpeedSetting/FanSpeedSetting
+CCENTER_MOCK_LOG=/tmp/calls.log CCENTER_MOCK=1 dist/FanSpeedSetting/FanSpeedSetting   # log each hardware call
 ```
 Run the app's own binary, not `dotnet App.dll`: the single-instance check depends on the process name. With the simulator the overclock
 guard allows writes, since nothing real is touched.
@@ -52,13 +52,13 @@ This renders the main window with Avalonia's headless platform (no display neede
 Use screenshots to compare against the original XAML when porting.
 
 ## Testing the daemon
-`ripple-ccd` can run without hardware or root:
+`ccenterd` can run without hardware or root:
 ```sh
-daemon/ripple-ccd --mock --socket /tmp/ccd.sock --state-dir /tmp/ccd-state --no-restore
-RIPPLE_CC_SOCKET=/tmp/ccd.sock dist/FanSpeedSetting/FanSpeedSetting
+daemon/ccenterd --mock --socket /tmp/ccd.sock --state-dir /tmp/ccd-state --no-restore
+CCENTER_SOCKET=/tmp/ccd.sock dist/FanSpeedSetting/FanSpeedSetting
 ```
 `--oc-unlock-file PATH` changes the file whose existence unlocks overclock writes (for tests only). The wire
-protocol (JSON lines, one request per connection) is documented at the top of `daemon/ripple-ccd`.
+protocol (JSON lines, one request per connection) is documented at the top of `daemon/ccenterd`.
 
 ## Continuous integration and releases
 Pull requests run the [checks](.github/workflows/ci.yml): they build the apps and render each one against the
@@ -89,4 +89,4 @@ Use Conventional Commits: `type(scope): summary`.
 - Do not add files from the original Windows software or decompiled sources to the repository; `reference/` is gitignored.
 
 ## Reporting hardware results
-Include the model, BIOS version, kernel, and output of `sudo ripplectl status` and `sudo ripplectl table`.
+Include the model, BIOS version, kernel, and output of `sudo ccenterctl status` and `sudo ccenterctl table`.

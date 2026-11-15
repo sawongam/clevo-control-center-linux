@@ -7,7 +7,7 @@ An unofficial Linux port of Control Center 3.0, the Windows utility that ships w
 rebrands. It reads fan speeds and temperatures, switches fan and performance modes, edits fan curves and sets the
 keyboard backlight, through the same firmware interface the Windows software uses.
 
-The package, the commands and the install paths use the project's short name, `ripple-cc`.
+The package, the commands and the install paths use the project's short name, `ccenter`.
 
 ![Control Center launcher](docs/screenshots/controlcenter30.png)
 
@@ -17,10 +17,10 @@ This is early software, and only part of it has run on real hardware.
 
 | Part | State |
 |---|---|
-| Kernel module `ripple_dchu` | Tested on hardware |
-| `ripplectl`: fan and temperature readings, fan modes, performance modes | Tested on hardware |
-| `ripplectl curve`: custom fan curve write | Not tested on hardware |
-| `ripple-ccd` service | Tested against the simulator only |
+| Kernel module `ccenter_dchu` | Tested on hardware |
+| `ccenterctl`: fan and temperature readings, fan modes, performance modes | Tested on hardware |
+| `ccenterctl curve`: custom fan curve write | Not tested on hardware |
+| `ccenterd` service | Tested against the simulator only |
 | Graphical apps | Tested against the simulator only |
 | CPU and GPU overclocking | Interface only. Writes are locked and not connected to a back-end |
 
@@ -57,20 +57,20 @@ Control Center opens as one window. Its tiles open the other tools, as on Window
 |---|---|
 | ![Fan Speed Setting](docs/screenshots/fanspeedsetting.png) | ![LED Keyboard](docs/screenshots/ledkeyboardsetting.png) |
 
-There is also `ripplectl`, a command line tool that needs neither the service nor a desktop.
+There is also `ccenterctl`, a command line tool that needs neither the service nor a desktop.
 
 ## Install
 
 Each [release](https://github.com/sawongam/clevo-control-center-linux/releases/latest) has three downloads. Pick
 the one for your distribution. All of them install the same things: the kernel module (built by DKMS, so it
-survives kernel updates), the `ripple-ccd` service, `ripplectl`, and the apps under `/opt/ripple-cc` with one
+survives kernel updates), the `ccenterd` service, `ccenterctl`, and the apps under `/opt/ccenter` with one
 "Control Center" entry in the application menu.
 
 | Distribution | File |
 |---|---|
-| Debian, Ubuntu, Mint, Pop!_OS | `ripple-cc_<version>_amd64.deb` |
-| Arch, Manjaro, EndeavourOS | `ripple-cc-<version>-1-x86_64.pkg.tar.zst` |
-| Anything else with systemd | `ripple-cc-<version>-linux-x64.tar.gz` |
+| Debian, Ubuntu, Mint, Pop!_OS | `ccenter_<version>_amd64.deb` |
+| Arch, Manjaro, EndeavourOS | `ccenter-<version>-1-x86_64.pkg.tar.zst` |
+| Anything else with systemd | `ccenter-<version>-linux-x64.tar.gz` |
 
 ### Debian and Ubuntu
 
@@ -86,7 +86,7 @@ survives kernel updates), the `ripple-ccd` service, `ripplectl`, and the apps un
    ```
 3. Install it. This builds the module and starts the service:
    ```sh
-   sudo apt install ./ripple-cc_*_amd64.deb
+   sudo apt install ./ccenter_*_amd64.deb
    ```
 
 ### Arch Linux
@@ -103,8 +103,8 @@ survives kernel updates), the `ripple-ccd` service, `ripplectl`, and the apps un
    ```
 3. Install it, then start the service:
    ```sh
-   sudo pacman -U ripple-cc-*.pkg.tar.zst
-   sudo systemctl enable --now ripple-ccd
+   sudo pacman -U ccenter-*.pkg.tar.zst
+   sudo systemctl enable --now ccenterd
    ```
 
 ### Any other distribution
@@ -120,20 +120,20 @@ kernel, `python3`, and the Liberation and Noto fonts.
    ```
 2. Unpack it and run the installer:
    ```sh
-   tar xf ripple-cc-*-linux-x64.tar.gz
-   cd ripple-cc-*-linux-x64
+   tar xf ccenter-*-linux-x64.tar.gz
+   cd ccenter-*-linux-x64
    sudo scripts/install.sh
    ```
 
 ### Check that it works
 
 ```sh
-systemctl status ripple-ccd     # should be "active (running)"
-sudo ripplectl status           # fan speeds and temperatures
+systemctl status ccenterd     # should be "active (running)"
+sudo ccenterctl status           # fan speeds and temperatures
 ```
 
 If the service is not running, the module probably did not load. Reboot if a kernel update was pending, and check
-`sudo dkms status` and `journalctl -u ripple-ccd -b`. To verify a download, compare it with the `SHA256SUMS` file
+`sudo dkms status` and `journalctl -u ccenterd -b`. To verify a download, compare it with the `SHA256SUMS` file
 attached to the release.
 
 ### From source
@@ -158,24 +158,24 @@ Install the newer release the same way. Your settings are kept.
 ### Uninstall
 
 Remove the package with your package manager, or run `sudo scripts/uninstall.sh` if you used the install script.
-Settings in `/var/lib/ripple-cc`, `/etc/ripple-cc` and `~/.config/ripple-cc` are kept.
+Settings in `/var/lib/ccenter`, `/etc/ccenter` and `~/.config/ccenter` are kept.
 
 ## Usage
 
-Open **Control Center** from the application menu, or run `ripple-cc`.
+Open **Control Center** from the application menu, or run `ccenter`.
 
-`ripplectl` talks to the kernel module directly and needs root:
+`ccenterctl` talks to the kernel module directly and needs root:
 
 ```sh
-sudo ripplectl status [--watch SEC]             # fan rpm, duty and temperatures
-sudo ripplectl table                            # fan curves stored in the firmware
-sudo ripplectl perf quiet|powersave|performance|entertainment
-sudo ripplectl fan auto|max|maxq|custom
-sudo ripplectl curve --cpu T2:D2,T3:D3          # write a custom fan curve, see --help
-sudo ripplectl kbd --color RRGGBB --brightness 0-100
+sudo ccenterctl status [--watch SEC]             # fan rpm, duty and temperatures
+sudo ccenterctl table                            # fan curves stored in the firmware
+sudo ccenterctl perf quiet|powersave|performance|entertainment
+sudo ccenterctl fan auto|max|maxq|custom
+sudo ccenterctl curve --cpu T2:D2,T3:D3          # write a custom fan curve, see --help
+sudo ccenterctl kbd --color RRGGBB --brightness 0-100
 ```
 
-`ripplectl kbd` uses the keyboard LED from [tuxedo-drivers](https://github.com/tuxedocomputers/tuxedo-drivers)
+`ccenterctl kbd` uses the keyboard LED from [tuxedo-drivers](https://github.com/tuxedocomputers/tuxedo-drivers)
 (`/sys/class/leds/rgb:kbd_backlight`). Optional extras: `power-profiles-daemon` for the power plans in Energy Save,
 and `nvidia-utils` for GPU readings.
 
@@ -183,15 +183,15 @@ and `nvidia-utils` for GPU readings.
 
 ```mermaid
 flowchart TD
-    A[Graphical apps<br/>your user] -->|unix socket<br/>/run/ripple-cc/ccd.sock| B[ripple-ccd service<br/>root]
-    C[ripplectl<br/>root] -->|ioctl| D
-    B -->|ioctl| D[/dev/ripple_dchu/]
-    D --> E[ripple_dchu kernel module]
+    A[Graphical apps<br/>your user] -->|unix socket<br/>/run/ccenter/ccd.sock| B[ccenterd service<br/>root]
+    C[ccenterctl<br/>root] -->|ioctl| D
+    B -->|ioctl| D[/dev/ccenter_dchu/]
+    D --> E[ccenter_dchu kernel module]
     E -->|_SB.DCHU._DSM| F[Laptop firmware]
 ```
 
 On Windows the apps reach the firmware through a service and a driver that evaluates one ACPI method.
-`ripple_dchu` is a small kernel module that exposes that method as `/dev/ripple_dchu`. The `ripple-ccd` service
+`ccenter_dchu` is a small kernel module that exposes that method as `/dev/ccenter_dchu`. The `ccenterd` service
 owns the device, so the apps run without root. It also stores settings and applies the last fan mode,
 performance mode and fan curve again at boot, because the firmware forgets them. The apps are the original
 .NET programs ported from WPF to [Avalonia](https://avaloniaui.net/).
@@ -206,7 +206,7 @@ The decoded command set and the hardware test log are in [docs/protocol.md](docs
   reboot, and the service then applies your last settings again.
 - Fan Speed Setting writes the fan defaults and a default curve to the firmware the first time it starts, as the
   Windows app does.
-- CPU and GPU overclock writes are refused unless `/etc/ripple-cc/oc-unlocked` exists. They are not connected to a
+- CPU and GPU overclock writes are refused unless `/etc/ccenter/oc-unlocked` exists. They are not connected to a
   real back-end in any case. Leave that file alone unless you are developing that part.
 
 ## Documentation

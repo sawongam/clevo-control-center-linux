@@ -1,16 +1,16 @@
 using System;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace ControlCenter30;
 
 /// <summary>
 /// Only active when the platform backend is the in-process simulator (no daemon / --screenshot).
-/// RippleCC.Platform's MockBackend returns zeros for the "BIOS feature" reads CC30 uses to decide which tiles to show
+/// CCenter.Platform's MockBackend returns zeros for the "BIOS feature" reads CC30 uses to decide which tiles to show
 /// (WMI 16/96/122, WMI package 17, AppSettings page 0 bytes 0-1 and page 7). With all zeros the original would show
 /// the "OSD Only" message and exit, so this overlay adds a plausible NH5x_NH7xHP feature set on top.
 /// None of these values were read from the real laptop (see PORT_NOTES.md); the real daemon is never wrapped.
-/// Overrides (hex): RIPPLE_CC30_WMI16, RIPPLE_CC30_WMI96, RIPPLE_CC30_WMI122, RIPPLE_CC30_P7_17 (page 7 byte 17),
-/// RIPPLE_CC30_CUSTOM (custom id), RIPPLE_CC30_SKIN (RRGGBB), RIPPLE_CC30_CLEVOID (decimal), RIPPLE_CC30_CPU (cpu name).
+/// Overrides (hex): CCENTER_CC30_WMI16, CCENTER_CC30_WMI96, CCENTER_CC30_WMI122, CCENTER_CC30_P7_17 (page 7 byte 17),
+/// CCENTER_CC30_CUSTOM (custom id), CCENTER_CC30_SKIN (RRGGBB), CCENTER_CC30_CLEVOID (decimal), CCENTER_CC30_CPU (cpu name).
 /// </summary>
 internal sealed class ProfileBackend : IBackend
 {
@@ -26,12 +26,12 @@ internal sealed class ProfileBackend : IBackend
 	public ProfileBackend(IBackend inner)
 	{
 		this.inner = inner;
-		Wmi16 = Env("RIPPLE_CC30_WMI16", Wmi16);
-		Wmi96 = Env("RIPPLE_CC30_WMI96", Wmi96);
-		Wmi122 = Env("RIPPLE_CC30_WMI122", Wmi122);
-		P7_17 = Env("RIPPLE_CC30_P7_17", P7_17);
-		CustomId = Env("RIPPLE_CC30_CUSTOM", CustomId);
-		ClevoId = int.TryParse(Environment.GetEnvironmentVariable("RIPPLE_CC30_CLEVOID"), out var cid) ? cid : ClevoId;
+		Wmi16 = Env("CCENTER_CC30_WMI16", Wmi16);
+		Wmi96 = Env("CCENTER_CC30_WMI96", Wmi96);
+		Wmi122 = Env("CCENTER_CC30_WMI122", Wmi122);
+		P7_17 = Env("CCENTER_CC30_P7_17", P7_17);
+		CustomId = Env("CCENTER_CC30_CUSTOM", CustomId);
+		ClevoId = int.TryParse(Environment.GetEnvironmentVariable("CCENTER_CC30_CLEVOID"), out var cid) ? cid : ClevoId;
 		var pg = AppHost.PageArg ?? "";
 		if (pg.StartsWith("apps") && int.TryParse(pg.Substring(4), out var n))
 		{
@@ -43,7 +43,7 @@ internal sealed class ProfileBackend : IBackend
 		if (pg == "mouse") P7_17 = 0x2D;
 		if (pg == "amd") Wmi96 |= 0x2000;
 		if (pg == "oldmodes") P7_17 = 0;
-		var skin = Environment.GetEnvironmentVariable("RIPPLE_CC30_SKIN");
+		var skin = Environment.GetEnvironmentVariable("CCENTER_CC30_SKIN");
 		if (skin != null && skin.Length == 6) Skin = Convert.FromHexString(skin);
 	}
 

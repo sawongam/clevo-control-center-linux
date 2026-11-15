@@ -5,7 +5,7 @@ Avalonia port of `DesktopBridge_EnergySave` (WPF). Assembly `EnergySave`, namesp
 ## Layout / structure
 - `MainWindow.axaml` generated from the decompiled XAML (Apps_main canvas 1900x1060 inside Viewbox), `MainWindow.axaml.cs` is the code-behind ported method by method, `Knobs.cs` the two schedule-dial handlers.
 - `Controls.cs`: `ProgressCircle` (pie + ring path), `KnobStart/KnobEnd` (replace the templated WPF Sliders), `PowerChart` (hand-drawn WinForms Chart), `ResizeGrip`, `MessageBox` (Windows-style dialog).
-- `DCHU.cs` -> `RippleCC.Platform.InsydeDCHU`, `IniFile.cs` -> `Ini`, `language.cs` reads `mtlanguage.ini` next to the exe.
+- `DCHU.cs` -> `CCenter.Platform.InsydeDCHU`, `IniFile.cs` -> `Ini`, `language.cs` reads `mtlanguage.ini` next to the exe.
 - `PowerSchemeHelper.cs`: powrprof adapter + `PowerStatusAdapter` (SystemInformation.PowerStatus).
 
 ## Window sizing (from WindowFitSize)
@@ -15,7 +15,7 @@ Window declared 1920x1080 but MaxWidth/MaxHeight = (0.75*screen)+20 / +18 (rate 
 - Windows power plans: three stock plans mapped onto power-profiles-daemon (`powerprofilesctl get/set` if installed); otherwise the active plan is stored only in Reg (`PowerPlan`) - "stored only, not applied". The app itself only reads the active plan name for the summary label.
 - Display-off / sleep / brightness / processor-state AC/DC values: not used by this app, no adapter written.
 - `SystemEvents.PowerModeChanged`: emulated by polling AC state in the 1 s battery timer.
-- Battery %, AC state: /sys/class/power_supply (dev overrides `RIPPLE_ES_BATTERY`, `RIPPLE_ES_AC`).
+- Battery %, AC state: /sys/class/power_supply (dev overrides `CCENTER_ES_BATTERY`, `CCENTER_ES_AC`).
 - `GetProductID_PCI()` (GetProductdll.dll): stub returns 0 (unknown model, affects only the WattLimit clamp for L140CU).
 - Model check `(GetWMI(16) & 0x100)` is skipped under the mock backend (mock returns 0).
 - `SetWMIForTotalCurrent` (cmd 65) needs the firmware result as return value; the shim's `SetDCHU_Data` returns 1/0, so `SetDCHU_DataEx` output bytes are used.

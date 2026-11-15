@@ -74,7 +74,7 @@ internal class battery
 	public void UpdatePowerInfo()
 	{
 		var s = new SystemPowerStatus { PowerLineStatus = PowerLineStatus.Offline, BatteryLifeRemaining = -1, BatteryFullLifeTime = -1 };
-		bool forceNone = Environment.GetEnvironmentVariable("RIPPLE_BAT_NONE") == "1";
+		bool forceNone = Environment.GetEnvironmentVariable("CCENTER_BAT_NONE") == "1";
 		var node = forceNone ? null : BatNode();
 		if (forceNone)
 		{
@@ -116,7 +116,7 @@ internal class battery
 		try
 		{
 			if (_inhibitor != null && !_inhibitor.HasExited) return;
-			if (Avalonia.Application.Current != null && RippleCC.Platform.AppHost.IsScreenshot) return;
+			if (Avalonia.Application.Current != null && CCenter.Platform.AppHost.IsScreenshot) return;
 			var psi = new ProcessStartInfo("systemd-inhibit",
 				"--what=idle:sleep --who=BatteryPackUtility --why=\"Battery refresh in progress\" --mode=block sleep infinity")
 			{ UseShellExecute = false, CreateNoWindow = true };

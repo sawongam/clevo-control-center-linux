@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using RippleCC.Platform;
+using CCenter.Platform;
 using System;
 using System.Text;
 

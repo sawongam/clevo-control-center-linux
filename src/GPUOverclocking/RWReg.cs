@@ -1,11 +1,11 @@
 using System;
 using System.Globalization;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace GPUOverclocking;
 
 // Port of the members of RWReg that this app uses (window geometry, language, GPU OC limits).
-// Registry -> RippleCC.Platform.Reg (JSON file). The keyboard/fan/battery members were never called here.
+// Registry -> CCenter.Platform.Reg (JSON file). The keyboard/fan/battery members were never called here.
 public class RWReg
 {
 	private const string UI = "HKEY_CURRENT_USER\\Software\\ControlCenter2.0\\UI\\";

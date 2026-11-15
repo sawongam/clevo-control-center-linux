@@ -1,7 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 
 public partial class App : Application

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using Clevo;
 using FnKey.Device;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace FnKey;
 

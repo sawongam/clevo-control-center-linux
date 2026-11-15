@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace RippleCC.Platform;
+namespace CCenter.Platform;
 
 /// <summary>
 /// Simulated firmware, seeded with values captured from the real NH5x_NH7xHP (see RE_NOTES.md).
@@ -18,7 +18,7 @@ public sealed class MockBackend : IBackend
     /// <summary>Every call the UI made: (func, intArg, buf). Tests can inspect this.</summary>
     public readonly List<(int func, uint arg, byte[] buf)> Log = new();
     int _fanModeEc = 0x02;
-    readonly string _logPath = Environment.GetEnvironmentVariable("RIPPLE_CC_MOCK_LOG");
+    readonly string _logPath = Environment.GetEnvironmentVariable("CCENTER_MOCK_LOG");
 
     public MockBackend()
     {

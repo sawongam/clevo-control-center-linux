@@ -7,7 +7,7 @@ internal class ClevoLog
 {
     public static void Write(string str)
     {
-        var p = Environment.GetEnvironmentVariable("RIPPLE_CC_KB_LOG");
+        var p = Environment.GetEnvironmentVariable("CCENTER_KB_LOG");
         if (p != null) try { File.AppendAllText(p, str.Replace("\n", " | ") + "\n"); } catch { }
     }
 }

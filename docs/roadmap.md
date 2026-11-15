@@ -7,23 +7,23 @@ Center 3.0 with the same look and behaviour, installed as one program. Design no
 ## Components
 | path | what |
 |---|---|
-| `kernel/` | `ripple_dchu` kernel module (DKMS) providing `/dev/ripple_dchu` |
-| `cli/ripplectl` | CLI: status, table, perf, fan, curve, kbd, raw |
-| `daemon/ripple-ccd` | root daemon on `/run/ripple-cc/ccd.sock`; keeps app settings; re-applies perf/fan/curve at boot |
-| `src/RippleCC.Platform/` | shared library: `InsydeDCHU` drop-in, `MockBackend`, `Ini`/`Reg`/`CcPaths` shims, `AppHost` (`--screenshot`) |
+| `kernel/` | `ccenter_dchu` kernel module (DKMS) providing `/dev/ccenter_dchu` |
+| `cli/ccenterctl` | CLI: status, table, perf, fan, curve, kbd, raw |
+| `daemon/ccenterd` | root daemon on `/run/ccenter/ccd.sock`; keeps app settings; re-applies perf/fan/curve at boot |
+| `src/CCenter.Platform/` | shared library: `InsydeDCHU` drop-in, `MockBackend`, `Ini`/`Reg`/`CcPaths` shims, `AppHost` (`--screenshot`) |
 | `src/<App>/` | one project per app; notes in [apps/](apps/) |
 | `scripts/` | `build.sh` (publishes to `dist/`), `stage.sh` (lays out the installed files), `install.sh`, `uninstall.sh` |
 | `packaging/` | systemd unit, menu entry, icon; Arch, Debian and tarball packaging |
 
 ## Hardware-verified
-- Kernel module and `ripplectl`: reading fans, temperatures and curves works. `fan max`, `fan auto` and `perf`
+- Kernel module and `ccenterctl`: reading fans, temperatures and curves works. `fan max`, `fan auto` and `perf`
   writes work (fans went from about 2200 to 4990 rpm and back).
-- Not tested: custom curve write (`ripplectl curve`).
+- Not tested: custom curve write (`ccenterctl curve`).
 - Nothing from the GUI apps or the daemon has touched real hardware yet.
 
 ## State of the apps
 The suite is nine programs, as on Windows: the launcher, seven tools it opens, and the Fn key OSD agent. They are
-installed together under `/opt/ripple-cc` with shared libraries and one menu entry.
+installed together under `/opt/ccenter` with shared libraries and one menu entry.
 All are tested against the simulator only. Each builds and renders its screens headlessly. Details and stubs
 are in the per-app notes.
 

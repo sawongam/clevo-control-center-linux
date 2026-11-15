@@ -8,7 +8,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Threading;
 using GPUOverclocking.UControl;
-using RippleCC.Platform;
+using CCenter.Platform;
 using static GPUOverclocking.NVGPU;
 
 namespace GPUOverclocking;

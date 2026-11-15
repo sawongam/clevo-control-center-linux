@@ -3,7 +3,7 @@
 # Builds from a release tag. The release workflow sets pkgver; to build by hand, set it to a
 # released version (see the releases page) and run `updpkgsums`.
 
-pkgname=ripple-cc
+pkgname=ccenter
 pkgver=0.1.0
 pkgrel=1
 pkgdesc="Control Center for Clevo laptops: fan, performance mode and keyboard backlight control"
@@ -17,7 +17,7 @@ optdepends=('linux-headers: build the kernel module for the stock kernel'
             'nvidia-utils: GPU readings'
             'tuxedo-drivers-dkms: keyboard backlight LED')
 options=('!strip' '!debug')
-install=ripple-cc.install
+install=ccenter.install
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('SKIP')
 

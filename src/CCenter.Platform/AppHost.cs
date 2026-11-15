@@ -13,7 +13,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 
-namespace RippleCC.Platform;
+namespace CCenter.Platform;
 
 /// <summary>
 /// Common entry point for every ported app.
@@ -45,7 +45,7 @@ public static class AppHost
                 .StartWithClassicDesktopLifetime(args);
 
         IsScreenshot = true;
-        Environment.SetEnvironmentVariable("RIPPLE_CC_MOCK", "1");
+        Environment.SetEnvironmentVariable("CCENTER_MOCK", "1");
         int afterMs = int.TryParse(Opt(args, "--after-ms"), out var ms) ? ms : 800;
         int rc = 2;
         ClassicDesktopStyleApplicationLifetime life = null;
@@ -189,7 +189,7 @@ public static class AppHost
                 Path.Combine(baseDir, "..", appName, appName),
                 // dev layout: ui/<App>/bin/<cfg>/net10.0/<App>
                 Path.Combine(baseDir, "..", "..", "..", "..", appName, "bin", new DirectoryInfo(baseDir).Parent?.Name ?? "Debug", "net10.0", appName),
-                Path.Combine("/opt/ripple-cc", appName, appName),
+                Path.Combine("/opt/ccenter", appName, appName),
             };
             var exe = candidates.FirstOrDefault(File.Exists);
             if (IsScreenshot) { Console.WriteLine($"LaunchSibling: {appName} args=\"{arguments}\" -> {(exe == null ? "NOT FOUND" : Path.GetFullPath(exe))} (not started in screenshot mode)"); return exe != null; }

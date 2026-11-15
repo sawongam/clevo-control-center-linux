@@ -1,6 +1,6 @@
 using System;
 using System.Globalization;
-using RippleCC.Platform;
+using CCenter.Platform;
 using System.Text;
 
 namespace CC.FlexiKey;

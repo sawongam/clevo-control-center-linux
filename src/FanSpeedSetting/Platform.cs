@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace FanSpeedSetting;
 
@@ -25,7 +25,7 @@ public static class Img
 
 public enum RegistryValueKind { String, DWord }
 
-/// <summary>Microsoft.Win32.Registry replacement backed by RippleCC.Platform.Reg.</summary>
+/// <summary>Microsoft.Win32.Registry replacement backed by CCenter.Platform.Reg.</summary>
 public static class Registry
 {
     public static object GetValue(string key, string name, object def) => Reg.GetValue(key, name, def);

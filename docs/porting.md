@@ -15,7 +15,7 @@ doubt, do what the original decompiled code does.
 | `reference/decompiled/<App>/` | ILSpy output of the Windows app (`.xaml` decompiled from BAML, `.cs`, images). The spec. Not part of the repository (gitignored); you need your own copy of the original software to produce it. |
 | `reference/decompiled/_pkg/<App>/` | the original installed files (mtlanguage.ini, oem.ini, native DLLs, helper exes). Same caveat. |
 | [`protocol.md`](protocol.md) | decoded firmware protocol, verified on the real laptop |
-| `src/RippleCC.Platform/` | shared library (hardware bridge, Win32 shims, app host) |
+| `src/CCenter.Platform/` | shared library (hardware bridge, Win32 shims, app host) |
 | `src/<App>/` | one project per app; per-app notes live in [`apps/<App>.md`](README.md#per-app-notes) |
 
 Target machine: Clevo NH5x_NH7xHP, i7-11800H, RTX 3060 (keyboard type byte KBTP=0x06), 2 fans. The original
@@ -102,10 +102,10 @@ Never P/Invoke Windows DLLs. Replace each `[DllImport]`:
 
 | original | use |
 |---|---|
-| `InsydeDCHU.dll` / `InsydeDCHU_x86.dll`: `SetDCHU_Data`, `SetDCHU_DataEx`, `GetDCHU_Data_Integer`, `GetDCHU_Data_Buffer`, `ReadAppSettings`, `WriteAppSettings` | `RippleCC.Platform.InsydeDCHU.<same name>` — identical signatures. Keep the app's own `DCHU`/`InsydeDriver` wrapper class and just redirect its extern calls. **Do not change command numbers, sub-commands, byte layouts or call order.** |
-| `kernel32` `GetPrivateProfileString` / `WritePrivateProfileString` | `RippleCC.Platform.Ini.<same name>` (handles UTF-16 ini files and Windows-style paths) |
-| `Microsoft.Win32.Registry` | `RippleCC.Platform.Reg.GetValue/SetValue/GetInt/GetString(keyPath, name, …)` |
-| Windows paths (`C:\ProgramData\…`, `Environment.SpecialFolder.*`, backslashes) | `RippleCC.Platform.CcPaths.Map(path)`; app-relative data via `AppContext.BaseDirectory` |
+| `InsydeDCHU.dll` / `InsydeDCHU_x86.dll`: `SetDCHU_Data`, `SetDCHU_DataEx`, `GetDCHU_Data_Integer`, `GetDCHU_Data_Buffer`, `ReadAppSettings`, `WriteAppSettings` | `CCenter.Platform.InsydeDCHU.<same name>` — identical signatures. Keep the app's own `DCHU`/`InsydeDriver` wrapper class and just redirect its extern calls. **Do not change command numbers, sub-commands, byte layouts or call order.** |
+| `kernel32` `GetPrivateProfileString` / `WritePrivateProfileString` | `CCenter.Platform.Ini.<same name>` (handles UTF-16 ini files and Windows-style paths) |
+| `Microsoft.Win32.Registry` | `CCenter.Platform.Reg.GetValue/SetValue/GetInt/GetString(keyPath, name, …)` |
+| Windows paths (`C:\ProgramData\…`, `Environment.SpecialFolder.*`, backslashes) | `CCenter.Platform.CcPaths.Map(path)`; app-relative data via `AppContext.BaseDirectory` |
 | `user32` window messages between the CC apps (`FindWindow`, `SendMessage`, `RegisterWindowMessage`, `WndProc` hooks), named pipes, EventLog IPC to DCHUService | The Windows service does not exist. Where the app asked the service to do a hardware call, do that DCHU call directly. App-to-app notifications: implement with a small file-watcher or unix-socket helper inside your project if the feature needs it, otherwise make it a no-op and note it. |
 | UWP `Launcher.LaunchUriAsync`, `Process.Start` of another CC app | `AppHost.LaunchSibling("<ProjectName>")`, which starts `../<ProjectName>/<ProjectName>` next to the running app. Project names: `ControlCenter30`, `FanSpeedSetting`, `LedKeyboardSetting`, `Flexikey`, `CPUOC`, `GPUOverclocking`, `EnergySave`, `BatteryUtility`, `FnKey`. |
 | power plans (`powrprof`), brightness, Wi-Fi/Bluetooth/camera/touchpad toggles, audio, battery info, CPU/GPU usage & temps, RAM | Linux equivalents where there is a clean unprivileged one: `/sys/class/power_supply/BAT*`, `/sys/class/backlight/*`, `/proc/stat`, `/proc/meminfo`, `/sys/class/hwmon`, `/sys/class/thermal`, `nvidia-smi --query-gpu=… --format=csv,noheader,nounits` (read-only), `rfkill`, `powerprofilesctl`, `/sys/class/leds/rgb:kbd_backlight`. Put each in a small adapter class named after the DLL it replaces. If there is no sane equivalent, stub it with a plausible fixed value and list it in the app notes. |
@@ -113,10 +113,10 @@ Never P/Invoke Windows DLLs. Replace each `[DllImport]`:
 
 Apps must run without root and without the daemon: `Backend` then uses an in-process
 simulator (`MockBackend`) seeded with values read from the reference laptop. Set
-`RIPPLE_CC_MOCK_LOG=/path/file` to get a line per hardware call the UI makes — use it to check
+`CCENTER_MOCK_LOG=/path/file` to get a line per hardware call the UI makes — use it to check
 that a click sends the same command the Windows code would.
 
-UI development needs no root: do not load kernel modules, open `/dev/ripple_dchu` or write to `/sys` from an app
+UI development needs no root: do not load kernel modules, open `/dev/ccenter_dchu` or write to `/sys` from an app
 under development. Keep NuGet dependencies to Avalonia-family packages.
 
 ## Checking your work
@@ -132,7 +132,7 @@ There are no Windows reference screenshots. The XAML is the spec: sizes, margins
 4. Run it for real for 5 s to catch runtime exceptions:
    `timeout 5 bin/Debug/net10.0/<App>; echo $?` (124 means it was still running, which is what you want).
    Unhandled exceptions in timers/handlers must not be swallowed silently during development.
-5. With `RIPPLE_CC_MOCK_LOG`, confirm start-up hardware calls match what the original would send.
+5. With `CCENTER_MOCK_LOG`, confirm start-up hardware calls match what the original would send.
 
 The screenshot shown in the README for each app lives in `docs/screenshots/`; update it when the main window changes.
 
@@ -143,6 +143,6 @@ Each app has a notes file in [`apps/`](README.md#per-app-notes), kept up to date
 - every stub;
 - the hardware commands the app sends (func, sub, data, when);
 - anything that could not be verified without the real hardware;
-- anything missing from `RippleCC.Platform` that you worked around inside the app.
+- anything missing from `CCenter.Platform` that you worked around inside the app.
 
 State plainly what is incomplete, stubbed or unverified.

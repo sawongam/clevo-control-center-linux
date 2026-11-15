@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 public class RWIni
 {

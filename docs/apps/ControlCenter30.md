@@ -22,7 +22,7 @@ SMBIOS -> /sys/class/dmi/id: System.ManufacturerName=sys_vendor ("Dream Machines
 so default title.png (no AORUS/MEDION/Gigabyte). Skin colour = package 17 bytes 3..5 (else XAML default #FFFF00D2 from BTN_close.Background).
 GetProductdll.dll GetProductID_PCI was declared but never called -> nothing to map.
 UNVERIFIED: real values of the above feature reads on the laptop (not read; no hardware access). In mock mode MockProfile.cs injects a
-plausible set (not measured). Env overrides RIPPLE_CC30_* documented there; `--page` names: fnkey, dialog, dialog2, dialog3, apps1..apps8, pgupdn, mouse, amd, oldmodes.
+plausible set (not measured). Env overrides CCENTER_CC30_* documented there; `--page` names: fnkey, dialog, dialog2, dialog3, apps1..apps8, pgupdn, mouse, amd, oldmodes.
 
 ## Power mode buttons
 Original CC30 only writes event "clevocc30^101^N" to the OutLog; FnKey.exe does the DCHU work. Port: ServiceBridge.cs performs FnKey's
@@ -42,7 +42,7 @@ Power-mode changes by FnKey are picked up by polling AppSettings(1,1) every 1 s 
 
 ## Verification status
 Rendered with `--screenshot` and checked against the XAML: main (7 tiles), apps3, pgupdn,
-fnkey (new 4-mode UI), oldmodes (circular UI), amd (RIPPLE_CC30_P7_17=0 --page amd), mouse, dialog, dialog2. 5 s run: no exceptions;
+fnkey (new 4-mode UI), oldmodes (circular UI), amd (CCENTER_CC30_P7_17=0 --page amd), mouse, dialog, dialog2. 5 s run: no exceptions;
 startup DCHU reads: 0x46, 0x0D, 0x11, 0x7A, 0x10, 0x60 (+ AppSettings).
 Click paths (mode buttons -> ServiceBridge writes 0x79 sub 0x19, tile launch -> LaunchSibling) are coded but were NOT exercised
 (no UI automation); tooltips, hover/pressed states, real-hardware feature bits unverified. Negative-margin quirk: Avalonia clamps

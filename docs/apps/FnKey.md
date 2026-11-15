@@ -7,7 +7,7 @@ Status legend: DONE / STUB (logged no-op, reason given) / UNVERIFIED (needs real
 |---|---|
 | OsdForm.cs | OsdForm.cs (WinForms) - the OSD popup, code-only Avalonia Window |
 | Form1.cs | Form1.cs - controller (no tray UI); event switch `Arg001_GetEvent` copied 1:1 |
-| Features.cs, Global.cs, DCHU.cs, InsydeAcpiProt.cs, KBModule/RGBKB/WhiteKB/PerkeyKB/BaseKB.cs, Device/FAN.cs, Device/GPU.cs | original logic, DllImports redirected to `RippleCC.Platform.InsydeDCHU` (same command numbers, order) |
+| Features.cs, Global.cs, DCHU.cs, InsydeAcpiProt.cs, KBModule/RGBKB/WhiteKB/PerkeyKB/BaseKB.cs, Device/FAN.cs, Device/GPU.cs | original logic, DllImports redirected to `CCenter.Platform.InsydeDCHU` (same command numbers, order) |
 | EventSources.cs, App.axaml.cs, Program.cs | new: IEventSource + unix socket + CLI |
 | Rfkill.cs, LCDBrightness.cs, Device/Brightness.cs, Device/battery.cs, Device/DeviceControl.cs, SMBIOS.cs, CallingVariations.cs | Linux adapters named after what they replace |
 | tools/extract_resx.py | extracts Resources.resx images -> Assets/Resources/*.png (72 osd_*/bg PNGs) |
@@ -23,7 +23,7 @@ Status legend: DONE / STUB (logged no-op, reason given) / UNVERIFIED (needs real
 - Deviations: opacity applied to the content (compositor alpha), not the OS window; position is honoured on X11 only (Wayland ignores toplevel positions; would need layer-shell); window is not click-through / `_NET_WM_WINDOW_TYPE_NOTIFICATION` not set.
 - Hi-DPI: layout is in physical px (scaled by 1/Screens.Primary.Scaling), as the WinForms form was.
 
-## Command protocol (socket `$XDG_RUNTIME_DIR/ripple-cc-fnkey.sock`, also CLI flags)
+## Command protocol (socket `$XDG_RUNTIME_DIR/ccenter-fnkey.sock`, also CLI flags)
 One text line per command:
 - `event <n>` / `--event 0x59`: n = the ACPI notify value. event = n & 0xFF, data = n >> 8 (only 186 uses data). Equivalent to log message `Arg001^<n>` (decimal).
 - `msg <text>` / `--msg`: raw original message, e.g. `Arg001^89`, `clevocc30^101^2` (set power mode 2 from CC30), `clevocc30^107`, `clevokeyboard^202^5`, `dchu^10e` (quit).

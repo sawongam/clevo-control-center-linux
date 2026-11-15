@@ -1,9 +1,9 @@
 using System;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 public class InsydeDriver
 {
-	// Original: [DllImport("InsydeDCHU.dll")] externs -> RippleCC.Platform.InsydeDCHU (same signatures).
+	// Original: [DllImport("InsydeDCHU.dll")] externs -> CCenter.Platform.InsydeDCHU (same signatures).
 	public static int GetDCHU_Data_Integer(int command, ref int data) => InsydeDCHU.GetDCHU_Data_Integer(command, ref data);
 	public static int SetDCHU_Data(int command, byte[] buffer, int length) => InsydeDCHU.SetDCHU_Data(command, buffer, length);
 	public static int GetDCHU_Data_Buffer(int command, ref byte buffer) => InsydeDCHU.GetDCHU_Data_Buffer(command, ref buffer);
@@ -62,7 +62,7 @@ public class InsydeDriver
 		if ((wMI2 & 0x200) == 512) Global.support_bit.UWP_BatteryUtility = true;
 		// PORT: the mock firmware has no value for func 16 (returns 0); the real laptop's value is unknown here.
 		// Under the simulator treat the feature bit as present so the main page can be shown (see PORT_NOTES).
-		if (!Global.support_bit.UWP_BatteryUtility && Backend.IsMock && Environment.GetEnvironmentVariable("RIPPLE_BAT_UNSUPPORTED") != "1")
+		if (!Global.support_bit.UWP_BatteryUtility && Backend.IsMock && Environment.GetEnvironmentVariable("CCENTER_BAT_UNSUPPORTED") != "1")
 			Global.support_bit.UWP_BatteryUtility = true;
 		int wMI3 = GetWMI(122);
 	}

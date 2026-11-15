@@ -10,7 +10,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using CC.UControl;
 using CC.other_Class;
-using RippleCC.Platform;
+using CCenter.Platform;
 namespace CC;
 
 public partial class Page_Battery_Refresh : UserControl

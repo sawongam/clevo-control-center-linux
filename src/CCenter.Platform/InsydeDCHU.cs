@@ -2,14 +2,14 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace RippleCC.Platform;
+namespace CCenter.Platform;
 
 /// <summary>
 /// Drop-in replacement for the P/Invoke surface of InsydeDCHU.dll / InsydeDCHU_x86.dll.
 /// Same names and signatures as the Windows DllImports, so ported code only has to delete
 /// its [DllImport] declarations and call these instead.
-/// Routed to the ripple-ccd daemon (unix socket), or to an in-process simulator when the
-/// daemon is not running or RIPPLE_CC_MOCK=1.
+/// Routed to the ccenterd daemon (unix socket), or to an in-process simulator when the
+/// daemon is not running or CCENTER_MOCK=1.
 /// Return values: the Windows DLL returns the firmware's integer result (original code does
 /// `x = GetDCHU_Data_Integer(122, ref x)` and uses SetDCHU_Data's return as the answer of cmd 65),
 /// so Get_Integer and SetDCHU_Data return that value; 0 on failure. Buffer/app-settings calls: 1/0.

@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CPUOC.Model;
 

@@ -5,7 +5,7 @@ namespace CPUOC30.Model;
 
 /// <summary>
 /// The Windows app talked to CC30_BG.exe through the Windows Event Log ("cpuoc_bg_104" ...).
-/// Here the in-log is dispatched in-process to <see cref="CpuOcBackground"/>; the out-log is dropped (stderr with RIPPLE_CC_MOCK_LOG).
+/// Here the in-log is dispatched in-process to <see cref="CpuOcBackground"/>; the out-log is dropped (stderr with CCENTER_MOCK_LOG).
 /// </summary>
 public class DebugLog
 {
@@ -15,7 +15,7 @@ public class DebugLog
     public static bool WriteDbgLog2Inlog(string log) { Trace("IN  " + log); CpuOcBackground.OnInLog(log); return true; }
     static void Trace(string s)
     {
-        var p = Environment.GetEnvironmentVariable("RIPPLE_CC_MOCK_LOG");
+        var p = Environment.GetEnvironmentVariable("CCENTER_MOCK_LOG");
         if (p != null) try { File.AppendAllText(p, "cpuoc-log: " + s + "\n"); } catch { }
     }
     public static void Log(string s) => Trace(s);

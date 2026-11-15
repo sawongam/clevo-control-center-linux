@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Threading;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CC;
 

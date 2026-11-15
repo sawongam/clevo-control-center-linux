@@ -17,7 +17,7 @@ Driver (kb.dll) is a documented STUB. Recording only works inside the app window
   `CC/Page_FlexiKey.Shots.cs`). The loading splash window (`loading.axaml`) is shown at start-up in normal runs only; not screenshotted.
 
 ## Data / file formats (same as original)
-- Profiles: `CcPaths.Map("C:\ComboKey")/profile.xml` (-> `~/.config/ripple-cc/ComboKey/profile.xml`), written/read by the
+- Profiles: `CcPaths.Map("C:\ComboKey")/profile.xml` (-> `~/.config/ccenter/ComboKey/profile.xml`), written/read by the
   unchanged `XmlRW` (root/Profile_N/Set_N/Index_N attributes; KeyCode = set-1 scan code, +0xE000 for extended keys).
 - Export/import use the same XML via OpenFileDialog/SaveFileDialog shims (`CC/Compat.cs`, Avalonia StorageProvider).
 - Registry values go through `Reg` (window_FullScreen, window_Color, language, FA keys, WMI_* ...).
@@ -65,7 +65,7 @@ Order of calls after a save: Clear*, Enable/Disable Filter, 50 ms sleep, then pe
 text -> SetTextMacro, disable -> SetKeyDisable.
 Not used at runtime by the UI (kept as methods): `SetKbMacroKey`, `SetMouseMacroKey` (old 16-entry variants).
 
-## Hardware commands sent by the UI (RIPPLE_CC_MOCK_LOG)
+## Hardware commands sent by the UI (CCENTER_MOCK_LOG)
 Only InsydeDCHU app-settings reads/writes: WriteAppSettings(0,28..31) at start, ReadAppSettings(1,8/9) (Flexikey KB/mouse status), WriteAppSettings(1,8/9) when
 the Enable/Disable switches change, ReadAppSettings(1,2) language, ReadAppSettings(0,0,2) product id; `GetDCHU_Data(70/16)`, package 17 reads (skin colour, 3-col numpad flag at byte 14),
 `SetDCHU_DataEx(4, buf[0]=12)` (panel size -> 14-inch layout). No performance/fan/LED commands.

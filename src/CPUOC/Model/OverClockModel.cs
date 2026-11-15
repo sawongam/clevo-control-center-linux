@@ -10,7 +10,7 @@ using CPUOC.Model;
 using CPUOC30;
 using Clevo;
 using GalaSoft.MvvmLight;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace CPUOC30.Model;
 

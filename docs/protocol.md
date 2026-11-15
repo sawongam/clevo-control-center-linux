@@ -82,9 +82,9 @@ Perf mode left at quiet after the test.
 ### Test 3 (2026-11-12): fan writes confirmed
 `fan max`: cpu 2190→4990 rpm, gpu 900→3150 rpm within ~2 s, duty 100%. `fan auto`: back to ~2200/~1000, duty 35%.
 PK0D byte 14 is not purely fan mode: reads 0x80 in auto while perf=quiet, 0x08 after `perf performance`,
-0x02 at boot (Nov 8). ripplectl labels updated; powersave/entertainment values still unmapped.
+0x02 at boot (Nov 8). ccenterctl labels updated; powersave/entertainment values still unmapped.
 
 ## Overclock lock
 CPU and GPU overclock writes go through `HardwareGate.GuardOcWrite` in the apps and are refused by the daemon unless
-`/etc/ripple-cc/oc-unlocked` exists. The daemon's `OC_LOCKED` table for DCHU functions is still empty: no overclock DCHU
+`/etc/ccenter/oc-unlocked` exists. The daemon's `OC_LOCKED` table for DCHU functions is still empty: no overclock DCHU
 function has been identified yet, so only the app-settings ranges that hold overclock values are protected.

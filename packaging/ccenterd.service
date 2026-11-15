@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-only
-# Copyright (C) 2026 ripple-cc contributors
+# Copyright (C) 2026 ccenter contributors
 [Unit]
 Description=Clevo Control Center hardware daemon
 After=systemd-modules-load.service
@@ -8,12 +8,12 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStartPre=-/sbin/modprobe ripple_dchu
-ExecStart=/opt/ripple-cc/bin/ripple-ccd
-RuntimeDirectory=ripple-cc
-StateDirectory=ripple-cc
+ExecStartPre=-/sbin/modprobe ccenter_dchu
+ExecStart=/opt/ccenter/bin/ccenterd
+RuntimeDirectory=ccenter
+StateDirectory=ccenter
 Restart=on-failure
-# ripple-ccd exits 78 when /dev/ripple_dchu is missing: do not restart-loop on that.
+# ccenterd exits 78 when /dev/ccenter_dchu is missing: do not restart-loop on that.
 RestartPreventExitStatus=78
 RestartSec=2
 ProtectHome=yes

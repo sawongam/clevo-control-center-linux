@@ -1,12 +1,12 @@
 using System;
 using System.Linq;
-using RippleCC.Platform;
+using CCenter.Platform;
 
 namespace FnKey;
 
 static class Program
 {
-	// FnKey                      long-running hot-key agent (socket $XDG_RUNTIME_DIR/ripple-cc-fnkey.sock)
+	// FnKey                      long-running hot-key agent (socket $XDG_RUNTIME_DIR/ccenter-fnkey.sock)
 	// FnKey --event 0x59         send a firmware notify value to the running agent (else handle it one-shot)
 	// FnKey --osd osd_caps_on    show an OSD directly (also: volume:40 brightness:70 kbwhite6:3 ...)
 	// FnKey --sleep | --resume | --quit | --msg "clevocc30^101^2"
