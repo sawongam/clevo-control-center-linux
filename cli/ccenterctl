@@ -59,7 +59,7 @@ class Dchu:
         try:
             self.fd = os.open(path, os.O_RDWR)
         except FileNotFoundError:
-            sys.exit(f"{path} missing - load the module: sudo insmod kernel/ccenter_dchu.ko")
+            sys.exit(f"{path} missing - load the module: sudo modprobe ccenter_dchu")
         except PermissionError:
             sys.exit(f"{path}: permission denied - run with sudo")
 
