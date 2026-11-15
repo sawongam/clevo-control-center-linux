@@ -1,8 +1,9 @@
 name: Release
 
-# Every push to master runs the checks, builds the packages and publishes them as a release.
-# The version is MAJOR.MINOR from the VERSION file plus the number of commits on master.
-# A manual run does everything except publishing.
+# Every push to master runs the checks and builds the packages. The version comes from the
+# VERSION file as it is. When no release exists for that version yet, the packages are published
+# as release "Clevo Control Center <version>" with tag v<version>; otherwise publishing is skipped,
+# so bump VERSION to ship a new release. A manual run does everything except publishing.
 on:
   push:
     branches: [master]
@@ -27,10 +28,8 @@ jobs:
       version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - id: version
-        run: echo "version=$(cut -d. -f1,2 VERSION).$(git rev-list --count HEAD)" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
 
   packages:
     name: Tarball and .deb
@@ -38,8 +37,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Set version
-        run: echo "${{ needs.version.outputs.version }}" > VERSION
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
@@ -70,7 +67,6 @@ jobs:
         run: |
           pacman -Syu --noconfirm dotnet-sdk
           version=${{ needs.version.outputs.version }}
-          echo "$version" > VERSION
           sed -i "s/^pkgver=.*/pkgver=$version/" packaging/arch/PKGBUILD
           # makepkg uses a source file that is already next to the PKGBUILD, so the package is
           # built from this checkout and not from a tag on GitHub.
@@ -93,16 +89,31 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Check whether this version is already released
+        id: exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: v${{ needs.version.outputs.version }}
+        run: |
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::notice::$TAG is already released; bump VERSION to publish a new release."
+            echo "released=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "released=false" >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/download-artifact@v4
+        if: steps.exists.outputs.released == 'false'
         with:
           path: out
           pattern: '*package*'
           merge-multiple: true
       - name: Create release
+        if: steps.exists.outputs.released == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: v${{ needs.version.outputs.version }}
+          VERSION: ${{ needs.version.outputs.version }}
         run: |
           cd out
           sha256sum * > SHA256SUMS
-          gh release create "$TAG" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "$TAG" --generate-notes *
+          gh release create "v$VERSION" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Clevo Control Center $VERSION" --latest --generate-notes *

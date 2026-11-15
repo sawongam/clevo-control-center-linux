@@ -64,12 +64,11 @@ protocol (JSON lines, one request per connection) is documented at the top of `d
 Pull requests run the [checks](.github/workflows/ci.yml): they build the apps and render each one against the
 simulator, build the kernel module, run shellcheck, and start the daemon with simulated hardware.
 
-Every push to `master` runs the same checks and then [publishes a release](.github/workflows/release.yml) with
-the tarball, the `.deb` and the Arch package. Nothing is released if a check fails.
-
-The version is `MAJOR.MINOR.PATCH`. `MAJOR.MINOR` comes from the `VERSION` file and `PATCH` is the number of
-commits on `master`, so it goes up with every push. Edit `VERSION` only to start a new major or minor series.
-Local builds use the number in `VERSION` as it is.
+Every push to `master` runs the same checks and builds the tarball, the `.deb` and the Arch package. The version
+is the `VERSION` file as it is (`MAJOR.MINOR.PATCH`). When that version has no release yet, the packages are
+[published](.github/workflows/release.yml) as release "Clevo Control Center <version>" with tag `v<version>`;
+when it is already released, publishing is skipped. To ship a new release, bump `VERSION` in the same push.
+Nothing is released if a check fails.
 
 ## Commits
 Use Conventional Commits: `type(scope): summary`.
