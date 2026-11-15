@@ -67,7 +67,8 @@ simulator, build the kernel module, run shellcheck, and start the daemon with si
 Every push to `master` runs the same checks and builds the tarball, the `.deb` and the Arch package. The version
 is the `VERSION` file as it is (`MAJOR.MINOR.PATCH`). When that version has no release yet, the packages are
 [published](.github/workflows/release.yml) as release "Clevo Control Center <version>" with tag `v<version>`;
-when it is already released, publishing is skipped. To ship a new release, bump `VERSION` in the same push.
+when it is already released, publishing is skipped. To ship a new release, bump `VERSION` in the same push,
+and set the same number as `pkgver` in `packaging/arch/PKGBUILD`.
 Nothing is released if a check fails.
 
 ## Commits

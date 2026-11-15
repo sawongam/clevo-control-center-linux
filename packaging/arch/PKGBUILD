@@ -4,7 +4,7 @@
 # released version (see the releases page) and run `updpkgsums`.
 
 pkgname=ccenter
-pkgver=0.1.0
+pkgver=0.2.0
 pkgrel=1
 pkgdesc="Control Center for Clevo laptops: fan, performance mode and keyboard backlight control"
 arch=('x86_64')
