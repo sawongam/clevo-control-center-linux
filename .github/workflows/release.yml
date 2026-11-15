@@ -27,7 +27,7 @@ jobs:
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: version
         run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
 
@@ -36,8 +36,8 @@ jobs:
     needs: version
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
       - name: Build
@@ -51,7 +51,7 @@ jobs:
           mkdir out
           packaging/tarball/build.sh out
           packaging/deb/build.sh out
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: packages
           path: out/
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-24.04
     container: archlinux:base-devel
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build with makepkg
         run: |
           pacman -Syu --noconfirm dotnet-sdk
@@ -76,7 +76,7 @@ jobs:
           chown -R builder packaging/arch
           cd packaging/arch
           sudo -u builder makepkg --nodeps
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: arch-package
           path: packaging/arch/*.pkg.tar.zst
@@ -101,7 +101,7 @@ jobs:
           else
             echo "released=false" >> "$GITHUB_OUTPUT"
           fi
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         if: steps.exists.outputs.released == 'false'
         with:
           path: out

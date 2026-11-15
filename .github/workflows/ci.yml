@@ -13,8 +13,8 @@ jobs:
     name: Apps
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 10.0.x
       - name: Install fonts
@@ -27,7 +27,7 @@ jobs:
           for app in ControlCenter30 FanSpeedSetting LedKeyboardSetting Flexikey CPUOC GPUOverclocking EnergySave BatteryUtility FnKey; do
             CCENTER_CONFIG="$RUNNER_TEMP/config" "dist/$app/$app" --screenshot "screenshots/$app.png" --after-ms 1500
           done
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: screenshots
           path: screenshots/
@@ -36,7 +36,7 @@ jobs:
     name: Kernel module
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Install kernel headers
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends "linux-headers-$(uname -r)"
       - name: Build
@@ -46,7 +46,7 @@ jobs:
     name: Scripts and daemon
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Shellcheck
         run: shellcheck scripts/*.sh packaging/deb/build.sh packaging/deb/postinst packaging/deb/prerm packaging/tarball/build.sh
       - name: Compile Python
