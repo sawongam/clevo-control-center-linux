@@ -25,6 +25,12 @@ namespace CCenter.Platform;
 public static class AppHost
 {
     public static bool IsScreenshot { get; private set; }
+
+    /// <summary>Show the original start-up spinner as its own window. Off by default: on tiling window
+    /// managers (Hyprland, Sway, ...) every extra top-level window is tiled, so the app appears to open
+    /// several windows. CCENTER_SPLASH=1 brings it back; `--screenshot --page loading` still renders it.</summary>
+    public static bool ShowSplash =>
+        Environment.GetEnvironmentVariable("CCENTER_SPLASH") == "1" || (IsScreenshot && PageArg == "loading");
     /// <summary>Value of --page, for apps that want to open on a specific page/state when screenshotting.</summary>
     public static string PageArg { get; private set; }
     public static string[] Args { get; private set; } = Array.Empty<string>();
@@ -35,13 +41,24 @@ public static class AppHost
         return i >= 0 && i + 1 < a.Length ? a[i + 1] : null;
     }
 
-    public static int Run<TApp>(string[] args) where TApp : Application, new()
+    public static int Run<TApp>(string[] args, bool singleInstance = true) where TApp : Application, new()
     {
         Args = args;
         PageArg = Opt(args, "--page");
         var shot = Opt(args, "--screenshot");
+        if (shot == null && singleInstance && !TakeInstanceLock())
+        {
+            ActivateRunning(AppName);   // already running: bring that copy forward, exit before any window exists
+            return 0;
+        }
         if (shot == null)
             return AppBuilder.Configure<TApp>().UsePlatformDetect().With(Fonts()).LogToTrace()
+                .AfterSetup(_ =>
+                {
+                    // MainWindow is assigned later, in App.OnFrameworkInitializationCompleted; Startup runs before it is shown
+                    if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime l)
+                        l.Startup += (_, _) => { if (l.MainWindow is { } w) FloatOnFirstMap(w); };
+                })
                 .StartWithClassicDesktopLifetime(args);
 
         IsScreenshot = true;
@@ -175,6 +192,104 @@ public static class AppHost
                 ["Yu Gothic UI"] = new FontFamily("Noto Sans CJK JP, Noto Sans"),
             },
         };
+    }
+
+    static FileStream _instanceLock;
+
+    static string AppName => System.Reflection.Assembly.GetEntryAssembly()?.GetName().Name ?? "app";
+
+    static string RuntimeDir
+    {
+        get
+        {
+            var dir = Environment.GetEnvironmentVariable("XDG_RUNTIME_DIR");
+            return string.IsNullOrEmpty(dir) || !Directory.Exists(dir) ? Path.GetTempPath() : dir;
+        }
+    }
+
+    static string ActivateSocket(string app) => Path.Combine(RuntimeDir, $"ccenter-{app}.activate.sock");
+
+    /// <summary>Ask the running copy of <paramref name="app"/> (project name, e.g. "FanSpeedSetting") to show its
+    /// main window. Replaces the original's SetForegroundWindow(FindWindow(...)). Returns false if none answers.</summary>
+    public static bool ActivateRunning(string app)
+    {
+        if (IsScreenshot) { Console.WriteLine($"ActivateRunning: {app} (not sent in screenshot mode)"); return true; }
+        try
+        {
+            using var s = new System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.Unix,
+                System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Unspecified);
+            s.Connect(new System.Net.Sockets.UnixDomainSocketEndPoint(ActivateSocket(app)));
+            s.Send(new byte[] { (byte)'a' });
+            return true;
+        }
+        catch { return false; }
+    }
+
+    /// <summary>First copy: listen for ActivateRunning and raise the main window (un-minimise, show, focus).
+    /// Safe to replace a stale socket file because only the lock holder gets here.</summary>
+    static void ListenForActivate()
+    {
+        try
+        {
+            var path = ActivateSocket(AppName);
+            File.Delete(path);
+            var srv = new System.Net.Sockets.Socket(System.Net.Sockets.AddressFamily.Unix,
+                System.Net.Sockets.SocketType.Stream, System.Net.Sockets.ProtocolType.Unspecified);
+            srv.Bind(new System.Net.Sockets.UnixDomainSocketEndPoint(path));
+            srv.Listen(4);
+            new System.Threading.Thread(() =>
+            {
+                while (true)
+                {
+                    try { using var c = srv.Accept(); } catch { return; }
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        if (Application.Current?.ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime l || l.MainWindow is not { } w) return;
+                        if (!w.IsVisible) w.Show();
+                        if (w.WindowState == WindowState.Minimized) w.WindowState = WindowState.Normal;
+                        w.Activate();
+                    });
+                }
+            }) { IsBackground = true, Name = "ccenter-activate" }.Start();
+        }
+        catch { }   // activation is a convenience; never block start-up
+    }
+
+    /// <summary>
+    /// One instance per app and user, like the original CheckAppExistOrNot (which counted processes once the
+    /// window was already up). An exclusive lock file is released by the kernel when the process dies, so a
+    /// crash never leaves the app unable to start. Set CCENTER_MULTI_INSTANCE=1 to allow several copies.
+    /// </summary>
+    static bool TakeInstanceLock()
+    {
+        if (Environment.GetEnvironmentVariable("CCENTER_MULTI_INSTANCE") == "1") return true;
+        try
+        {
+            _instanceLock = new FileStream(Path.Combine(RuntimeDir, $"ccenter-{AppName}.instance.lock"),
+                FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            ListenForActivate();
+            return true;
+        }
+        catch (IOException) { return false; }   // held by the running copy
+        catch { return true; }                  // cannot lock at all (permissions etc.): do not block start-up
+    }
+
+    /// <summary>
+    /// Tiling window managers (Hyprland, Sway, i3) tile every new window unless it looks like a fixed-size
+    /// dialog, which they decide once, when the window is first mapped. These apps are fixed-layout 16:9
+    /// windows like on Windows, so map the main window as non-resizable (min size = max size, which makes
+    /// the WM float it) and give resizing back once the WM has placed it. No effect on stacking desktops.
+    /// </summary>
+    static void FloatOnFirstMap(Window w)
+    {
+        if (!w.CanResize) return;
+        w.CanResize = false;
+        void Restore(object sender, EventArgs e)
+        {
+            w.Opened -= Restore;
+            DispatcherTimer.RunOnce(() => w.CanResize = true, TimeSpan.FromMilliseconds(500));
+        }
+        w.Opened += Restore;
     }
 
     /// <summary>Start a sibling ported app (replaces UWP Launcher.LaunchUriAsync / Process.Start of the other CC apps).</summary>

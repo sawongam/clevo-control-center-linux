@@ -37,7 +37,7 @@ public partial class MainWindow : Window
 		InitializeComponent();
 		try { Icon = new WindowIcon(Img.Load("image/fanspeedsetting/ic_fan.png")); } catch { }
 		// original: loading splash window on its own STA thread
-		try { loadingWindwos = new loading(); loadingWindwos.Show(); } catch { }
+		if (AppHost.ShowSplash) try { loadingWindwos = new loading(); loadingWindwos.Show(); } catch { }
 		Loaded += Window_Loaded;
 		Opened += (s, e) => Dispatcher.UIThread.Post(() => window_ContentRendered(s, e), DispatcherPriority.Loaded);
 		Closed += window_Closed;
@@ -73,13 +73,11 @@ public partial class MainWindow : Window
 	}
 
 	// original: exits when another instance of the same process name runs
+	// Original counted processes with this name and exited if there was more than one. That check ran after the
+	// window was up (so it flashed) and also counted headless test runs. AppHost.Run now holds a per-app lock
+	// before any window exists and hands a second launch to the running copy.
 	private void CheckAppExistOrNot()
 	{
-		string processName = Process.GetCurrentProcess().ProcessName;
-		if (processName != "dotnet" && Process.GetProcessesByName(processName).Length > 1 && !AppHost.IsScreenshot)
-		{
-			Environment.Exit(Environment.ExitCode);
-		}
 	}
 
 	// Windows event-log driven notifications (FnKey app / service). No Linux source; the handlers are kept and callable.

@@ -30,7 +30,7 @@ public partial class MainWindow : Window
 		_dbRawWidth = Width;
 		_dbRawHeight = Height;
 		// loading splash (WPF showed it during start-up, closed in ContentRendered)
-		if (!AppHost.IsScreenshot || AppHost.PageArg == "loading") { loadingWindwos = new loading(); loadingWindwos.Show(); }
+		if (AppHost.ShowSplash) { loadingWindwos = new loading(); loadingWindwos.Show(); }
 		AddHandler(KeyDownEvent, (s, e) => { if (Test1.Class1.Active != null && Test1.Class1.Active.Feed(e, true)) e.Handled = true; }, RoutingStrategies.Tunnel);
 		AddHandler(KeyUpEvent, (s, e) => { if (Test1.Class1.Active != null && Test1.Class1.Active.Feed(e, false)) e.Handled = true; }, RoutingStrategies.Tunnel);
 	}

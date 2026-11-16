@@ -27,15 +27,14 @@ public partial class MainWindow : Window
 	public MainWindow()
 	{
 		InitializeComponent();
-		loadingWindwos = new loading();
-		loadingWindwos.Show();
+		if (AppHost.ShowSplash) { loadingWindwos = new loading(); loadingWindwos.Show(); }
 		Opened += (_, _) => { if (!_started) { _started = true; Window_Loaded(); } };
 		Closed += (_, _) => window_Closed();
 		SizeChanged += window_SizeChanged;
 		PropertyChanged += (s, e) => { if (e.Property == WindowStateProperty) window_StateChanged(); };
 	}
 
-	private void CloseWindowSafe(Window w) { try { w.Close(); } catch { } }
+	private void CloseWindowSafe(Window w) { try { w?.Close(); } catch { } }
 
 	private void Window_Loaded()
 	{

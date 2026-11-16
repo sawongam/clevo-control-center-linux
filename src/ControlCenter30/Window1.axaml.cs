@@ -1039,10 +1039,10 @@ public partial class Window1 : Window
 	{
 		Common.MapApp(appName, out var command, out var processName, out var project);
 		DebugLog.WriteLog2InLog(command);
-		if (project != null && !Common.IsProcessExist(project))
-		{
-			AppHost.LaunchSibling(project);
-		}
+		if (project == null) return;
+		// already open: bring it forward (original: ChangeFocus -> SetForegroundWindow)
+		if (Common.IsProcessExist(project)) AppHost.ActivateRunning(project);
+		else AppHost.LaunchSibling(project);
 	}
 
 	private bool IsProcessExist(string processName) => Common.IsProcessExist(processName);

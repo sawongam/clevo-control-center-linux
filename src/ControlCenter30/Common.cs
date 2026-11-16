@@ -82,10 +82,9 @@ public class Common
 		MapApp(appName, out var command, out var processName, out var project);
 		DebugLog.WriteLog2InLog(command);
 		Thread.Sleep(1000);
-		if (!IsProcessExist(project ?? processName))
-		{
-			if (project != null) CCenter.Platform.AppHost.LaunchSibling(project);
-		}
+		if (project == null) return;
+		if (IsProcessExist(project)) CCenter.Platform.AppHost.ActivateRunning(project);
+		else CCenter.Platform.AppHost.LaunchSibling(project);
 	}
 
 	/// <summary>True when a process whose command line mentions the sibling project name is running (Linux: scans /proc).</summary>

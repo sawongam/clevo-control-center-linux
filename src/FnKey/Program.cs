@@ -16,9 +16,22 @@ static class Program
 	[STAThread]
 	public static int Main(string[] args)
 	{
+		if (args.Contains("--help") || args.Contains("-h"))
+		{
+			// usage = the comment block above Main
+			Console.WriteLine("FnKey - Fn key OSD agent\n" +
+				"  FnKey                      run the hot-key agent\n" +
+				"  FnKey --event 0x59         send a firmware notify value to the running agent\n" +
+				"  FnKey --osd osd_caps_on    show an OSD (also volume:40 brightness:70 kbwhite6:3 ...)\n" +
+				"  FnKey --sleep | --resume | --quit | --msg \"clevocc30^101^2\"\n" +
+				"  FnKey --no-init            agent without the start-up hardware initialisation\n" +
+				"  FnKey --first-run          allow the first-run init (resets app settings, fan defaults)");
+			return 0;
+		}
 		if (AppHost.IsScreenshot || args.Contains("--screenshot")) return AppHost.Run<App>(args);
 		var cmds = App.CommandsFromArgs(args);
 		if (cmds.Count > 0 && Sock.Send(cmds.ToArray())) return 0;   // handed to the running instance
-		return AppHost.Run<App>(args);
+		// only the long-running agent is single-instance; one-shot commands run beside it
+		return AppHost.Run<App>(args, singleInstance: cmds.Count == 0);
 	}
 }

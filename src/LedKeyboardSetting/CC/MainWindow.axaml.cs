@@ -34,7 +34,7 @@ public partial class MainWindow : Window
 		InitializeComponent();
 		SystemParameters.Init(this);
 		// original: second process instance exits (CheckAppExistOrNot); loading window ran on its own STA thread
-		if (!AppHost.IsScreenshot)
+		if (AppHost.ShowSplash)
 		{
 			loadingWindwos = new loading();
 			loadingWindwos.Show();
@@ -68,7 +68,8 @@ public partial class MainWindow : Window
 
 	private void Window_Loaded(object sender, RoutedEventArgs e)
 	{
-		IsVisible = false;
+		// original hid the window here and showed it again in ContentRendered; on Linux that unmaps and
+		// remaps the window, which tiling window managers show as the window closing and reopening
 		Global.RW_REG = new RWReg();
 		string subkey = "Software\\ControlCenter2.0\\UI";
 		Reg.SetValue(subkey, "_created", 1);
@@ -128,7 +129,6 @@ public partial class MainWindow : Window
 	private void window_ContentRendered(object sender, EventArgs e)
 	{
 		Load_windowStyle();
-		IsVisible = true;
 		Init_Main_UI();
 		Topmost = false;
 	}

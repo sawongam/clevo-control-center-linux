@@ -45,7 +45,7 @@ public partial class MainWindow : Window
 
 	private void OnOpened()
 	{
-		if (!AppHost.IsScreenshot)
+		if (AppHost.ShowSplash)
 		{
 			loadingWindwos = new loading();
 			loadingWindwos.Show();
@@ -80,11 +80,11 @@ public partial class MainWindow : Window
 		}
 	}
 
+	// Original counted processes with this name and exited if there was more than one. That check ran after the
+	// window was up (so it flashed) and also counted headless test runs. AppHost.Run now holds a per-app lock
+	// before any window exists and hands a second launch to the running copy.
 	private void CheckAppExistOrNot()
 	{
-		string processName = Process.GetCurrentProcess().ProcessName;
-		if (processName == "GPUOverclocking" && Process.GetProcessesByName(processName).Length > 1)
-			Environment.Exit(Environment.ExitCode);
 	}
 
 	private void window_ContentRendered()

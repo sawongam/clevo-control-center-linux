@@ -112,13 +112,11 @@ public partial class MainWindow : Window
 		SizeChanged += mainWindow_SizeChanged;
 	}
 
+	// Original counted processes with this name and exited if there was more than one. That check ran after the
+	// window was up (so it flashed) and also counted headless test runs. AppHost.Run now holds a per-app lock
+	// before any window exists and hands a second launch to the running copy.
 	private void CheckAppExistOrNot()
 	{
-		string processName = Process.GetCurrentProcess().ProcessName;
-		if (Process.GetProcessesByName(processName).GetUpperBound(0) > 0)
-		{
-			Environment.Exit(Environment.ExitCode);
-		}
 	}
 
 	private int GetProductIDFromInsydeBuffer()

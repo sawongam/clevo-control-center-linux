@@ -338,7 +338,7 @@ public partial class Page_system_monitor : UserControl
 			}
 			num++;
 		}
-		slider_CoreInc.Maximum = list.Count;
+		slider_CoreInc.Maximum = list.Count - 1;   // last index (original: Count, one past the end)
 		T_CoreIncMin.Text = list[0].ToString();
 		T_CoreIncMax.Text = list[list.Count - 1].ToString();
 		comboBox_GPUMinc.ItemsSource = list;
@@ -356,7 +356,7 @@ public partial class Page_system_monitor : UserControl
 			}
 			num2++;
 		}
-		slider_VRAMInc.Maximum = list2.Count;
+		slider_VRAMInc.Maximum = list2.Count - 1;   // last index (original: Count, one past the end)
 		T_MEMIncMin.Text = list2[0].ToString();
 		T_MEMIncMax.Text = list2[list2.Count - 1].ToString();
 		comboBox_VRAMinc.ItemsSource = list2;
@@ -378,7 +378,7 @@ public partial class Page_system_monitor : UserControl
 				}
 				num3++;
 			}
-			slider_CoreInc1.Maximum = list3.Count;
+			slider_CoreInc1.Maximum = list3.Count - 1;   // last index (original: Count, one past the end)
 			T_CoreIncMin1.Text = list3[0].ToString();
 			T_CoreIncMax1.Text = list3[list3.Count - 1].ToString();
 			comboBox_GPUMinc1.ItemsSource = list3;
@@ -396,7 +396,7 @@ public partial class Page_system_monitor : UserControl
 				}
 				num4++;
 			}
-			slider_VRAMInc1.Maximum = list4.Count;
+			slider_VRAMInc1.Maximum = list4.Count - 1;   // last index (original: Count, one past the end)
 			T_MEMIncMin1.Text = list4[0].ToString();
 			T_MEMIncMax1.Text = list4[list4.Count - 1].ToString();
 			comboBox_VRAMinc1.ItemsSource = list4;
@@ -440,7 +440,6 @@ public partial class Page_system_monitor : UserControl
 
 	private void UpdateUI_VRAM_Clock(int clock)
 	{
-		Console.WriteLine(Get_Memory_OC_max().ToString());
 		R_mem1.IsVisible = false;
 		R_mem2.IsVisible = false;
 		R_mem3.IsVisible = false;
@@ -474,48 +473,71 @@ public partial class Page_system_monitor : UserControl
 		VRAMClock_Value.Text = clock.ToString();
 	}
 
+	// slider <-> dropdown mirror each other; the guard stops each change bouncing back
+	private bool _syncing;
+
 	private void comboBox_GPUMinc_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		slider_CoreInc.Value = comboBox_GPUMinc.SelectedIndex;
+		if (_syncing || comboBox_GPUMinc.SelectedIndex < 0) return;
+		_syncing = true;
+		try { slider_CoreInc.Value = comboBox_GPUMinc.SelectedIndex; } finally { _syncing = false; }
 	}
 
 	private void slider_CoreInc_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
 	{
-		comboBox_GPUMinc.SelectedIndex = (int)slider_CoreInc.Value;
 		BTN_SAVE_GPUOC.IsEnabled = true;
+		int i = (int)Math.Round(slider_CoreInc.Value);
+		if (_syncing || comboBox_GPUMinc.SelectedIndex == i) return;
+		_syncing = true;
+		try { comboBox_GPUMinc.SelectedIndex = i; } finally { _syncing = false; }
 	}
 
 	private void comboBox_VRAMinc_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		slider_VRAMInc.Value = comboBox_VRAMinc.SelectedIndex;
+		if (_syncing || comboBox_VRAMinc.SelectedIndex < 0) return;
+		_syncing = true;
+		try { slider_VRAMInc.Value = comboBox_VRAMinc.SelectedIndex; } finally { _syncing = false; }
 	}
 
 	private void slider_VRAMInc_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
 	{
-		comboBox_VRAMinc.SelectedIndex = (int)slider_VRAMInc.Value;
 		BTN_SAVE_GPUOC.IsEnabled = true;
+		int i = (int)Math.Round(slider_VRAMInc.Value);
+		if (_syncing || comboBox_VRAMinc.SelectedIndex == i) return;
+		_syncing = true;
+		try { comboBox_VRAMinc.SelectedIndex = i; } finally { _syncing = false; }
 	}
 
 	private void comboBox_GPUMinc1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		slider_CoreInc1.Value = comboBox_GPUMinc1.SelectedIndex;
+		if (_syncing || comboBox_GPUMinc1.SelectedIndex < 0) return;
+		_syncing = true;
+		try { slider_CoreInc1.Value = comboBox_GPUMinc1.SelectedIndex; } finally { _syncing = false; }
 	}
 
 	private void slider_CoreInc1_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
 	{
-		comboBox_GPUMinc1.SelectedIndex = (int)slider_CoreInc1.Value;
 		BTN_SAVE_GPUOC.IsEnabled = true;
+		int i = (int)Math.Round(slider_CoreInc1.Value);
+		if (_syncing || comboBox_GPUMinc1.SelectedIndex == i) return;
+		_syncing = true;
+		try { comboBox_GPUMinc1.SelectedIndex = i; } finally { _syncing = false; }
 	}
 
 	private void comboBox_VRAMinc1_SelectionChanged(object sender, SelectionChangedEventArgs e)
 	{
-		slider_VRAMInc1.Value = comboBox_VRAMinc1.SelectedIndex;
+		if (_syncing || comboBox_VRAMinc1.SelectedIndex < 0) return;
+		_syncing = true;
+		try { slider_VRAMInc1.Value = comboBox_VRAMinc1.SelectedIndex; } finally { _syncing = false; }
 	}
 
 	private void slider_VRAMInc1_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
 	{
-		comboBox_VRAMinc1.SelectedIndex = (int)slider_VRAMInc1.Value;
 		BTN_SAVE_GPUOC.IsEnabled = true;
+		int i = (int)Math.Round(slider_VRAMInc1.Value);
+		if (_syncing || comboBox_VRAMinc1.SelectedIndex == i) return;
+		_syncing = true;
+		try { comboBox_VRAMinc1.SelectedIndex = i; } finally { _syncing = false; }
 	}
 
 	private void BTN_SAVE_GPUOC_Click(object sender, RoutedEventArgs e)

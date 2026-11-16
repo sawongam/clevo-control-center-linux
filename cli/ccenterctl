@@ -10,12 +10,15 @@ using the exact command encoding reverse-engineered from the Windows apps
 
 import argparse
 import fcntl
+import json
 import os
+import socket
 import struct
 import sys
 import time
 
 DEV = "/dev/ccenter_dchu"
+SOCK = os.environ.get("CCENTER_SOCKET", "/run/ccenter/ccd.sock")
 KBD_LED = "/sys/class/leds/rgb:kbd_backlight"
 
 # struct ccenter_dchu_call (kernel/ccenter_dchu.h)
@@ -61,7 +64,7 @@ class Dchu:
         except FileNotFoundError:
             sys.exit(f"{path} missing - load the module: sudo modprobe ccenter_dchu")
         except PermissionError:
-            sys.exit(f"{path}: permission denied - run with sudo")
+            sys.exit(f"{path}: permission denied - start the daemon (sudo systemctl start ccenterd) or run with sudo")
 
     def call(self, func, arg=0, buf=None):
         if buf is None:
@@ -82,6 +85,50 @@ class Dchu:
     def opt(self, sub, data):
         """Send command 0x79 with sub-command `sub` in the top byte."""
         return self.call(CMD_OPT, (sub << 24) | (data & 0xFFFFFF))
+
+
+class DaemonDchu(Dchu):
+    """Same calls through ccenterd's socket: works without sudo, and perf/fan/curve changes are
+    remembered by the daemon and re-applied at boot (direct device writes bypass that)."""
+
+    def __init__(self, path=SOCK):
+        self.path = path
+
+    def call(self, func, arg=0, buf=None):
+        req = {"op": "call", "func": func}
+        if buf is None:
+            req["int"] = arg & 0xFFFFFFFF
+        else:
+            req["buf"] = bytes(buf).hex()
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+            s.settimeout(10)
+            s.connect(self.path)
+            s.sendall((json.dumps(req) + "\n").encode())
+            data = b""
+            while not data.endswith(b"\n"):
+                chunk = s.recv(4096)
+                if not chunk:
+                    break
+                data += chunk
+        r = json.loads(data)
+        if not r.get("ok"):
+            sys.exit(f"ccenterd refused the call: {r.get('err')}")
+        if "buf" in r:
+            return bytes.fromhex(r["buf"])
+        return r.get("int")
+
+
+def open_dchu():
+    """Prefer the daemon when it is running; fall back to the device (needs root)."""
+    if os.path.exists(SOCK):
+        try:
+            with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
+                s.settimeout(2)
+                s.connect(SOCK)
+            return DaemonDchu()
+        except OSError:
+            pass
+    return Dchu()
 
 
 def raw_to_rpm(raw):
@@ -267,7 +314,7 @@ def main():
 
     if a.cmd == "kbd":
         return cmd_kbd(None, a)
-    globals()[f"cmd_{a.cmd}"](Dchu(), a)
+    globals()[f"cmd_{a.cmd}"](open_dchu(), a)
 
 
 if __name__ == "__main__":

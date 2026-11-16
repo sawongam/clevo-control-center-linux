@@ -62,6 +62,7 @@ public class App : Application
 				src = new SocketEventSource();
 				src.Line += l => Dispatcher.UIThread.Post(() => Execute(l));
 				try { src.Start(); } catch (Exception ex) { Console.Error.WriteLine("fnkey: socket: " + ex.Message); }
+				if (life != null) life.Exit += (_, _) => src.Dispose();   // remove the socket file on --quit / shutdown
 			}
 			else
 			{

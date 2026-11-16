@@ -77,10 +77,18 @@ public static class LinuxSensors
         try
         {
             foreach (var l in File.ReadLines("/proc/cpuinfo"))
-                if (l.StartsWith("model name")) return l.Substring(l.IndexOf(':') + 1).Trim();
+                if (l.StartsWith("model name")) return ShortBrand(l.Substring(l.IndexOf(':') + 1).Trim());
         }
         catch { }
-        return "11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz";
+        return ShortBrand("11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz");
+    }
+
+    /// <summary>The label box fits about 40 characters; the " @ 2.30GHz" tail is shown elsewhere (base clock),
+    /// so drop it rather than let the box clip the name mid-way.</summary>
+    static string ShortBrand(string s)
+    {
+        int at = s.IndexOf(" @ ", StringComparison.Ordinal);
+        return at > 0 ? s.Substring(0, at) : s;
     }
 
     /// <summary>Average current core frequency in MHz (XTU monitor id 5 x 1000).</summary>

@@ -2568,7 +2568,6 @@ public partial class Page_FlexiKey : UserControl
 					{
 						CheckBoxName = name
 					};
-					Console.WriteLine(name);
 					if (name.Contains("CB_keyCode_14Inch_"))
 					{
 						keyInfo.KeyCode = Convert.ToInt32(name.Substring(18));
