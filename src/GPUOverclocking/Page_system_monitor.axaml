@@ -805,7 +805,7 @@
                   <TextBlock Name="T_CoreIncMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
                   <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
-                    <Slider Name="slider_CoreInc" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC.Fill}" />
+                    <Slider Name="slider_CoreInc" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" BorderBrush="{Binding #R_sliderGPU_CoreINC.Fill}" />
                   </LayoutTransformControl>
                   <Grid Name="G_T_GPU_CoreINC" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
                     <TextBlock Name="T_GPU_CoreINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Core Increment" Width="170" HorizontalAlignment="Left" />
@@ -823,7 +823,7 @@
                   <TextBlock Name="T_MEMIncMax" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
                   <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
-                    <Slider Name="slider_VRAMInc" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC1.Fill}" />
+                    <Slider Name="slider_VRAMInc" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" BorderBrush="{Binding #R_sliderGPU_CoreINC1.Fill}" />
                   </LayoutTransformControl>
                   <Grid Name="G_T_GPU_MemINC" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
                     <TextBlock Name="T_GPU_MemINC" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Memory Increment" Width="170" HorizontalAlignment="Left" />
@@ -847,7 +847,7 @@
                   <TextBlock Name="T_CoreIncMax1" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
                   <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
-                    <Slider Name="slider_CoreInc1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC2.Fill}" />
+                    <Slider Name="slider_CoreInc1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" BorderBrush="{Binding #R_sliderGPU_CoreINC2.Fill}" />
                   </LayoutTransformControl>
                   <Grid Name="G_T_GPU_CoreINC1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
                     <TextBlock Name="T_GPU_CoreINC1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Core Increment" Width="170" HorizontalAlignment="Left" />
@@ -865,7 +865,7 @@
                   <TextBlock Name="T_MEMIncMax1" Margin="0,0,180.656,11.666" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
                   <LayoutTransformControl Margin="223.002,0,0,17.8" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <LayoutTransformControl.LayoutTransform><SkewTransform AngleX="-32" /></LayoutTransformControl.LayoutTransform>
-                    <Slider Name="slider_VRAMInc1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" BorderBrush="{Binding #R_sliderGPU_CoreINC3.Fill}" />
+                    <Slider Name="slider_VRAMInc1" Theme="{StaticResource SliderStyle_INC}" Width="362.399" SmallChange="1" Height="60" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" BorderBrush="{Binding #R_sliderGPU_CoreINC3.Fill}" />
                   </LayoutTransformControl>
                   <Grid Name="G_T_GPU_MemINC1" HorizontalAlignment="Left" Margin="67.6,-17,0,42.44" Width="161.2">
                     <TextBlock Name="T_GPU_MemINC1" Margin="0" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Text="Memory Increment" Width="170" HorizontalAlignment="Left" />

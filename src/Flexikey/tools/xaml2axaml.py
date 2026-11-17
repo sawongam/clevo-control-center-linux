@@ -271,6 +271,9 @@ class Conv:
         for k, v in el.attrib.items():
             r = self.attr(tn, k, v)
             if r: n.attrs[r[0]] = r[1]
+        # WPF Slider.TickFrequency defaults to 1, Avalonia's to 0 (snap-to-tick then only reaches Minimum/Maximum).
+        if tn == 'Slider' and 'IsSnapToTickEnabled' in n.attrs and 'TickFrequency' not in n.attrs:
+            n.attrs['TickFrequency'] = '1'
         for c in el:
             cns, cn = split(c.tag)
             if '.' in cn and cns == WPF:

@@ -65,7 +65,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF" Margin="2" MinWidth="100">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Column="1" Margin="0">
@@ -116,7 +116,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image Name="Image_ic_close_png" Margin="0" Source="/ic_fullscreen.png" Stretch="Fill" Width="80" Height="60" />

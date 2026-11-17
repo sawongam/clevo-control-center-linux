@@ -79,7 +79,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image Name="Image_ic_close_png" Margin="0" Stretch="Fill" Width="80" Height="60" />

@@ -82,7 +82,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Path Name="path" Grid.ColumnSpan="2" Data="M6.6676679,118.66715 C9.6683379,115.33392 145.8404,34.700784 148.13518,35.776978 C393.33471,138.0007 318.26326,309.64176 239.0899,358.40174 C239.0899,358.40174 6.4231495,216.73505 6.4231495,216.73505 C6.4231495,216.73505 88.00104,182.66696 6.6676679,118.66715" Margin="6.423,35.766,53.675,52.597" Stretch="Fill" StrokeThickness="0" VerticalAlignment="Stretch" Fill="#FF000000" Opacity="0.8" Focusable="False" Stroke="{x:Null}" />
@@ -181,7 +181,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Path Name="path" Grid.ColumnSpan="2" Data="M6.6676679,118.66715 C9.6683379,115.33392 145.8404,34.700784 148.13518,35.776978 C393.33471,138.0007 318.26326,309.64176 239.0899,358.40174 C239.0899,358.40174 6.4231495,216.73505 6.4231495,216.73505 C6.4231495,216.73505 88.00104,182.66696 6.6676679,118.66715" Margin="53.756,41.099,6.342,47.264" Stretch="Fill" StrokeThickness="0" VerticalAlignment="Stretch" Fill="#FF000000" Opacity="0.8" Focusable="False" RenderTransformOrigin="50%,50%" Stroke="{x:Null}">
@@ -336,7 +336,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
@@ -422,7 +422,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
@@ -459,7 +459,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="{x:Null}">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle Name="rectangle1" Fill="{TemplateBinding BorderBrush}" Margin="2" StrokeThickness="0" Grid.ColumnSpan="2" IsVisible="False" Stroke="{x:Null}">
@@ -612,7 +612,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">

@@ -176,6 +176,9 @@ def attrs_of(el, owner):
         r = conv_attr(owner, k, v)
         if r:
             out.append(r)
+    # WPF Slider.TickFrequency defaults to 1, Avalonia's to 0 (snap-to-tick then only reaches Minimum/Maximum).
+    if owner == 'Slider' and any(n == 'IsSnapToTickEnabled' for n, _ in out) and not any(n == 'TickFrequency' for n, _ in out):
+        out.append(('TickFrequency', '1'))
     return out
 
 # ---- identity transform cleanup --------------------------------------------------------------

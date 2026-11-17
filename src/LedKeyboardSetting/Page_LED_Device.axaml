@@ -3617,7 +3617,7 @@
                 <TextBlock Name="KbSpeed_2_tb" Margin="0,112,9.8,0" TextWrapping="Wrap" Text="2" FlowDirection="RightToLeft" FontSize="24" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" Foreground="#FFFFFFFF" />
                 <TextBlock Name="KbSpeed_3_tb" Margin="0,31,9.8,0" TextWrapping="Wrap" Text="3" FlowDirection="RightToLeft" FontSize="24" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" Foreground="#FFFFFFFF" />
               </Grid>
-              <Slider Name="KbSpeedSlider" Maximum="2" Orientation="Vertical" Theme="{DynamicResource SliderStyle2}" Cursor="Hand" IsSnapToTickEnabled="True" TickPlacement="TopLeft" Focusable="False" IsTabStop="False" BorderBrush="{Binding #path_sw5_Copy9.Stroke}" />
+              <Slider Name="KbSpeedSlider" Maximum="2" Orientation="Vertical" Theme="{DynamicResource SliderStyle2}" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="TopLeft" Focusable="False" IsTabStop="False" BorderBrush="{Binding #path_sw5_Copy9.Stroke}" />
             </StackPanel>
           </Grid>
           <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
@@ -3737,7 +3737,7 @@
                     <TextBlock Name="brightness_4_tb" Margin="0,93,10,0" TextWrapping="Wrap" Text="4" FlowDirection="RightToLeft" FontSize="24" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" Foreground="#FFFFFFFF" />
                     <TextBlock Name="brightness_5_tb" Margin="0,29.75,10,0" TextWrapping="Wrap" Text="5" FlowDirection="RightToLeft" FontSize="24" FontFamily="Microsoft Sans Serif" Height="30.48" VerticalAlignment="Top" Foreground="#FFFFFFFF" />
                   </Grid>
-                  <Slider Name="KbBrightnessSlider" Maximum="5" Orientation="Vertical" Theme="{DynamicResource SliderStyle2}" Cursor="Hand" IsSnapToTickEnabled="True" TickPlacement="TopLeft" IsTabStop="False" Focusable="False" BorderBrush="{Binding #path_sw5_Copy9.Stroke}" />
+                  <Slider Name="KbBrightnessSlider" Maximum="5" Orientation="Vertical" Theme="{DynamicResource SliderStyle2}" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="TopLeft" IsTabStop="False" Focusable="False" BorderBrush="{Binding #path_sw5_Copy9.Stroke}" />
                 </StackPanel>
               </Grid>
               <StackPanel VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -3847,7 +3847,7 @@
                     <TextBlock Name="brightness_3_tb1" Margin="0,111,10,0" TextWrapping="Wrap" Text="3" FlowDirection="RightToLeft" FontSize="24" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" Foreground="#FFFFFFFF" />
                     <TextBlock Name="brightness_4_tb1" Margin="0,31,10,0" TextWrapping="Wrap" Text="4" FlowDirection="RightToLeft" FontSize="24" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top" Foreground="#FFFFFFFF" />
                   </Grid>
-                  <Slider Name="X170LB_BrightnessSlider" Maximum="4" Orientation="Vertical" Theme="{DynamicResource SliderStyle2}" Cursor="Hand" IsSnapToTickEnabled="True" TickPlacement="TopLeft" IsTabStop="False" Focusable="False" SmallChange="1" Value="1" BorderBrush="{Binding #path_sw5_Copy9.Stroke}" />
+                  <Slider Name="X170LB_BrightnessSlider" Maximum="4" Orientation="Vertical" Theme="{DynamicResource SliderStyle2}" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="TopLeft" IsTabStop="False" Focusable="False" SmallChange="1" Value="1" BorderBrush="{Binding #path_sw5_Copy9.Stroke}" />
                 </StackPanel>
               </Grid>
               <StackPanel VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right">

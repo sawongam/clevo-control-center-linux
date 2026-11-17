@@ -18,7 +18,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle Name="rectangle" Fill="{TemplateBinding Foreground}" StrokeThickness="0" Width="50" Stroke="{x:Null}" />
@@ -50,7 +50,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle Name="rectangle" Grid.ColumnSpan="2" Fill="{TemplateBinding Foreground}" Margin="0" StrokeThickness="0" Width="50" Height="50" Stroke="{x:Null}" />
@@ -147,7 +147,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
@@ -203,7 +203,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0,0,5,0" VerticalAlignment="Center" Width="46">
@@ -245,7 +245,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0,0,5,0" VerticalAlignment="Center" Width="46">
@@ -287,7 +287,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0,0,5,0" VerticalAlignment="Center" Width="46">
@@ -329,7 +329,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF" Margin="0">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Rectangle Name="rectangle" Grid.ColumnSpan="2" Margin="0" StrokeThickness="0" RenderTransformOrigin="50%,50%" Fill="#FF242424" Stroke="{x:Null}">
@@ -382,7 +382,7 @@
         <ControlTemplate>
           <Grid Name="templateRoot" Background="#00FFFFFF">
             <Grid.ColumnDefinitions>
-              <ColumnDefinition />
+              <ColumnDefinition Width="Auto" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid Height="46" Margin="0" VerticalAlignment="Center" Width="46">
@@ -977,7 +977,7 @@
           <TextBlock Name="T_FanAutoOffset" Margin="0,0,613,219" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="24" Foreground="#FFFFFFFF" Height="34" TextAlignment="Center" HorizontalAlignment="Right" Text="Offset" Width="188" />
           <TextBlock Name="T_FanAutoMin" Margin="562.154,0,0,191.422" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Left" Text="0" />
           <TextBlock Name="T_FanAutoMax" Margin="0,0,241.5,191.422" TextWrapping="Wrap" VerticalAlignment="Bottom" FontFamily="Microsoft Sans Serif" FontSize="16" Foreground="#FFFFFFFF" Height="18" TextAlignment="Center" HorizontalAlignment="Right" Text="0" />
-          <Slider Name="slider_FAN_AutoOffset" Margin="554.446,0,0,202.223" Theme="{StaticResource SliderStyle_INC}" HorizontalAlignment="Left" Width="362.399" SmallChange="1" Height="60" VerticalAlignment="Bottom" Cursor="Hand" IsSnapToTickEnabled="True" Maximum="50" BorderBrush="{Binding #R_slider_fan_auto_offset.Fill}">
+          <Slider Name="slider_FAN_AutoOffset" Margin="554.446,0,0,202.223" Theme="{StaticResource SliderStyle_INC}" HorizontalAlignment="Left" Width="362.399" SmallChange="1" Height="60" VerticalAlignment="Bottom" Cursor="Hand" IsSnapToTickEnabled="True" TickFrequency="1" Maximum="50" BorderBrush="{Binding #R_slider_fan_auto_offset.Fill}">
             <Slider.RenderTransform>
               <TransformGroup>
                 <ScaleTransform />
