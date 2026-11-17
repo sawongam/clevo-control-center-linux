@@ -1207,7 +1207,7 @@
         </Rectangle>
       </Grid>
     </Viewbox>
-    <StackPanel Name="SP_FANBTN" Height="302" Margin="835,190,796,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="289">
+    <StackPanel Name="SP_FANBTN" Height="302" Margin="0,190,0,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="160">
       <StackPanel Name="SP_Auto" Height="46" Margin="0,0,0,10">
         <RadioButton Name="RB_FAN_auto" Content="Automatic" Margin="0" Foreground="#FFFFFFFF" FontFamily="Microsoft Sans Serif" FontSize="24" Theme="{StaticResource RadioButtonStyle1_FAN}" VerticalContentAlignment="Center" Cursor="Hand" Height="46" Focusable="False" IsChecked="True" GroupName="FanMode" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{Binding #userControl.BorderBrush}" />
       </StackPanel>
